@@ -31,7 +31,7 @@
 			</form>
 			<% } else {  %>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" style="color:#9d9d9d">Benvenuto ${customer.firstName}</a></li>
+				<li><p class="navbar-text">Benvenuto ${customer.firstName}</p></li>
 				<li><a href="<c:url value="${request.getContextPath()}/shop/customer.logout" />">Logout</a></li>
 				
 			</ul>

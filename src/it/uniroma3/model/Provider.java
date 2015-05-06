@@ -35,7 +35,6 @@ public class Provider {
 	
 
 	public Provider() {
-		//inizializzo la lista vuota per evitare null pointer exception
 		this.products = new LinkedList<Product>();
 	}
 

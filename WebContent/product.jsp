@@ -16,9 +16,7 @@
 
 	<!-- Page Content -->
 	<div class="container">
-
 		<div class="row">
-
 			<div class="col-md-12">
 
 				<div class="thumbnail">
@@ -95,9 +93,7 @@
 				</div>
 
 			</div>
-
 		</div>
-
 	</div>
 	<!-- /.container -->
 

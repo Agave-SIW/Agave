@@ -1,16 +1,20 @@
 package it.uniroma3.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Column;
 
-	@Entity
-	@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
-	public class Product {
-        
+@Entity
+@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
+public class Product {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -25,66 +29,99 @@ import javax.persistence.Column;
 
 	@Column(nullable = false)
 	private String code;
+
+	@ManyToMany(mappedBy="products")
+	private List<Provider> providers;
 	
+	@ManyToMany(mappedBy="products")
+	private List<Review> reviews;
+
+
 	public Product() {
-    }
+		this.providers = new LinkedList<Provider>();
+		this.reviews = new LinkedList<Review>();
+	}
 
 	public Product(String name, Float price, String description, String code) {
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.code = code;
-}
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.code = code;
+		this.providers = new LinkedList<Provider>();
+		this.reviews = new LinkedList<Review>();
+	}
 
-    //          Getters & Setters        
-    
-   public Long getId() {
-        return id;
-    }
+	//          Getters & Setters        
 
-    public String getName() {
-        return this.name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getCode() {
-        return this.code;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return this.description;
-    }
+	public String getCode() {
+		return this.code;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public Float getPrice() {
-        return price;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-	
-    public boolean equals(Object obj) {
-        Product product = (Product)obj;
-        return this.getCode().equals(product.getCode());
-    }
+	public String getDescription() {
+		return this.description;
+	}
 
-    public int hashCode() {
-         return this.code.hashCode();
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+	public boolean equals(Object obj) {
+		Product product = (Product)obj;
+		return this.getCode().equals(product.getCode());
+	}
+
+	public int hashCode() {
+		return this.code.hashCode();
+	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public List<Provider> getProviders() {
+		return providers;
+	}
+
+	public void setProviders(List<Provider> providers) {
+		this.providers = providers;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price
+				+ ", description=" + description + ", code=" + code + "]";
+	}
+
 }

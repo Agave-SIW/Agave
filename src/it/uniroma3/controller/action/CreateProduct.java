@@ -2,7 +2,7 @@ package it.uniroma3.controller.action;
 
 import it.uniroma3.controller.helper.HelperProduct;
 import it.uniroma3.model.Product;
-import it.uniroma3.model.ProductFacade;
+import it.uniroma3.facade.ProductFacade;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,4 +25,5 @@ public class CreateProduct implements Action {
 		} else
 			return "/newProduct.jsp";
 	}
+
 }

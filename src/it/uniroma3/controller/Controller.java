@@ -1,7 +1,7 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.controller.action.Action;
-import it.uniroma3.model.ProductFacade;
+import it.uniroma3.facade.ProductFacade;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -20,7 +20,7 @@
 						new product</a></li>
 			</ul>
 			<form class="navbar-form navbar-right" role="login"
-				action="<c:url value="/shop/customer.login" />" method="get">
+				action="<c:url value="/shop/customer.login" />" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="email"
 						name="email" /> <input type="password" class="form-control"

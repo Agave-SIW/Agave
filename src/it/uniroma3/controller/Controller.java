@@ -1,7 +1,7 @@
 package it.uniroma3.controller;
 
 import it.uniroma3.controller.action.Action;
-import it.uniroma3.facade.ProductFacade;
+import it.uniroma3.facade.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,7 +21,10 @@ public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB(beanName="pFacade")
-	private ProductFacade productsFacade;
+	private ProductFacade productFacade;
+	
+	@EJB(beanName="cFacade")
+	private CustomerFacade customerFacade;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -42,7 +45,10 @@ public class Controller extends HttpServlet {
 		Action action;
 		try {
 			action = (Action)Class.forName(actionName).newInstance();
-			nextPage = action.perform(request, productsFacade);
+			if(actionName.contains("Product"))
+				nextPage = action.perform(request, productFacade);
+			if(actionName.contains("Customer"))
+				nextPage = action.perform(request, customerFacade);
 		}
 		catch (InstantiationException e) {
 		 	request.setAttribute("ex", e);

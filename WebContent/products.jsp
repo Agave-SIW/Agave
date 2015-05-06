@@ -67,8 +67,10 @@
 							<div class="thumbnail">
 								<img src="http://placehold.it/320x150" alt="">
 								<div class="caption">
-									<fmt:formatNumber type="currency" currencySymbol=" &euro; "
-										value="${product.price}" />
+									<h4>
+										<fmt:formatNumber type="currency" currencySymbol=" &euro; "
+											value="${product.price}" />
+									</h4>
 									<h2>
 										<a href="<c:url value="/shop/product.get?id=${product.id}" />">${product.name}</a>
 									</h2>

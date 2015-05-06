@@ -78,5 +78,3 @@ public class Controller extends HttpServlet {
 		return actionName;
 	}
 }
-
-

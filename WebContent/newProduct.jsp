@@ -16,6 +16,7 @@
 				class="col-md-6 col-md-offset-3 form-horizontal">
 				<div class="form-group">
 					<h1>New Product</h1>
+					<span style="color:red">TODO: questa pagina va spostata nel pannello admin</span>
 					<hr />
 				</div>
 				<div class="form-group">
@@ -45,6 +46,10 @@
 				</div>
 			</form>
 		</div>
+
+		<!-- Footer -->
+		<%@include file="includes/footer.jsp"%>
+
 	</div>
 
 	<%@include file="includes/boostrapjquery.jsp"%>

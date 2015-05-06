@@ -1,5 +1,4 @@
-# Agave
-`Progetto SIW 2015`
+# Agave `Progetto SIW 2015`
 
 --------------
 * Gaetano Bonofiglio

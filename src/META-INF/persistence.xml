@@ -11,6 +11,8 @@
 		<class>it.uniroma3.model.Orders</class>
 		<class>it.uniroma3.model.Product</class>
 		<class>it.uniroma3.model.Provider</class>
+		<class>it.uniroma3.model.Review</class>
+		<class>it.uniroma3.model.Admin</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 		</properties>

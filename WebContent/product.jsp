@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
 	pageEncoding="US-ASCII"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -23,8 +24,11 @@
 					<img class="img-responsive" src="http://placehold.it/1150x400"
 						alt="">
 					<div class="caption-full">
-						<h4 class="pull-right">${product.price}</h4>
-						<h1>${product.name}</h1>
+						<h4 class="pull-right price">
+							<fmt:formatNumber type="currency" currencySymbol=" &euro; "
+								value="${product.price}" />
+						</h4>
+						<h2>${product.name}</h2>
 						<div>Codice: ${product.code}</div>
 						<div>${product.description}</div>
 					</div>

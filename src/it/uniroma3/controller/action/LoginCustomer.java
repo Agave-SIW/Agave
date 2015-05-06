@@ -16,21 +16,26 @@ public class LoginCustomer implements Action {
 		
 		if (helper.isValid(request)) {
 			String email = request.getParameter("email");
+			String password = request.getParameter("password");
 			
 			Customer customer = customerFacade.getCustomer(email);
 			//request.setAttribute("customer", customer);
-			if(customer!=null){
-				session.setAttribute("customerLogged", true);
-				session.setAttribute("customer", customer);
-			}
-			else{
+			if(customer==null || !customer.getPassword().equals(password)){
 				session.setAttribute("customerLogged", false);
 				session.setAttribute("customer", null);
+				System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
+				request.setAttribute("ex", "Invalid credentials");
+				return "/error.jsp";
 			}
-			
-			return "/index.jsp";
+			else{
+				session.setAttribute("customerLogged", true);
+				session.setAttribute("customer", customer);
+				System.out.print("\n\nLogin OK\n\n");
+			}
+			return "/success.jsp";
 		} else
-			return "/invalid.jsp";
+			request.setAttribute("ex", "Invalid credentials"); //TODO mostrare in pagina
+			return "/error.jsp";
 	}
 
 	@Override

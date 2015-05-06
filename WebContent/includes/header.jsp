@@ -29,11 +29,14 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
-			<% } else { %>
-			<ul class="nav navbar-right">
-				<li>Benvenuto ${customer.name}</li>
+			<% } else {  %>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#" style="color:#9d9d9d">Benvenuto ${customer.firstName}</a></li>
+				<li><a href="<c:url value="/shop/customer.logout" />">Logout</a></li>
+				
 			</ul>
-			<% } %>
+				<% } %>
+
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

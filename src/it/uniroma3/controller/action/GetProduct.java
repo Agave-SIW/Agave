@@ -20,7 +20,7 @@ public class GetProduct implements Action {
 			
 			return "/product.jsp";
 		} else
-			return "/invalid.jsp";
+			return "/invalidProduct.jsp";
 	}
 
 	@Override

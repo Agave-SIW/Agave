@@ -22,6 +22,8 @@ public class Customer {
 	
 	private String email;
 	
+	private String password;
+	
 	private String phoneNumber;
 	
 	@Temporal(TemporalType.DATE)
@@ -41,11 +43,12 @@ public class Customer {
 		this.orders = new LinkedList<Orders>();
 	}
 
-	public Customer(String firstName, String lastName, String email,
+	public Customer(String firstName, String lastName, String email, String password,
 			String phoneNumber, Date dateofBirth, Address address) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password; //TODO MD5
 		this.phoneNumber = phoneNumber;
 		this.dateofBirth = dateofBirth;
 		this.address = address;
@@ -113,6 +116,14 @@ public class Customer {
 
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Address getAddress() {

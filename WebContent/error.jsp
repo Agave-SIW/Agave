@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <%@include file="includes/boostrapjquery.jsp"%>
 
 <meta charset="US-ASCII">

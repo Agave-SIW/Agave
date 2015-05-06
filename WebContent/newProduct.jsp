@@ -3,18 +3,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-
-<%@include file="includes/boostrapjquery.jsp"%>
-
-<meta charset="ISO-8859-1" />
-<title>New Product</title>
-
+	<%@include file="includes/head.jsp"%>
+	<title>New Product</title>
 </head>
 <body>
 	<div class="container maincontent">
+		<%@include file="includes/header.jsp"%>
 		<div class="row">
-			<form action="<c:url value="/controller/product.create" />" method="get"
+			<form action="<c:url value="/shop/product.create" />" method="get"
 				class="col-md-6 col-md-offset-3 form-horizontal">
 				<div class="form-group">
 					<h1>New Product</h1>
@@ -48,5 +46,7 @@
 			</form>
 		</div>
 	</div>
+
+	<%@include file="includes/boostrapjquery.jsp"%>
 </body>
 </html>

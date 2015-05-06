@@ -8,7 +8,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<%=request.getContextPath()%>">Agave
+			<a class="navbar-brand" href="<c:url value="${request.getContextPath()}" />">Agave
 				Shop</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,7 +21,7 @@
 			</ul>
 			<% if (session.getAttribute("customerLogged")==null || session.getAttribute("customerLogged").equals(false)) { %>
 			<form class="navbar-form navbar-right" role="login"
-				action="<c:url value="/shop/customer.login" />" method="post">
+				action="<c:url value="${request.getContextPath()}/shop/customer.login" />" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="email"
 						name="email" /> <input type="password" class="form-control"
@@ -32,7 +32,7 @@
 			<% } else {  %>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#" style="color:#9d9d9d">Benvenuto ${customer.firstName}</a></li>
-				<li><a href="<c:url value="/shop/customer.logout" />">Logout</a></li>
+				<li><a href="<c:url value="${request.getContextPath()}/shop/customer.logout" />">Logout</a></li>
 				
 			</ul>
 				<% } %>

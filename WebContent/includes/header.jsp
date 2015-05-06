@@ -19,6 +19,7 @@
 				<li><a href="<c:url value="/newProduct.jsp" />">Insert a
 						new product</a></li>
 			</ul>
+			<% if (session.getAttribute("customerLogged")==null || session.getAttribute("customerLogged").equals(false)) { %>
 			<form class="navbar-form navbar-right" role="login"
 				action="<c:url value="/shop/customer.login" />" method="post">
 				<div class="form-group">
@@ -28,6 +29,11 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Login</button>
 			</form>
+			<% } else { %>
+			<ul class="nav navbar-right">
+				<li>Benvenuto ${customer.name}</li>
+			</ul>
+			<% } %>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

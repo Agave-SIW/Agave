@@ -10,7 +10,7 @@ import java.util.List;
 @Stateless(name="pFacade")
 public class ProductFacade {
 	
-    @PersistenceContext(unitName = "unit-jee-es1")
+    @PersistenceContext(unitName = "agave")
     private EntityManager em;
     
 	public Product createProduct(String name, String code, Float price, String description) {

@@ -25,6 +25,17 @@ public class Controller extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		genericAction(request, response); 
+		return;
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		genericAction(request, response); 
+		return;
+	}
+	
+	private void genericAction(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 
 		String nextPage = null;
 		String actionName = path2action(request);

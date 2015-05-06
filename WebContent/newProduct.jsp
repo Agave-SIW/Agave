@@ -12,7 +12,7 @@
 	<div class="container maincontent">
 		<%@include file="includes/header.jsp"%>
 		<div class="row">
-			<form action="<c:url value="/shop/product.create" />" method="get"
+			<form action="<c:url value="/shop/product.create" />" method="post"
 				class="col-md-6 col-md-offset-3 form-horizontal">
 				<div class="form-group">
 					<h1>New Product</h1>

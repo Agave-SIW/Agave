@@ -19,6 +19,15 @@
 				<li><a href="<c:url value="/newProduct.jsp" />">Insert a
 						new product</a></li>
 			</ul>
+			<form class="navbar-form navbar-right" role="login"
+				action="<c:url value="/shop/customer.login" />" method="get">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="email"
+						name="email" /> <input type="password" class="form-control"
+						placeholder="password" name="password" />
+				</div>
+				<button type="submit" class="btn btn-default">Login</button>
+			</form>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

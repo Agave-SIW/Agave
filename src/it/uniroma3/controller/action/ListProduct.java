@@ -12,7 +12,7 @@ public class ListProduct implements Action {
 	public String perform(HttpServletRequest request, ProductFacade productsFacade) {	
 //		productsFacade = new ProductsFacade();
 		List<Product> products = productsFacade.getAllProducts();
-		request.setAttribute("products", products);	
+		request.setAttribute("products", products);	//TODO invertire lista prodotti che si passa alla view
 		return "/products.jsp";
 	}
 }

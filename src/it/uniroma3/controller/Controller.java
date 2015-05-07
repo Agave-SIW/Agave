@@ -20,14 +20,8 @@ public class Controller extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	@EJB(beanName="pFacade")
-	private ProductFacade productFacade;
-	
-	@EJB(beanName="cFacade")
-	private CustomerFacade customerFacade;
-	
-	@EJB(beanName="aFacade")
-	private AdminFacade adminFacade;
+	@EJB(beanName="Facade")
+	private Facade facade;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -48,12 +42,7 @@ public class Controller extends HttpServlet {
 		Action action;
 		try {
 			action = (Action)Class.forName(actionName).newInstance();
-			if(actionName.contains("Product"))
-				nextPage = action.perform(request, productFacade);
-			if(actionName.contains("Customer"))
-				nextPage = action.perform(request, customerFacade);
-			if(actionName.contains("Admin"))
-				nextPage = action.perform(request, adminFacade);
+			nextPage = action.perform(request, facade);
 		}
 		catch (InstantiationException e) {
 		 	request.setAttribute("ex", e);

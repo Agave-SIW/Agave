@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class GetProduct implements Action {
     
-	public String perform(HttpServletRequest request, ProductFacade productFacade) {
+	public String perform(HttpServletRequest request, Facade facade) {
 		
 		HelperProductId helper = new HelperProductId();
 		
 		if (helper.isValid(request)) {
 			Long id = Long.parseLong(request.getParameter("id"));
 			
-			Product product = productFacade.getProduct(id);
+			Product product = facade.getProduct(id);
 			request.setAttribute("product", product);
 			
 			return "/product.jsp";
@@ -23,16 +23,4 @@ public class GetProduct implements Action {
 			return "/invalidProduct.jsp";
 	}
 
-	@Override
-	public String perform(HttpServletRequest request,
-			CustomerFacade customerFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

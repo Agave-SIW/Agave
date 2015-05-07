@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CreateProduct implements Action {
 
-	public String perform(HttpServletRequest request, ProductFacade productFacade) {
+	public String perform(HttpServletRequest request, Facade facade) {
 		
 		HelperProduct helper = new HelperProduct();
 		
@@ -18,25 +18,12 @@ public class CreateProduct implements Action {
 			Float price = Float.parseFloat(request.getParameter("price"));
 			String description = request.getParameter("description");
 			
-			Product product = productFacade.createProduct(name, code, price, description);
+			Product product = facade.createProduct(name, code, price, description);
 			request.setAttribute("product", product);
 			
 			return "/product.jsp";
 		} else
 			return "/newProduct.jsp";
-	}
-
-	@Override
-	public String perform(HttpServletRequest request,
-			CustomerFacade customerFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

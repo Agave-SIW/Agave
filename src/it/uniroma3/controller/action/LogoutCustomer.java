@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 public class LogoutCustomer implements Action {
 
-	public String perform(HttpServletRequest request, CustomerFacade customerFacade) {
+	public String perform(HttpServletRequest request, Facade facade) {
 
 		HttpSession session = request.getSession();
 
@@ -17,19 +17,5 @@ public class LogoutCustomer implements Action {
 		return "/success.jsp";
 
 	}
-
-	@Override
-	public String perform(HttpServletRequest request,
-			ProductFacade productFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

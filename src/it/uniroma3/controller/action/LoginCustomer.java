@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class LoginCustomer implements Action {
     
-	public String perform(HttpServletRequest request, CustomerFacade customerFacade) {
+	public String perform(HttpServletRequest request, Facade facade) {
 		
 		HelperLogin helper = new HelperLogin();
 		HttpSession session = request.getSession();
@@ -18,7 +18,7 @@ public class LoginCustomer implements Action {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
-			Customer customer = customerFacade.getCustomer(email);
+			Customer customer = facade.getCustomer(email);
 			//request.setAttribute("customer", customer);
 			if(customer==null || !customer.getPassword().equals(password)){
 				session.setAttribute("customerLogged", false);
@@ -37,19 +37,5 @@ public class LoginCustomer implements Action {
 			request.setAttribute("ex", "Invalid credentials"); //TODO mostrare in pagina
 			return "/error.jsp";
 	}
-
-	@Override
-	public String perform(HttpServletRequest request,
-			ProductFacade productFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

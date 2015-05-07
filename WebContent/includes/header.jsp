@@ -10,7 +10,7 @@
 			</button>
 			<a class="navbar-brand"
 				href="<c:url value="${request.getContextPath()}" />"> <img
-				alt="Agave" src="<%=request.getContextPath()%>/images/logo.png" style="width: auto;height: 20px;" />
+				alt="Agave" src="<%=request.getContextPath()%>/images/logo_small.png" style="width: auto;height: 20px;" />
 			</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->

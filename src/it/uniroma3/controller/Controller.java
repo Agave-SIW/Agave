@@ -26,6 +26,9 @@ public class Controller extends HttpServlet {
 	@EJB(beanName="cFacade")
 	private CustomerFacade customerFacade;
 	
+	@EJB(beanName="aFacade")
+	private AdminFacade adminFacade;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		genericAction(request, response); 
@@ -49,6 +52,8 @@ public class Controller extends HttpServlet {
 				nextPage = action.perform(request, productFacade);
 			if(actionName.contains("Customer"))
 				nextPage = action.perform(request, customerFacade);
+			if(actionName.contains("Admin"))
+				nextPage = action.perform(request, adminFacade);
 		}
 		catch (InstantiationException e) {
 		 	request.setAttribute("ex", e);

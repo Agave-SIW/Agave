@@ -33,4 +33,10 @@ public class CreateProduct implements Action {
 		return null;
 	}
 
+	@Override
+	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

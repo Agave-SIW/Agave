@@ -19,6 +19,8 @@ public class Admin {
 	private String lastName;
 	
 	private String email;
+	
+	private String password;
 
 	private String phoneNumber;
 
@@ -33,11 +35,12 @@ public class Admin {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(String firstName, String lastName, String email,
+	public Admin(String firstName, String lastName, String email, String password,
 			String phoneNumber, Date dateofBirth) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.dateofBirth = dateofBirth;
 	}
@@ -60,6 +63,14 @@ public class Admin {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setLastName(String lastName) {
@@ -98,10 +109,10 @@ public class Admin {
 		this.registrationDate = registrationDate;
 	}
 
-	public boolean equals(Admin customer) {
+	public boolean equals(Admin admin) {
 
-		if(this.firstName == customer.getFirstName() && this.lastName == customer.getLastName() &&
-				this.dateofBirth == customer.getDateofBirth())
+		if(this.firstName == admin.getFirstName() && this.lastName == admin.getLastName() &&
+				this.dateofBirth == admin.getDateofBirth())
 			return true;
 		else return false;
 	}

@@ -21,4 +21,10 @@ public class ListProduct implements Action {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String perform(HttpServletRequest request, AdminFacade adminFacade) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

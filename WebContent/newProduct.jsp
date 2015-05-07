@@ -5,8 +5,8 @@
 <html>
 
 <head>
-	<%@include file="includes/head.jsp"%>
-	<title>New Product</title>
+<%@include file="includes/head.jsp"%>
+<title>New Product</title>
 </head>
 <body>
 	<div class="container maincontent">
@@ -16,23 +16,24 @@
 				class="col-md-6 col-md-offset-3 form-horizontal">
 				<div class="form-group">
 					<h1>New Product</h1>
-					<span style="color:red">TODO: questa pagina va spostata nel pannello admin</span>
+					<span style="color: red">TODO: questa pagina va spostata nel
+						pannello admin</span>
 					<hr />
 				</div>
 				<div class="form-group">
 					<label for="name">Name: </label> <input type="text" id="name"
-						name="name" value="${param.name}" class="form-control" required /> <span
-						style="color: red">${nameErr}</span>
+						name="name" value="${param.name}" class="form-control" required />
+					<span style="color: red">${nameErr}</span>
 				</div>
 				<div class="form-group">
 					<label for="code">Code: </label> <input type="text" id="code"
-						name="code" value="${param.code}" class="form-control" required /> <span
-						style="color: red">${codeErr}</span>
+						name="code" value="${param.code}" class="form-control" required />
+					<span style="color: red">${codeErr}</span>
 				</div>
 				<div class="form-group">
 					<label for="price">Price: </label> <input type="text" id="price"
-						name="price" value="${param.price}" class="form-control" required /> <span
-						style="color: red">${priceErr}</span>
+						name="price" value="${param.price}" class="form-control" required />
+					<span style="color: red">${priceErr}</span>
 				</div>
 				<div class="form-group">
 					<label for="description">Description: </label>
@@ -45,6 +46,39 @@
 					<button type="reset" class="btn btn-default">Reset</button>
 				</div>
 			</form>
+
+			<span style="color: red"
+				class="col-md-6 col-md-offset-3 form-horizontal">TODO: questo
+				&egrave; un test per il login admin</span>
+			<%
+				if (session.getAttribute("adminLogged") == null
+						|| session.getAttribute("adminLogged").equals(false)) {
+			%>
+			<form class="col-md-6 col-md-offset-3 form-horizontal" role="login"
+				action="<c:url value="${request.getContextPath()}/shop/admin.login" />"
+				method="post">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="email"
+						name="email" /> <input type="password" class="form-control"
+						placeholder="password" name="password" />
+				</div>
+				<button type="submit" class="btn btn-primary">Login</button>
+			</form>
+			<%
+				} else {
+			%>
+			<div class="col-md-6 col-md-offset-3 form-horizontal">
+				<p class="navbar-text">
+					Benvenuto Admin ${admin.firstName} <a
+						href="<c:url value="${request.getContextPath()}/shop/admin.logout" />">Logout</a>
+				</p>
+
+			</div>
+			<%
+				}
+			%>
+
+
 		</div>
 
 		<!-- Footer -->

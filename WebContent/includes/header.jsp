@@ -9,7 +9,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand"
-				href="<c:url value="${request.getContextPath()}" />"> <img
+				href="<c:url value="${request.getContextPath()}/" />"> <img
 				alt="Agave" src="<%=request.getContextPath()%>/images/logo_small.png" style="width: auto;height: 20px;" />
 			</a>
 		</div>

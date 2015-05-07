@@ -11,7 +11,7 @@ public class ListProduct implements Action {
     
 	public String perform(HttpServletRequest request, ProductFacade productFacade) {	
 		List<Product> products = productFacade.getAllProducts();
-		request.setAttribute("products", products);	//TODO invertire lista prodotti che si passa alla view
+		request.setAttribute("products", products);	//TODO   invertire lista prodotti che si passa alla view
 		return "/products.jsp";
 	}
 

@@ -1,24 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-<!DOCTYPE html>
+<%@include file="includes/imports.jsp" %><!DOCTYPE html>
 <html lang="it">
 
+
 <head>
-<%@include file="includes/head.jsp"%>
+<%@include file="includes/head.jsp" %>
 <title>Agave Shop</title>
 </head>
 
 <body>
 
+<f:view>
+
 	<!-- Navigation -->
-	<%@include file="includes/header.jsp"%>
+	<%@include file="includes/header.jsp" %>
 
 	<!-- Page Content -->
 	<div class="container">
-		<f:view>
+		
 			<!-- Jumbotron Header -->
 			<header class="jumbotron hero-spacer">
 				<h1>A Warm Welcome!</h1>
@@ -108,7 +106,7 @@
 			<!-- /.row -->
 
 
-		</f:view>
+		
 	</div>
 	<!-- /.container -->
 
@@ -120,6 +118,8 @@
 
 
 	<%@include file="includes/boostrapjquery.jsp"%>
+
+</f:view>
 
 </body>
 

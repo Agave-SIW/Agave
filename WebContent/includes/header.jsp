@@ -10,7 +10,9 @@
 			</button>
 			<a class="navbar-brand"
 				href="<c:url value="${request.getContextPath()}/" />"> <img
-				alt="Agave" src="<%=request.getContextPath()%>/images/logo_small.png" style="width: auto;height: 20px;" />
+				alt="Agave"
+				src="<%=request.getContextPath()%>/images/logo_small.png"
+				style="width: auto; height: 20px;" />
 			</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -18,28 +20,55 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="#">About</a></li>
-				<li><a href="<c:url value="/shop/newProduct.jsp" />">Insert a
-						new product</a></li>
+				<li><a href="<c:url value="/shop/newProduct.jsp" />">Insert
+						a new product</a></li>
 			</ul>
-			<% if (session.getAttribute("customerLogged")==null || session.getAttribute("customerLogged").equals(false)) { %>
-			<form class="navbar-form navbar-right" role="login"
-				action="<c:url value="${request.getContextPath()}/shop/customer.login" />"
-				method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="email"
-						name="email" /> <input type="password" class="form-control"
-						placeholder="password" name="password" />
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-			</form>
-			<% } else {  %>
-			<ul class="nav navbar-nav navbar-right">
-				<li><p class="navbar-text">Benvenuto ${customer.firstName}</p></li>
-				<li><a
-					href="<c:url value="${request.getContextPath()}/shop/customer.logout" />">Logout</a></li>
+<%@include file="imports.jsp" %>
+			<f:subview id="customerController">
+				<h:panelGroup rendered="#{customerController.notLoggedIn()}">
+					<h:form styleClass="navbar-form navbar-right">
 
-			</ul>
-			<% } %>
+						<div class="form-group">
+
+							<h:inputText value="#{customerController.email}" required="true"
+								requiredMessage="la mail e' obbligatoria" id="email"
+								styleClass="form-control" />
+							<!--  placeholder="Email" -->
+							<h:message for="email" style="color: red" />
+
+							<h:inputSecret value="#{customerController.password}"
+								required="true" requiredMessage="La password e' obbligatoria"
+								id="password" styleClass="form-control" />
+							<!--  placeholder="Email" -->
+							<h:message for="password" style="color: red" />
+
+						</div>
+						<h:commandButton value="Login"
+							action="#{customerController.loginCustomer}"
+							styleClass="btn btn-primary" />
+
+					</h:form>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{customerController.loggedIn()}">
+					<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
+
+						<div class="form-group">
+							<ul class="nav navbar-nav navbar-right">
+								<li><p class="navbar-text">
+										Benvenuto
+										<h:outputText
+											value="#{customerController.getCurrentCustomer().getFirstName()}" />
+									</p></li>
+								<li><h:commandLink value="Logout"
+										action="#{customerController.logoutCustomer}" /></li>
+
+							</ul>
+						</div>
+					</h:form>
+				</h:panelGroup>
+
+			</f:subview>
+
 
 		</div>
 		<!-- /.navbar-collapse -->

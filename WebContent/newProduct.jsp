@@ -1,10 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
-
-<!DOCTYPE html>
+<%@include file="includes/imports.jsp" %><!DOCTYPE html>
 <html>
 
 <head>
@@ -75,9 +69,9 @@
 					class="col-md-6 col-md-offset-3 form-horizontal">TODO:
 					questo &egrave; un test per il login admin</span>
 
-inizio
+
 				<h:panelGroup rendered="#{adminController.notLoggedIn()}">
-				falso
+
 					<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
 
 						<div class="form-group">
@@ -98,12 +92,13 @@ inizio
 						<h:commandButton value="Login"
 							action="#{adminController.loginAdmin}"
 							styleClass="btn btn-primary" />
-							
+
 					</h:form>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{adminController.loggedIn()}">
-				vero
-					Benvenuto <h:outputText value="#{adminController.getCurrentAdmin().getFirstName()}" />
+				
+					Benvenuto <h:outputText
+						value="#{adminController.getCurrentAdmin().getFirstName()}" />
 				</h:panelGroup>
 
 

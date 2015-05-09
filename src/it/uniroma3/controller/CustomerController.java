@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 
 @ManagedBean
@@ -20,7 +21,6 @@ public class CustomerController {
 	private String firstName;
 	private String password;
 	private String email;
-	private Boolean customerLogged;
 	private Customer customer;
 	private List<Customer> customers;
 
@@ -29,26 +29,46 @@ public class CustomerController {
 
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
+		
+		System.out.print("\n\ntest\n\n");
 
 		if(customer==null || !customer.getPassword().equals(password)){
-			this.customerLogged = false;
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
-			return "index";
 		}
 		else{
-			this.customerLogged = true;
 			System.out.print("\n\nLogin OK\n\n");
-			return "index";
 		}
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("customer", customer);
+		
+		return "index";
 	}
 
 	public String logoutCustomer(){
 
-		this.customerLogged = false;
 		this.customer = null;
-		System.out.print("\n\nCUSTOMER LOGGED OUT\n\n");
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("customer", customer);
+		
+		System.out.print("\n\nCustomer LOGGED OUT\n\n");
 		return "index";
+	}
+	
+	public Customer getCurrentCustomer(){
+		return (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
+	}
+	
+	public Boolean loggedIn() {
+		if(this.getCurrentCustomer()==null)
+			return false;
+		return true;
+	}
+	
+	public Boolean notLoggedIn() {
+		return !this.loggedIn();
 	}
 
 	public Long getId() {
@@ -81,14 +101,6 @@ public class CustomerController {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Boolean getCustomerLogged() {
-		return customerLogged;
-	}
-
-	public void setCustomerLogged(Boolean customerLogged) {
-		this.customerLogged = customerLogged;
 	}
 
 	public Customer getCustomer() {

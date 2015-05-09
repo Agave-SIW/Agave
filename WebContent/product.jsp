@@ -1,9 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
-<!DOCTYPE html>
+<%@include file="includes/imports.jsp" %><!DOCTYPE html>
 <html lang="it">
 
 <head>

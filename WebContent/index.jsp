@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
 	pageEncoding="US-ASCII"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -16,99 +18,106 @@
 
 	<!-- Page Content -->
 	<div class="container">
+		<f:view>
+			<!-- Jumbotron Header -->
+			<header class="jumbotron hero-spacer">
+				<h1>A Warm Welcome!</h1>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero
+					aliquid similique quaerat nam nobis illo aspernatur vitae fugiat
+					numquam repellat.</p>
+				<p>
+					<h:form>
+						<h:commandLink action="#{productController.listProducts}"
+							value="View all Products" styleClass="btn btn-primary btn-large" />
+					</h:form>
 
-		<!-- Jumbotron Header -->
-		<header class="jumbotron hero-spacer">
-			<h1>A Warm Welcome!</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero
-				aliquid similique quaerat nam nobis illo aspernatur vitae fugiat
-				numquam repellat.</p>
-			<p>
-				<a class="btn btn-primary btn-large"
-					href="<c:url value="/shop/product.list" />">View all products</a>
-			</p>
-		</header>
+				</p>
+			</header>
 
-		<hr>
+			<hr>
 
-		<!-- Title -->
-		<div class="row">
-			<div class="col-lg-12">
-				<h3>Latest Features</h3>
-			</div>
-		</div>
-		<!-- /.row -->
-
-		<!-- Page Features -->
-		<div class="row text-center">
-
-			<div class="col-md-3 col-sm-6 hero-feature">
-				<div class="thumbnail">
-					<img src="http://placehold.it/800x500" alt="">
-					<div class="caption">
-						<h3>Feature Label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						<p>
-							<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-								class="btn btn-default">More Info</a>
-						</p>
-					</div>
+			<!-- Title -->
+			<div class="row">
+				<div class="col-lg-12">
+					<h3>Latest Features</h3>
 				</div>
 			</div>
+			<!-- /.row -->
 
-			<div class="col-md-3 col-sm-6 hero-feature">
-				<div class="thumbnail">
-					<img src="http://placehold.it/800x500" alt="">
-					<div class="caption">
-						<h3>Feature Label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						<p>
-							<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-								class="btn btn-default">More Info</a>
-						</p>
+			<!-- Page Features -->
+			<div class="row text-center">
+
+				<div class="col-md-3 col-sm-6 hero-feature">
+					<div class="thumbnail">
+						<img src="http://placehold.it/800x500" alt="">
+						<div class="caption">
+							<h3>Feature Label</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+							<p>
+								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
+									class="btn btn-default">More Info</a>
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="col-md-3 col-sm-6 hero-feature">
-				<div class="thumbnail">
-					<img src="http://placehold.it/800x500" alt="">
-					<div class="caption">
-						<h3>Feature Label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						<p>
-							<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-								class="btn btn-default">More Info</a>
-						</p>
+				<div class="col-md-3 col-sm-6 hero-feature">
+					<div class="thumbnail">
+						<img src="http://placehold.it/800x500" alt="">
+						<div class="caption">
+							<h3>Feature Label</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+							<p>
+								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
+									class="btn btn-default">More Info</a>
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="col-md-3 col-sm-6 hero-feature">
-				<div class="thumbnail">
-					<img src="http://placehold.it/800x500" alt="">
-					<div class="caption">
-						<h3>Feature Label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-						<p>
-							<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-								class="btn btn-default">More Info</a>
-						</p>
+				<div class="col-md-3 col-sm-6 hero-feature">
+					<div class="thumbnail">
+						<img src="http://placehold.it/800x500" alt="">
+						<div class="caption">
+							<h3>Feature Label</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+							<p>
+								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
+									class="btn btn-default">More Info</a>
+							</p>
+						</div>
 					</div>
 				</div>
+
+				<div class="col-md-3 col-sm-6 hero-feature">
+					<div class="thumbnail">
+						<img src="http://placehold.it/800x500" alt="">
+						<div class="caption">
+							<h3>Feature Label</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+							<p>
+								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
+									class="btn btn-default">More Info</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
 			</div>
+			<!-- /.row -->
 
-		</div>
-		<!-- /.row -->
 
-		<hr>
-
-		<!-- Footer -->
-		<%@include file="includes/footer.jsp"%>
-
+		</f:view>
 	</div>
 	<!-- /.container -->
+
+
+	<hr>
+
+	<!-- Footer -->
+	<%@include file="includes/footer.jsp"%>
+
 
 	<%@include file="includes/boostrapjquery.jsp"%>
 

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
 	pageEncoding="US-ASCII"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<%@ taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,79 +15,116 @@
 	<div class="container maincontent">
 		<%@include file="includes/header.jsp"%>
 		<div class="row">
-			<form action="<c:url value="/shop/product.create" />" method="post"
-				class="col-md-6 col-md-offset-3 form-horizontal">
-				<div class="form-group">
-					<h1>New Product</h1>
-					<span style="color: red">TODO: questa pagina va spostata nel
-						pannello admin</span>
-					<hr />
-				</div>
-				<div class="form-group">
-					<label for="name">Name: </label> <input type="text" id="name"
-						name="name" value="${param.name}" class="form-control" required />
-					<span style="color: red">${nameErr}</span>
-				</div>
-				<div class="form-group">
-					<label for="code">Code: </label> <input type="text" id="code"
-						name="code" value="${param.code}" class="form-control" required />
-					<span style="color: red">${codeErr}</span>
-				</div>
-				<div class="form-group">
-					<label for="price">Price: </label> <input type="text" id="price"
-						name="price" value="${param.price}" class="form-control" required />
-					<span style="color: red">${priceErr}</span>
-				</div>
-				<div class="form-group">
-					<label for="description">Description: </label>
-					<textarea rows="4" cols="50" id="description" name="description"
-						rows="3" class="form-control">${param.description}</textarea>
-				</div>
-				<div class="form-group" style="padding-top: 20px">
-					<input type="submit" name="sumbit" value="Submit"
-						class="btn btn-primary" />
-					<button type="reset" class="btn btn-default">Reset</button>
-				</div>
-			</form>
+			<f:view>
+				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
+					<div class="form-group">
+						<h1>New Product</h1>
+						<span style="color: red">TODO: questa pagina va spostata
+							nel pannello admin</span>
+						<hr />
+					</div>
+					<div class="form-group">
+						<label for="name">Name: </label>
 
-			<span style="color: red"
-				class="col-md-6 col-md-offset-3 form-horizontal">TODO: questo
-				&egrave; un test per il login admin</span>
-			<%
-				if (session.getAttribute("adminLogged") == null
-						|| session.getAttribute("adminLogged").equals(false)) {
-			%>
-			<form class="col-md-6 col-md-offset-3 form-horizontal" role="login"
-				action="<c:url value="${request.getContextPath()}/shop/admin.login" />"
-				method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="email"
-						name="email" /> <input type="password" class="form-control"
-						placeholder="password" name="password" />
-				</div>
-				<button type="submit" class="btn btn-primary">Login</button>
-			</form>
-			<%
-				} else {
-			%>
-			<div class="col-md-6 col-md-offset-3 form-horizontal">
-				<p class="navbar-text">
-					Benvenuto Admin ${admin.firstName} <a
-						href="<c:url value="${request.getContextPath()}/shop/admin.logout" />">Logout</a>
-				</p>
+						<h:inputText value="#{productController.name}" required="true"
+							requiredMessage="Il nome e' obbligatorio" id="name"
+							styleClass="form-control" />
+						<h:message for="name" style="color: red" />
 
-			</div>
-			<%
-				}
-			%>
+					</div>
+					<div class="form-group">
 
+						<label for="code">Code: </label>
+
+						<h:inputText value="#{productController.code}" required="true"
+							requiredMessage="Il codice prodotto e' obbligatorio" id="code"
+							styleClass="form-control" />
+						<h:message for="code" style="color: red" />
+
+					</div>
+					<div class="form-group">
+						<label for="price">Price: </label>
+
+						<h:inputText value="#{productController.price}" required="true"
+							requiredMessage="Il prezzo e' obbligatorio" id="price"
+							styleClass="form-control" />
+						<h:message for="price" style="color: red" />
+
+					</div>
+					<div class="form-group">
+						<label for="description">Description: </label>
+
+						<h:inputTextarea value="#{productController.description}"
+							required="false" cols="20" rows="5" id="description"
+							styleClass="form-control" />
+
+					</div>
+					<div class="form-group" style="padding-top: 20px">
+
+						<h:commandButton value="Submit"
+							action="#{productController.createProduct}"
+							styleClass="btn btn-primary" />
+						<button type="reset" class="btn btn-default">Reset</button>
+					</div>
+				</h:form>
+
+
+
+
+				<span style="color: red"
+					class="col-md-6 col-md-offset-3 form-horizontal">TODO:
+					questo &egrave; un test per il login admin</span>
+
+inizio
+				<h:panelGroup rendered="#{adminController.notLoggedIn()}">
+				falso
+					<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
+
+						<div class="form-group">
+
+							<h:inputText value="#{adminController.email}" required="true"
+								requiredMessage="la mail e' obbligatoria" id="email"
+								styleClass="form-control" />
+							<!--  placeholder="Email" -->
+							<h:message for="email" style="color: red" />
+
+							<h:inputSecret value="#{adminController.password}"
+								required="true" requiredMessage="La password e' obbligatoria"
+								id="password" styleClass="form-control" />
+							<!--  placeholder="Email" -->
+							<h:message for="password" style="color: red" />
+
+						</div>
+						<h:commandButton value="Login"
+							action="#{adminController.loginAdmin}"
+							styleClass="btn btn-primary" />
+							
+					</h:form>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{adminController.loggedIn()}">
+				vero
+					Benvenuto <h:outputText value="#{adminController.getCurrentAdmin().getFirstName()}" />
+				</h:panelGroup>
+
+
+			</f:view>
 
 		</div>
 
-		<!-- Footer -->
-		<%@include file="includes/footer.jsp"%>
+
 
 	</div>
+
+	<!-- /.container -->
+
+
+	<hr>
+
+	<!-- Footer -->
+	<%@include file="includes/footer.jsp"%>
+
+
+	<%@include file="includes/boostrapjquery.jsp"%>
 
 	<%@include file="includes/boostrapjquery.jsp"%>
 </body>

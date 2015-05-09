@@ -2,6 +2,7 @@
 	pageEncoding="US-ASCII"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <!DOCTYPE html>
 <html lang="it">
 
@@ -17,21 +18,24 @@
 
 	<!-- Page Content -->
 	<div class="container">
+
 		<div class="row">
 			<div class="col-md-12">
 
 				<div class="thumbnail">
 					<img class="img-responsive" src="http://placehold.it/1150x400"
 						alt="">
-					<div class="caption-full">
-						<h4 class="pull-right price">
-							<fmt:formatNumber type="currency" currencySymbol=" &euro; "
-								value="${product.price}" />
-						</h4>
-						<h2>${product.name}</h2>
-						<div>Codice: ${product.code}</div>
-						<div>${product.description}</div>
-					</div>
+					<f:view>
+						<div class="caption-full">
+							<h4 class="pull-right price">
+								<fmt:formatNumber type="currency" currencySymbol=" &euro; "
+									value="${productController.product.price}" />
+							</h4>
+							<h2>${productController.product.name}</h2>
+							<div>Codice: ${productController.product.code}</div>
+							<div>${productController.product.description}</div>
+						</div>
+					</f:view>
 					<div class="ratings">
 						<p class="pull-right">3 reviews</p>
 						<p>
@@ -98,18 +102,16 @@
 
 			</div>
 		</div>
-	</div>
-	<!-- /.container -->
-
-	<div class="container">
-
-		<hr>
-
-		<!-- Footer -->
-		<%@include file="includes/footer.jsp"%>
 
 	</div>
 	<!-- /.container -->
+
+
+	<hr>
+
+	<!-- Footer -->
+	<%@include file="includes/footer.jsp"%>
+
 
 	<%@include file="includes/boostrapjquery.jsp"%>
 

@@ -6,13 +6,11 @@ import it.uniroma3.model.Product;
 import it.uniroma3.facade.ProductFacade;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 
 @ManagedBean
-@SessionScoped
 public class ProductController {
 	
 	@ManagedProperty(value="#{param.id}")
@@ -40,16 +38,6 @@ public class ProductController {
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);
-		
-		/*
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("productName", product.getName());
-		
-		System.out.print("\n\nSAVED\n\n");
-		System.out.print("\n\nGOT "+ (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("productName") +" !\n\n");
-		
-		*/
-		
 		return "product";
 	}
 	

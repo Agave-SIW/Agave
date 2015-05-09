@@ -23,7 +23,7 @@
 
 						<h:inputText value="#{productController.name}" required="true"
 							requiredMessage="Il nome e' obbligatorio" id="name"
-							styleClass="form-control" />
+							styleClass="form-control needRequired" />
 						<h:message for="name" style="color: red" />
 
 					</div>
@@ -33,7 +33,7 @@
 
 						<h:inputText value="#{productController.code}" required="true"
 							requiredMessage="Il codice prodotto e' obbligatorio" id="code"
-							styleClass="form-control" />
+							styleClass="form-control needRequired" />
 						<h:message for="code" style="color: red" />
 
 					</div>
@@ -42,7 +42,7 @@
 
 						<h:inputText value="#{productController.price}" required="true"
 							requiredMessage="Il prezzo e' obbligatorio" id="price"
-							styleClass="form-control" />
+							styleClass="form-control needRequired" />
 						<h:message for="price" style="color: red" />
 
 					</div>
@@ -50,7 +50,7 @@
 						<label for="description">Description: </label>
 
 						<h:inputTextarea value="#{productController.description}"
-							required="false" cols="20" rows="5" id="description"
+							required="false" cols="20" rows="5" id="description" 
 							styleClass="form-control" />
 
 					</div>
@@ -79,13 +79,13 @@
 
 							<h:inputText value="#{adminController.email}" required="true"
 								requiredMessage="la mail e' obbligatoria" id="email"
-								styleClass="form-control" />
+								styleClass="form-control needPlaceholder" />
 							<!--  placeholder="Email" -->
 							<h:message for="email" style="color: red" />
 
 							<h:inputSecret value="#{adminController.password}"
 								required="true" requiredMessage="La password e' obbligatoria"
-								id="password" styleClass="form-control" />
+								id="password" styleClass="form-control needPlaceholder" />
 							<!--  placeholder="Email" -->
 							<h:message for="password" style="color: red" />
 

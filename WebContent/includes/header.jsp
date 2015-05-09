@@ -32,13 +32,13 @@
 
 							<h:inputText value="#{customerController.email}" required="true"
 								requiredMessage="la mail e' obbligatoria" id="email"
-								styleClass="form-control" />
+								styleClass="form-control needPlaceholder" />
 							<!--  placeholder="Email" -->
 							<h:message for="email" style="color: red" />
 
 							<h:inputSecret value="#{customerController.password}"
 								required="true" requiredMessage="La password e' obbligatoria"
-								id="password" styleClass="form-control" />
+								id="password" styleClass="form-control needPlaceholder" />
 							<!--  placeholder="Email" -->
 							<h:message for="password" style="color: red" />
 

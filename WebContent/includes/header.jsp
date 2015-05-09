@@ -23,7 +23,7 @@
 				<li><a href="<c:url value="/shop/newProduct.jsp" />">Insert
 						a new product</a></li>
 			</ul>
-<%@include file="imports.jsp" %>
+			<%@include file="imports.jsp"%>
 			<f:subview id="customerController">
 				<h:panelGroup rendered="#{customerController.notLoggedIn()}">
 					<h:form styleClass="navbar-form navbar-right">

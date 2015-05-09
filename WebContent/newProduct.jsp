@@ -1,4 +1,4 @@
-<%@include file="includes/imports.jsp" %><!DOCTYPE html>
+<%@include file="includes/imports.jsp"%><!DOCTYPE html>
 <html>
 
 <head>
@@ -6,10 +6,11 @@
 <title>New Product</title>
 </head>
 <body>
-	<div class="container maincontent">
-		<%@include file="includes/header.jsp"%>
-		<div class="row">
-			<f:view>
+	<f:view>
+		<div class="container maincontent">
+			<%@include file="includes/header.jsp"%>
+			<div class="row">
+
 				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
 					<div class="form-group">
 						<h1>New Product</h1>
@@ -96,31 +97,35 @@
 					</h:form>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{adminController.loggedIn()}">
-				
-					Benvenuto <h:outputText
-						value="#{adminController.getCurrentAdmin().getFirstName()}" />
+					<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
+
+						<div class="form-group">
+							<p>
+								Benvenuto
+								<h:outputText
+									value="#{adminController.getCurrentAdmin().getFirstName()}" />
+								-
+								<h:commandLink value="Logout"
+									action="#{adminController.logoutAdmin}" />
+							</p>
+
+						</div>
+					</h:form>
 				</h:panelGroup>
 
-
-			</f:view>
+			</div>
 
 		</div>
 
+		<!-- /.container -->
+
+		<!-- Footer -->
+		<%@include file="includes/footer.jsp"%>
 
 
-	</div>
+		<%@include file="includes/boostrapjquery.jsp"%>
 
-	<!-- /.container -->
-
-
-	<hr>
-
-	<!-- Footer -->
-	<%@include file="includes/footer.jsp"%>
-
-
-	<%@include file="includes/boostrapjquery.jsp"%>
-
-	<%@include file="includes/boostrapjquery.jsp"%>
+		<%@include file="includes/boostrapjquery.jsp"%>
+	</f:view>
 </body>
 </html>

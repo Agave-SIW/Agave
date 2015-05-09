@@ -1,4 +1,4 @@
-<%@include file="includes/imports.jsp" %><!DOCTYPE html>
+<%@include file="includes/imports.jsp"%><!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -7,13 +7,13 @@
 </head>
 
 <body>
+	<f:view>
+		<!-- Navigation -->
+		<%@include file="includes/header.jsp"%>
 
-	<!-- Navigation -->
-	<%@include file="includes/header.jsp"%>
+		<!-- Page Content -->
+		<div class="container">
 
-	<!-- Page Content -->
-	<div class="container">
-		<f:view>
 			<h:form>
 
 				<div class="row">
@@ -99,21 +99,15 @@
 
 				</div>
 			</h:form>
-		</f:view>
-	</div>
-	<!-- /.container -->
 
+		</div>
+		<!-- /.container -->
 
+		<!-- Footer -->
+		<%@include file="includes/footer.jsp"%>
 
-	<hr>
-
-	<!-- Footer -->
-	<%@include file="includes/footer.jsp"%>
-
-
-
-	<%@include file="includes/boostrapjquery.jsp"%>
-
+		<%@include file="includes/boostrapjquery.jsp"%>
+	</f:view>
 </body>
 
 </html>

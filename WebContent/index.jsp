@@ -1,22 +1,22 @@
-<%@include file="includes/imports.jsp" %><!DOCTYPE html>
+<%@include file="includes/imports.jsp"%><!DOCTYPE html>
 <html lang="it">
 
 
 <head>
-<%@include file="includes/head.jsp" %>
+<%@include file="includes/head.jsp"%>
 <title>Agave Shop</title>
 </head>
 
 <body>
 
-<f:view>
+	<f:view>
 
-	<!-- Navigation -->
-	<%@include file="includes/header.jsp" %>
+		<!-- Navigation -->
+		<%@include file="includes/header.jsp"%>
 
-	<!-- Page Content -->
-	<div class="container">
-		
+		<!-- Page Content -->
+		<div class="container">
+
 			<!-- Jumbotron Header -->
 			<header class="jumbotron hero-spacer">
 				<h1>A Warm Welcome!</h1>
@@ -105,21 +105,16 @@
 			</div>
 			<!-- /.row -->
 
+		</div>
+		<!-- /.container -->
 
-		
-	</div>
-	<!-- /.container -->
-
-
-	<hr>
-
-	<!-- Footer -->
-	<%@include file="includes/footer.jsp"%>
+		<!-- Footer -->
+		<%@include file="includes/footer.jsp"%>
 
 
-	<%@include file="includes/boostrapjquery.jsp"%>
+		<%@include file="includes/boostrapjquery.jsp"%>
 
-</f:view>
+	</f:view>
 
 </body>
 

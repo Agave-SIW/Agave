@@ -18,7 +18,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="#">About</a></li>
-				<li><a href="<c:url value="/newProduct.jsp" />">Insert a
+				<li><a href="<c:url value="/shop/newProduct.jsp" />">Insert a
 						new product</a></li>
 			</ul>
 			<% if (session.getAttribute("customerLogged")==null || session.getAttribute("customerLogged").equals(false)) { %>

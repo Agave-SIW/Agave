@@ -9,7 +9,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-//import javax.faces.context.FacesContext;
+import javax.faces.context.FacesContext;
 
 
 @ManagedBean
@@ -26,6 +26,8 @@ public class CustomerController {
 
 	@EJB
 	private CustomerFacade customerFacade;
+	
+	
 
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
@@ -40,26 +42,25 @@ public class CustomerController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getSessionMap().put("customer", customer);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("customer", customer);
 		
-		return "index";
+		return "index?faces-redirect=true";
 	}
 
 	public String logoutCustomer(){
 
 		this.customer = null;
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getSessionMap().put("customer", customer);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("customer", customer);
 		
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
 		return "index";
 	}
 	
 	public Customer getCurrentCustomer(){
-		return customer;
-		//return (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
+		return (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
 	}
 	
 	public Boolean loggedIn() {

@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.enterprise.context.SessionScoped;
-//import javax.faces.context.FacesContext;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
@@ -34,8 +34,8 @@ public class AdminController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getSessionMap().put("admin", admin);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("admin", admin);
 		
 		return "newProduct";
 	}
@@ -44,16 +44,15 @@ public class AdminController {
 
 		this.admin = null;
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
-		//context.getExternalContext().getSessionMap().put("admin", admin);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("admin", admin);
 		
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
 		return "index";
 	}
 	
 	public Admin getCurrentAdmin(){
-		return admin;
-		//return (Admin) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("admin");
+		return (Admin) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("admin");
 	}
 	
 	public Boolean loggedIn() {

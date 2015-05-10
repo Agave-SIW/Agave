@@ -1,7 +1,6 @@
 /* custom css */
 body {
-	padding-top: 70px;
-	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+	padding: 0;
 }
 
 .thumbnail img {
@@ -69,4 +68,7 @@ footer {
 
 .navbar-lower {
 	margin-top: -20px;
+}
+.navbar-relative {
+	position: relative;
 }

@@ -7,8 +7,13 @@
 </head>
 <body>
 	<f:view>
-		<div class="container maincontent">
-			<%@include file="includes/header.jsp"%>
+
+		<!-- Navigation -->
+		<%@include file="includes/header.jsp"%>
+
+		<!-- Page Content -->
+		<div class="container">
+
 			<div class="row">
 
 				<h:panelGroup rendered="#{adminController.notLoggedIn()}">

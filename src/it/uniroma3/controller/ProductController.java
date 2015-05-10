@@ -73,6 +73,10 @@ public class ProductController {
 		this.products = productFacade.getAllProducts();
 		return "products"; 
 	}
+	
+	public List<Product> getListProducts() {
+		return productFacade.getAllProducts();
+	}
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);

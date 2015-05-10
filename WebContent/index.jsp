@@ -46,61 +46,27 @@
 			<!-- Page Features -->
 			<div class="row text-center">
 
-				<div class="col-md-3 col-sm-6 hero-feature">
-					<div class="thumbnail">
-						<img src="http://placehold.it/800x500" alt="">
-						<div class="caption">
-							<h3>Feature Label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-							<p>
-								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-									class="btn btn-default">More Info</a>
-							</p>
+				<c:forEach var="product"
+					items="#{productController.getListProducts()}" end="3">
+					<h:form>
+						<div class="col-md-3 col-sm-6 hero-feature">
+							<div class="thumbnail">
+								<img src="http://placehold.it/800x500" alt="">
+								<div class="caption">
+									<h3>${product.name}</h3>
+									<p>${product.description}</p>
+									<p>
+										<a href="#" class="btn btn-primary">Buy Now!</a>
+										<h:commandLink action="#{productController.findProduct}"
+											value="More Info" styleClass="btn btn-default">
+											<f:param name="id" value="#{product.id}" />
+										</h:commandLink>
+									</p>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3 col-sm-6 hero-feature">
-					<div class="thumbnail">
-						<img src="http://placehold.it/800x500" alt="">
-						<div class="caption">
-							<h3>Feature Label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-							<p>
-								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-									class="btn btn-default">More Info</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3 col-sm-6 hero-feature">
-					<div class="thumbnail">
-						<img src="http://placehold.it/800x500" alt="">
-						<div class="caption">
-							<h3>Feature Label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-							<p>
-								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-									class="btn btn-default">More Info</a>
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-3 col-sm-6 hero-feature">
-					<div class="thumbnail">
-						<img src="http://placehold.it/800x500" alt="">
-						<div class="caption">
-							<h3>Feature Label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-							<p>
-								<a href="#" class="btn btn-primary">Buy Now!</a> <a href="#"
-									class="btn btn-default">More Info</a>
-							</p>
-						</div>
-					</div>
-				</div>
+					</h:form>
+				</c:forEach>
 
 			</div>
 			<!-- /.row -->

@@ -11,7 +11,7 @@
 	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="<%=request.getContextPath()%>/css/shop-item.css"
+<link href="<%=request.getContextPath()%>/css/shop.css"
 	rel="stylesheet">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

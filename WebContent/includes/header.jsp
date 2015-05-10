@@ -20,8 +20,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="#">About</a></li>
-				<li><a href="<c:url value="/shop/newProduct.jsp" />">Insert
-						a new product</a></li>
+				<li><a href="<c:url value="/shop/admin.jsp" />">Admin CP</a></li>
 			</ul>
 			<%@include file="imports.jsp"%>
 			<f:subview id="customerController">
@@ -33,14 +32,12 @@
 							<h:inputText value="#{customerController.email}" required="true"
 								requiredMessage="Email is mandatory" id="email"
 								styleClass="form-control needPlaceholder needRequired" />
-							<!--  placeholder="Email" -->
 							<h:message for="email" styleClass="label label-warning" />
 						</div>
 						<div class="form-group">
 							<h:inputSecret value="#{customerController.password}"
 								required="true" requiredMessage="Password is mandatory"
 								id="password" styleClass="form-control needPlaceholder needRequired" />
-							<!--  placeholder="Email" -->
 							<h:message for="password" styleClass="label label-warning" />
 
 						</div>
@@ -58,7 +55,7 @@
 						<div class="form-group">
 							<ul class="nav navbar-nav navbar-right">
 								<li><p class="navbar-text">
-										Benvenuto
+										Welcome
 										<h:outputText
 											value="#{customerController.getCurrentCustomer().getFirstName()}" />
 									</p></li>
@@ -78,3 +75,4 @@
 	</div>
 	<!-- /.container -->
 </nav>
+<%@include file="adminMenu.jsp"%>

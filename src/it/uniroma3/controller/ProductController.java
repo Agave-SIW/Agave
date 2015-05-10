@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
 public class ProductController {
-	
+
 	@ManagedProperty(value="#{param.id}")
 	private Long id;
 	private String name;
@@ -21,16 +21,23 @@ public class ProductController {
 	private String code;
 	private Product product;
 	private List<Product> products;
-	
+
 	@EJB
 	private ProductFacade productFacade;
-	
+
 	public String createProduct() {
-		this.product = productFacade.createProduct(name, code, price, description);
-	
-		return "product"; 
+		// security check
+		AdminController ac = new AdminController();
+		
+		if(ac.loggedIn()){		
+			this.product = productFacade.createProduct(name, code, price, description);
+			return "product"; 
+		}
+		else {
+			return "error"; //TODO
+		}
 	}
-	
+
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
 		return "products"; 
@@ -40,7 +47,7 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
-	
+
 	public String findProduct(Long id) {
 		this.product = productFacade.getProduct(id);	
 		return "product";

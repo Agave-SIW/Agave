@@ -14,17 +14,17 @@
 				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
 					<div class="form-group">
 						<h1>New Product</h1>
-						<span style="color: red">TODO: questa pagina va spostata
-							nel pannello admin</span>
+						<span class="label label-info">TODO: questa pagina va
+							spostata nel pannello admin</span>
 						<hr />
 					</div>
 					<div class="form-group">
 						<label for="name">Name: </label>
 
 						<h:inputText value="#{productController.name}" required="true"
-							requiredMessage="Il nome e' obbligatorio" id="name"
+							requiredMessage="Product name is mandatory" id="name"
 							styleClass="form-control needRequired" />
-						<h:message for="name" style="color: red" />
+						<h:message for="name" styleClass="label label-warning" />
 
 					</div>
 					<div class="form-group">
@@ -32,25 +32,25 @@
 						<label for="code">Code: </label>
 
 						<h:inputText value="#{productController.code}" required="true"
-							requiredMessage="Il codice prodotto e' obbligatorio" id="code"
+							requiredMessage="Product code is mandatory" id="code"
 							styleClass="form-control needRequired" />
-						<h:message for="code" style="color: red" />
+						<h:message for="code" styleClass="label label-warning" />
 
 					</div>
 					<div class="form-group">
 						<label for="price">Price: </label>
 
 						<h:inputText value="#{productController.price}" required="true"
-							requiredMessage="Il prezzo e' obbligatorio" id="price"
+							requiredMessage="Price is mandatory" id="price"
 							styleClass="form-control needRequired" />
-						<h:message for="price" style="color: red" />
+						<h:message for="price" styleClass="label label-warning" />
 
 					</div>
 					<div class="form-group">
 						<label for="description">Description: </label>
 
 						<h:inputTextarea value="#{productController.description}"
-							required="false" cols="20" rows="5" id="description" 
+							required="false" cols="20" rows="5" id="description"
 							styleClass="form-control" />
 
 					</div>
@@ -65,34 +65,38 @@
 
 
 
-
-				<span style="color: red"
-					class="col-md-6 col-md-offset-3 form-horizontal">TODO:
-					questo &egrave; un test per il login admin</span>
+				<div class="col-md-6 col-md-offset-3 form-horizontal">
+					<span class="label label-info">TODO: questo &egrave; un test
+						per il login admin</span>
+				</div>
 
 
 				<h:panelGroup rendered="#{adminController.notLoggedIn()}">
-
 					<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
 
 						<div class="form-group">
 
 							<h:inputText value="#{adminController.email}" required="true"
-								requiredMessage="la mail e' obbligatoria" id="email"
-								styleClass="form-control needPlaceholder" />
+								requiredMessage="Email is mandatory" id="email"
+								styleClass="form-control needPlaceholder needRequired" />
 							<!--  placeholder="Email" -->
-							<h:message for="email" style="color: red" />
-
-							<h:inputSecret value="#{adminController.password}"
-								required="true" requiredMessage="La password e' obbligatoria"
-								id="password" styleClass="form-control needPlaceholder" />
-							<!--  placeholder="Email" -->
-							<h:message for="password" style="color: red" />
+							<h:message for="email" styleClass="label label-warning" />
 
 						</div>
-						<h:commandButton value="Login"
-							action="#{adminController.loginAdmin}"
-							styleClass="btn btn-primary" />
+						<div class="form-group">
+
+							<h:inputSecret value="#{adminController.password}"
+								required="true" requiredMessage="Password is mandatory"
+								id="password" styleClass="form-control needPlaceholder needRequired" />
+							<!--  placeholder="Email" -->
+							<h:message for="password" styleClass="label label-warning" />
+
+						</div>
+						<div class="form-group">
+							<h:commandButton value="Login"
+								action="#{adminController.loginAdmin}"
+								styleClass="btn btn-primary" />
+						</div>
 
 					</h:form>
 				</h:panelGroup>

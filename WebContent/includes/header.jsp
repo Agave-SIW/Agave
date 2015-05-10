@@ -31,21 +31,24 @@
 						<div class="form-group">
 
 							<h:inputText value="#{customerController.email}" required="true"
-								requiredMessage="la mail e' obbligatoria" id="email"
-								styleClass="form-control needPlaceholder" />
+								requiredMessage="Email is mandatory" id="email"
+								styleClass="form-control needPlaceholder needRequired" />
 							<!--  placeholder="Email" -->
-							<h:message for="email" style="color: red" />
-
+							<h:message for="email" styleClass="label label-warning" />
+						</div>
+						<div class="form-group">
 							<h:inputSecret value="#{customerController.password}"
-								required="true" requiredMessage="La password e' obbligatoria"
-								id="password" styleClass="form-control needPlaceholder" />
+								required="true" requiredMessage="Password is mandatory"
+								id="password" styleClass="form-control needPlaceholder needRequired" />
 							<!--  placeholder="Email" -->
-							<h:message for="password" style="color: red" />
+							<h:message for="password" styleClass="label label-warning" />
 
 						</div>
-						<h:commandButton value="Login"
-							action="#{customerController.loginCustomer}"
-							styleClass="btn btn-primary" />
+						<div class="form-group">
+							<h:commandButton value="Login"
+								action="#{customerController.loginCustomer}"
+								styleClass="btn btn-primary" />
+						</div>
 
 					</h:form>
 				</h:panelGroup>

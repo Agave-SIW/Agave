@@ -28,7 +28,7 @@ public class ProductController {
 	public String createProduct() {
 		this.product = productFacade.createProduct(name, code, price, description);
 	
-		return "product"; //?faces-redirect=true per cambiare pagina, ma serve la sessione
+		return "product"; 
 	}
 	
 	public String listProducts() {

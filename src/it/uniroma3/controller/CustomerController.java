@@ -1,6 +1,7 @@
 package it.uniroma3.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import it.uniroma3.model.Customer;
 import it.uniroma3.facade.CustomerFacade;
@@ -27,7 +28,12 @@ public class CustomerController {
 	@EJB
 	private CustomerFacade customerFacade;
 	
+	private Map<String, Object> currentSessionMap;
 	
+	
+	public CustomerController() {
+		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	}
 
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
@@ -42,8 +48,7 @@ public class CustomerController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("customer", customer);
+		this.currentSessionMap.put("customer", customer);
 		
 		return "index?faces-redirect=true";
 	}
@@ -52,15 +57,15 @@ public class CustomerController {
 
 		this.customer = null;
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("customer", customer);
+		this.currentSessionMap.put("customer", customer);
 		
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
-		return "index";
+		
+		return "index?faces-redirect=true";
 	}
 	
 	public Customer getCurrentCustomer(){
-		return (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
+		return (Customer) this.currentSessionMap.get("customer");
 	}
 	
 	public Boolean loggedIn() {

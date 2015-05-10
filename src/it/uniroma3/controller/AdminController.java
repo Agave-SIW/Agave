@@ -1,5 +1,7 @@
 package it.uniroma3.controller;
 
+import java.util.Map;
+
 import it.uniroma3.model.Admin;
 import it.uniroma3.facade.AdminFacade;
 
@@ -20,8 +22,16 @@ public class AdminController {
 	private String email;
 	private Admin admin;
 	
+	private Map<String, Object> currentSessionMap;
+	
 	@EJB
 	private AdminFacade adminFacade;
+
+	
+	
+	public AdminController() {
+		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+	}
 
 	public String loginAdmin(){
 		this.admin = adminFacade.getAdmin(email);
@@ -34,25 +44,24 @@ public class AdminController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("admin", admin);
+		this.currentSessionMap.put("admin", admin);
 		
-		return "newProduct";
+		return "newProduct?faces-redirect=true";
 	}
 
 	public String logoutAdmin(){
 
 		this.admin = null;
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("admin", admin);
+		this.currentSessionMap.put("admin", admin);
 		
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
-		return "index";
+		
+		return "newProduct?faces-redirect=true";
 	}
 	
 	public Admin getCurrentAdmin(){
-		return (Admin) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("admin");
+		return (Admin) this.currentSessionMap.get("admin");
 	}
 	
 	public Boolean loggedIn() {

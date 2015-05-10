@@ -26,6 +26,8 @@ public class Product {
 	@Column(length = 2000)
 
 	private String description;
+	
+	private String picturePath;
 
 	@Column(nullable = false)
 	private String code;
@@ -42,10 +44,11 @@ public class Product {
 		this.reviews = new LinkedList<Review>();
 	}
 
-	public Product(String name, Float price, String description, String code) {
+	public Product(String name, Float price, String description, String code, String picturePath) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
+		this.picturePath = picturePath;
 		this.code = code;
 		this.providers = new LinkedList<Provider>();
 		this.reviews = new LinkedList<Review>();
@@ -122,6 +125,14 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price
 				+ ", description=" + description + ", code=" + code + "]";
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
 	}
 
 }

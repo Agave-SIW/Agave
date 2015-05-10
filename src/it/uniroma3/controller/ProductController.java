@@ -5,9 +5,14 @@ import java.util.List;
 import it.uniroma3.model.Product;
 import it.uniroma3.facade.ProductFacade;
 
+import it.uniroma3.helper.FileHelper;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 
 
 @ManagedBean
@@ -19,6 +24,12 @@ public class ProductController {
 	private Float price;
 	private String description;
 	private String code;
+
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 1L;
+	private Part picture;
+	private String picturePath;
+
 	private Product product;
 	private List<Product> products;
 
@@ -29,12 +40,32 @@ public class ProductController {
 		// security check
 		AdminController ac = new AdminController();
 		
-		if(ac.loggedIn()){		
-			this.product = productFacade.createProduct(name, code, price, description);
-			return "product"; 
+		//file path functions
+		FileHelper fh = new FileHelper();
+
+		if(ac.loggedIn()){
+			String filename = fh.getFileNameFromHeader(picture);
+			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		    String path = ctx.getRealPath("/");
+		    path = path + fh.makePath(path, "uploads");
+			System.out.print("\n\nFile system context path (in TestServlet): " + path + "\n");
+
+			try {
+				System.out.print("\nTrying to upload "+ filename +" in "+ path +"\n");
+				picture.write(path+filename);
+				System.out.print("\nSuccesful! "+ filename + " is uploaded\n\n");
+				
+				this.picturePath = filename.toString();
+				
+				this.product = productFacade.createProduct(name, code, price, description, picturePath);
+				return "product"; 
+			} 
+			catch (Exception e) {
+				return "error"; //TODO
+			}
 		}
 		else {
-			return "error"; //TODO
+			return "admin"; //TODO
 		}
 	}
 
@@ -107,6 +138,30 @@ public class ProductController {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public Part getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Part picture) {
+		this.picture = picture;
+	}
+
+	public ProductFacade getProductFacade() {
+		return productFacade;
+	}
+
+	public void setProductFacade(ProductFacade productFacade) {
+		this.productFacade = productFacade;
+	}
+
+	public String getPicturePath() {
+		return picturePath;
+	}
+
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
 	}
 }
 

@@ -17,7 +17,7 @@
 			<div class="row">
 				<h:panelGroup rendered="#{adminController.loggedIn()}">
 
-					<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal">
+					<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal" enctype="multipart/form-data">
 						<div class="form-group">
 							<h1>New Product</h1>
 							<span class="label label-info">TODO: questa pagina resa omogenea col resto del sito</span>
@@ -59,6 +59,15 @@
 								styleClass="form-control" />
 
 						</div>
+						<div class="form-group">
+							<label for="picture">Picture: </label>
+
+							<h:inputFile id="picture" value="#{productController.picture}" styleClass="form-control" />
+							<h:message for="picture" styleClass="label label-warning" />
+
+						</div>
+						
+						
 						<div class="form-group" style="padding-top: 20px">
 
 							<h:commandButton value="Submit"

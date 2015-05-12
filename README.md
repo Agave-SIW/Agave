@@ -1,4 +1,4 @@
-# Agave `Progetto SIW 2015`
+﻿# Agave `Progetto SIW 2015`
 
 --------------
 * Gaetano Bonofiglio
@@ -14,8 +14,8 @@
 * Quando l'**amministratore** effettua il login, l'applicazione lo ricorda fino allo scadere della sessione.
  * Se l'amministratore non è loggato non può accedere al **pannello admin**.
 * Quando un amministratore invia un nuovo prodotto può **caricare un'immagine** che poi verrà mostrata nel riepilogo.
-* Quando un cliente effettua un **ordine**, gli ordini non sono subito confermati, ma sono salvati in un **carrello** (in sessione).
- * Il carrello può essere svuotato o confermato. Alla conferma gli ordini diventano effettivi.
+* Quando un cliente effettua un **ordine**, ogni prodotto selezionato (**riga ordine**) viene salvato temporaneamente nel **carrello** (in sessione, **righe carrello**), fino alla conferma o alla cancellazione.
+ * Il carrello può essere svuotato o confermato. Alla conferma l'ordine diventa effettivo e il carrello viene comunque svuotato.
 * Ad ogni prodotto può essere associata una serie di **recensioni** di altri clienti.
  * Una recensione è composta da un **commento**, una **valutazione** da 1 a 5 e un autore (cliente). 
  * Nella pagina del singolo prodotto è mostrato l'elenco delle recensioni. 

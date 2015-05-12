@@ -10,6 +10,9 @@ $(".label-warning").text(function(){
 	if (str.indexOf("float") !=-1) {
 		return "Price must be a valid number";
 	}
+	if (str.indexOf("numero intero") !=-1) {
+		return "Quantity must be a valid number";
+	}
 	return str;
 	});
 

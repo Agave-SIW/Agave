@@ -51,6 +51,16 @@
 							<h:message for="price" styleClass="label label-warning" />
 
 						</div>
+						
+						<div class="form-group">
+							<label for="price">Quantity: </label>
+
+							<h:inputText value="#{productController.quantity}" required="true"
+								requiredMessage="Quantity is mandatory" id="quantity"
+								styleClass="form-control needRequired" />
+							<h:message for="quantity" styleClass="label label-warning" />
+
+						</div>
 						<div class="form-group">
 							<label for="description">Description: </label>
 
@@ -62,7 +72,7 @@
 						<div class="form-group">
 							<label for="picture">Picture: </label>
 
-							<h:inputFile id="picture" value="#{productController.picture}" styleClass="form-control" />
+							<h:inputFile id="picture" value="#{productController.picture}" styleClass="form-control needRequired" required="true" />
 							<h:message for="picture" styleClass="label label-warning" />
 
 						</div>

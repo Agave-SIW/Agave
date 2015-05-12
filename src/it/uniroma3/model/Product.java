@@ -27,6 +27,8 @@ public class Product {
 
 	private String description;
 	
+	private Integer storageQuantity;
+	
 	private String picturePath;
 
 	@Column(nullable = false)
@@ -44,10 +46,11 @@ public class Product {
 		this.reviews = new LinkedList<Review>();
 	}
 
-	public Product(String name, Float price, String description, String code, String picturePath) {
+	public Product(String name, Float price, String description, String code, String picturePath, Integer quantity) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
+		this.storageQuantity = quantity;
 		this.picturePath = picturePath;
 		this.code = code;
 		this.providers = new LinkedList<Provider>();
@@ -92,6 +95,14 @@ public class Product {
 		this.price = price;
 	}
 
+	public Integer getStorageQuantity() {
+		return storageQuantity;
+	}
+
+	public void setStorageQuantity(Integer storageQuantity) {
+		this.storageQuantity = storageQuantity;
+	}
+
 	public boolean equals(Object obj) {
 		Product product = (Product)obj;
 		return this.getCode().equals(product.getCode());
@@ -124,7 +135,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price
-				+ ", description=" + description + ", code=" + code + "]";
+				+ ", description=" + description + ", storageQuantity="
+				+ storageQuantity + ", picturePath=" + picturePath + ", code="
+				+ code + "]";
 	}
 
 	public String getPicturePath() {

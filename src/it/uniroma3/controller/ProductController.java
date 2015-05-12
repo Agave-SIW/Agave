@@ -24,9 +24,7 @@ public class ProductController {
 	private Float price;
 	private String description;
 	private String code;
-
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
+	private Integer quantity;
 	private Part picture;
 	private String picturePath;
 
@@ -57,7 +55,7 @@ public class ProductController {
 				
 				this.picturePath = filename.toString();
 				
-				this.product = productFacade.createProduct(name, code, price, description, picturePath);
+				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
 				return "product"; 
 			} 
 			catch (Exception e) {
@@ -167,6 +165,16 @@ public class ProductController {
 	public void setPicturePath(String picturePath) {
 		this.picturePath = picturePath;
 	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	
+	
 }
 
 

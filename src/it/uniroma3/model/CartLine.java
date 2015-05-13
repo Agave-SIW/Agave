@@ -1,37 +1,20 @@
 package it.uniroma3.model;
 
-import javax.persistence.*;
 
-@Entity
-public class OrderLine {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class CartLine {
 	
 	private Float unitPrice;
-	
 	private Integer quantity;
-	
-	@ManyToOne
 	private Product product;
 	
 	
-	public OrderLine() {
+	public CartLine() {
 	}
 	
-	public OrderLine(Float unitPrice, Integer quantity, Product product) {
+	public CartLine(Float unitPrice, Integer quantity, Product product) {
 		this.unitPrice = unitPrice;
 		this.quantity = quantity;
 		this.product = product;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Float getUnitPrice() {
@@ -59,10 +42,15 @@ public class OrderLine {
 	}
 
 	@Override
+	public String toString() {
+		return "CartLine [unitPrice=" + unitPrice + ", quantity=" + quantity
+				+ ", product=" + product + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((quantity == null) ? 0 : quantity.hashCode());
@@ -79,12 +67,7 @@ public class OrderLine {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderLine other = (OrderLine) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+		CartLine other = (CartLine) obj;
 		if (product == null) {
 			if (other.product != null)
 				return false;

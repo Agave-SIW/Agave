@@ -7,24 +7,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
+import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class OrdersFacade {
+public class OrderFacade {
 	
     @PersistenceContext(unitName = "agave")
     private EntityManager em;
     
-    
-	public OrdersFacade() {
+	public OrderFacade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
     
-    
-	public Orders createOrders(Customer customer, List<OrderLine> orderlines) {
-		//TODO rivedere costruttore:
+	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {
 		Orders order = new Orders();
+		order.setCustomer(customer);
+		order.setOrderLines(orderlines);
+		
+		Date creationTime = new Date();
+		order.setCreationTime(creationTime);
+		
 		em.persist(order);
 		return order;
 	}
@@ -54,6 +58,4 @@ public class OrdersFacade {
         deleteOrder(order);
 	}
 
-
-	
 }

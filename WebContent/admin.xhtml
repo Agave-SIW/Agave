@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+	<ui:define name="title">
+        Admin Control Panel | Agave Shop - SIW 2015
+    </ui:define>
+
+	<ui:define name="content">
+
+		<div class="row">
+
+			<h:panelGroup rendered="#{adminController.notLoggedIn()}">
+				<h:form styleClass="form-signin">
+					<h2 class="form-signin-heading">Please sign in</h2>
+
+
+					<label for="email" class="sr-only">Email address</label>
+					<h:inputText value="#{adminController.email}" required="true"
+						requiredMessage="Email is mandatory" id="email"
+						styleClass="form-control needPlaceholder needRequired needType" />
+					<!--  placeholder="Email" -->
+					<h:message for="email" styleClass="label label-warning" />
+
+					<label for="password" class="sr-only">Password</label>
+					<h:inputSecret value="#{adminController.password}" required="true"
+						requiredMessage="Password is mandatory" id="password"
+						styleClass="form-control needPlaceholder needRequired" />
+					<!--  placeholder="Email" -->
+					<h:message for="password" styleClass="label label-warning" />
+
+
+					<div class="form-group">
+						<h:commandButton value="Login"
+							action="#{adminController.loginAdmin}"
+							styleClass="btn btn-primary btn-block" />
+					</div>
+
+				</h:form>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{adminController.loggedIn()}">
+				<h:form styleClass="form-signin">
+
+
+					<p>
+						Benvenuto
+						<h:outputText
+							value="#{adminController.getCurrentAdmin().getFirstName()}" />
+						-
+						<h:commandLink value="Logout"
+							action="#{adminController.logoutAdmin}" />
+					</p>
+
+
+				</h:form>
+			</h:panelGroup>
+
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -64,7 +64,7 @@ public class ProductController {
 			}
 		}
 		else {
-			return "admin"; //TODO
+			return "admin?faces-redirect=true"; //TODO
 		}
 	}
 	
@@ -77,8 +77,8 @@ public class ProductController {
 	}
 
 	public String listProducts() {
-		this.products = productFacade.getAllProducts();
-		return "products"; 
+		//this.products = productFacade.getAllProducts();
+		return "products?faces-redirect=true"; 
 	}
 	
 	public List<Product> getListProducts() {

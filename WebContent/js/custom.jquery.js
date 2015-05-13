@@ -1,3 +1,5 @@
+window.jQuery||document.write('<script src="#{root}/js/jquery.js"><\/script>');
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -18,7 +20,7 @@ $(".label-warning").text(function(){
 
 $(".price").priceFormat({
 	prefix: '',
-	suffix: ' &euro;',
+	suffix: ' &#8364;', //&euro;
 	centsSeparator: ',',
 	thousandsSeparator: '.',
 	centsLimit: 2

@@ -1,19 +1,14 @@
 package it.uniroma3.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.model.Cart;
 import it.uniroma3.model.CartLine;
 import it.uniroma3.model.Product;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-import javax.servlet.http.Part;
 
 
 @ManagedBean
@@ -77,7 +72,7 @@ public class CartController {
 	
 	public String removeProductFromCart(Product product){
 		int index = this.cart.getIndex(product);
-		CartLine lineRemoved = this.cart.removeCartLine(index);
+		this.cart.removeCartLine(index);
 		
 		return "cart";
 	}

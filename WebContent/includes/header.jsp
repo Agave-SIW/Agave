@@ -60,7 +60,7 @@
 											value="#{customerController.getCurrentCustomer().getFirstName()}" />
 									</p></li>
 								<li><h:commandLink value="Cart"
-										action="#{cartController.showCart}" /></li>
+										action="#{cartController.createCart}" /></li>
 								<li><h:commandLink value="Logout"
 										action="#{customerController.logoutCustomer}" /></li>
 

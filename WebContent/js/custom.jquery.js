@@ -1,5 +1,3 @@
-window.jQuery||document.write('<script src="#{root}/js/jquery.js"><\/script>');
-
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }

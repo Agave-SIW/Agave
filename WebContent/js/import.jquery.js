@@ -1,0 +1,1 @@
+window.jQuery||document.write('<script src="#{root}/js/jquery.js"><\/script>');

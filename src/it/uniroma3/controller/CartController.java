@@ -3,9 +3,8 @@ package it.uniroma3.controller;
 import java.util.List;
 import java.util.Map;
 
-import it.uniroma3.facade.OrderFacade;
 import it.uniroma3.model.Cart;
-import it.uniroma3.model.OrderLine;
+import it.uniroma3.model.CartLine;
 import it.uniroma3.model.Product;
 
 import javax.enterprise.context.SessionScoped;
@@ -18,7 +17,6 @@ import javax.faces.context.FacesContext;
 public class CartController {
 
 	private Cart cart;
-	private OrderFacade of;
 
 	private Map<String, Object> currentSessionMap;
 
@@ -31,7 +29,7 @@ public class CartController {
 		CustomerController cc = new CustomerController();
 
 		if(cc.loggedIn()){
-			this.cart = (Cart) of.createOrder(null, null);
+			this.cart = new Cart();
 			this.currentSessionMap.put("cart", cart);
 
 			System.out.print("\n\nCart Created\n\n");
@@ -66,8 +64,8 @@ public class CartController {
 		return (Cart) this.currentSessionMap.get("cart");
 	}
 	
-	public List<OrderLine> getOrderLines(){
-		return this.cart.getOrderLines();
+	public List<CartLine> getCartLines(){
+		return this.cart.getCartLines();
 	}
 	
 	public Boolean cartIsEmpty() {
@@ -76,17 +74,16 @@ public class CartController {
 		return false;
 	}
 	
-	public String addProductToCart(Product product, int quantity){
-		OrderLine orderLine = new OrderLine(product.getPrice(), quantity, product);
+	public boolean addProductToCart(Product product, int quantity){
+		CartLine cartline = new CartLine(product.getPrice(), quantity, product);
 		
 		System.out.print("\n\nCartLine Created\n\n");
-		this.cart.addOrderLine(orderLine);
-		
-		return "cart";
+		return this.cart.addCartLine(cartline);
 	}
 	
-	public String removeProductFromCart(Integer index){
-		this.cart.removeOrderLine(index);
+	public String removeProductFromCart(Product product){
+		int index = this.cart.getIndex(product);
+		this.cart.removeCartLine(index);
 		
 		return "cart";
 	}

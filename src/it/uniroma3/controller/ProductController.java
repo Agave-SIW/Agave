@@ -71,13 +71,9 @@ public class ProductController {
 	public String addToCart(){
 		CartController cc = new CartController();
 		
-		try {
-			cc.addProductToCart(this.product, this.orderQuantity);
+		if(cc.addProductToCart(this.product, this.orderQuantity))
 			return "products";
-		}
-		catch (Exception e) {
-			return "error";
-		}
+		else return "error";
 	}
 
 	public String listProducts() {

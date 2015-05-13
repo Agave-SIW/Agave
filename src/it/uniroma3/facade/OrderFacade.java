@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -21,9 +22,12 @@ public class OrderFacade {
 	}
     
 	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {
-		Orders order = new CreatedOrder();
+		Orders order = new Orders();
 		order.setCustomer(customer);
 		order.setOrderLines(orderlines);
+		
+		Date creationTime = new Date();
+		order.setCreationTime(creationTime);
 		
 		em.persist(order);
 		return order;

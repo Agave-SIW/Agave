@@ -59,6 +59,8 @@
 										<h:outputText
 											value="#{customerController.getCurrentCustomer().getFirstName()}" />
 									</p></li>
+								<li><h:commandLink value="Cart"
+										action="#{cartController.showCart}" /></li>
 								<li><h:commandLink value="Logout"
 										action="#{customerController.logoutCustomer}" /></li>
 

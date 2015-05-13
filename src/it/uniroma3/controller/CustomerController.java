@@ -50,6 +50,9 @@ public class CustomerController {
 		
 		this.currentSessionMap.put("customer", customer);
 		
+		CartController cc = new CartController();
+		cc.createCart();
+		
 		return "index?faces-redirect=true";
 	}
 

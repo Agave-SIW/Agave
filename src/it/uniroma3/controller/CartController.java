@@ -1,5 +1,6 @@
 package it.uniroma3.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.model.Cart;
@@ -41,6 +42,12 @@ public class CartController {
 		}
 
 	}
+	
+	public String showCart(){
+		//TODO
+		
+		return "cart?faces-redirect=true";
+	}
 
 	public String emptyCart(){
 		this.cart = null;
@@ -55,6 +62,10 @@ public class CartController {
 	
 	public Cart getCurrentCart(){
 		return (Cart) this.currentSessionMap.get("cart");
+	}
+	
+	public List<CartLine> getCartLines(){
+		return this.cart.getCartLines();
 	}
 	
 	public Boolean cartIsEmpty() {

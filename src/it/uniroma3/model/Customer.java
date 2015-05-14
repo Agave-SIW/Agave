@@ -36,18 +36,18 @@ public class Customer {
 	private Address address;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
-	private Cart cart;
+	private Orders cart;
 	
 	@OneToMany(mappedBy="customer")
-	private List<ClosedOrder> closedOrders;
+	private List<Orders> closedOrders;
 	
 	@OneToMany(mappedBy="customer")
-	private List<EvadedOrder> evadedOrders;
+	private List<Orders> evadedOrders;
 	
 
 	public Customer() {	
-		this.closedOrders = new LinkedList<ClosedOrder>();
-		this.evadedOrders = new LinkedList<EvadedOrder>();
+		this.closedOrders = new LinkedList<Orders>();
+		this.evadedOrders = new LinkedList<Orders>();
 	}
 
 	public Customer(String firstName, String lastName, String email, String password,
@@ -77,27 +77,27 @@ public class Customer {
 		return allOrdersAndCart;
 	}
 
-	public Cart getCart() {
+	public Orders getCart() {
 		return cart;
 	}
 
-	public void setCart(Cart cart) {
+	public void setCart(Orders cart) {
 		this.cart = cart;
 	}
 
-	public List<ClosedOrder> getClosedOrders() {
+	public List<Orders> getClosedOrders() {
 		return closedOrders;
 	}
 
-	public void setClosedOrders(List<ClosedOrder> closedOrders) {
+	public void setClosedOrders(List<Orders> closedOrders) {
 		this.closedOrders = closedOrders;
 	}
 
-	public List<EvadedOrder> getEvadedOrders() {
+	public List<Orders> getEvadedOrders() {
 		return evadedOrders;
 	}
 
-	public void setEvadedOrders(List<EvadedOrder> evadedOrders) {
+	public void setEvadedOrders(List<Orders> evadedOrders) {
 		this.evadedOrders = evadedOrders;
 	}
 
@@ -187,8 +187,7 @@ public class Customer {
 				+ ", lastName=" + lastName + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", dateofBirth="
 				+ dateofBirth + ", registrationDate=" + registrationDate
-				+ ", address=" + address.toString() + "]"; 
-		// NB: non aggiungere gli ordini per evitare overflow in ricorsione
+				+ ", address=" + address.toString() + "]"; // nb: non aggiungere gli ordini per evitare overflow in ricorsione
 	}
 
 	@Override

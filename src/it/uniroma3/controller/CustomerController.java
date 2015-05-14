@@ -34,8 +34,6 @@ public class CustomerController {
 	
 	public CustomerController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		//default value
-		if(this.page==null) this.page="index";
 	}
 
 	public String loginCustomer(){

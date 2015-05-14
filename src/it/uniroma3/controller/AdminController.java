@@ -29,11 +29,8 @@ public class AdminController {
 	private AdminFacade adminFacade;
 
 	
-	
 	public AdminController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-		//default value
-		if(this.page==null) this.page="index";
 	}
 
 	public String loginAdmin(){

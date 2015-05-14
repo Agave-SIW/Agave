@@ -8,7 +8,6 @@ import it.uniroma3.facade.AdminFacade;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -16,12 +15,13 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class AdminController {
 
-	@ManagedProperty(value="#{param.id}")
 	private Long id;
 	private String firstName;
 	private String password;
 	private String email;
 	private Admin admin;
+	
+	private String page;
 	
 	private Map<String, Object> currentSessionMap;
 	
@@ -32,6 +32,8 @@ public class AdminController {
 	
 	public AdminController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		//default value
+		if(this.page==null) this.page="index";
 	}
 
 	public String loginAdmin(){
@@ -47,32 +49,30 @@ public class AdminController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
+		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("admin", admin);
-		
 		return "newProduct?faces-redirect=true";
 	}
 
 	public String logoutAdmin(){
-
 		this.admin = null;
-		
-		this.currentSessionMap.put("admin", admin);
-		
+		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
+		this.currentSessionMap.put("admin", null);
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
-		
-		return "newProduct?faces-redirect=true";
+		return page;
 	}
 	
 	public Admin getCurrentAdmin(){
 		return (Admin) this.currentSessionMap.get("admin");
 	}
 	
+	// currently not used in view, as #{SessionScope} works. Used by other controllers
 	public Boolean loggedIn() {
-		if(this.getCurrentAdmin()==null)
-			return false;
-		return true;
+		Admin a = (Admin) this.currentSessionMap.get("admin");
+		return !(a == null);
 	}
 	
+	// currently not used in view, as #{SessionScope} works
 	public Boolean notLoggedIn() {
 		return !this.loggedIn();
 	}

@@ -6,14 +6,14 @@ $(".needType").attr("type", function(){ var arr = this.name.split(":"); return a
 $(".needRequired").prop("required",true);
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
-	var str = capitalizeFirstLetter(arr[arr.length - 1]).trim();
+	var str = capitalizeFirstLetter(arr[1]).trim();
 	if (str.indexOf("float") !=-1) {
 		return "Price must be a valid number";
 	}
 	if (str.indexOf("numero intero") !=-1) {
 		return "Quantity must be a valid number";
 	}
-	return str;
+	return str+arr[2]+arr[3];
 	});
 
 $(".price").priceFormat({

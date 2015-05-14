@@ -7,10 +7,9 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.facade.CustomerFacade;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
 
@@ -18,7 +17,6 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class CustomerController {
 
-	@ManagedProperty(value="#{param.id}")
 	private Long id;
 	private String firstName;
 	private String password;
@@ -37,7 +35,7 @@ public class CustomerController {
 	public CustomerController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		//default value
-		this.page="index";
+		if(this.page==null) this.page="index";
 	}
 
 	public String loginCustomer(){
@@ -52,6 +50,7 @@ public class CustomerController {
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		
+		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);		
 		return page;
 	}
@@ -60,6 +59,7 @@ public class CustomerController {
 
 		this.customer = null;
 		
+		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);
 		
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
@@ -71,14 +71,15 @@ public class CustomerController {
 		return (Customer) this.currentSessionMap.get("customer");
 	}
 	
-	public Boolean loggedIn() {
-		if(this.getCurrentCustomer()==null)
-			return false;
-		return true;
+	// currently not used in view, as #{SessionScope} works
+	public Boolean isLogged() {
+		Customer c = (Customer) this.currentSessionMap.get("customer");
+		return !(c == null);
 	}
 	
-	public Boolean notLoggedIn() {
-		return !this.loggedIn();
+	// currently not used in view, as #{SessionScope} works
+	public Boolean isNotLogged() {
+		return !this.isLogged();
 	}
 
 	public Long getId() {

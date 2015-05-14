@@ -53,7 +53,7 @@
 						<li><a href="#{root}/admin.jsf">Admin CP</a></li>
 					</ul>
 					<f:subview id="customerController">
-						<h:panelGroup rendered="#{customerController.notLoggedIn()}">
+						<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
 							<h:form id="customerLogin" styleClass="navbar-form navbar-right">
 
 								<div class="form-group">
@@ -81,7 +81,7 @@
 
 							</h:form>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{customerController.loggedIn()}">
+						<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
 
 								<div class="form-group">
@@ -89,12 +89,12 @@
 										<li><p class="navbar-text">
 												Welcome
 												<h:outputText
-													value="#{customerController.getCurrentCustomer().getFirstName()}" />
+													value='#{sessionScope["customer"].getFirstName()}' />
 											</p></li>
 										<li><h:commandLink value="Cart"
 												action="#{cartController.showCart}" /></li>
-										<li><h:commandLink value="Logout"
-												action="#{customerController.logoutCustomer}" /></li>
+										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
+												value="Logout" action="#{customerController.logoutCustomer}" /></li>
 
 									</ul>
 								</div>
@@ -111,7 +111,7 @@
 		</nav>
 
 		<f:subview id="adminController">
-			<h:panelGroup rendered="#{adminController.loggedIn()}">
+			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
 				<nav class="navbar navbar-default navbar-lower navbar-relative"
 					role="navigation">
 					<div class="container">
@@ -124,8 +124,7 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#{root}/admin.jsf"> Admin
-								CP </a>
+							<a class="navbar-brand" href="#{root}/admin.jsf"> Admin CP </a>
 						</div>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse"
@@ -141,9 +140,10 @@
 										<li><p class="navbar-text">
 												Welcome
 												<h:outputText
-													value="#{adminController.getCurrentAdmin().getFirstName()}" />
+													value='#{sessionScope["admin"].getFirstName()}' />
 											</p></li>
-										<li><h:commandLink value="Logout"
+										<li><h:inputHidden value="#{view.viewId}" id="page" />
+											<h:commandLink value="Logout"
 												action="#{adminController.logoutAdmin}" /></li>
 
 									</ul>
@@ -159,7 +159,9 @@
 
 		<!-- Page Content -->
 		<div class="container">
-			<ui:insert name="content"><!-- content --></ui:insert>
+			<ui:insert name="content">
+				<!-- content -->
+			</ui:insert>
 		</div>
 		<!-- /.container -->
 
@@ -168,13 +170,15 @@
 			<hr />
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Gaetano Bonofiglio, Veronica Iovinella, Andrea Salvoni 2015</p>
+					<p>Copyright &copy; Gaetano Bonofiglio, Veronica Iovinella,
+						Andrea Salvoni 2015</p>
 				</div>
 			</div>
 		</footer>
 
 		<!-- jQuery -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script
+			src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="#{root}/js/import.jquery.js"></script>
 		<script src="#{root}/js/modernizr.js"></script>
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

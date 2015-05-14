@@ -19,7 +19,7 @@
 
 		<div class="row">
 
-			<h:panelGroup rendered="#{adminController.notLoggedIn()}">
+			<h:panelGroup rendered='#{empty sessionScope["admin"]}'>
 				<h:form id="adminLogin" styleClass="form-signin">
 					<h2 class="form-signin-heading">Please sign in</h2>
 
@@ -48,14 +48,14 @@
 
 				</h:form>
 			</h:panelGroup>
-			<h:panelGroup rendered="#{adminController.loggedIn()}">
+			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
 				<h:form styleClass="form-signin">
 
 
 					<p>
 						Benvenuto
 						<h:outputText
-							value="#{adminController.getCurrentAdmin().getFirstName()}" />
+							value='#{sessionScope["admin"].getFirstName()}' />
 						-
 						<h:commandLink value="Logout"
 							action="#{adminController.logoutAdmin}" />

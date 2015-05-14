@@ -17,7 +17,7 @@
 	<ui:define name="content">
 
 		<div class="row">
-			<h:panelGroup rendered="#{adminController.loggedIn()}">
+			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
 
 				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal"
 					enctype="multipart/form-data">
@@ -93,7 +93,7 @@
 				</h:form>
 
 			</h:panelGroup>
-			<h:panelGroup rendered="#{adminController.notLoggedIn()}">
+			<h:panelGroup rendered='#{empty sessionScope["admin"]}'>
 				<span class="label label-warning">You must be logged ad admin
 					to view this page</span>
 			</h:panelGroup>

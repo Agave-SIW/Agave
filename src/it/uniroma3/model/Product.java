@@ -23,8 +23,8 @@ public class Product {
 	private String name;
 
 	private Float price;
+	
 	@Column(length = 2000)
-
 	private String description;
 	
 	private Integer storageQuantity;

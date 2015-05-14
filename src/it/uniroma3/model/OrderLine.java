@@ -9,8 +9,6 @@ public class OrderLine {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Float unitPrice;
-	
 	private Integer quantity;
 	
 	@ManyToOne
@@ -21,7 +19,6 @@ public class OrderLine {
 	}
 	
 	public OrderLine(Float unitPrice, Integer quantity, Product product) {
-		this.unitPrice = unitPrice;
 		this.quantity = quantity;
 		this.product = product;
 	}
@@ -32,14 +29,6 @@ public class OrderLine {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Float getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(Float unitPrice) {
-		this.unitPrice = unitPrice;
 	}
 
 	public Integer getQuantity() {
@@ -66,8 +55,6 @@ public class OrderLine {
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((quantity == null) ? 0 : quantity.hashCode());
-		result = prime * result
-				+ ((unitPrice == null) ? 0 : unitPrice.hashCode());
 		return result;
 	}
 
@@ -94,11 +81,6 @@ public class OrderLine {
 			if (other.quantity != null)
 				return false;
 		} else if (!quantity.equals(other.quantity))
-			return false;
-		if (unitPrice == null) {
-			if (other.unitPrice != null)
-				return false;
-		} else if (!unitPrice.equals(other.unitPrice))
 			return false;
 		return true;
 	}

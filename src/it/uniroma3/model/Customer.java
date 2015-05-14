@@ -46,7 +46,8 @@ public class Customer {
 	
 
 	public Customer() {	
-		this.orders = new LinkedList<Orders>();
+		this.closedOrders = new LinkedList<Orders>();
+		this.evadedOrders = new LinkedList<Orders>();
 	}
 
 	public Customer(String firstName, String lastName, String email, String password,
@@ -62,13 +63,44 @@ public class Customer {
 	}
 	
 	public List<Orders> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Orders> orders) {
-		this.orders = orders;
+		List<Orders> allOrders = new LinkedList<Orders>();
+		allOrders.addAll(this.closedOrders);
+		allOrders.addAll(this.evadedOrders);
+		return allOrders;
 	}
 	
+	public List<Orders> getOrdersAndCart() {
+		List<Orders> allOrdersAndCart = new LinkedList<Orders>();
+		allOrdersAndCart.add(this.cart);
+		allOrdersAndCart.addAll(this.closedOrders);
+		allOrdersAndCart.addAll(this.evadedOrders);
+		return allOrdersAndCart;
+	}
+
+	public Orders getCart() {
+		return cart;
+	}
+
+	public void setCart(Orders cart) {
+		this.cart = cart;
+	}
+
+	public List<Orders> getClosedOrders() {
+		return closedOrders;
+	}
+
+	public void setClosedOrders(List<Orders> closedOrders) {
+		this.closedOrders = closedOrders;
+	}
+
+	public List<Orders> getEvadedOrders() {
+		return evadedOrders;
+	}
+
+	public void setEvadedOrders(List<Orders> evadedOrders) {
+		this.evadedOrders = evadedOrders;
+	}
+
 	public Long getId() {
 		return id;
 	}

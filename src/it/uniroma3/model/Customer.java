@@ -35,8 +35,14 @@ public class Customer {
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
 	
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+	private Orders cart;
+	
 	@OneToMany(mappedBy="customer")
-	private List<Orders> orders;
+	private List<Orders> closedOrders;
+	
+	@OneToMany(mappedBy="customer")
+	private List<Orders> evadedOrders;
 	
 
 	public Customer() {	

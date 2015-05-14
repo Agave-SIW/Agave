@@ -14,8 +14,9 @@
 * Quando l'**amministratore** effettua il login, l'applicazione lo ricorda fino allo scadere della sessione.
  * Se l'amministratore non è loggato non può accedere al **pannello admin**.
 * Quando un amministratore invia un nuovo prodotto deve **caricare un'immagine** che poi verrà mostrata nel riepilogo del prodotto.
-* Quando un cliente effettua un **ordine**, ogni prodotto (**riga ordine**) selezionato  viene salvato temporaneamente nel **carrello** fino alla conferma o alla cancellazione (di fatto, il carrello rappresenta l'ordine *aperto* delle specifiche originali). Questo consente di avere gli ordini non confermati in una tabella a parte. Analogamente accade per gli **ordini evasi**, in modo da migliorare in efficienza.
- * Il carrello può essere svuotato o confermato. Alla conferma l'ordine diventa effettivo e il carrello viene comunque svuotato.
+* Quando un cliente effettua un **ordine**, ogni prodotto (*riga ordine*) selezionato  viene salvato temporaneamente nel **carrello** fino alla conferma o alla cancellazione (di fatto, il carrello rappresenta l'ordine *aperto* delle specifiche originali). 
+  * Carrello, ordini e ordini evasi sono comunque di tipo *Orders*, ma sono differenziati in base alla loro associazione a Customer (con cardinalità 1 a 1 per Cart).
+ * Il carrello può essere svuotato o confermato. Alla conferma l'ordine diventa effettivo e il carrello viene comunque svuotato. Questo provoca un cambiamento dell'associazione.
 * Ad ogni prodotto può essere associata una serie di **recensioni** di altri clienti.
  * Una recensione è composta da un **commento**, una **valutazione** da 1 a 5 e un *autore* (un cliente). 
  * Nella pagina del singolo prodotto è mostrato l'elenco delle recensioni. 

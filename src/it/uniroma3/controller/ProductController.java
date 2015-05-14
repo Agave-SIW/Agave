@@ -26,7 +26,6 @@ public class ProductController {
 	private Integer quantity;
 	private Part picture;
 	private String picturePath;
-	private int orderQuantity;
 
 	private Product product;
 	private List<Product> products;
@@ -65,14 +64,6 @@ public class ProductController {
 		else {
 			return "admin?faces-redirect=true";
 		}
-	}
-	
-	public String addToCart(){
-		CartController cc = new CartController();
-		
-		if(cc.addProductToCart(this.product, this.orderQuantity))
-			return "products";
-		else return "error";
 	}
 
 	public String listProducts() {

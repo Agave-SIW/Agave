@@ -7,7 +7,8 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-public class Orders {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Orders {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

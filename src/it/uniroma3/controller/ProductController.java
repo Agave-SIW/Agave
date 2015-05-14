@@ -87,12 +87,16 @@ public class ProductController {
 
 	public String findProduct() {
 		this.product = productFacade.getProduct(id);
-		return "product";
+		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
+	}
+	
+	public String findProduct(Long id) {
+		this.product = productFacade.getProduct(id);
+		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
 	}
 
-	public String findProduct(Long id) {
-		this.product = productFacade.getProduct(id);	
-		return "product";
+	public void setProductFromId() {
+		this.product = productFacade.getProduct(id);
 	}
 
 	public Long getId() {

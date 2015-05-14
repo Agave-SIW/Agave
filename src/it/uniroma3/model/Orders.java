@@ -14,11 +14,11 @@ public abstract class Orders {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Temporal(TemporalType.DATE)
-	private Date creationTime;
+	//@Temporal(TemporalType.DATE)
+	//private Date creationTime;
 	
-	@Temporal(TemporalType.DATE)
-	private Date evasionTime;
+	//@Temporal(TemporalType.DATE)
+	//private Date evasionTime;
 	
 	@ManyToOne
 	private Customer customer;

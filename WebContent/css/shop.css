@@ -72,3 +72,12 @@ footer {
 .navbar-relative {
 	position: relative;
 }
+
+.indexDesc {
+	height: 45px;
+	width:100%;
+}
+.productsDesc {
+	height: 45px;
+	width:100%;
+}

@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.uniroma3.model.Product;
 import it.uniroma3.facade.ProductFacade;
-
 import it.uniroma3.helper.FileHelper;
 
 import javax.ejb.EJB;
@@ -83,6 +82,13 @@ public class ProductController {
 	
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
+	}
+	
+	public List<Product> getLastProducts() {
+		return productFacade.getLastProducts();
+	}
+	public List<Product> getLastFourProducts() {
+		return productFacade.getLastProducts(4);
 	}
 
 	public String findProduct() {

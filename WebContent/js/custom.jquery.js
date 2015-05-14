@@ -23,3 +23,14 @@ $(".price").priceFormat({
 	thousandsSeparator: '.',
 	centsLimit: 2
 });
+
+$(document).ready(function() {
+	$(".indexDesc").dotdotdot({
+		ellipsis: 	'... ',
+		watch: 		'window'
+	});
+	$(".productsDesc").dotdotdot({
+		ellipsis: 	'... ',
+		watch: 		'window'
+	});
+});

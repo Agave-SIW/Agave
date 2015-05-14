@@ -45,14 +45,14 @@
 		<div class="row text-center">
 
 			<c:forEach var="product"
-				items="#{productController.getListProducts()}" end="3">
+				items="#{productController.getLastFourProducts()}" end="3">
 				<h:form>
 					<div class="col-md-3 col-sm-6 hero-feature">
 						<div class="thumbnail">
 							<img src="http://placehold.it/800x500" alt="" />
 							<div class="caption">
 								<h3>${product.name}</h3>
-								<p>${product.description}</p>
+								<p class="indexDesc">${product.description}</p>
 								<p>
 									<a href="#" class="btn btn-primary">Buy Now!</a>&nbsp;
 									<h:commandLink action="#{productController.findProduct}"

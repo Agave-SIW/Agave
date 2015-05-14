@@ -36,11 +36,10 @@ public class AdminController {
 	public String loginAdmin(){
 		this.admin = adminFacade.getAdmin(email);
 
-		if(admin==null || !admin.getPassword().equals(password)){
+		if(admin==null || !admin.getPassword().equals(password)){ //TODO MD5
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));
-			return "admin";
 		}
 		else{
 			System.out.print("\n\nLogin OK\n\n");
@@ -48,7 +47,8 @@ public class AdminController {
 		
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("admin", admin);
-		return "newProduct?faces-redirect=true";
+		
+		return "admin";
 	}
 
 	public String logoutAdmin(){

@@ -39,7 +39,7 @@ public class CustomerController {
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
 
-		if(customer==null || !customer.getPassword().equals(password)){
+		if(customer==null || !customer.getPassword().equals(password)){ //TODO MD5
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));

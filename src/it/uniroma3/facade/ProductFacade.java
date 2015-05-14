@@ -25,7 +25,23 @@ public class ProductFacade {
     
 	public Product createProduct(String name, String code, Float price, String description, String picturePath, Integer quantity) {
 		Product product = new Product(name, price, description, code, picturePath, quantity);
+		
+		Cart cart = new Cart();
+		Customer customer = em.find(Customer.class, 10);
+		cart.setCustomer(customer);
+		
+		OrderLine ol = new OrderLine();
+		ol.setProduct(product);
+		ol.setQuantity(10);
+		
+		List<OrderLine> ols = new ArrayList<OrderLine>();
+		ols.add(ol);
+		
+		cart.setOrderLines(ols);
+		
 		em.persist(product);
+		em.persist(ol);
+		em.persist(cart);
 		return product;
 	}
 	

@@ -21,8 +21,8 @@ public class OrderFacade {
 		// TODO Auto-generated constructor stub
 	}
     
-	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {
-		Orders order = new Orders();
+	public Orders createClosedOrder(Customer customer, List<OrderLine> orderlines) {
+		ClosedOrder order = new ClosedOrder();
 		order.setCustomer(customer);
 		order.setOrderLines(orderlines);
 		
@@ -33,29 +33,29 @@ public class OrderFacade {
 		return order;
 	}
 	
-	public Orders getOrder(Long id) {
-	    Orders order = em.find(Orders.class, id);
+	public ClosedOrder getClosedOrder(Long id) {
+		ClosedOrder order = em.find(ClosedOrder.class, id);
 		return order;
 	}
 	
-	public List<Orders> getAllOrders() {
-        CriteriaQuery<Orders> cq = em.getCriteriaBuilder().createQuery(Orders.class);
-        cq.select(cq.from(Orders.class));
-        List<Orders> ordersList = em.createQuery(cq).getResultList();
+	public List<ClosedOrder> getAllClosedOrders() {
+        CriteriaQuery<ClosedOrder> cq = em.getCriteriaBuilder().createQuery(ClosedOrder.class);
+        cq.select(cq.from(ClosedOrder.class));
+        List<ClosedOrder> ordersList = em.createQuery(cq).getResultList();
 		return ordersList;
 	}
 
-	public void updateOrder(Orders order) {
+	public void updateClosedOrder(ClosedOrder order) {
         em.merge(order);
 	}
 	
-    private void deleteOrder(Orders order) {
+    private void deleteClosedOrder(ClosedOrder order) {
         em.remove(order);
     }
 
 	public void deleteOrder(Long id) {
-		Orders order = em.find(Orders.class, id);
-        deleteOrder(order);
+		ClosedOrder order = em.find(ClosedOrder.class, id);
+        deleteClosedOrder(order);
 	}
 
 }

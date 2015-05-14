@@ -64,7 +64,7 @@ public class ProductController {
 			}
 		}
 		else {
-			return "admin?faces-redirect=true"; //TODO
+			return "admin?faces-redirect=true";
 		}
 	}
 	

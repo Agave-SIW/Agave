@@ -6,6 +6,7 @@ import it.uniroma3.model.Admin;
 import it.uniroma3.facade.AdminFacade;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.enterprise.context.SessionScoped;
@@ -39,6 +40,8 @@ public class AdminController {
 		if(admin==null || !admin.getPassword().equals(password)){
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
+			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			return "admin";
 		}
 		else{
 			System.out.print("\n\nLogin OK\n\n");

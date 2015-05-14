@@ -54,7 +54,7 @@
 					</ul>
 					<f:subview id="customerController">
 						<h:panelGroup rendered="#{customerController.notLoggedIn()}">
-							<h:form styleClass="navbar-form navbar-right">
+							<h:form id="customerLogin" styleClass="navbar-form navbar-right">
 
 								<div class="form-group">
 
@@ -70,12 +70,13 @@
 										id="password"
 										styleClass="form-control needPlaceholder needRequired" />
 									<h:message for="password" styleClass="label label-warning" />
-
 								</div>
+								<h:inputHidden value="#{view.viewId}" id="page" />
 								<div class="form-group">
-									<h:commandButton value="Login"
+									<h:commandButton id="loginButton" value="Login"
 										action="#{customerController.loginCustomer}"
 										styleClass="btn btn-primary" />
+									<h:message for="loginButton" styleClass="label label-warning" />
 								</div>
 
 							</h:form>

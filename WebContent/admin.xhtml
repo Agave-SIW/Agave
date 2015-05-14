@@ -20,7 +20,7 @@
 		<div class="row">
 
 			<h:panelGroup rendered="#{adminController.notLoggedIn()}">
-				<h:form styleClass="form-signin">
+				<h:form id="adminLogin" styleClass="form-signin">
 					<h2 class="form-signin-heading">Please sign in</h2>
 
 
@@ -40,9 +40,10 @@
 
 
 					<div class="form-group">
-						<h:commandButton value="Login"
+						<h:commandButton id="loginButton" value="Login"
 							action="#{adminController.loginAdmin}"
 							styleClass="btn btn-primary btn-block" />
+						<h:message for="loginButton" styleClass="label label-warning" />
 					</div>
 
 				</h:form>

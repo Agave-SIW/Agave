@@ -1,5 +1,6 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +20,19 @@ public class CustomerController {
 
 	private Long id;
 	private String firstName;
+	private String lastName;
 	private String password;
+	private String passwordRepeated;
 	private String email;
+	private Date dateOfBirth;
+	
+	//address data
+	private String street;
+	private String city;
+	private String state;
+	private String zipcode;
+	private String country;
+	
 	private Customer customer;
 	private List<Customer> customers;
 	
@@ -142,6 +154,78 @@ public class CustomerController {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Map<String, Object> getCurrentSessionMap() {
+		return currentSessionMap;
+	}
+
+	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
+		this.currentSessionMap = currentSessionMap;
+	}
+
+	public String getPasswordRepeated() {
+		return passwordRepeated;
+	}
+
+	public void setPasswordRepeated(String passwordRepeated) {
+		this.passwordRepeated = passwordRepeated;
 	}
 	
 	

@@ -103,15 +103,6 @@ public class Product {
 		this.storageQuantity = storageQuantity;
 	}
 
-	public boolean equals(Object obj) {
-		Product product = (Product)obj;
-		return this.getCode().equals(product.getCode());
-	}
-
-	public int hashCode() {
-		return this.code.hashCode();
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}

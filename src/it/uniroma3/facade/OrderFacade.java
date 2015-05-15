@@ -52,12 +52,6 @@ public class OrderFacade {
         List<Orders> ordersList = em.createQuery(cq).getResultList();
 		return ordersList;
 	}
-	
-	public List<OrderLine> getOrderLines(Long id){
-		Orders order = em.find(Orders.class, id);
-		
-		return order.getOrderLines();
-	}
 
 	public void updateOrder(Orders order) {
         em.merge(order);

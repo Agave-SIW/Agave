@@ -62,10 +62,13 @@ public class Orders {
 	public void setOrderLines(List<OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "Orders [id=" + id + ", creationTime=" + creationTime + ", customer=" + customer + "]";
+		return "Orders [id=" + id + ", creationTime=" + creationTime
+				+ ", evasionTime=" + evasionTime + ", customer=" + customer
+				+ ", orderLines=" + orderLines + "]";
 	}
 
 	public Date getEvasionTime() {

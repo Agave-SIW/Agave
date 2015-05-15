@@ -4,14 +4,11 @@ import java.util.List;
 
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.OrderFacade;
-import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
-import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 
 @ManagedBean
 public class CartController {
@@ -37,6 +34,10 @@ public class CartController {
 
 	public Orders getCart() {
 		return cart;
+	}
+	
+	public List<OrderLine> getOrderLines() {
+		return this.cart.getOrderLines();
 	}
 
 	public void setCart(Orders cart) {

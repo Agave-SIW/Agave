@@ -29,8 +29,17 @@ public class CartController {
 		}
 	}
 	
-	
-	/*SETTER and GETTER*/
+	public Float getTotal() {
+		List<OrderLine> ols = this.cart.getOrderLines();
+		Integer size = ols.size();
+		Float total = new Float(0);
+		
+		for (Integer i = 0; i < size; i++) {
+			total += (ols.get(i).getQuantity() * ols.get(i).getProduct().getPrice());
+		}
+		
+		return total;
+	}
 
 	public Orders getCart() {
 		return cart;

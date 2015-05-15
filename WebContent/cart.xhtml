@@ -11,10 +11,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<f:metadata>
-		<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
 			<f:event type="preRenderView"
 				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
-		</h:panelGroup>
 	</f:metadata>
 
 	<ui:define name="title">
@@ -30,6 +28,7 @@
 				<div>#{line.product.name} #{line.product.price}
 					#{line.quantity}</div>
 			</ui:repeat>
+			<div>Total: #{cartController.getTotal()}</div>
 
 
 		</h:panelGroup>

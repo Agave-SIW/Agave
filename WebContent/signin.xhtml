@@ -27,27 +27,6 @@
 							omogenea col resto del sito</span>
 						<hr />
 					</div>
-
-					<div class="form-group">
-						<label for="firstName">First Name: </label>
-
-						<h:inputText value="#{customerController.firstName}" required="true"
-							requiredMessage="First name is mandatory" id="firstName"
-							styleClass="form-control needRequired" />
-						<h:message for="firstName" styleClass="label label-warning" />
-
-					</div>
-					<div class="form-group">
-					
-						<label for="lastName">LastName: </label>
-
-						<h:inputText value="#{productController.lastName}" required="true"
-							requiredMessage="Last name is mandatory" id="lastName"
-							styleClass="form-control needRequired" />
-						<h:message for="lastName" styleClass="label label-warning" />
-
-					</div>
-					
 					
 					<div class="form-group">
 						<label for="email">Email: </label>
@@ -69,7 +48,7 @@
 
 					</div>
 					<div class="form-group">
-						<label for="passwordRepeated">Password: </label>
+						<label for="passwordRepeated">Repeat Password: </label>
 
 						<h:inputSecret value="#{productController.passwordRepeated}" required="true"
 							requiredMessage="Price is mandatory" id="passwordRepeated"
@@ -78,6 +57,58 @@
 
 					</div>
 
+					<div class="form-group">
+						<label for="firstName">First Name: </label>
+
+						<h:inputText value="#{customerController.firstName}" required="true"
+							requiredMessage="First name is mandatory" id="firstName"
+							styleClass="form-control needRequired" />
+						<h:message for="firstName" styleClass="label label-warning" />
+
+					</div>
+					<div class="form-group">
+					
+						<label for="lastName">LastName: </label>
+
+						<h:inputText value="#{productController.lastName}" required="true"
+							requiredMessage="Last name is mandatory" id="lastName"
+							styleClass="form-control needRequired" />
+						<h:message for="lastName" styleClass="label label-warning" />
+
+					</div>
+					
+					<div class="form-group">
+					
+						<label for="dateOfBirth">Date of birth (dd-MM-yyyy): </label>
+
+						<h:inputText value="#{productController.dateOfBirth}" required="true"
+							requiredMessage="Last name is mandatory" id="dateOfBirth"
+							styleClass="form-control needRequired">
+							<f:convertDateTime pattern="dd-MM-yyyy"/></h:inputText>
+						<h:message for="dateOfBirth" styleClass="label label-warning" />
+
+					</div>
+					
+					<div class="form-group">
+					<h4>Address</h4>
+						private String street;
+	private String city;
+	private String state;
+	private String zipcode;
+	private String country;
+					</div>
+					
+					<div class="form-group">
+					
+						<label for="street">Street: </label>
+
+						<h:inputText value="#{productController.street}" required="true"
+							requiredMessage="Last name is mandatory" id="street"
+							styleClass="form-control needRequired" />
+						<h:message for="street" styleClass="label label-warning" />
+
+					</div>
+					
 
 					<div class="form-group" style="padding-top: 20px">
 

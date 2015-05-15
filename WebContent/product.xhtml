@@ -23,6 +23,7 @@
 	<ui:define name="content">
 
 		<div class="row">
+		<h:panelGroup rendered='#{not empty productController.product}'>
 			<div class="col-md-12">
 
 				<div class="thumbnail">
@@ -102,6 +103,10 @@
 				</div>
 
 			</div>
+			</h:panelGroup>
+			<h:panelGroup rendered='#{empty productController.product}'>
+				<span class="label label-warning">There is no product with the selected id</span>
+			</h:panelGroup>
 		</div>
 
 	</ui:define>

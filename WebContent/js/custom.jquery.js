@@ -4,6 +4,12 @@ function capitalizeFirstLetter(string) {
 $(".needPlaceholder").attr("placeholder", function(){ var arr = this.name.split(":"); return capitalizeFirstLetter(arr[arr.length - 1]);});
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});
 $(".needRequired").prop("required",true);
+
+$(".login-link").click(function() {
+	$(".login-link").toggle('slide');
+	$(".login-form").toggle('slide');
+});
+
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
 	var str = capitalizeFirstLetter(arr[1]).trim();

@@ -19,7 +19,7 @@
 		<div class="row">
 
 				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal"
-					enctype="multipart/form-data">
+					enctype="multipart/form-data" id="signIn">
 					
 					<div class="form-group">
 						<h1>Sign In</h1>
@@ -33,7 +33,7 @@
 
 						<h:inputText value="#{customerController.email}" required="true"
 							requiredMessage="Email is mandatory" id="email"
-							styleClass="form-control needRequired" />
+							styleClass="form-control needRequired needType" />
 						<h:message for="email" styleClass="label label-warning" />
 
 					</div>
@@ -41,8 +41,8 @@
 					<div class="form-group">
 						<label for="password">Password: </label>
 
-						<h:inputSecret value="#{productController.password}" required="true"
-							requiredMessage="Price is mandatory" id="password"
+						<h:inputSecret value="#{customerController.password}" required="true"
+							requiredMessage="Password is mandatory" id="password"
 							styleClass="form-control needRequired" />
 						<h:message for="password" styleClass="label label-warning" />
 
@@ -50,8 +50,8 @@
 					<div class="form-group">
 						<label for="passwordRepeated">Repeat Password: </label>
 
-						<h:inputSecret value="#{productController.passwordRepeated}" required="true"
-							requiredMessage="Price is mandatory" id="passwordRepeated"
+						<h:inputSecret value="#{customerController.passwordRepeated}" required="true"
+							requiredMessage="Password needs to be repeated" id="passwordRepeated"
 							styleClass="form-control needRequired" />
 						<h:message for="passwordRepeated" styleClass="label label-warning" />
 
@@ -68,9 +68,9 @@
 					</div>
 					<div class="form-group">
 					
-						<label for="lastName">LastName: </label>
+						<label for="lastName">Last Name: </label>
 
-						<h:inputText value="#{productController.lastName}" required="true"
+						<h:inputText value="#{customerController.lastName}" required="true"
 							requiredMessage="Last name is mandatory" id="lastName"
 							styleClass="form-control needRequired" />
 						<h:message for="lastName" styleClass="label label-warning" />
@@ -79,33 +79,82 @@
 					
 					<div class="form-group">
 					
-						<label for="dateOfBirth">Date of birth (dd-MM-yyyy): </label>
+						<label for="dateOfBirth">Date of birth (dd/MM/yyyy): </label>
 
-						<h:inputText value="#{productController.dateOfBirth}" required="true"
-							requiredMessage="Last name is mandatory" id="dateOfBirth"
-							styleClass="form-control needRequired">
-							<f:convertDateTime pattern="dd-MM-yyyy"/></h:inputText>
-						<h:message for="dateOfBirth" styleClass="label label-warning" />
+						<h:inputText value="#{customerController.dateofBirth}" id="dateofBirth"
+							styleClass="form-control" placeholder="dd/MM/yyyy">
+							<f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
+						<h:message for="dateofBirth" styleClass="label label-warning" />
 
 					</div>
 					
 					<div class="form-group">
+					
+						<label for="phoneNumber">Phone number: </label>
+
+						<h:inputText value="#{customerController.phoneNumber}" required="true"
+							requiredMessage="Last name is mandatory" id="phoneNumber"
+							styleClass="form-control needRequired" />
+						<h:message for="phoneNumber" styleClass="label label-warning" />
+
+					</div>
+					
+					<div class="form-group">
+					
+					<br />
 					<h4>Address</h4>
-						private String street;
-	private String city;
-	private String state;
-	private String zipcode;
-	private String country;
+					<hr />
 					</div>
 					
 					<div class="form-group">
 					
 						<label for="street">Street: </label>
 
-						<h:inputText value="#{productController.street}" required="true"
-							requiredMessage="Last name is mandatory" id="street"
+						<h:inputText value="#{customerController.street}" required="true"
+							requiredMessage="Street is mandatory" id="street"
 							styleClass="form-control needRequired" />
 						<h:message for="street" styleClass="label label-warning" />
+
+					</div>
+					<div class="form-group">
+					
+						<label for="city">City: </label>
+
+						<h:inputText value="#{customerController.city}" required="true"
+							requiredMessage="City is mandatory" id="city"
+							styleClass="form-control needRequired" />
+						<h:message for="city" styleClass="label label-warning" />
+
+					</div>
+					<div class="form-group">
+					
+						<label for="state">State: </label>
+
+						<h:inputText value="#{customerController.state}" required="true"
+							requiredMessage="State is mandatory" id="state"
+							styleClass="form-control needRequired" />
+						<h:message for="state" styleClass="label label-warning" />
+
+					</div>
+					
+					<div class="form-group">
+					
+						<label for="zipcode">Zipcode: </label>
+
+						<h:inputText value="#{customerController.zipcode}" required="true"
+							requiredMessage="Zipcode is mandatory" id="zipcode"
+							styleClass="form-control needRequired" />
+						<h:message for="zipcode" styleClass="label label-warning" />
+
+					</div>
+					<div class="form-group">
+					
+						<label for="country">Country: </label>
+
+						<h:inputText value="#{customerController.country}" required="true"
+							requiredMessage="Country is mandatory" id="country"
+							styleClass="form-control needRequired" />
+						<h:message for="country" styleClass="label label-warning" />
 
 					</div>
 					

@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
+import it.uniroma3.facade.AddressFacade;
 import it.uniroma3.facade.CustomerFacade;
 
 import javax.ejb.EJB;
@@ -24,9 +26,10 @@ public class CustomerController {
 	private String password;
 	private String passwordRepeated;
 	private String email;
-	private Date dateOfBirth;
+	private String phoneNumber;
+	private Date dateofBirth;
 	
-	//address data
+	//address data fetch from form
 	private String street;
 	private String city;
 	private String state;
@@ -40,12 +43,31 @@ public class CustomerController {
 
 	@EJB
 	private CustomerFacade customerFacade;
+	//not ejb
+	private AddressFacade addressFacade;
 	
 	private Map<String, Object> currentSessionMap;
 	
 	
 	public CustomerController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.addressFacade = new AddressFacade();
+	}
+	
+	public String signIn() {
+		if(this.passwordRepeated.equals(this.password)){
+			Address address = addressFacade.createAddress(street, city, state, zipcode, country);
+			System.out.println("\nAddress created\n");
+			this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
+			System.out.println("\nCustomer Created\n");
+			
+			return "signin";
+		}
+		else {
+			FacesContext.getCurrentInstance().addMessage("signIn:passwordRepeated", new FacesMessage("Repeated password must be the same as password"));
+			return "signin";
+		}
+		
 	}
 
 	public String loginCustomer(){
@@ -156,14 +178,6 @@ public class CustomerController {
 		this.page = page;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
 	public String getLastName() {
 		return lastName;
 	}
@@ -190,6 +204,30 @@ public class CustomerController {
 
 	public String getState() {
 		return state;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Date getDateofBirth() {
+		return dateofBirth;
+	}
+
+	public void setDateofBirth(Date dateofBirth) {
+		this.dateofBirth = dateofBirth;
+	}
+
+	public AddressFacade getAddressFacade() {
+		return addressFacade;
+	}
+
+	public void setAddressFacade(AddressFacade addressFacade) {
+		this.addressFacade = addressFacade;
 	}
 
 	public void setState(String state) {

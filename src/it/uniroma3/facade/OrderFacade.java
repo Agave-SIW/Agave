@@ -33,6 +33,14 @@ public class OrderFacade {
 		return order;
 	}
 	
+	public Orders createCart(Customer customer, List<OrderLine> orderlines) {
+		Orders cart = new Orders();
+		cart.setCustomer(customer);
+		cart.setOrderLines(orderlines);
+		
+		return cart;
+	}
+	
 	public Orders getOrder(Long id) {
 	    Orders order = em.find(Orders.class, id);
 		return order;
@@ -43,6 +51,12 @@ public class OrderFacade {
         cq.select(cq.from(Orders.class));
         List<Orders> ordersList = em.createQuery(cq).getResultList();
 		return ordersList;
+	}
+	
+	public List<OrderLine> getOrderLines(Long id){
+		Orders order = em.find(Orders.class, id);
+		
+		return order.getOrderLines();
 	}
 
 	public void updateOrder(Orders order) {

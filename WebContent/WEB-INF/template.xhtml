@@ -91,8 +91,7 @@
 												<h:outputText
 													value='#{sessionScope["customer"].getFirstName()}' />
 											</p></li>
-										<li><h:commandLink value="Cart"
-												action="#{cartController.showCart}" /></li>
+										<li><a href="#{root}/cart.jsf">Cart</a></li>
 										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
 												value="Logout" action="#{customerController.logoutCustomer}" /></li>
 

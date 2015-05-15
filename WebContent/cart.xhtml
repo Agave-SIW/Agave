@@ -9,6 +9,10 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
+	</f:metadata>
 
 	<ui:define name="title">
         Cart | Agave Shop - SIW 2015
@@ -16,7 +20,13 @@
 
 	<ui:define name="content">
 
-		
-		
+		<h2>Cart</h2>
+		<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+		${cartController.cart.toString()}
+		</h:panelGroup>
+		<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
+		warning
+		</h:panelGroup>
+
 	</ui:define>
 </ui:composition>

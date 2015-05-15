@@ -53,13 +53,37 @@ public class CustomerFacade {
         em.merge(customer);
 	}
 	
+	public void updateCustomer(Long idCustomer) {
+		Customer customer = em.find(Customer.class, idCustomer);
+        updateCustomer(customer);
+	}
+	
     private void deleteCustomer(Customer customer) {
         em.remove(customer);
     }
 
-	public void deleteCustomer(Long id) {
-		Customer customer = em.find(Customer.class, id);
+	public void deleteCustomer(Long idCustomer) {
+		Customer customer = em.find(Customer.class, idCustomer);
         deleteCustomer(customer);
 	}
 	
+	public Orders getCart(Long idCustomer){
+		//idCustomer = 3401l;
+		Customer customer = em.find(Customer.class, idCustomer);
+		return getCart(customer);
+	}
+	
+	public Orders getCart(Customer customer){
+		return customer.getCart();
+	}
+	
+	public void setCart(Long idCustomer, Orders cart){
+		Customer customer = em.find(Customer.class, idCustomer);
+		setCart(customer, cart);
+	}
+	
+	public void setCart(Customer customer, Orders cart){
+		customer.setCart(cart);
+		updateCustomer(customer);
+	}
 }

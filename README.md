@@ -11,6 +11,7 @@
 
 ### Estensioni
 * Quando il **cliente** effettua il login, l'applicazione lo ricorda fino allo scadere della sessione.
+* Un cliente può registrarsi al sito, oltre a poter essere aggiunto da un amministratore come da specifiche.
 * Quando l'**amministratore** effettua il login, l'applicazione lo ricorda fino allo scadere della sessione.
  * Se l'amministratore non è loggato non può accedere al **pannello admin**.
 * Quando un amministratore invia un nuovo prodotto deve **caricare un'immagine** che poi verrà mostrata nel riepilogo del prodotto.

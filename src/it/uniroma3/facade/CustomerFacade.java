@@ -24,7 +24,8 @@ public class CustomerFacade {
 	
 	public Customer createCustomer(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth, Address address) {
 		Date currentDate = new Date();
-		Customer customer = new Customer(firstName, lastName, email, password,  phoneNumber, dateofBirth, currentDate, address);
+		Orders cart = new Orders();
+		Customer customer = new Customer(firstName, lastName, email, password,  phoneNumber, dateofBirth, currentDate, address, cart);
 		em.persist(customer);
 		return customer;
 	}

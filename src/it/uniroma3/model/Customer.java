@@ -51,7 +51,7 @@ public class Customer {
 	}
 
 	public Customer(String firstName, String lastName, String email, String password,
-			String phoneNumber, Date dateofBirth, Date registrationDate, Address address) {
+			String phoneNumber, Date dateofBirth, Date registrationDate, Address address, Orders cart) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -60,6 +60,7 @@ public class Customer {
 		this.dateofBirth = dateofBirth;
 		this.address = address;
 		this.registrationDate = registrationDate;
+		this.cart = cart;
 	}
 	
 	public List<Orders> getOrders() {

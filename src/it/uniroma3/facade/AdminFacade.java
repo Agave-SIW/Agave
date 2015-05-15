@@ -17,10 +17,7 @@ public class AdminFacade {
     @PersistenceContext(unitName = "agave")
     private EntityManager em;
     
-	public AdminFacade() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public AdminFacade() {}
     
 	public Admin createAdmin(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth) {
 		Admin admin = new Admin(firstName, lastName, email, password, phoneNumber, dateofBirth);

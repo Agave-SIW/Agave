@@ -1,9 +1,12 @@
 package it.uniroma3.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
+import it.uniroma3.facade.AddressFacade;
 import it.uniroma3.facade.CustomerFacade;
 
 import javax.ejb.EJB;
@@ -19,8 +22,20 @@ public class CustomerController {
 
 	private Long id;
 	private String firstName;
+	private String lastName;
 	private String password;
+	private String passwordRepeated;
 	private String email;
+	private String phoneNumber;
+	private Date dateofBirth;
+	
+	//address data fetch from form
+	private String street;
+	private String city;
+	private String state;
+	private String zipcode;
+	private String country;
+	
 	private Customer customer;
 	private List<Customer> customers;
 	
@@ -28,12 +43,31 @@ public class CustomerController {
 
 	@EJB
 	private CustomerFacade customerFacade;
+	//not ejb
+	private AddressFacade addressFacade;
 	
 	private Map<String, Object> currentSessionMap;
 	
 	
 	public CustomerController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.addressFacade = new AddressFacade();
+	}
+	
+	public String signIn() {
+		if(this.passwordRepeated.equals(this.password)){
+			Address address = addressFacade.createAddress(street, city, state, zipcode, country);
+			System.out.println("\nAddress created\n");
+			this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
+			System.out.println("\nCustomer Created\n");
+			
+			return "signin";
+		}
+		else {
+			FacesContext.getCurrentInstance().addMessage("signIn:passwordRepeated", new FacesMessage("Repeated password must be the same as password"));
+			return "signin";
+		}
+		
 	}
 
 	public String loginCustomer(){
@@ -142,6 +176,94 @@ public class CustomerController {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Date getDateofBirth() {
+		return dateofBirth;
+	}
+
+	public void setDateofBirth(Date dateofBirth) {
+		this.dateofBirth = dateofBirth;
+	}
+
+	public AddressFacade getAddressFacade() {
+		return addressFacade;
+	}
+
+	public void setAddressFacade(AddressFacade addressFacade) {
+		this.addressFacade = addressFacade;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipcode() {
+		return zipcode;
+	}
+
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Map<String, Object> getCurrentSessionMap() {
+		return currentSessionMap;
+	}
+
+	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
+		this.currentSessionMap = currentSessionMap;
+	}
+
+	public String getPasswordRepeated() {
+		return passwordRepeated;
+	}
+
+	public void setPasswordRepeated(String passwordRepeated) {
+		this.passwordRepeated = passwordRepeated;
 	}
 	
 	

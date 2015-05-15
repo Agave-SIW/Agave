@@ -54,7 +54,11 @@
 					</ul>
 					<f:subview id="customerController">
 						<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
-							<h:form id="customerLogin" styleClass="navbar-form navbar-right">
+							<ul class="nav navbar-nav navbar-right">
+							    <li><a class="login-link" href="#">Log In</a></li>
+								<li><a href="#{root}/signin.jsf">Sign In</a></li>
+							</ul>
+							<h:form id="customerLogin" style="display:none" styleClass="login-form navbar-form navbar-right">
 
 								<div class="form-group">
 
@@ -141,9 +145,8 @@
 												<h:outputText
 													value='#{sessionScope["admin"].getFirstName()}' />
 											</p></li>
-										<li><h:inputHidden value="#{view.viewId}" id="page" />
-											<h:commandLink value="Logout"
-												action="#{adminController.logoutAdmin}" /></li>
+										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
+												value="Logout" action="#{adminController.logoutAdmin}" /></li>
 
 									</ul>
 								</div>

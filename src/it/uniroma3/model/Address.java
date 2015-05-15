@@ -25,13 +25,10 @@ public class Address {
 	private String country;
 	
 
-	public Address() {
-
-	}
+	public Address() {}
 	
 	public Address(String street, String city, String state,
 			String zipcode, String country) {
-		
 		this.street = street;
 		this.city = city;
 		this.state = state;

@@ -30,6 +30,14 @@ public class Orders {
 	public Orders() {
 		this.orderLines = new LinkedList<OrderLine>();
 	}
+	
+	public void addOrderLine(OrderLine orderline){
+		this.orderLines.add(orderline);
+	}
+	
+	public void emptyOrderLines(){
+		this.orderLines = new LinkedList<OrderLine>();
+	}
 
 	public Long getId() {
 		return id;
@@ -132,6 +140,6 @@ public class Orders {
 		return true;
 	}
 	
-	
+
 
 }

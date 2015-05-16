@@ -6,6 +6,7 @@ import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.OrderFacade;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
+import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -20,13 +21,14 @@ public class CartController {
 	@EJB
 	private CustomerFacade customerFacade;
 	
-	public void setCartFromId(Long idCustomer) {
+	public Orders setCartFromId(Long idCustomer) {
 		try{
 			this.cart = customerFacade.getCart(idCustomer);
 		}
 		catch(Exception e){
-			//TODO
+			//
 		}
+		return this.cart;
 	}
 	
 	public Float getTotal() {
@@ -39,6 +41,14 @@ public class CartController {
 		}
 		
 		return total;
+	}
+	
+	public String addProductToCart(Orders cart, Product product){
+		System.out.println("trying to add Product to Cart");
+		System.out.println(cart.toString());
+		orderFacade.addProductToCart(cart, product);
+		System.out.println("Product added to Cart");
+		return "cart?faces-redirect=true";
 	}
 
 	public Orders getCart() {

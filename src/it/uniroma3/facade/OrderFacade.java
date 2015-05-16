@@ -57,6 +57,12 @@ public class OrderFacade {
         em.merge(order);
 	}
 	
+	public void updateCartFromCopy(Orders cart) {
+		Orders c = getOrder(cart.getId());
+		c.setOrderLines(cart.getOrderLines());
+		updateOrder(c);
+	}
+	
     private void deleteOrder(Orders order) {
         em.remove(order);
     }
@@ -64,6 +70,29 @@ public class OrderFacade {
 	public void deleteOrder(Long id) {
 		Orders order = em.find(Orders.class, id);
         deleteOrder(order);
+	}
+	
+	public void addProductToCart(Orders cart, Long idProduct){
+		ProductFacade pf = new ProductFacade();
+		Product p = pf.getProduct(idProduct);
+		addProductToCart(cart, p);
+	}
+	
+	public void addProductToCart(Orders cart, Product product){
+		System.out.println("making order line from product");
+		OrderLine ol = makeOrderLineFromProduct(product);
+		System.out.println("made order line from product");
+		System.out.println("adding order line to cart");
+		System.out.println(cart.toString());
+		cart.addOrderLine(ol);
+		System.out.println("added order line to cart, updating order");
+		updateCartFromCopy(cart);
+		System.out.println("Cart Updated");
+	}
+	
+	public OrderLine makeOrderLineFromProduct(Product product){
+		OrderLine ol = new OrderLine(1, product);
+		return ol;
 	}
 
 }

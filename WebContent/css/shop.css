@@ -108,3 +108,6 @@ input[readonly] {
   background-color: white !important;
   cursor: text !important;
 }
+.well {
+	min-height: 125px;
+}

@@ -55,7 +55,35 @@ public class OrderFacade {
         em.merge(order);
 	}
 	
-	/* 
+	
+	
+    private void deleteOrder(Orders order) {
+        em.remove(order);
+    }
+
+	public void deleteOrder(Long id) {
+		Orders order = em.find(Orders.class, id);
+        deleteOrder(order);
+	}
+	
+	/* OLD METHOD TODO delete? */
+	public void addProductToCart(Orders cart, Long idProduct){
+		ProductFacade pf = new ProductFacade();
+		Product p = pf.getProduct(idProduct);
+		addProductToCart(cart, p);
+	}
+	
+	/* OLD METHOD TODO delete? */
+	public void addProductToCart(Orders cart, Product product){
+		OrderLine ol = makeOrderLineFromProduct(product);
+		Orders c = getOrder(cart.getId());
+		c.addOrderLine(ol);
+		updateOrder(c);
+		
+		System.out.println("Cart Updated");
+	}
+	
+	/* TODO delete?
 	 * Metodo Inutilizzato
 	 * 
 	public void updateCartFromCopy(Orders cart) {
@@ -69,33 +97,7 @@ public class OrderFacade {
 	}
 	*/
 	
-    private void deleteOrder(Orders order) {
-        em.remove(order);
-    }
-
-	public void deleteOrder(Long id) {
-		Orders order = em.find(Orders.class, id);
-        deleteOrder(order);
-	}
-	
-	public void addProductToCart(Orders cart, Long idProduct){
-		ProductFacade pf = new ProductFacade();
-		Product p = pf.getProduct(idProduct);
-		addProductToCart(cart, p);
-	}
-	
-	/*OLD METHOD*/
-	public void addProductToCart(Orders cart, Product product){
-		OrderLine ol = makeOrderLineFromProduct(product);
-		Orders c = getOrder(cart.getId());
-		c.addOrderLine(ol);
-		updateOrder(c);
-		
-		System.out.println("Cart Updated");
-	}
-	
-	/*NEW METHOD*/
-	public void addProductToCart(Orders cart, Product product, int quantity){		
+	public void addProductToCart(Orders cart, Product product, Integer quantity){		
 		OrderLine ol = makeOrderLineFromProduct(product, quantity);
 		Orders c = getOrder(cart.getId());
 		c.addOrderLine(ol);

@@ -40,6 +40,7 @@ public class CustomerController {
 	private List<Customer> customers;
 
 	private String page;
+	private String param;
 
 	@EJB
 	private CustomerFacade customerFacade;
@@ -91,10 +92,7 @@ public class CustomerController {
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);	
 		
-		if(page == null)
-			return "index?faces-redirect=true";
-		if(page.contains("product.")) 
-			return "products?faces-redirect=true";
+		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		return page;
 	}
 
@@ -107,10 +105,7 @@ public class CustomerController {
 
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
 
-		if(page == null)
-			return "index?faces-redirect=true";
-		if(page.contains("product.")) 
-			return "products?faces-redirect=true";
+		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		return page;
 	}
 
@@ -279,6 +274,14 @@ public class CustomerController {
 
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
+	}
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) {
+		this.param = param;
 	}
 
 

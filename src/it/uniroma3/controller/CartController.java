@@ -45,9 +45,11 @@ public class CartController {
 	}
 	
 	public String addProductToCart(Orders cart, Product product){
-		System.out.println("trying to add " + this.quantity +" Product to Cart");
+		Integer quantity = 1;
+		if(this.quantity != 0) quantity = this.quantity;
+		System.out.println("trying to add " + quantity +" Product to Cart");
 		System.out.println(cart.toString());
-		orderFacade.addProductToCart(cart, product, this.quantity);
+		orderFacade.addProductToCart(cart, product, quantity);
 		System.out.println("Product added to Cart");
 		return "cart?faces-redirect=true";
 	}

@@ -88,10 +88,14 @@
 				<div class="col-lg-12">
 
 					<div class="col-md-12">
-						<h1>Error</h1>
+						<h1>Ops</h1>
 						<hr />
 						<span class="label label-warning">There is no product with
-							the selected id</span>
+							the selected id</span> Loading previous page...
+							<script type="text/javascript">window.location = document.referrer + 
+							((document.referrer.indexOf('?')!=-1 &amp;&amp; 
+									document.referrer.indexOf('rel=')!=-1)? 
+											"&amp;rel=1":"");</script>
 					</div>
 				</div>
 			</h:panelGroup>

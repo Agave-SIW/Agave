@@ -128,12 +128,9 @@ public class ProductController {
 
 	public String addReview(Long idProduct){
 		//must verify that the user is actually logged in
-		Customer cs = (Customer) currentSessionMap.get("customer");
-		if(cs==null) return "error";
-			
-		Long idCustomer = cs.getId();
-		//must get the managed customer and product, not a session copy
-		Customer c = this.customerFacade.getCustomer(idCustomer);
+		Customer c = (Customer) currentSessionMap.get("customer");
+		if(c==null) return "error";
+
 		Product p = this.productFacade.getProduct(idProduct);
 		Review r = this.reviewFacade.createReview(stars, comment, c);
 

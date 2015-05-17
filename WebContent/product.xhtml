@@ -5,26 +5,21 @@
     <!ENTITY euro "&#8364;"> 
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-	<f:metadata>
-		<f:event type="preRenderView"
-			listener="#{productController.setProductFromId}">
-			<f:param name="id" value="#{productController.id}" />
-		</f:event>
-	</f:metadata>
-
 	<ui:define name="title">
-        ${productController.product.name} | Agave Shop - SIW 2015
+		<h:outputText
+			value="#{productController.getProductFromId(param['id']).name}" /> | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
 
 		<div class="row">
-			<h:panelGroup rendered='#{not empty productController.product}'>
+			<h:panelGroup rendered="#{not empty productController.product}">
 				<div class="col-md-12">
 
 					<div class="thumbnail">
@@ -37,41 +32,27 @@
 									<f:convertNumber pattern="#0.00 &#8364;" />
 								</h:outputText>
 							</h4>
-							<h2>${productController.product.name}</h2>
-							<div>Code: ${productController.product.code}</div>
-							<div>${productController.product.description}</div>
+							<h2>#{productController.product.name}</h2>
+							<div>Code: #{productController.product.code}</div>
+							<div>#{productController.product.description}</div>
 						</div>
 
 						<div class="ratings">
-							<p class="pull-right">${productController.getReviewNumber()}</p>
+							<p class="pull-right">#{productController.getReviewNumber()}</p>
 							<p>
 								<h:outputText
 									value="#{productController.getReviewAverageHtml()}"
 									escape="false" />
-								${productController.getReviewAverage()} stars
+								#{productController.getReviewAverage()} stars
 							</p>
 						</div>
 					</div>
 
 					<div class="well">
 
-						<h:form>
-							<h:inputTextarea value="#{productController.comment}"
-								required="false" cols="20" rows="3" id="comment"
-								styleClass="form-control" />
-
-							<h:inputText value="#{productController.stars}" required="true"
-								requiredMessage="Vote is mandatory" id="stars"
-								styleClass="form-control needRequired needPlaceholder" />
-
-							<div class="text-right">
-								<h:inputHidden value="#{view.viewId}" id="page" />
-								<h:commandButton value="Leave a Review" immediate="true"
-									action='#{productController.addReview(sessionScope["customer"].id, product.id)}'
-									styleClass="btn btn-success" />
-							</div>
-
-						</h:form>
+						<div class="text-right">
+							<a class="btn btn-success">Add a review</a>
+						</div>
 
 						<hr />
 
@@ -81,7 +62,10 @@
 									<h:outputText
 										value="#{productController.getReviewHtml(review)}"
 										escape="false" />
-									#{review.getCustomerName()} <span class="pull-right">#{review.getDate()}</span>
+									#{review.getCustomerName()} <span class="pull-right"><h:outputText
+											value="#{review.getDate()}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText></span>
 									<p>#{review.getComment()}</p>
 								</div>
 							</div>
@@ -105,7 +89,9 @@
 					</div>
 				</div>
 			</h:panelGroup>
+
 		</div>
 
 	</ui:define>
+
 </ui:composition>

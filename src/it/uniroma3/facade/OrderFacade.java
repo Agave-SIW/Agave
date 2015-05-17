@@ -55,11 +55,19 @@ public class OrderFacade {
         em.merge(order);
 	}
 	
+	/* 
+	 * Metodo Inutilizzato
+	 * 
 	public void updateCartFromCopy(Orders cart) {
 		Orders c = getOrder(cart.getId());
+		c.emptyOrderLines();
+		updateOrder(c);
 		c.setOrderLines(cart.getOrderLines());
+		System.out.println("Print Order from DB + new prod");
+		System.out.println(c.toString());
 		updateOrder(c);
 	}
+	*/
 	
     private void deleteOrder(Orders order) {
         em.remove(order);
@@ -77,14 +85,11 @@ public class OrderFacade {
 	}
 	
 	public void addProductToCart(Orders cart, Product product){
-		System.out.println("making order line from product");
 		OrderLine ol = makeOrderLineFromProduct(product);
-		System.out.println("made order line from product");
-		System.out.println("adding order line to cart");
-		System.out.println(cart.toString());
-		cart.addOrderLine(ol);
-		System.out.println("added order line to cart, updating order");
-		updateCartFromCopy(cart);
+		Orders c = getOrder(cart.getId());
+		c.addOrderLine(ol);
+		updateOrder(c);
+		
 		System.out.println("Cart Updated");
 	}
 	

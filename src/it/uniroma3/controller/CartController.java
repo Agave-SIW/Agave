@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 public class CartController {
 	
 	private Orders cart;
+	private int quantity;
 	
 	@EJB
 	private OrderFacade orderFacade;
@@ -44,9 +45,9 @@ public class CartController {
 	}
 	
 	public String addProductToCart(Orders cart, Product product){
-		System.out.println("trying to add Product to Cart");
+		System.out.println("trying to add " + this.quantity +" Product to Cart");
 		System.out.println(cart.toString());
-		orderFacade.addProductToCart(cart, product);
+		orderFacade.addProductToCart(cart, product, this.quantity);
 		System.out.println("Product added to Cart");
 		return "cart?faces-redirect=true";
 	}
@@ -69,6 +70,14 @@ public class CartController {
 
 	public void setOrderFacade(OrderFacade orderFacade) {
 		this.orderFacade = orderFacade;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

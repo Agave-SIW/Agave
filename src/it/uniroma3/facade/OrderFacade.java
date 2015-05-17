@@ -93,8 +93,22 @@ public class OrderFacade {
 		System.out.println("Cart Updated");
 	}
 	
+	public void addProductToCart(Orders cart, Product product, int quantity){
+		OrderLine ol = makeOrderLineFromProduct(product, quantity);
+		Orders c = getOrder(cart.getId());
+		c.addOrderLine(ol);
+		updateOrder(c);
+		
+		System.out.println("Cart Updated");
+	}
+	
 	public OrderLine makeOrderLineFromProduct(Product product){
 		OrderLine ol = new OrderLine(1, product);
+		return ol;
+	}
+	
+	public OrderLine makeOrderLineFromProduct(Product product, int quantity){
+		OrderLine ol = new OrderLine(quantity, product);
 		return ol;
 	}
 

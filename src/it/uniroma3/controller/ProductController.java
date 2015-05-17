@@ -1,6 +1,7 @@
 package it.uniroma3.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Product;
@@ -37,7 +38,7 @@ public class ProductController {
 	// review form data
 	private String comment;
 	private Integer stars;
-	private Long idCustomer;
+	private Long idProduct;
 
 	private String page;
 
@@ -48,8 +49,11 @@ public class ProductController {
 
 	private ReviewFacade reviewFacade;
 	
+	private Map<String, Object> currentSessionMap;
+	
 	
 	public ProductController() {
+		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		this.reviewFacade = new ReviewFacade();
 	}
 
@@ -122,18 +126,16 @@ public class ProductController {
 		return this.product;
 	}
 
-	public String addReview(Long idCustomer, Long idProduct){
-		System.out.println("\n\n\n"+idCustomer.toString()+" ");
-        System.out.println(idProduct.toString()+"\n\n\n");
-		
+	public String addReview(Long idProduct){
+		//must verify that the user is actually logged in
+		Customer cs = (Customer) currentSessionMap.get("customer");
+		if(cs==null) return "error";
+			
+		Long idCustomer = cs.getId();
+		//must get the managed customer and product, not a session copy
 		Customer c = this.customerFacade.getCustomer(idCustomer);
-		System.out.println(c.toString());
-
 		Product p = this.productFacade.getProduct(idProduct);
-		System.out.println(p.toString());
-
 		Review r = this.reviewFacade.createReview(stars, comment, c);
-		System.out.println(r.toString());
 
 		try{
 			this.productFacade.addReviewToProduct(r, p);
@@ -144,8 +146,7 @@ public class ProductController {
 
 		System.out.println("Review Added!");
 
-		return "index";
-		//return page+"?id="+idProduct+"&faces-redirect=true&includeViewParams=true";
+		return "successReview";
 	}
 
 	public List<Review> getReviews(Product product){
@@ -341,12 +342,20 @@ public class ProductController {
 		this.reviewFacade = reviewFacade;
 	}
 
-	public Long getIdCustomer() {
-		return idCustomer;
+	public Long getIdProduct() {
+		return idProduct;
 	}
 
-	public void setIdCustomer(Long idCustomer) {
-		this.idCustomer = idCustomer;
+	public void setIdProduct(Long idProduct) {
+		this.idProduct = idProduct;
+	}
+
+	public Map<String, Object> getCurrentSessionMap() {
+		return currentSessionMap;
+	}
+
+	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
+		this.currentSessionMap = currentSessionMap;
 	}
 	
 	

@@ -10,10 +10,16 @@ $(".needPlaceholder").attr("placeholder", function(){
 	});
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});
 $(".needRequired").prop("required",true);
+$("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
 
 $(".login-link").click(function() {
 	$(".login-link").toggle('slide');
 	$(".login-form").toggle('slide');
+});
+
+$("#addReviewButton").click(function() {
+	$("#addReviewButton").toggle('slide');
+	$("#reviewFrameDiv").toggle('slide');
 });
 
 $(".label-warning").text(function(){ 

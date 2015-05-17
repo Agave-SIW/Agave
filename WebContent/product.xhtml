@@ -49,12 +49,18 @@
 					</div>
 
 					<div class="well">
-
-						<div class="text-right">
-							<a class="btn btn-success">Add a review</a>
+						<div class="col-md-12" id="reviewFrameDiv" style="display: none">
+							<iframe id="reviewFrame"
+								src="#{root}/newReview.xhtml?id=#{productController.product.id}"
+								width="100%" height="100" seamless="seamless"></iframe>
 						</div>
+						<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+							<div class="text-right">
+								<a class="btn btn-success" id="addReviewButton">Add a review</a>
+							</div>
 
-						<hr />
+							<hr />
+						</h:panelGroup>
 
 						<ui:repeat var="review" value="#{productController.getReviews()}">
 							<div class="row">

@@ -62,7 +62,7 @@ public class CustomerController {
 				this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
 				System.out.println("\nCustomer Created\n");
 
-				return "success";
+				return "successSignin";
 			}
 			else {
 				FacesContext.getCurrentInstance().addMessage("signIn:email", new FacesMessage("There is already a customer with this email address"));

@@ -43,7 +43,10 @@
 								<h:outputText
 									value="#{productController.getReviewAverageHtml()}"
 									escape="false" />
-								#{productController.getReviewAverage()} stars
+								<h:outputText value="#{productController.getReviewAverage()}">
+									<f:convertNumber pattern="#0.0" />
+								</h:outputText>
+								stars
 							</p>
 						</div>
 					</div>
@@ -92,7 +95,7 @@
 						<hr />
 						<span class="label label-warning">There is no product with
 							the selected id</span> Loading previous page...
-							<script type="text/javascript">window.location = document.referrer + 
+						<script type="text/javascript">window.location = document.referrer + 
 							((document.referrer.indexOf('?')!=-1 &amp;&amp; 
 									document.referrer.indexOf('rel=')!=-1)? 
 											"&amp;rel=1":"");</script>

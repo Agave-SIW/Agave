@@ -168,8 +168,8 @@ public class ProductController {
 
 	public Float getReviewAverage(Product product){
 		List<Review> rws = product.getReviews();
-		Integer size = rws.size();
-		Integer total = new Integer(0);
+		Float size = (float) rws.size();
+		Float total = new Float(0);
 
 		for (Integer i = 0; i < size; i++) {
 			total += (rws.get(i).getStars());

@@ -56,18 +56,23 @@ public class CustomerController {
 	
 	public String signIn() {
 		if(this.passwordRepeated.equals(this.password)){
+			if(customerFacade.getCustomer(this.email)!=null){
 			Address address = addressFacade.createAddress(street, city, state, zipcode, country);
 			System.out.println("\nAddress created\n");
 			this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
 			System.out.println("\nCustomer Created\n");
 			
-			return "signin";
+			return "success";
+			}
+			else {
+				FacesContext.getCurrentInstance().addMessage("signIn:email", new FacesMessage("There is already a customer with this email address"));
+				return "signin";
+			}
 		}
 		else {
 			FacesContext.getCurrentInstance().addMessage("signIn:passwordRepeated", new FacesMessage("Repeated password must be the same as password"));
 			return "signin";
 		}
-		
 	}
 
 	public String loginCustomer(){

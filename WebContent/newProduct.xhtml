@@ -94,8 +94,20 @@
 
 			</h:panelGroup>
 			<h:panelGroup rendered='#{empty sessionScope["admin"]}'>
-				<span class="label label-warning">You must be logged ad admin
-					to view this page</span>
+				<div class="col-md-6 col-md-offset-3 form-horizontal">
+
+					<div class="form-group">
+						<h1>Error</h1>
+						<span class="label label-info">TODO: questa pagina resa
+							omogenea col resto del sito</span>
+						<hr />
+					</div>
+
+					<div class="form-group">
+						<span class="label label-warning">You must be logged as
+							admin to view this page</span>
+					</div>
+				</div>
 			</h:panelGroup>
 		</div>
 

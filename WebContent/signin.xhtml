@@ -17,17 +17,16 @@
 	<ui:define name="content">
 
 		<div class="row">
+			<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal"
+				enctype="multipart/form-data" id="signIn">
 
-				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal"
-					enctype="multipart/form-data" id="signIn">
-					
 					<div class="form-group">
 						<h1>Sign In</h1>
 						<span class="label label-info">TODO: questa pagina resa
 							omogenea col resto del sito</span>
 						<hr />
 					</div>
-					
+
 					<div class="form-group">
 						<label for="email">Email: </label>
 
@@ -37,22 +36,22 @@
 						<h:message for="email" styleClass="label label-warning" />
 
 					</div>
-					
+
 					<div class="form-group">
 						<label for="password">Password: </label>
 
-						<h:inputSecret value="#{customerController.password}" required="true"
-							requiredMessage="Password is mandatory" id="password"
-							styleClass="form-control needRequired" />
+						<h:inputSecret value="#{customerController.password}"
+							required="true" requiredMessage="Password is mandatory"
+							id="password" styleClass="form-control needRequired" />
 						<h:message for="password" styleClass="label label-warning" />
 
 					</div>
 					<div class="form-group">
 						<label for="passwordRepeated">Repeat Password: </label>
 
-						<h:inputSecret value="#{customerController.passwordRepeated}" required="true"
-							requiredMessage="Password needs to be repeated" id="passwordRepeated"
-							styleClass="form-control needRequired" />
+						<h:inputSecret value="#{customerController.passwordRepeated}"
+							required="true" requiredMessage="Password needs to be repeated"
+							id="passwordRepeated" styleClass="form-control needRequired" />
 						<h:message for="passwordRepeated" styleClass="label label-warning" />
 
 					</div>
@@ -60,54 +59,56 @@
 					<div class="form-group">
 						<label for="firstName">First Name: </label>
 
-						<h:inputText value="#{customerController.firstName}" required="true"
-							requiredMessage="First name is mandatory" id="firstName"
-							styleClass="form-control needRequired" />
+						<h:inputText value="#{customerController.firstName}"
+							required="true" requiredMessage="First name is mandatory"
+							id="firstName" styleClass="form-control needRequired" />
 						<h:message for="firstName" styleClass="label label-warning" />
 
 					</div>
 					<div class="form-group">
-					
+
 						<label for="lastName">Last Name: </label>
 
-						<h:inputText value="#{customerController.lastName}" required="true"
-							requiredMessage="Last name is mandatory" id="lastName"
-							styleClass="form-control needRequired" />
+						<h:inputText value="#{customerController.lastName}"
+							required="true" requiredMessage="Last name is mandatory"
+							id="lastName" styleClass="form-control needRequired" />
 						<h:message for="lastName" styleClass="label label-warning" />
 
 					</div>
-					
+
 					<div class="form-group">
-					
+
 						<label for="dateOfBirth">Date of birth (dd/MM/yyyy): </label>
 
-						<h:inputText value="#{customerController.dateofBirth}" id="dateofBirth"
-							styleClass="form-control" placeholder="dd/MM/yyyy">
-							<f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
+						<h:inputText value="#{customerController.dateofBirth}"
+							id="dateofBirth" styleClass="form-control"
+							placeholder="dd/MM/yyyy">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText>
 						<h:message for="dateofBirth" styleClass="label label-warning" />
 
 					</div>
-					
+
 					<div class="form-group">
-					
+
 						<label for="phoneNumber">Phone number: </label>
 
-						<h:inputText value="#{customerController.phoneNumber}" required="true"
-							requiredMessage="Last name is mandatory" id="phoneNumber"
-							styleClass="form-control needRequired" />
+						<h:inputText value="#{customerController.phoneNumber}"
+							required="true" requiredMessage="Last name is mandatory"
+							id="phoneNumber" styleClass="form-control needRequired" />
 						<h:message for="phoneNumber" styleClass="label label-warning" />
 
 					</div>
-					
+
 					<div class="form-group">
-					
-					<br />
-					<h4>Address</h4>
-					<hr />
+
+						<br />
+						<h4>Address</h4>
+						<hr />
 					</div>
-					
+
 					<div class="form-group">
-					
+
 						<label for="street">Street: </label>
 
 						<h:inputText value="#{customerController.street}" required="true"
@@ -117,7 +118,7 @@
 
 					</div>
 					<div class="form-group">
-					
+
 						<label for="city">City: </label>
 
 						<h:inputText value="#{customerController.city}" required="true"
@@ -127,7 +128,7 @@
 
 					</div>
 					<div class="form-group">
-					
+
 						<label for="state">State: </label>
 
 						<h:inputText value="#{customerController.state}" required="true"
@@ -136,9 +137,9 @@
 						<h:message for="state" styleClass="label label-warning" />
 
 					</div>
-					
+
 					<div class="form-group">
-					
+
 						<label for="zipcode">Zipcode: </label>
 
 						<h:inputText value="#{customerController.zipcode}" required="true"
@@ -148,7 +149,7 @@
 
 					</div>
 					<div class="form-group">
-					
+
 						<label for="country">Country: </label>
 
 						<h:inputText value="#{customerController.country}" required="true"
@@ -157,7 +158,7 @@
 						<h:message for="country" styleClass="label label-warning" />
 
 					</div>
-					
+
 
 					<div class="form-group" style="padding-top: 20px">
 
@@ -166,8 +167,8 @@
 							styleClass="btn btn-primary" />
 						<button type="reset" class="btn btn-default">Reset</button>
 					</div>
-				</h:form>
 
+			</h:form>
 		</div>
 
 

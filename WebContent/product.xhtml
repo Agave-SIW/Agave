@@ -54,29 +54,25 @@
 					</div>
 
 					<div class="well">
-						<h:form id="addReview">
+
+						<h:form>
 							<h:inputTextarea value="#{productController.comment}"
 								required="false" cols="20" rows="3" id="comment"
 								styleClass="form-control" />
 
-							<h:selectOneMenu value="#{productController.stars}" id="stars">
-								<f:selectItem itemValue="1" itemLabel="1" />
-								<f:selectItem itemValue="2" itemLabel="2" />
-								<f:selectItem itemValue="3" itemLabel="3" />
-								<f:selectItem itemValue="4" itemLabel="4" />
-								<f:selectItem itemValue="5" itemLabel="5" />
-							</h:selectOneMenu>
+							<h:inputText value="#{productController.stars}" required="true"
+								requiredMessage="Vote is mandatory" id="stars"
+								styleClass="form-control needRequired needPlaceholder" />
 
 							<div class="text-right">
 								<h:inputHidden value="#{view.viewId}" id="page" />
-								<h:inputHidden value='#{sessionScope["customer"].getId()}' id="idCustomer" />
-								<h:inputHidden value="#{productController.product.getId()}" id="idProduct" />
-								
 								<h:commandButton value="Leave a Review" immediate="true"
-									action="#{productController.addReview()}"
+									action='#{productController.addReview(sessionScope["customer"].id, product.id)}'
 									styleClass="btn btn-success" />
 							</div>
+
 						</h:form>
+
 						<hr />
 
 						<ui:repeat var="review" value="#{productController.getReviews()}">

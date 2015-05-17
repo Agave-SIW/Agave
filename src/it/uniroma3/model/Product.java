@@ -41,7 +41,7 @@ public class Product {
 	@ManyToMany(mappedBy="products")
 	private List<Provider> providers;
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="product_id")
 	private List<Review> reviews;
 

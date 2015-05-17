@@ -38,7 +38,6 @@ public class ProductController {
 	private String comment;
 	private Integer stars;
 	private Long idCustomer;
-	private Long idProduct;
 
 	private String page;
 
@@ -48,6 +47,11 @@ public class ProductController {
 	private CustomerFacade customerFacade;
 
 	private ReviewFacade reviewFacade;
+	
+	
+	public ProductController() {
+		this.reviewFacade = new ReviewFacade();
+	}
 
 	public String createProduct() {
 		// security check
@@ -112,32 +116,30 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 	}
 
-	public String addReview(){
-System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		/*Customer c = this.customerFacade.getCustomer(this.idCustomer);
+	public String addReview(Long idCustomer, Long idProduct){
+		System.out.println("\n\n\n"+idCustomer.toString()+" ");
+        System.out.println(idProduct.toString()+"\n\n\n");
 		
+		Customer c = this.customerFacade.getCustomer(idCustomer);
 		System.out.println(c.toString());
-		
-		Product p = this.productFacade.getProduct(this.idProduct);
-		
+
+		Product p = this.productFacade.getProduct(idProduct);
 		System.out.println(p.toString());
-		
+
 		Review r = this.reviewFacade.createReview(stars, comment, c);
-		
 		System.out.println(r.toString());
-		
+
 		try{
 			this.productFacade.addReviewToProduct(r, p);
 		}
 		catch (Exception e){
 			return "error?faces-redirect=true";
 		}
-		
+
 		System.out.println("Review Added!");
-		*/
+
 		return "index";
-		
-		//return this.page;
+		//return page+"?id="+idProduct+"&faces-redirect=true&includeViewParams=true";
 	}
 
 	public List<Review> getReviews(Product product){
@@ -332,6 +334,16 @@ System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	public void setReviewFacade(ReviewFacade reviewFacade) {
 		this.reviewFacade = reviewFacade;
 	}
+
+	public Long getIdCustomer() {
+		return idCustomer;
+	}
+
+	public void setIdCustomer(Long idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+	
+	
 
 }
 

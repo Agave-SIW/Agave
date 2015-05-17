@@ -27,42 +27,36 @@ public class Review {
 
 	public Review(Integer stars, String comment, Date date,
 			Customer customer) {
+		System.out.println("Review constructor...");
 		this.stars = stars;
 		this.comment = comment;
 		this.date = date;
 		this.customer = customer;
 	}
 
-
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public Integer getStars() {
 		return stars;
 	}
-
 
 	public void setStars(Integer stars) {
 		this.stars = stars;
 	}
 
-
 	public String getComment() {
 		return comment;
 	}
 
-
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 
 	public Customer getCustomer() {
 		return customer;
@@ -79,7 +73,6 @@ public class Review {
 	public Date getDate() {
 		return date;
 	}
-
 
 	public void setDate(Date date) {
 		this.date = date;
@@ -138,7 +131,7 @@ public class Review {
 	@Override
 	public String toString() {
 		return "Review [id=" + id + ", stars=" + stars + ", comment=" + comment
-				+ ", date=" + date + ", customer=" + customer.getFirstName() + " " + customer.getLastName() + "]";
+				+ ", date=" + date + ", customer name=" + customer.getFullName() + "]";
 	}
 
 }

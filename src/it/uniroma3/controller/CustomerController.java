@@ -89,8 +89,10 @@ public class CustomerController {
 		}
 
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("customer", customer);		
-		return page;
+		this.currentSessionMap.put("customer", customer);	
+		
+		// TODO fix redirect on product. it doesn't get product id
+		return this.page;
 	}
 
 	public String logoutCustomer(){

@@ -19,83 +19,119 @@
 		<div class="row">
 			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
 
-				<h:form styleClass="col-md-6 col-md-offset-3 form-horizontal"
-					enctype="multipart/form-data">
-					<div class="form-group">
+				<h:form styleClass="col-lg-12" enctype="multipart/form-data">
+					<div class="col-md-12">
 						<h1>New Product</h1>
-						<span class="label label-info">TODO: questa pagina resa
-							omogenea col resto del sito</span>
 						<hr />
 					</div>
-					<div class="form-group">
-						<label for="name">Name: </label>
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Product informations</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="name" class="control-label col-sm-2">Name:
+									</label>
+									<div class="col-sm-10">
+										<h:inputText value="#{productController.name}" required="true"
+											requiredMessage="Product name is mandatory" id="name"
+											styleClass="form-control needRequired needPlaceholder" />
+										<h:message for="name" styleClass="label label-warning" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="code" class="control-label col-sm-2">Code:
+									</label>
+									<div class="col-sm-10">
+										<h:inputText value="#{productController.code}" required="true"
+											requiredMessage="Product code is mandatory" id="code"
+											styleClass="form-control needRequired needPlaceholder" />
+										<h:message for="code" styleClass="label label-warning" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="price" class="control-label col-sm-2">Price:
+									</label>
+									<div class="col-sm-10">
+										<h:inputText value="#{productController.price}"
+											required="true" requiredMessage="Price is mandatory"
+											id="price"
+											styleClass="form-control needRequired needPlaceholder" />
+										<h:message for="price" styleClass="label label-warning" />
+									</div>
+								</div>
 
-						<h:inputText value="#{productController.name}" required="true"
-							requiredMessage="Product name is mandatory" id="name"
-							styleClass="form-control needRequired" />
-						<h:message for="name" styleClass="label label-warning" />
+								<div class="form-group">
+									<label for="price" class="control-label col-sm-2">Quantity:
+									</label>
+									<div class="col-sm-10">
+										<h:inputText value="#{productController.quantity}"
+											required="true" requiredMessage="Quantity is mandatory"
+											id="quantity"
+											styleClass="form-control needRequired needPlaceholder" />
+										<h:message for="quantity" styleClass="label label-warning" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="picture" class="control-label col-sm-2">Picture:
+									</label>
+									<div class="col-sm-10">
+										<div class="input-group">
+											<span class="input-group-btn"> <span
+												class="btn btn-default btn-file"> Browse... <h:inputFile
+														id="picture" value="#{productController.picture}"
+														styleClass="form-control needRequired" required="true" />
+											</span>
+											</span> <input type="text" class="form-control" readonly="readonly" />
+
+											<h:message for="picture" styleClass="label label-warning" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
-					<div class="form-group">
+					<div class="col-md-6">
+						<div class="panel panel-info">
+							<div class="panel-heading">Product Description (not
+								mandatory)</div>
+							<div class="panel-body">
+								<div class="form-group">
+									<label for="description">Description: </label>
 
-						<label for="code">Code: </label>
+									<h:inputTextarea value="#{productController.description}"
+										required="false" cols="20" rows="12" id="description"
+										styleClass="form-control" style="height:236px" />
 
-						<h:inputText value="#{productController.code}" required="true"
-							requiredMessage="Product code is mandatory" id="code"
-							styleClass="form-control needRequired" />
-						<h:message for="code" styleClass="label label-warning" />
-
-					</div>
-					<div class="form-group">
-						<label for="price">Price: </label>
-
-						<h:inputText value="#{productController.price}" required="true"
-							requiredMessage="Price is mandatory" id="price"
-							styleClass="form-control needRequired" />
-						<h:message for="price" styleClass="label label-warning" />
-
+								</div>
+							</div>
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label for="price">Quantity: </label>
-
-						<h:inputText value="#{productController.quantity}" required="true"
-							requiredMessage="Quantity is mandatory" id="quantity"
-							styleClass="form-control needRequired" />
-						<h:message for="quantity" styleClass="label label-warning" />
-
-					</div>
-					<div class="form-group">
-						<label for="description">Description: </label>
-
-						<h:inputTextarea value="#{productController.description}"
-							required="false" cols="20" rows="5" id="description"
-							styleClass="form-control" />
-
-					</div>
-					<div class="form-group">
-						<label for="picture">Picture: </label>
-
-						<h:inputFile id="picture" value="#{productController.picture}"
-							styleClass="form-control needRequired" required="true" />
-						<h:message for="picture" styleClass="label label-warning" />
-
-					</div>
-
-
-					<div class="form-group" style="padding-top: 20px">
+					<div class="form-group col-md-6" style="padding-top: 20px">
 
 						<h:commandButton value="Submit"
 							action="#{productController.createProduct}"
 							styleClass="btn btn-primary" />
 						<button type="reset" class="btn btn-default">Reset</button>
 					</div>
+
+
 				</h:form>
 
 			</h:panelGroup>
 			<h:panelGroup rendered='#{empty sessionScope["admin"]}'>
-				<span class="label label-warning">You must be logged ad admin
-					to view this page</span>
+
+				<div class="col-lg-12">
+
+					<div class="col-md-12">
+						<h1>Error</h1>
+						<hr />
+						<span class="label label-warning">You must be logged as
+							admin to view this page</span>
+					</div>
+				</div>
 			</h:panelGroup>
 		</div>
 

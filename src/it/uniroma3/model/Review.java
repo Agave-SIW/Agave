@@ -1,7 +1,6 @@
 package it.uniroma3.model;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -15,26 +14,23 @@ public class Review {
 	private Integer stars;
 
 	private String comment;
+	
+	@Temporal(TemporalType.DATE)
+	private Date date;
 
 	@ManyToOne
 	private Customer customer;
 
-	@ManyToMany
-	private List<Product> products;
-
 
 	public Review() {
-		this.products = new LinkedList<Product>();
 	}
 
-
-	public Review(Integer stars, String comment, Customer customer,
-			List<Product> products) {
-		super();
+	public Review(Integer stars, String comment, Date date,
+			Customer customer) {
 		this.stars = stars;
 		this.comment = comment;
+		this.date = date;
 		this.customer = customer;
-		this.products = products;
 	}
 
 
@@ -71,22 +67,23 @@ public class Review {
 	public Customer getCustomer() {
 		return customer;
 	}
-
+	
+	public String getCustomerName() {
+		return customer.getFullName();
+	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-
-	public List<Product> getProducts() {
-		return products;
+	public Date getDate() {
+		return date;
 	}
 
 
-	public void setProducts(List<Product> products) {
-		this.products = products;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -95,13 +92,11 @@ public class Review {
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result
 				+ ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((products == null) ? 0 : products.hashCode());
 		result = prime * result + ((stars == null) ? 0 : stars.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -122,15 +117,15 @@ public class Review {
 				return false;
 		} else if (!customer.equals(other.customer))
 			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (products == null) {
-			if (other.products != null)
-				return false;
-		} else if (!products.equals(other.products))
 			return false;
 		if (stars == null) {
 			if (other.stars != null)
@@ -140,12 +135,10 @@ public class Review {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Review [id=" + id + ", stars=" + stars + ", comment=" + comment
-				+ ", customer=" + customer + "]";
+				+ ", date=" + date + ", customer=" + customer.getFirstName() + " " + customer.getLastName() + "]";
 	}
-
 
 }

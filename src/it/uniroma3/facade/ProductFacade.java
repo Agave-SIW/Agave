@@ -18,10 +18,7 @@ public class ProductFacade {
     
     
 	public ProductFacade() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
-    
     
 	public Product createProduct(String name, String code, Float price, String description, String picturePath, Integer quantity) {
 		Product product = new Product(name, price, description, code, picturePath, quantity);
@@ -51,6 +48,7 @@ public class ProductFacade {
 		}
 		return products;
 	}
+	
 	public List<Product> getLastProducts(Integer n) {
 		List<Product> products = new ArrayList<Product>();
 		try { 
@@ -60,6 +58,11 @@ public class ProductFacade {
 			products = null;
 		}
 		return products;
+	}
+	
+	public void addReviewToProduct(Review review, Product product){
+		product.addReview(review);
+		em.merge(product);
 	}
 
 	public void updateProduct(Product product) {
@@ -75,6 +78,7 @@ public class ProductFacade {
         deleteProduct(product);
 	}
 
+	
 
 	
 }

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;">
+    <!ENTITY euro "&#8364;"> 
+]>
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<c:set var="root" value="#{request.contextPath}" />
+
+	<ui:define name="title">
+        Sign In Success | Agave Shop - SIW 2015
+    </ui:define>
+
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<div class="col-md-12">
+					<h1>Success</h1>
+					<hr />
+					<div class="label label-success">Registration successful</div>
+					<script type="text/javascript">
+						var count = 6;
+						var redirect = "#{root}";
+
+						function countDown() {
+							var timer = document.getElementById("timer");
+							if (count > 0) {
+								count--;
+								timer.innerHTML = "This page will redirect in "
+										+ count + " seconds.";
+								setTimeout("countDown()", 1000);
+							} else {
+								window.location.href = redirect;
+							}
+						}
+					</script>
+					<span id="timer"> <script type="text/javascript">
+						countDown();
+					</script>
+					</span>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -1,7 +1,13 @@
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-$(".needPlaceholder").attr("placeholder", function(){ var arr = this.name.split(":"); return capitalizeFirstLetter(arr[arr.length - 1]);});
+$(".needPlaceholder").attr("placeholder", function(){
+		var arr = this.name.split(":"); 
+		var str = arr[arr.length - 1];
+		var arr = str.split(/(?=[A-Z])/);
+		if(arr[0]=="dateof") return "dd/MM/yyyy";
+		return capitalizeFirstLetter(arr[0]) + " " + (arr[1]? arr[1]:"") + " " + (arr[2]? arr[2]:"");
+	});
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});
 $(".needRequired").prop("required",true);
 
@@ -19,7 +25,10 @@ $(".label-warning").text(function(){
 	if (str.indexOf("numero intero") !=-1) {
 		return "Quantity must be a valid number";
 	}
-	return str+arr[2]+arr[3];
+	if (str.indexOf("DateofBirth") !=-1) {
+		return "Could not be intended as a valid date. Example: 17/05/2015";
+	}
+	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
 	});
 
 $(".price").priceFormat({
@@ -28,6 +37,13 @@ $(".price").priceFormat({
 	centsSeparator: ',',
 	thousandsSeparator: '.',
 	centsLimit: 2
+});
+
+$(document).on('change', '.btn-file :file', function() {
+  var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
 });
 
 $(document).ready(function() {
@@ -39,4 +55,17 @@ $(document).ready(function() {
 		ellipsis: 	'... ',
 		watch: 		'window'
 	});
+	
+	$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+        
+        if( input.length ) {
+            input.val(log);
+        } /*else {
+            if( log ) alert(log);
+        }*/
+        
+    });
 });

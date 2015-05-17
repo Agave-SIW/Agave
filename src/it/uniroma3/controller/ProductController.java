@@ -2,8 +2,12 @@ package it.uniroma3.controller;
 
 import java.util.List;
 
+import it.uniroma3.model.Customer;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.Review;
+import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.ProductFacade;
+import it.uniroma3.facade.ReviewFacade;
 import it.uniroma3.helper.FileHelper;
 
 import javax.ejb.EJB;
@@ -30,35 +34,47 @@ public class ProductController {
 	private Product product;
 	private List<Product> products;
 
+	// review form data
+	private String comment;
+	private Integer stars;
+	private Long idCustomer;
+	private Long idProduct;
+
+	private String page;
+
 	@EJB
 	private ProductFacade productFacade;
+	@EJB
+	private CustomerFacade customerFacade;
+
+	private ReviewFacade reviewFacade;
 
 	public String createProduct() {
 		// security check
 		AdminController ac = new AdminController();
-		
+
 		//file path functions
 		FileHelper fh = new FileHelper();
 
 		if(ac.loggedIn()){
 			String filename = fh.getFileNameFromHeader(picture);
 			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-		    String path = ctx.getRealPath("/");
-		    path = path + fh.makePath(path, "uploads");
+			String path = ctx.getRealPath("/");
+			path = path + fh.makePath(path, "uploads");
 			System.out.print("\n\nFile system context path (in TestServlet): " + path + "\n");
 
 			try {
 				System.out.print("\nTrying to upload "+ filename +" in "+ path +"\n");
 				picture.write(path+filename);
 				System.out.print("\nSuccesful! "+ filename + " is uploaded\n\n");
-				
+
 				this.picturePath = filename.toString();
-				
+
 				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
 				return "product"; 
 			} 
 			catch (Exception e) {
-				return "error"; //TODO
+				return "errorProduct"; 
 			}
 		}
 		else {
@@ -67,14 +83,14 @@ public class ProductController {
 	}
 
 	public String listProducts() {
-		//this.products = productFacade.getAllProducts();
+		this.products = productFacade.getAllProducts();
 		return "products?faces-redirect=true"; 
 	}
-	
+
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
 	}
-	
+
 	public List<Product> getLastProducts() {
 		return productFacade.getLastProducts();
 	}
@@ -86,7 +102,7 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
 	}
-	
+
 	public String findProduct(Long id) {
 		this.product = productFacade.getProduct(id);
 		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
@@ -94,6 +110,99 @@ public class ProductController {
 
 	public void setProductFromId() {
 		this.product = productFacade.getProduct(id);
+	}
+
+	public String addReview(){
+System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		/*Customer c = this.customerFacade.getCustomer(this.idCustomer);
+		
+		System.out.println(c.toString());
+		
+		Product p = this.productFacade.getProduct(this.idProduct);
+		
+		System.out.println(p.toString());
+		
+		Review r = this.reviewFacade.createReview(stars, comment, c);
+		
+		System.out.println(r.toString());
+		
+		try{
+			this.productFacade.addReviewToProduct(r, p);
+		}
+		catch (Exception e){
+			return "error?faces-redirect=true";
+		}
+		
+		System.out.println("Review Added!");
+		*/
+		return "index";
+		
+		//return this.page;
+	}
+
+	public List<Review> getReviews(Product product){
+		return product.getReviews();
+	}
+
+	public List<Review> getReviews(){
+		return getReviews(this.product);
+	}
+
+	public Integer getReviewNumber(Product product){
+		return product.getReviews().size();
+	}
+
+	public Integer getReviewNumber(){
+		return getReviewNumber(this.product);
+	}
+
+	public Integer getReviewScore(Review review){
+		return review.getStars();
+	}
+
+	public Float getReviewAverage(Product product){
+		List<Review> rws = product.getReviews();
+		Integer size = rws.size();
+		Integer total = new Integer(0);
+
+		for (Integer i = 0; i < size; i++) {
+			total += (rws.get(i).getStars());
+		}
+		if(size!=0)
+			return (float) (total/size);
+		else
+			return (float) 0;
+	}
+
+	public Float getReviewAverage(){		
+		return getReviewAverage(this.product);
+	}
+
+	public String getReviewAverageHtml(){			
+		return getReviewAverageHtml(this.product);
+	}
+
+	public String getReviewAverageHtml(Product product){		
+		Integer stars = Math.round(getReviewAverage(product));
+		return starsToHtml(stars);
+	}
+
+	public String getReviewHtml(Review review){		
+		Integer stars = review.getStars();
+		return starsToHtml(stars);
+	}
+
+	public String starsToHtml(Integer stars){
+		String html = "";
+
+		for (Integer i = 0; i < stars; i++) {
+			html += "<span class=\"glyphicon glyphicon-star\"></span> ";
+		}
+		for (Integer i = stars; i < 5; i++) {
+			html += "<span class=\"glyphicon glyphicon-star-empty\"></span> ";
+		}
+
+		return html;
 	}
 
 	public Long getId() {
@@ -183,8 +292,47 @@ public class ProductController {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	
-	
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Integer getStars() {
+		return stars;
+	}
+
+	public void setStars(Integer stars) {
+		this.stars = stars;
+	}
+
+	public CustomerFacade getCustomerFacade() {
+		return customerFacade;
+	}
+
+	public void setCustomerFacade(CustomerFacade customerFacade) {
+		this.customerFacade = customerFacade;
+	}
+
+	public ReviewFacade getReviewFacade() {
+		return reviewFacade;
+	}
+
+	public void setReviewFacade(ReviewFacade reviewFacade) {
+		this.reviewFacade = reviewFacade;
+	}
+
 }
 
 

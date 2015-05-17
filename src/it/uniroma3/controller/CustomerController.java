@@ -24,50 +24,55 @@ public class CustomerController {
 	private String firstName;
 	private String lastName;
 	private String password;
-	private String passwordRepeated;
+	private String repeatPassword;
 	private String email;
 	private String phoneNumber;
 	private Date dateofBirth;
-	
+
 	//address data fetch from form
 	private String street;
 	private String city;
 	private String state;
 	private String zipcode;
 	private String country;
-	
+
 	private Customer customer;
 	private List<Customer> customers;
-	
+
 	private String page;
 
 	@EJB
 	private CustomerFacade customerFacade;
 	//not ejb
 	private AddressFacade addressFacade;
-	
+
 	private Map<String, Object> currentSessionMap;
-	
-	
+
+
 	public CustomerController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		this.addressFacade = new AddressFacade();
 	}
-	
+
 	public String signIn() {
-		if(this.passwordRepeated.equals(this.password)){
-			Address address = addressFacade.createAddress(street, city, state, zipcode, country);
-			System.out.println("\nAddress created\n");
-			this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
-			System.out.println("\nCustomer Created\n");
-			
-			return "signin";
+		if(this.repeatPassword.equals(this.password)){
+			if(!customerFacade.existsCustomer(this.email)){
+				Address address = addressFacade.createAddress(street, city, state, zipcode, country);
+				System.out.println("\nAddress created\n");
+				this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
+				System.out.println("\nCustomer Created\n");
+
+				return "success";
+			}
+			else {
+				FacesContext.getCurrentInstance().addMessage("signIn:email", new FacesMessage("There is already a customer with this email address"));
+				return "signin";
+			}
 		}
 		else {
-			FacesContext.getCurrentInstance().addMessage("signIn:passwordRepeated", new FacesMessage("Repeated password must be the same as password"));
+			FacesContext.getCurrentInstance().addMessage("signIn:repeatPassword", new FacesMessage("Repeated password must be the same as password"));
 			return "signin";
 		}
-		
 	}
 
 	public String loginCustomer(){
@@ -76,12 +81,13 @@ public class CustomerController {
 		if(customer==null || !customer.getPassword().equals(password)){ //TODO MD5
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
-			FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			return "errorLogin";
 		}
 		else{
 			System.out.print("\n\nLogin OK\n\n");
 		}
-		
+
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);		
 		return page;
@@ -90,25 +96,25 @@ public class CustomerController {
 	public String logoutCustomer(){
 
 		this.customer = null;
-		
+
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);
-		
+
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
-		
+
 		return page;
 	}
-	
+
 	public Customer getCurrentCustomer(){
 		return (Customer) this.currentSessionMap.get("customer");
 	}
-	
+
 	// currently not used in view, as #{SessionScope} works
 	public Boolean isLogged() {
 		Customer c = (Customer) this.currentSessionMap.get("customer");
 		return !(c == null);
 	}
-	
+
 	// currently not used in view, as #{SessionScope} works
 	public Boolean isNotLogged() {
 		return !this.isLogged();
@@ -258,15 +264,15 @@ public class CustomerController {
 		this.currentSessionMap = currentSessionMap;
 	}
 
-	public String getPasswordRepeated() {
-		return passwordRepeated;
+	public String getRepeatPassword() {
+		return repeatPassword;
 	}
 
-	public void setPasswordRepeated(String passwordRepeated) {
-		this.passwordRepeated = passwordRepeated;
+	public void setRepeatPassword(String repeatPassword) {
+		this.repeatPassword = repeatPassword;
 	}
-	
-	
+
+
 }
 
 

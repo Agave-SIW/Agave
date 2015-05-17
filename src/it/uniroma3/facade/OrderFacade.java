@@ -17,8 +17,6 @@ public class OrderFacade {
     private EntityManager em;
     
 	public OrderFacade() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
     
 	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {

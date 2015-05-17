@@ -84,13 +84,9 @@
 										<div class="productsDesc">${product.description}</div>
 									</div>
 									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
+										<p class="pull-right">${productController.getReviewNumber(product)}</p>
 										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
+											<h:outputText value="#{productController.getReviewAverageHtml(product)}" escape="false" />
 										</p>
 									</div>
 								</div>

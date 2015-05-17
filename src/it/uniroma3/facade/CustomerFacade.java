@@ -44,11 +44,9 @@ public class CustomerFacade {
 	}
 	
 	public boolean existsCustomer(String email) {
-		Customer customer = new Customer();
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
-			customer = customerQuery.getSingleResult();
-			System.out.println(customer.toString());
+			customerQuery.getSingleResult();
 			return true;
 		}
 		catch(Exception e){

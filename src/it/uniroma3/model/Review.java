@@ -25,10 +25,8 @@ public class Review {
 	public Review() {
 	}
 
-	public Review(Long id, Integer stars, String comment, Date date,
+	public Review(Integer stars, String comment, Date date,
 			Customer customer) {
-		super();
-		this.id = id;
 		this.stars = stars;
 		this.comment = comment;
 		this.date = date;
@@ -69,7 +67,10 @@ public class Review {
 	public Customer getCustomer() {
 		return customer;
 	}
-
+	
+	public String getCustomerName() {
+		return customer.getFullName();
+	}
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;

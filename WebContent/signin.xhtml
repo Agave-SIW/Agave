@@ -60,7 +60,7 @@
 										id="repeatPassword"
 										styleClass="form-control needRequired needPlaceholder"
 										placeholder="Repeat password" />
-									
+
 								</div>
 							</div>
 
@@ -82,7 +82,7 @@
 										required="true" requiredMessage="Last name is mandatory"
 										id="lastName"
 										styleClass="form-control needRequired needPlaceholder" />
-									
+
 								</div>
 							</div>
 
@@ -109,19 +109,14 @@
 								<div class="col-sm-10">
 									<h:inputText value="#{customerController.phoneNumber}"
 										required="true" requiredMessage="Last name is mandatory"
-										id="phoneNumber" styleClass="form-control needRequired needPlaceholder" />
+										id="phoneNumber"
+										styleClass="form-control needRequired needPlaceholder" />
 									<h:message for="phoneNumber" styleClass="label label-warning" />
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group" style="padding-top: 20px">
 
-						<h:commandButton value="Submit"
-							action="#{customerController.signIn}"
-							styleClass="btn btn-primary" />
-						<button type="reset" class="btn btn-default">Reset</button>
-					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="panel panel-info">
@@ -134,7 +129,8 @@
 								<div class="col-sm-10">
 									<h:inputText value="#{customerController.street}"
 										required="true" requiredMessage="Street is mandatory"
-										id="street" styleClass="form-control needRequired needPlaceholder" />
+										id="street"
+										styleClass="form-control needRequired needPlaceholder" />
 									<h:message for="street" styleClass="label label-warning" />
 								</div>
 							</div>
@@ -155,7 +151,8 @@
 								<div class="col-sm-10">
 									<h:inputText value="#{customerController.state}"
 										required="true" requiredMessage="State is mandatory"
-										id="state" styleClass="form-control needRequired needPlaceholder" />
+										id="state"
+										styleClass="form-control needRequired needPlaceholder" />
 									<h:message for="state" styleClass="label label-warning" />
 								</div>
 							</div>
@@ -167,7 +164,8 @@
 								<div class="col-sm-10">
 									<h:inputText value="#{customerController.zipcode}"
 										required="true" requiredMessage="Zipcode is mandatory"
-										id="zipcode" styleClass="form-control needRequired needPlaceholder" />
+										id="zipcode"
+										styleClass="form-control needRequired needPlaceholder" />
 									<h:message for="zipcode" styleClass="label label-warning" />
 								</div>
 							</div>
@@ -178,7 +176,8 @@
 								<div class="col-sm-10">
 									<h:inputText value="#{customerController.country}"
 										required="true" requiredMessage="Country is mandatory"
-										id="country" styleClass="form-control needRequired needPlaceholder" />
+										id="country"
+										styleClass="form-control needRequired needPlaceholder" />
 									<h:message for="country" styleClass="label label-warning" />
 								</div>
 							</div>
@@ -187,7 +186,13 @@
 
 						</div>
 					</div>
-					
+
+				</div>
+				<div class="form-group col-md-6" style="padding-top: 20px">
+
+					<h:commandButton value="Submit"
+						action="#{customerController.signIn}" styleClass="btn btn-primary" />
+					<button type="reset" class="btn btn-default">Reset</button>
 				</div>
 			</h:form>
 		</div>

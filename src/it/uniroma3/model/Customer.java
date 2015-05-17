@@ -20,7 +20,7 @@ public class Customer {
 	@Column(nullable = false)
 	private String lastName;
 	
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
 	
 	private String password;
@@ -121,6 +121,10 @@ public class Customer {
 
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 
 	public void setLastName(String lastName) {

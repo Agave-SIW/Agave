@@ -38,84 +38,72 @@
 								</h:outputText>
 							</h4>
 							<h2>${productController.product.name}</h2>
-							<div>Codice: ${productController.product.code}</div>
+							<div>Code: ${productController.product.code}</div>
 							<div>${productController.product.description}</div>
 						</div>
 
 						<div class="ratings">
-							<p class="pull-right">3 reviews</p>
+							<p class="pull-right">${productController.getReviewNumber()}</p>
 							<p>
-								<span class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star-empty"></span> 4.0 stars
+								<h:outputText
+									value="#{productController.getReviewAverageHtml()}"
+									escape="false" />
+								${productController.getReviewAverage()} stars
 							</p>
 						</div>
 					</div>
 
 					<div class="well">
+						<h:form id="addReview">
+							<h:inputTextarea value="#{productController.comment}"
+								required="false" cols="20" rows="3" id="comment"
+								styleClass="form-control" />
 
-						<div class="text-right">
-							<a class="btn btn-success">Leave a Review</a>
-						</div>
+							<h:selectOneMenu value="#{productController.stars}" id="stars">
+								<f:selectItem itemValue="1" itemLabel="1" />
+								<f:selectItem itemValue="2" itemLabel="2" />
+								<f:selectItem itemValue="3" itemLabel="3" />
+								<f:selectItem itemValue="4" itemLabel="4" />
+								<f:selectItem itemValue="5" itemLabel="5" />
+							</h:selectOneMenu>
 
-						<hr />
-						<div class="row">
-							<div class="col-md-12">
-								<span class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star-empty"></span> Anonymous <span
-									class="pull-right">10 days ago</span>
-								<p>This product was great in terms of quality. I would
-									definitely buy another!</p>
+							<div class="text-right">
+								<h:inputHidden value="#{view.viewId}" id="page" />
+								<h:inputHidden value='#{sessionScope["customer"].getId()}' id="idCustomer" />
+								<h:inputHidden value="#{productController.product.getId()}" id="idProduct" />
+								
+								<h:commandButton value="Leave a Review" immediate="true"
+									action="#{productController.addReview()}"
+									styleClass="btn btn-success" />
 							</div>
-						</div>
-
+						</h:form>
 						<hr />
-						<div class="row">
-							<div class="col-md-12">
-								<span class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star-empty"></span> Anonymous <span
-									class="pull-right">12 days ago</span>
-								<p>I've alredy ordered another one!</p>
-							</div>
-						</div>
 
-						<hr />
-						<div class="row">
-							<div class="col-md-12">
-								<span class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star"></span> <span
-									class="glyphicon glyphicon-star-empty"></span> Anonymous <span
-									class="pull-right">15 days ago</span>
-								<p>I've seen some better than this, but not at this price. I
-									definitely recommend this item.</p>
+						<ui:repeat var="review" value="#{productController.getReviews()}">
+							<div class="row">
+								<div class="col-md-12">
+									<h:outputText
+										value="#{productController.getReviewHtml(review)}"
+										escape="false" />
+									#{review.getCustomerName()} <span class="pull-right">#{review.getDate()}</span>
+									<p>#{review.getComment()}</p>
+								</div>
 							</div>
-						</div>
+
+							<hr />
+						</ui:repeat>
 
 					</div>
 
 				</div>
 			</h:panelGroup>
 			<h:panelGroup rendered='#{empty productController.product}'>
-				<div class="col-md-6 col-md-offset-3 form-horizontal">
 
-					<div class="form-group">
+				<div class="col-lg-12">
+
+					<div class="col-md-12">
 						<h1>Error</h1>
-						<span class="label label-info">TODO: questa pagina resa
-							omogenea col resto del sito</span>
 						<hr />
-					</div>
-
-					<div class="form-group">
 						<span class="label label-warning">There is no product with
 							the selected id</span>
 					</div>

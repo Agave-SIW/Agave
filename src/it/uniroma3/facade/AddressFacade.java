@@ -10,7 +10,7 @@ public class AddressFacade {
 	public Address createAddress(String street, String city, String state,
 			String zipcode, String country){
     	Address address = new Address(street, city, state, zipcode, country);
-    	//persistance handled by cascade type on customer
+    	// persistence handled by cascade type on customer
     	return address;
     }
     

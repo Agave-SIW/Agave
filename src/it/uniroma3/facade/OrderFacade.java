@@ -84,6 +84,7 @@ public class OrderFacade {
 		addProductToCart(cart, p);
 	}
 	
+	/*OLD METHOD*/
 	public void addProductToCart(Orders cart, Product product){
 		OrderLine ol = makeOrderLineFromProduct(product);
 		Orders c = getOrder(cart.getId());
@@ -93,7 +94,8 @@ public class OrderFacade {
 		System.out.println("Cart Updated");
 	}
 	
-	public void addProductToCart(Orders cart, Product product, int quantity){
+	/*NEW METHOD*/
+	public void addProductToCart(Orders cart, Product product, int quantity){		
 		OrderLine ol = makeOrderLineFromProduct(product, quantity);
 		Orders c = getOrder(cart.getId());
 		c.addOrderLine(ol);

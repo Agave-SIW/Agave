@@ -81,7 +81,8 @@ public class CustomerController {
 		if(customer==null || !customer.getPassword().equals(password)){ //TODO MD5
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
-			FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			return "errorLogin";
 		}
 		else{
 			System.out.print("\n\nLogin OK\n\n");

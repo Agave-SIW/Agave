@@ -112,8 +112,14 @@ public class ProductController {
 		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
 	}
 
-	public void setProductFromId() {
+	public Product getProductFromId() {
+		this.product = getProductFromId(id);
+		return this.product;
+	}
+	
+	public Product getProductFromId(Long id) {
 		this.product = productFacade.getProduct(id);
+		return this.product;
 	}
 
 	public String addReview(Long idCustomer, Long idProduct){

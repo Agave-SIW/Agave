@@ -1,7 +1,13 @@
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-$(".needPlaceholder").attr("placeholder", function(){ var arr = this.name.split(":"); return capitalizeFirstLetter(arr[arr.length - 1]);});
+$(".needPlaceholder").attr("placeholder", function(){
+		var arr = this.name.split(":"); 
+		var str = arr[arr.length - 1];
+		var arr = str.split(/(?=[A-Z])/);
+		if(arr[0]=="dateof") return "dd/MM/yyyy";
+		return capitalizeFirstLetter(arr[0]) + " " + (arr[1]? arr[1]:"") + " " + (arr[2]? arr[2]:"");
+	});
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});
 $(".needRequired").prop("required",true);
 
@@ -19,7 +25,10 @@ $(".label-warning").text(function(){
 	if (str.indexOf("numero intero") !=-1) {
 		return "Quantity must be a valid number";
 	}
-	return str+arr[2]+arr[3];
+	if (str.indexOf("DateofBirth") !=-1) {
+		return "Could not be intended as a valid date. Example: 17/05/2015";
+	}
+	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
 	});
 
 $(".price").priceFormat({

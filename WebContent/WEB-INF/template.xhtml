@@ -55,13 +55,14 @@
 					<f:subview id="customerController">
 						<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
 							<ul class="nav navbar-nav navbar-right">
-							    <li><a class="login-link" href="#">Log In</a></li>
+								<li><a class="login-link" href="#">Log In</a></li>
 								<li><a href="#{root}/signin.jsf">Sign In</a></li>
 							</ul>
-							<h:form id="customerLogin" style="display:none" styleClass="login-form navbar-form navbar-right">
+							<h:form id="customerLogin" style="display:none"
+								styleClass="login-form navbar-form navbar-right">
 
 								<div class="form-group">
-
+									<label for="email" class="sr-only">Email: </label>
 									<h:inputText value="#{customerController.email}"
 										required="true" requiredMessage="Email is mandatory"
 										id="email"
@@ -69,6 +70,7 @@
 									<h:message for="email" styleClass="label label-warning" />
 								</div>
 								<div class="form-group">
+									<label for="password" class="sr-only">Password: </label>
 									<h:inputSecret value="#{customerController.password}"
 										required="true" requiredMessage="Password is mandatory"
 										id="password"

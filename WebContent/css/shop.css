@@ -81,3 +81,7 @@ footer {
 	height: 45px;
 	width:100%;
 }
+
+.form-group{
+	  min-height: 40px;
+}

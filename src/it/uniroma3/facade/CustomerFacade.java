@@ -43,6 +43,19 @@ public class CustomerFacade {
 		return customer;
 	}
 	
+	public boolean existsCustomer(String email) {
+		Customer customer = new Customer();
+		try { 
+			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
+			customer = customerQuery.getSingleResult();
+			System.out.println(customer.toString());
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+	}
+	
 	public List<Customer> getAllCustomers() {
         CriteriaQuery<Customer> cq = em.getCriteriaBuilder().createQuery(Customer.class);
         cq.select(cq.from(Customer.class));
@@ -87,4 +100,6 @@ public class CustomerFacade {
 		customer.setCart(cart);
 		updateCustomer(customer);
 	}
+
+	
 }

@@ -73,7 +73,6 @@ public class CustomerFacade {
 	}
 	
 	public Boolean checkPassword(Customer customer, String password){
-		System.out.println(md.securePassword("pepette")); //TODO
 		return customer.getPassword().equals(md.securePassword(password));
 	}
 

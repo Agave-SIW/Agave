@@ -41,13 +41,13 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="#">About</a></li>
-						<li><a href="#{root}/admin.jsf">Admin CP</a></li>
+						<li><a href="#{root}/admin.xhtml">Admin CP</a></li>
 					</ul>
 					<f:subview id="customerController">
 						<h:panelGroup rendered="#{customerController.isNotLogged()}">
 							<ul class="nav navbar-nav navbar-right">
 								<li><a class="login-link" href="#">Log In</a></li>
-								<li><a href="#{root}/signin.jsf">Sign In</a></li>
+								<li><a href="#{root}/signin.xhtml">Sign In</a></li>
 							</ul>
 							<h:form id="customerLogin" style="display:none"
 								styleClass="login-form navbar-form navbar-right">
@@ -88,7 +88,7 @@
 												<h:outputText
 													value='#{sessionScope["customer"].getFirstName()}' />
 											</p></li>
-										<li><a href="#{root}/cart.jsf">Cart</a></li>
+										<li><a href="#{root}/cart.xhtml">Cart</a></li>
 										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
 												value="Logout" action="#{customerController.logoutCustomer}" /></li>
 
@@ -120,13 +120,13 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#{root}/admin.jsf"> Admin CP </a>
+							<a class="navbar-brand" href="#{root}/admin.xhtml"> Admin CP </a>
 						</div>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse"
 							id="bs-example-navbar-collapse-2">
 							<ul class="nav navbar-nav">
-								<li><a href="#{root}/newProduct.jsf">Inserta new
+								<li><a href="#{root}/newProduct.xhtml">Inserta new
 										product</a></li>
 							</ul>
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">

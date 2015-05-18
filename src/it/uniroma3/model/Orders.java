@@ -156,7 +156,7 @@ public class Orders {
 		
 		while(olIterator.hasNext()){
 			OrderLine ol = olIterator.next();
-			if(ol.getProduct().equals(product)){
+			if(ol.getProduct().equals(product) && product.getStorageQuantity() > (ol.getQuantity() + quantity)){
 				ol.setQuantity(ol.getQuantity() + quantity);
 				return true;
 			}

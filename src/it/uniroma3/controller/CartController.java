@@ -48,10 +48,18 @@ public class CartController {
 		Integer quantity = 1;
 		if(this.quantity != 0) quantity = this.quantity;
 		System.out.println("trying to add " + quantity +" Product to Cart");
-		System.out.println(cart.toString());
-		orderFacade.addProductToCart(cart, product, quantity);
-		System.out.println("Product added to Cart");
-		return "cart?faces-redirect=true";
+		
+		try{
+			orderFacade.addProductToCart(cart, product, quantity);
+			System.out.println("Product added to Cart");
+			
+			return "cart?faces-redirect=true";
+		}
+		catch(Exception e){
+			System.out.println("Insufficient Storage Quantity");
+			return "errorQuantity";
+		}
+
 	}
 
 	public Orders getCart() {

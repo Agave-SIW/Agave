@@ -1,6 +1,7 @@
 package it.uniroma3.model;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -140,6 +141,28 @@ public class Orders {
 		return true;
 	}
 	
+	public boolean containsProduct(Product product){
+		Iterator<OrderLine> olIterator = this.orderLines.iterator();
+		
+		while(olIterator.hasNext()){
+			if(olIterator.next().getProduct().equals(product))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean updateOrderLine(Product product, Integer quantity){
+		Iterator<OrderLine> olIterator = this.orderLines.iterator();
+		
+		while(olIterator.hasNext()){
+			OrderLine ol = olIterator.next();
+			if(ol.getProduct().equals(product)){
+				ol.setQuantity(ol.getQuantity() + quantity);
+				return true;
+			}
+		}
+		return false;
+	}
 
 
 }

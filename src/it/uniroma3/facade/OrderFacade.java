@@ -97,12 +97,20 @@ public class OrderFacade {
 	}
 	*/
 	
-	public void addProductToCart(Orders cart, Product product, Integer quantity){		
-		OrderLine ol = makeOrderLineFromProduct(product, quantity);
+	public void addProductToCart(Orders cart, Product product, Integer quantity){
 		Orders c = getOrder(cart.getId());
-		c.addOrderLine(ol);
-		updateOrder(c);
 		
+		if(c.containsProduct(product)){
+			//TODO
+			System.out.println("Product already exists");
+			c.updateOrderLine(product, quantity);
+		}
+		else {
+			OrderLine ol = makeOrderLineFromProduct(product, quantity);
+			c.addOrderLine(ol);
+		}
+		updateOrder(c);
+
 		System.out.println("Cart Updated");
 	}
 	
@@ -115,5 +123,6 @@ public class OrderFacade {
 		OrderLine ol = new OrderLine(quantity, product);
 		return ol;
 	}
+	
 
 }

@@ -81,7 +81,5 @@ public class CartController {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 
 }

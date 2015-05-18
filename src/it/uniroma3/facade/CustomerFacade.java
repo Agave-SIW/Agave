@@ -32,7 +32,7 @@ public class CustomerFacade {
 	
 	public Customer getCustomer(String email) {
 		Customer customer = new Customer();
-		//customer = em.find(Customer.class, email); // Non funziona perch� l'Id � id, non email. Serve una query per cercare su email
+		//customer = em.find(Customer.class, email); // Non funziona perche' l'Id e' id, non email. Serve una query per cercare su email
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
 			customer = customerQuery.getSingleResult();
@@ -86,7 +86,6 @@ public class CustomerFacade {
 	}
 	
 	public Orders getCart(Long idCustomer){
-		//idCustomer = 3401l;
 		Customer customer = em.find(Customer.class, idCustomer);
 		return getCart(customer);
 	}

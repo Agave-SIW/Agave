@@ -14,17 +14,7 @@
 <h:head>
 	<title>Success | Agave Shop - SIW 2015</title>
 
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Progetto SIW 2015" />
-	<meta name="author"
-		content="Gaetano Bonofiglio, Veronica Iovinella, Andrea Salvoni" />
-	<link rel="icon" href="#{root}/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="#{root}/favicon.ico"
-		type="image/x-icon" />
-	<link href="#{root}/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="#{root}/css/shop.css" rel="stylesheet" />
+	<ui:include src="/WEB-INF/meta.xhtml" />
 </h:head>
 
 <body style="background: #f5f5f5">
@@ -32,27 +22,18 @@
 		<f:metadata>
 			<f:viewParam name="id" value="#{productController.idProduct}" />
 		</f:metadata>
+		<script>
+		//checks if page is inside iframe. If not performs a redirect
+		if(window==window.top) {
+			window.location.href = "#{root}";
+		}
+		</script>
+		<h:panelGroup rendered="#{customerController.isLogged()}">
+			<div class="label label-success">Review added, thank you!</div>
 
-			<h:panelGroup rendered="#{customerController.isLogged()}">
-				<div class="label label-success">Review added, thank you!</div>
+		</h:panelGroup>
 
-			</h:panelGroup>
-
-		<!-- jQuery -->
-		<script
-			src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="#{root}/js/import.jquery.js"></script>
-		<script src="#{root}/js/modernizr.js"></script>
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-		<script src="#{root}/js/jquery.price_format.2.0.js"></script>
-		<script src="#{root}/js/jquery.dotdotdot.min.js"></script>
-		<script src="#{root}/js/custom.jquery.js"></script>
-		<!-- Bootstrap Core JavaScript -->
-		<script src="#{root}/js/bootstrap.min.js"></script>
+		<ui:include src="/WEB-INF/footer-js.xhtml" />
 	</f:view>
 </body>
 

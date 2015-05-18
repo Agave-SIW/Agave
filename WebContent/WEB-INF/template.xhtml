@@ -54,7 +54,7 @@
 						<li><a href="#{root}/admin.jsf">Admin CP</a></li>
 					</ul>
 					<f:subview id="customerController">
-						<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
+						<h:panelGroup rendered="#{customerController.isNotLogged()}">
 							<ul class="nav navbar-nav navbar-right">
 								<li><a class="login-link" href="#">Log In</a></li>
 								<li><a href="#{root}/signin.jsf">Sign In</a></li>
@@ -88,7 +88,7 @@
 
 							</h:form>
 						</h:panelGroup>
-						<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+						<h:panelGroup rendered="#{customerController.isLogged()}">
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
 
 								<div class="form-group">
@@ -117,7 +117,7 @@
 		</nav>
 
 		<f:subview id="adminController">
-			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
+			<h:panelGroup rendered="#{adminController.isLogged()}">
 				<nav class="navbar navbar-default navbar-lower navbar-relative"
 					role="navigation">
 					<div class="container">

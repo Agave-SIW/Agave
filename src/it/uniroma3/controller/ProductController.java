@@ -64,7 +64,7 @@ public class ProductController {
 		//file path functions
 		FileHelper fh = new FileHelper();
 
-		if(ac.loggedIn()){
+		if(ac.isLogged()){
 			String filename = fh.getFileNameFromHeader(picture);
 			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			String path = ctx.getRealPath("/");

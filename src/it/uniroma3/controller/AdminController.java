@@ -63,15 +63,13 @@ public class AdminController {
 		return (Admin) this.currentSessionMap.get("admin");
 	}
 	
-	// currently not used in view, as #{SessionScope} works. Used by other controllers
-	public Boolean loggedIn() {
+	public Boolean isLogged() {
 		Admin a = (Admin) this.currentSessionMap.get("admin");
 		return !(a == null);
 	}
 	
-	// currently not used in view, as #{SessionScope} works
-	public Boolean notLoggedIn() {
-		return !this.loggedIn();
+	public Boolean isNotLogged() {
+		return !this.isLogged();
 	}
 	
 	public Long getId() {

@@ -33,7 +33,7 @@
 			<f:viewParam name="id" value="#{productController.idProduct}" />
 		</f:metadata>
 
-			<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+			<h:panelGroup rendered="#{customerController.isLogged()}">
 				<div class="label label-success">Review added, thank you!</div>
 
 			</h:panelGroup>

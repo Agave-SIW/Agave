@@ -33,7 +33,7 @@
 			<f:viewParam name="id" value="#{productController.idProduct}" />
 		</f:metadata>
 
-		<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+		<h:panelGroup rendered="#{customerController.isLogged()}">
 
 			<h:form enctype="multipart/form-data">
 				<div class="col-sm-8">

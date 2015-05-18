@@ -19,7 +19,7 @@
 
 		<div class="row">
 
-			<h:panelGroup rendered='#{empty sessionScope["admin"]}'>
+			<h:panelGroup rendered="#{adminController.isNotLogged()}">
 				<h:form id="adminLogin" styleClass="form-signin">
 					<h2 class="form-signin-heading">Please sign in</h2>
 
@@ -46,7 +46,7 @@
 
 				</h:form>
 			</h:panelGroup>
-			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
+			<h:panelGroup rendered="#{adminController.isLogged()}">
 				<h:form styleClass="form-signin">
 
 

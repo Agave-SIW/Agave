@@ -23,7 +23,7 @@
 	<ui:define name="content">
 
 		<h2>Cart</h2>
-		<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+		<h:panelGroup rendered="#{customerController.isLogged()}">
 
 			<ui:repeat var="line" value="#{cartController.getOrderLines()}">
 				<div>#{line.product.name} #{line.product.price}
@@ -33,7 +33,7 @@
 
 
 		</h:panelGroup>
-		<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
+		<h:panelGroup rendered="#{customerController.isNotLogged()}">
 		warning
 		</h:panelGroup>
 

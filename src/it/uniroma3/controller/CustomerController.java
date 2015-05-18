@@ -112,13 +112,11 @@ public class CustomerController {
 		return (Customer) this.currentSessionMap.get("customer");
 	}
 
-	// currently not used in view, as #{SessionScope} works
 	public Boolean isLogged() {
 		Customer c = (Customer) this.currentSessionMap.get("customer");
 		return !(c == null);
 	}
 
-	// currently not used in view, as #{SessionScope} works
 	public Boolean isNotLogged() {
 		return !this.isLogged();
 	}

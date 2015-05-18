@@ -17,6 +17,7 @@
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<h:panelGroup rendered="#{not empty productController.product}">

@@ -97,18 +97,23 @@ public class OrderFacade {
 	}
 	*/
 	
-	public void addProductToCart(Orders cart, Product product, Integer quantity){
+	public void addProductToCart(Orders cart, Product product, Integer quantity) throws Exception{
 		Orders c = getOrder(cart.getId());
+		Exception e = new Exception();
+		boolean check = true;
 		
 		if(c.containsProduct(product)){
-			//TODO
 			System.out.println("Product already exists");
-			c.updateOrderLine(product, quantity);
+			check = c.updateOrderLine(product, quantity);
 		}
-		else {
+		else if(product.getStorageQuantity() > quantity) {
 			OrderLine ol = makeOrderLineFromProduct(product, quantity);
 			c.addOrderLine(ol);
 		}
+		else check = false;
+		
+		if(!check) throw e;
+		
 		updateOrder(c);
 
 		System.out.println("Cart Updated");

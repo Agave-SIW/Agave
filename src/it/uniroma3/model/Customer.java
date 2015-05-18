@@ -62,6 +62,24 @@ public class Customer {
 		this.address = address;
 		this.registrationDate = registrationDate;
 		this.cart = cart;
+        this.closedOrders = new LinkedList<Orders>();
+        this.evadedOrders = new LinkedList<Orders>();
+	}
+	
+	public Customer(Customer c) {
+		this.firstName = c.getFirstName();
+		this.lastName = c.getLastName();
+		this.email = c.getEmail();
+		this.password = c.getPassword();
+		this.phoneNumber = c.getPhoneNumber();
+		this.dateofBirth = c.getDateofBirth();
+		this.address = c.getAddress();
+		this.registrationDate = c.getRegistrationDate();
+		this.cart = c.getCart();
+		this.closedOrders = new LinkedList<Orders>();
+		this.evadedOrders = new LinkedList<Orders>();
+		this.closedOrders.addAll(c.getClosedOrders());
+		this.evadedOrders.addAll(c.getEvadedOrders());
 	}
 	
 	public List<Orders> getOrders() {

@@ -30,9 +30,18 @@ public class CustomerFacade {
 		return customer;
 	}
 	
+	//no password and no order lists
+	public Customer copyCustomerNoPersist(Customer c){
+		Customer customer = new Customer(c);
+		customer.setPassword("");
+		customer.setEvadedOrders(null);
+		customer.setClosedOrders(null);
+		return customer;
+	}
+	
 	public Customer getCustomer(String email) {
 		Customer customer = new Customer();
-		//customer = em.find(Customer.class, email); // Non funziona perchè l'Id è id, non email. Serve una query per cercare su email
+		//customer = em.find(Customer.class, email); // Non funziona perchï¿½ l'Id ï¿½ id, non email. Serve una query per cercare su email
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
 			customer = customerQuery.getSingleResult();

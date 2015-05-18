@@ -38,7 +38,6 @@ public class ProductController {
 	// review form data
 	private String comment;
 	private Integer stars;
-	private Long idProduct;
 
 	private String page;
 

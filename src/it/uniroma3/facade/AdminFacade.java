@@ -44,6 +44,10 @@ public class AdminFacade {
         List<Admin> admins = em.createQuery(cq).getResultList();
 		return admins;
 	}
+	
+	public Boolean checkPassword(Admin admin, String password){
+		return admin.getPassword().equals(password);
+	}
 
 	public void updateAdmin(Admin admin) {
         em.merge(admin);

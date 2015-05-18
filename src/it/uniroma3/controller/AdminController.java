@@ -36,7 +36,7 @@ public class AdminController {
 	public String loginAdmin(){
 		this.admin = adminFacade.getAdmin(email);
 
-		if(admin==null || !admin.getPassword().equals(password)){ //TODO MD5
+		if(admin==null || !adminFacade.checkPassword(admin, password)){ 
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));

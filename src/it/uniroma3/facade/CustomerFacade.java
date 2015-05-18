@@ -66,6 +66,10 @@ public class CustomerFacade {
         List<Customer> customers = em.createQuery(cq).getResultList();
 		return customers;
 	}
+	
+	public Boolean checkPassword(Customer customer, String password){
+		return customer.getPassword().equals(password);
+	}
 
 	public void updateCustomer(Customer customer) {
         em.merge(customer);

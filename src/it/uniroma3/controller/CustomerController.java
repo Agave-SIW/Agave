@@ -88,9 +88,8 @@ public class CustomerController {
 		else{
 			System.out.print("\n\nLogin OK\n\n");
 		}
-        Customer c = this.customerFacade.copyCustomerNoPersist(customer);
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("customer", c);	
+		this.currentSessionMap.put("customer", customer);	
 		
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		return page;

@@ -38,6 +38,7 @@ public class ProductController {
 	// review form data
 	private String comment;
 	private Integer stars;
+	private Long idProduct;
 
 	private String page;
 
@@ -338,20 +339,20 @@ public class ProductController {
 		this.reviewFacade = reviewFacade;
 	}
 
-	public Long getIdProduct() {
-		return idProduct;
-	}
-
-	public void setIdProduct(Long idProduct) {
-		this.idProduct = idProduct;
-	}
-
 	public Map<String, Object> getCurrentSessionMap() {
 		return currentSessionMap;
 	}
 
 	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
 		this.currentSessionMap = currentSessionMap;
+	}
+
+	public Long getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(Long idProduct) {
+		this.idProduct = idProduct;
 	}
 	
 	

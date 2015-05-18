@@ -6,6 +6,7 @@ import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.OrderFacade;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
+import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -14,19 +15,21 @@ import javax.faces.bean.ManagedBean;
 public class CartController {
 	
 	private Orders cart;
+	private int quantity;
 	
 	@EJB
 	private OrderFacade orderFacade;
 	@EJB
 	private CustomerFacade customerFacade;
 	
-	public void setCartFromId(Long idCustomer) {
+	public Orders setCartFromId(Long idCustomer) {
 		try{
 			this.cart = customerFacade.getCart(idCustomer);
 		}
 		catch(Exception e){
-			//TODO
+			//
 		}
+		return this.cart;
 	}
 	
 	public Float getTotal() {
@@ -39,6 +42,16 @@ public class CartController {
 		}
 		
 		return total;
+	}
+	
+	public String addProductToCart(Orders cart, Product product){
+		Integer quantity = 1;
+		if(this.quantity != 0) quantity = this.quantity;
+		System.out.println("trying to add " + quantity +" Product to Cart");
+		System.out.println(cart.toString());
+		orderFacade.addProductToCart(cart, product, quantity);
+		System.out.println("Product added to Cart");
+		return "cart?faces-redirect=true";
 	}
 
 	public Orders getCart() {
@@ -59,6 +72,14 @@ public class CartController {
 
 	public void setOrderFacade(OrderFacade orderFacade) {
 		this.orderFacade = orderFacade;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

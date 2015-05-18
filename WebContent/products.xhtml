@@ -5,6 +5,7 @@
     <!ENTITY euro "&#8364;"> 
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -16,7 +17,7 @@
 
 	<ui:define name="content">
 
-		<h:form>
+		<h:form enctype="multipart/form-data">
 
 			<div class="row">
 
@@ -84,13 +85,9 @@
 										<div class="productsDesc">${product.description}</div>
 									</div>
 									<div class="ratings">
-										<p class="pull-right">15 reviews</p>
+										<p class="pull-right">${productController.getReviewNumber(product)}</p>
 										<p>
-											<span class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star-empty"></span>
+											<h:outputText value="#{productController.getReviewAverageHtml(product)}" escape="false" />
 										</p>
 									</div>
 								</div>

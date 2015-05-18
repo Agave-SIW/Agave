@@ -5,11 +5,17 @@
     <!ENTITY euro "&#8364;"> 
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+	<f:metadata>
+			<f:event type="preRenderView"
+				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
+	</f:metadata>
+	
 	<ui:define name="title">
         Agave Shop - SIW 2015
     </ui:define>
@@ -46,7 +52,7 @@
 
 			<c:forEach var="product"
 				items="#{productController.getLastFourProducts()}" end="3">
-				<h:form>
+				<h:form id="product-form">
 					<div class="col-md-3 col-sm-6 hero-feature">
 						<div class="thumbnail">
 							<img src="http://placehold.it/800x500" alt="" />
@@ -54,7 +60,10 @@
 								<h3>${product.name}</h3>
 								<p class="indexDesc">${product.description}</p>
 								<p>
-									<a href="#" class="btn btn-primary">Buy Now!</a>&nbsp;
+									<h:commandButton
+										action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
+										value="Buy Now!" styleClass="btn btn-primary" />
+									&nbsp;
 									<h:commandLink action="#{productController.findProduct}"
 										value="More Info" styleClass="btn btn-default">
 										<f:param name="id" value="#{product.id}" />

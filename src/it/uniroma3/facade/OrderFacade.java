@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,6 @@ public class OrderFacade {
     private EntityManager em;
     
 	public OrderFacade() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
     
 	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {
@@ -57,6 +56,8 @@ public class OrderFacade {
         em.merge(order);
 	}
 	
+	
+	
     private void deleteOrder(Orders order) {
         em.remove(order);
     }
@@ -64,6 +65,116 @@ public class OrderFacade {
 	public void deleteOrder(Long id) {
 		Orders order = em.find(Orders.class, id);
         deleteOrder(order);
+	}
+	
+	/* OLD METHOD TODO delete? */
+	public void addProductToCart(Orders cart, Long idProduct){
+		ProductFacade pf = new ProductFacade();
+		Product p = pf.getProduct(idProduct);
+		addProductToCart(cart, p);
+	}
+	
+	/* OLD METHOD TODO delete? */
+	public void addProductToCart(Orders cart, Product product){
+		OrderLine ol = makeOrderLineFromProduct(product);
+		Orders c = getOrder(cart.getId());
+		c.addOrderLine(ol);
+		updateOrder(c);
+		
+		System.out.println("Cart Updated");
+	}
+	
+	/* TODO delete?
+	 * Metodo Inutilizzato
+	 * 
+	public void updateCartFromCopy(Orders cart) {
+		Orders c = getOrder(cart.getId());
+		c.emptyOrderLines();
+		updateOrder(c);
+		c.setOrderLines(cart.getOrderLines());
+		System.out.println("Print Order from DB + new prod");
+		System.out.println(c.toString());
+		updateOrder(c);
+	}
+	*/
+	
+	public void addProductToCart(Orders cart, Product product, Integer quantity){		
+		OrderLine ol = makeOrderLineFromProduct(product, quantity);
+		Orders c = getOrder(cart.getId());
+		c.addOrderLine(ol);
+		updateOrder(c);
+		
+		System.out.println("Cart Updated");
+	}
+	
+	public OrderLine makeOrderLineFromProduct(Product product){
+		OrderLine ol = new OrderLine(1, product);
+		return ol;
+	}
+	
+	public OrderLine makeOrderLineFromProduct(Product product, int quantity){
+		OrderLine ol = new OrderLine(quantity, product);
+		return ol;
+	}
+	
+	/**
+	 * Return the closed but not evaded order
+	 * @return  the closed but not evaded order
+	 */
+	public List<Orders> getClosedOrders() {
+
+		return 	em.createQuery("SELECT o "
+			        	     + "FROM Orders o  "
+				             + "WHERE o.closingDate <> NULL "
+				             + "and o.evasionDate = NULL", Orders.class)
+				             .getResultList();
+	}
+
+	/**
+	 * Return the list of order lines in base of the
+	 * corrispondence by the id of the product
+	 * @param id
+	 * @return
+	 */
+	public List<OrderLine> getOrderLines(Long id) {
+		return 	em.createQuery("SELECT ol "
+						+ "		FROM OrderLine "
+						+ "		WHERE ol.id_order = :id"
+						, OrderLine.class).setParameter("id", id).getResultList();
+	}
+
+	/**
+	 * Return the last numOrders orders
+	 * @param numOrders
+	 * @return
+	 */
+	public List<Orders> getLastOrders(int numOrders) {
+
+		List<Orders> orders = new ArrayList<Orders>();
+		try { 
+			orders = em.createQuery("SELECT o "
+								  + "FROM Orders o "
+								  + "ORDER BY o.id DESC"
+								  , Orders.class).setMaxResults(numOrders).getResultList();
+		}
+		catch(Exception e){
+			orders = null;
+		}
+		return orders;
+	}
+	
+	/**
+	 * Return all orders of a selected customer in base the corrispondence of 
+	 * the customer's id
+	 * @param idCustomer
+	 * @return
+	 */
+	public List<Orders> getAllOrdersFromCustomer(Long idCustomer){
+		return em.createQuery("SELECT o "
+				            + "FROM Orders o "
+							+ "WHERE o.customer.id = :idCustomer", Orders.class)
+							.setParameter("idCustomer", idCustomer)
+							.getResultList();
 	}
 
 }

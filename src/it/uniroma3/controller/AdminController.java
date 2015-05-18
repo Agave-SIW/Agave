@@ -56,7 +56,7 @@ public class AdminController {
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("admin", null);
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
-		return page;
+		return "admin";
 	}
 	
 	public Admin getCurrentAdmin(){
@@ -120,6 +120,14 @@ public class AdminController {
 
 	public void setAdminFacade(AdminFacade adminFacade) {
 		this.adminFacade = adminFacade;
+	}
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
 	}
 	
 	

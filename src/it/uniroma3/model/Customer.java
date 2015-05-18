@@ -20,6 +20,7 @@ public class Customer {
 	@Column(nullable = false)
 	private String lastName;
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String password;
@@ -61,6 +62,18 @@ public class Customer {
 		this.address = address;
 		this.registrationDate = registrationDate;
 		this.cart = cart;
+	}
+	
+	public Customer(Customer c) {
+		this.firstName = c.getFirstName();
+		this.lastName = c.getLastName();
+		this.email = c.getEmail();
+		this.password = c.getPassword();
+		this.phoneNumber = c.getPhoneNumber();
+		this.dateofBirth = c.getDateofBirth();
+		this.address = c.getAddress();
+		this.registrationDate = c.getRegistrationDate();
+		this.cart = c.getCart();
 	}
 	
 	public List<Orders> getOrders() {
@@ -120,6 +133,10 @@ public class Customer {
 
 	public String getLastName() {
 		return lastName;
+	}
+	
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 
 	public void setLastName(String lastName) {

@@ -22,12 +22,20 @@ public class Orders {
 	@ManyToOne
 	private Customer customer;
 	
-	@OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinColumn(name="orders_id")
 	private List<OrderLine> orderLines;
 
 	
 	public Orders() {
+		this.orderLines = new LinkedList<OrderLine>();
+	}
+	
+	public void addOrderLine(OrderLine orderline){
+		this.orderLines.add(orderline);
+	}
+	
+	public void emptyOrderLines(){
 		this.orderLines = new LinkedList<OrderLine>();
 	}
 
@@ -132,6 +140,6 @@ public class Orders {
 		return true;
 	}
 	
-	
+
 
 }

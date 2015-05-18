@@ -3,13 +3,17 @@ package it.uniroma3.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Column;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
@@ -37,7 +41,8 @@ public class Product {
 	@ManyToMany(mappedBy="products")
 	private List<Provider> providers;
 	
-	@ManyToMany(mappedBy="products")
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
+	@JoinColumn(name="product_id")
 	private List<Review> reviews;
 
 
@@ -121,6 +126,10 @@ public class Product {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+	
+	public void addReview(Review review) {
+		this.reviews.add(review);
 	}
 
 	@Override

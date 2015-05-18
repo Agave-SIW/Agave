@@ -1,10 +1,69 @@
 /* custom css */
 body {
 	padding: 0;
+	background: #4e483c url('../images/bg.png') repeat-x;
+	color: #e9ffca;
+}
+
+.h1, h1, .h2, h2 {
+	color: #e9ffca;
+}
+
+a {
+	color: #d17581;
+}
+
+a:hover, a:active {
+	color: #e6818e;
+}
+
+.navbar-default {
+	background-color: #8cbc46;
+	background-color: rgba(140, 188, 70, 0.4);
+	border-color: #5d8e2a;
+	border-color: rgba(140, 188, 70, 0.6);
+	border-radius: 0;
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+}
+
+.navbar-inverse {
+	background-color: #44690c;
+	border-color: #5d8e2a;
+}
+
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
+	color: #afd37c;
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+	color: #afd37c;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover
+	{
+	color: #fff;
+}
+
+.navbar-default .navbar-brand {
+	color: #afd37c;
+}
+
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover
+	{
+	color: #fff;
+	background-color: transparent;
+}
+
+hr {
+	border-top: 1px solid #5e584c;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .thumbnail img {
 	width: 100%;
+	padding: 10px;
 }
 
 .ratings {
@@ -22,7 +81,107 @@ body {
 	color: #333;
 }
 
+.thumbnail {
+	background-color: #494333;
+	border: 1px solid #494333;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 0;
+	box-shadow: 0px 5px 8px -2px #000;
+	box-shadow: 0px 5px 8px -2px rgba(0, 0, 0, 0.3);
+}
+
+.thumbnail h3 {
+	color: #fcf9da;
+}
+
+.thumbnail p {
+	color: #efe9dd;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #b74a12;
+	border-color: #b44f25;
+	border-radius: 0;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active,
+	.btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary
+	{
+	color: #fff;
+	background-color: #b74a12;
+	border-color: #b44f25;
+}
+
+.btn-default {
+	border-radius: 0;
+}
+
+.jumbotron {
+	background: url('../images/tea.jpg') 50% 40% no-repeat;
+	background-size: 100%;
+	border-radius: 0 !important;
+	box-shadow: 0px 5px 10px -2px #000;
+	box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.7);
+}
+
+.jumbotron h1, .jumbotron p {
+	color: #fcf9da;
+	text-shadow: 0px 0px 20px #000;
+}
+
+.ratings, .ratings p {
+	color: #d17581;
+}
+
+.thumbnail div, .thumbnail h4 {
+	color: #fcf9da;
+}
+
+.thumbnail h2 a {
+	color: #c2542f;
+}
+
+.thumbnail h2 a:hover, .thumbnail h2 a:active {
+	color: #d96640;
+}
+
+.thumbnail .caption-full, .thumbnail .caption-full h4, .thumbnail .caption-full h2,
+	.thumbnail .caption-full p {
+	color: #fcf9da;
+}
+
+.thumbnail .caption-full div {
+	color: #9d9588;
+}
+
+.panel-primary>.panel-heading {
+	color: #fff;
+	background-color: #b74a12;
+	border-color: #b44f25;
+}
+
+.panel-primary {
+	border-color: #b44f25;
+}
+
+.panel-info {
+	border-color: #45771c;
+}
+
+.panel-info>.panel-heading {
+	color: #afd37c;
+	background-color: #528624;
+	border-color: #45771c;
+}
+
+.panel {
+	box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.5);
+	color: #333;
+}
+
 footer {
+	color: #fcf9da;
 	margin: 50px 0;
 }
 
@@ -69,45 +228,51 @@ footer {
 .navbar-lower {
 	margin-top: -20px;
 }
+
 .navbar-relative {
 	position: relative;
 }
 
 .indexDesc {
 	height: 45px;
-	width:100%;
-}
-.productsDesc {
-	height: 45px;
-	width:100%;
+	width: 100%;
 }
 
-.form-group{
-	  min-height: 40px;
+.productsDesc {
+	height: 45px;
+	width: 100%;
+}
+
+.form-group {
+	min-height: 40px;
 }
 
 .btn-file {
-  position: relative;
-  overflow: hidden;
+	position: relative;
+	overflow: hidden;
 }
+
 .btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	background: red;
+	cursor: inherit;
+	display: block;
 }
+
 input[readonly] {
-  background-color: white !important;
-  cursor: text !important;
+	background-color: white !important;
+	cursor: text !important;
 }
+
 .well {
 	min-height: 125px;
+	color: #333;
 }

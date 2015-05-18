@@ -5,6 +5,18 @@ body {
 	color: #e9ffca;
 }
 
+::-moz-selection {
+    background: #ccc;
+    background: rgba(128,128,128,0.3);
+    text-shadow: none;
+}
+
+::selection {
+    background: #ccc;
+    background: rgba(128,128,128,0.3);
+    text-shadow: none;
+}
+
 .h1, h1, .h2, h2 {
 	color: #e9ffca;
 }

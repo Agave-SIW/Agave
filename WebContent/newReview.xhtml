@@ -33,13 +33,18 @@
 			<f:viewParam name="id" value="#{productController.idProduct}" />
 		</f:metadata>
 
+		<script>
+		if(window==window.top) {
+			window.location.href = "#{root}";
+		}
+		</script>
+
 		<h:panelGroup rendered="#{customerController.isLogged()}">
 
 			<h:form enctype="multipart/form-data">
 				<div class="col-sm-8">
-					<h:inputText value="#{productController.comment}"
-						required="true" requiredMessage="Review comment is mandatory"
-						id="comment"
+					<h:inputText value="#{productController.comment}" required="true"
+						requiredMessage="Review comment is mandatory" id="comment"
 						styleClass="form-control needRequired needPlaceholder" />
 					<h:message for="comment" styleClass="label label-warning" />
 				</div>

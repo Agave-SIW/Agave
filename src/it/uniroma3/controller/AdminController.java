@@ -63,13 +63,13 @@ public class AdminController {
 		return (Admin) this.currentSessionMap.get("admin");
 	}
 	
-	public Boolean loggedIn() {
+	public Boolean isLogged() {
 		Admin a = (Admin) this.currentSessionMap.get("admin");
 		return !(a == null);
 	}
 	
-	public Boolean notLoggedIn() {
-		return !this.loggedIn();
+	public Boolean isNotLogged() {
+		return !this.isLogged();
 	}
 	
 	public Long getId() {

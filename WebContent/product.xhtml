@@ -17,7 +17,7 @@
     </ui:define>
 
 	<ui:define name="content">
-	<c:set var="root" value="#{request.contextPath}" />
+		<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<h:panelGroup rendered="#{not empty productController.product}">
@@ -35,6 +35,7 @@
 							</h4>
 							<h2>#{productController.product.name}</h2>
 							<div>Code: #{productController.product.code}</div>
+							<hr />
 							<p>#{productController.product.description}</p>
 						</div>
 
@@ -61,12 +62,12 @@
 							<div class="text-right">
 								<a class="btn btn-success" id="addReviewButton">Add a review</a>
 							</div>
-
-							<hr />
 						</h:panelGroup>
-
+						<div class="reviewHr">
+							<hr />
+						</div>
 						<ui:repeat var="review" value="#{productController.getReviews()}">
-							<div class="row">
+							<div class="row review">
 								<div class="col-md-12">
 									<h:outputText
 										value="#{productController.getReviewHtml(review)}"
@@ -79,7 +80,9 @@
 								</div>
 							</div>
 
-							<hr />
+							<div class="reviewHr">
+								<hr />
+							</div>
 						</ui:repeat>
 
 					</div>
@@ -95,10 +98,17 @@
 						<hr />
 						<span class="label label-warning">There is no product with
 							the selected id</span> Loading previous page...
-						<script type="text/javascript">window.location = document.referrer + 
+						<script type="text/javascript">
+							if(document.referrer) {
+							window.location = document.referrer + 
 							((document.referrer.indexOf('?')!=-1 &amp;&amp; 
 									document.referrer.indexOf('rel=')!=-1)? 
-											"&amp;rel=1":"");</script>
+											"&amp;rel=1":"");
+							}
+							else {
+								window.history.back();
+							}
+						</script>
 					</div>
 				</div>
 			</h:panelGroup>

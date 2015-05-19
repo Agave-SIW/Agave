@@ -39,6 +39,8 @@ public class ProductController {
 	private String comment;
 	private Integer stars;
 	private Long idProduct;
+	
+	private Review review;
 
 	private String page;
 
@@ -142,7 +144,8 @@ public class ProductController {
 		}
 
 		System.out.println("Review Added!");
-
+        
+		this.setReview(r);
 		return "successReview";
 	}
 
@@ -193,6 +196,11 @@ public class ProductController {
 		return starsToHtml(stars);
 	}
 
+	public String getReviewHtml(){		
+		Integer stars = review.getStars();
+		return starsToHtml(stars);
+	}
+	
 	public String getReviewHtml(Review review){		
 		Integer stars = review.getStars();
 		return starsToHtml(stars);
@@ -353,6 +361,14 @@ public class ProductController {
 
 	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
+	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
 	}
 	
 	

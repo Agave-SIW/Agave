@@ -166,6 +166,14 @@ hr {
 	border-radius: 0;
 }
 
+.btn-success {
+	border-radius: 0;
+}
+
+.label {
+	border-radius: 0;
+}
+
 .btn-primary.active, .btn-primary.focus, .btn-primary:active,
 	.btn-primary:focus, .btn-primary:hover, .open>.dropdown-toggle.btn-primary
 	{

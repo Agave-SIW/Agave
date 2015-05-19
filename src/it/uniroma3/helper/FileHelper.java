@@ -4,10 +4,7 @@ import javax.servlet.http.Part;
 
 public class FileHelper {
 
-	public FileHelper() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public FileHelper() {}
 
 	public String getFileNameFromHeader(Part file){
 		String header = file.getHeader("content-disposition");	

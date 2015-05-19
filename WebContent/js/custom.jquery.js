@@ -62,6 +62,10 @@ $(document).ready(function() {
 		watch: 		'window'
 	});
 	
+	// word wrap already in css file
+	$(".indexDesc").removeAttr("style");
+	$(".productsDesc").removeAttr("style");
+	
 	$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
         
         var input = $(this).parents('.input-group').find(':text'),

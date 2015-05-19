@@ -33,13 +33,13 @@
 		<h:panelGroup rendered="#{customerController.isLogged()}">
 
 			<h:form enctype="multipart/form-data">
-				<div class="col-sm-8">
+				<div class="col-sm-8" style="margin-bottom: 10px;">
 					<h:inputText value="#{productController.comment}" required="true"
 						requiredMessage="Review comment is mandatory" id="comment"
 						styleClass="form-control needRequired needPlaceholder" />
 					<h:message for="comment" styleClass="label label-warning" />
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-2" style="max-width: 160px; display: inline-table;">
 					<h:selectOneMenu value="#{productController.stars}" id="stars"
 						styleClass="form-control" style="height: 34px;">
 						<f:selectItem itemValue="1" itemLabel="1 star" />
@@ -50,7 +50,7 @@
 					</h:selectOneMenu>
 					<h:message for="stars" styleClass="label label-warning" />
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-2" style="display:  inline;">
 					<h:commandButton value="Submit"
 						action="#{productController.addReview(productController.idProduct)}"
 						styleClass="btn btn-success" />

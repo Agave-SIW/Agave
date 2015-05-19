@@ -17,6 +17,7 @@
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<h:panelGroup rendered="#{not empty productController.product}">
@@ -34,7 +35,7 @@
 							</h4>
 							<h2>#{productController.product.name}</h2>
 							<div>Code: #{productController.product.code}</div>
-							<div>#{productController.product.description}</div>
+							<p>#{productController.product.description}</p>
 						</div>
 
 						<div class="ratings">
@@ -50,7 +51,6 @@
 							</p>
 						</div>
 					</div>
-
 					<div class="well">
 						<div class="col-md-12" id="reviewFrameDiv" style="display: none">
 							<iframe id="reviewFrame"

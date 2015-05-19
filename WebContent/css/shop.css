@@ -29,6 +29,15 @@ a:hover, a:active {
 	color: #e6818e;
 }
 
+textarea {
+   resize: none;
+}
+
+hr {
+	border-top: 1px solid #5e584c;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 	border-color: #3C4E4B;
 	border-color: rgba(0, 0, 0, 0.1);
@@ -102,11 +111,6 @@ a:hover, a:active {
 	{
 	color: #fff;
 	background-color: transparent;
-}
-
-hr {
-	border-top: 1px solid #5e584c;
-	border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .thumbnail img {
@@ -220,18 +224,23 @@ hr {
 }
 
 .panel-info {
-	border-color: #45771c;
+	border-color: #f2e769;
 }
 
 .panel-info>.panel-heading {
-	color: #afd37c;
-	background-color: #528624;
-	border-color: #45771c;
+	color: #fff;
+	background-color: #f6c803;
+	border-color: #f2e769;
 }
 
 .panel {
 	box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.5);
 	color: #333;
+	border-radius: 0;
+}
+
+.panel-heading {
+	border-radius: 0;
 }
 
 footer {
@@ -331,4 +340,8 @@ input[readonly] {
 .well {
 	min-height: 125px;
 	color: #333;
+}
+
+.form-control {
+  border-radius: 0;
 }

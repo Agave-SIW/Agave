@@ -6,15 +6,15 @@ body {
 }
 
 ::-moz-selection {
-    background: #ccc;
-    background: rgba(128,128,128,0.3);
-    text-shadow: none;
+	background: #ccc;
+	background: rgba(128, 128, 128, 0.3);
+	text-shadow: none;
 }
 
 ::selection {
-    background: #ccc;
-    background: rgba(128,128,128,0.3);
-    text-shadow: none;
+	background: #ccc;
+	background: rgba(128, 128, 128, 0.3);
+	text-shadow: none;
 }
 
 .h1, h1, .h2, h2 {
@@ -30,36 +30,38 @@ a:hover, a:active {
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-  border-color: #3C4E4B;
-  border-color: rgba(0,0,0,0.1);
+	border-color: #3C4E4B;
+	border-color: rgba(0, 0, 0, 0.1);
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border-color: #afd37c;
-  border-color: rgba(255,255,255,0.4);
+	border-color: #afd37c;
+	border-color: rgba(255, 255, 255, 0.4);
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #3C4E4B;
-  border-color: rgba(0,0,0,0.1);
+	border-color: #3C4E4B;
+	border-color: rgba(0, 0, 0, 0.1);
 }
 
 .navbar-default .navbar-toggle {
-  border-color: #afd37c;
-  border-color: rgba(255,255,255,0.4);
+	border-color: #afd37c;
+	border-color: rgba(255, 255, 255, 0.4);
 }
 
-.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
-  background-color: #3C4E4B;
-  background-color: rgba(0,0,0,0.1);
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover
+	{
+	background-color: #3C4E4B;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-  background-color: #afd37c;
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover
+	{
+	background-color: #afd37c;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #fff;
+	background-color: #fff;
 }
 
 .navbar-default {
@@ -75,10 +77,9 @@ a:hover, a:active {
 
 .navbar-inverse {
 	background-color: #44690c;
+	background-color: rgba(0, 0, 0, 0.2);
 	border-color: #5d8e2a;
 }
-
-
 
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
 	color: #afd37c;
@@ -170,6 +171,12 @@ hr {
 	border-radius: 0 !important;
 	box-shadow: 0px 5px 10px -2px #000;
 	box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.7);
+}
+
+@media ( max-width : 553px ) {
+	.jumbotron {
+		background-size: auto 100%;
+	}
 }
 
 .jumbotron h1, .jumbotron p {

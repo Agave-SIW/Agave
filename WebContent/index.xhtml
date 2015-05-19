@@ -16,6 +16,7 @@
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
 	<f:metadata>
 		<f:event type="preRenderView"
 			listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
@@ -54,10 +55,10 @@
 				<h:form>
 					<div class="col-md-3 col-sm-6 hero-feature">
 						<div class="thumbnail">
-							<img src="http://placehold.it/800x500" alt="" />
+							<img src="#{root}/uploads/#{product.picturePath}" alt="#{product.name}" />
 							<div class="caption">
-								<h3>${product.name}</h3>
-								<p class="indexDesc">${product.description}</p>
+								<h3>#{product.name}</h3>
+								<p class="indexDesc">#{product.description}</p>
 								<p>
 									<h:panelGroup rendered="#{customerController.isLogged()}">
 										<h:commandButton

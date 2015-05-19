@@ -81,7 +81,8 @@ public class ProductController {
 				this.picturePath = filename.toString();
 
 				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
-				return "product"; 
+				
+				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true"; 
 			} 
 			catch (Exception e) {
 				return "errorProduct"; 

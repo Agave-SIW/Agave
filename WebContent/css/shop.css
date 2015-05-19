@@ -5,13 +5,13 @@ body {
 	color: #e9ffca;
 }
 
-::-moz-selection {
+::-moz-selection, *::-moz-selection {
 	background: #ccc;
 	background: rgba(128, 128, 128, 0.3);
 	text-shadow: none;
 }
 
-::selection {
+::selection, *::selection {
 	background: #ccc;
 	background: rgba(128, 128, 128, 0.3);
 	text-shadow: none;
@@ -290,11 +290,13 @@ footer {
 .indexDesc {
 	height: 45px;
 	width: 100%;
+	word-wrap: break-word;
 }
 
 .productsDesc {
 	height: 45px;
 	width: 100%;
+	word-wrap: break-word;
 }
 
 .form-group {

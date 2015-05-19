@@ -69,6 +69,13 @@ public class CartController {
 		return "cart?faces-redirect=true";
 	}
 	
+	public String confirmCart(Orders cart){
+		System.out.println("Creating new Order from Cart");
+		
+		orderFacade.createOrderFromCart(cart);
+		return "cart?faces-redirect=true";
+	}
+	
 	public Orders getCart() {
 		return cart;
 	}

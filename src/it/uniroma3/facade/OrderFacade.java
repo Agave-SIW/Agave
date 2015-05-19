@@ -44,6 +44,11 @@ public class OrderFacade {
 		return order;
 	}
 	
+	public OrderLine getOrderLine(Long id){
+		OrderLine orderLine = em.find(OrderLine.class, id);
+		return orderLine;
+	}
+	
 	public List<Orders> getAllOrders() {
         CriteriaQuery<Orders> cq = em.getCriteriaBuilder().createQuery(Orders.class);
         cq.select(cq.from(Orders.class));
@@ -53,9 +58,7 @@ public class OrderFacade {
 
 	public void updateOrder(Orders order) {
         em.merge(order);
-	}
-	
-	
+	}	
 	
     private void deleteOrder(Orders order) {
         em.remove(order);
@@ -66,36 +69,9 @@ public class OrderFacade {
         deleteOrder(order);
 	}
 	
-	/* OLD METHOD TODO delete? */
-	public void addProductToCart(Orders cart, Long idProduct){
-		ProductFacade pf = new ProductFacade();
-		Product p = pf.getProduct(idProduct);
-		addProductToCart(cart, p);
+	public void deleteOrderLine(OrderLine orderLine){
+		em.remove(orderLine);
 	}
-	
-	/* OLD METHOD TODO delete? */
-	public void addProductToCart(Orders cart, Product product){
-		OrderLine ol = makeOrderLineFromProduct(product);
-		Orders c = getOrder(cart.getId());
-		c.addOrderLine(ol);
-		updateOrder(c);
-		
-		System.out.println("Cart Updated");
-	}
-	
-	/* TODO delete?
-	 * Metodo Inutilizzato
-	 * 
-	public void updateCartFromCopy(Orders cart) {
-		Orders c = getOrder(cart.getId());
-		c.emptyOrderLines();
-		updateOrder(c);
-		c.setOrderLines(cart.getOrderLines());
-		System.out.println("Print Order from DB + new prod");
-		System.out.println(c.toString());
-		updateOrder(c);
-	}
-	*/
 	
 	public void addProductToCart(Orders cart, Product product, Integer quantity) throws Exception{
 		Orders c = getOrder(cart.getId());
@@ -106,7 +82,7 @@ public class OrderFacade {
 			System.out.println("Product already exists");
 			check = c.updateOrderLine(product, quantity);
 		}
-		else if(product.getStorageQuantity() > quantity) {
+		else if(product.getStorageQuantity() >= quantity) {
 			OrderLine ol = makeOrderLineFromProduct(product, quantity);
 			c.addOrderLine(ol);
 		}
@@ -119,14 +95,21 @@ public class OrderFacade {
 		System.out.println("Cart Updated");
 	}
 	
-	public OrderLine makeOrderLineFromProduct(Product product){
-		OrderLine ol = new OrderLine(1, product);
-		return ol;
-	}
-	
 	public OrderLine makeOrderLineFromProduct(Product product, int quantity){
 		OrderLine ol = new OrderLine(quantity, product);
 		return ol;
+	}
+	
+	public void removeOrderLine(Orders cart, OrderLine orderLine){
+		Orders c = getOrder(cart.getId());
+		OrderLine olToRemove = getOrderLine(orderLine.getId());
+		
+		c.removeOrderLine(olToRemove);
+		
+		deleteOrderLine(olToRemove);
+		updateOrder(c);
+
+		System.out.println("OrderLine Removed");
 	}
 	
 

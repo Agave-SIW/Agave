@@ -36,6 +36,10 @@ public class Orders {
 		this.orderLines.add(orderline);
 	}
 	
+	public void removeOrderLine(OrderLine orderline){
+		this.orderLines.remove(orderline);
+	}
+	
 	public void emptyOrderLines(){
 		this.orderLines = new LinkedList<OrderLine>();
 	}
@@ -156,7 +160,7 @@ public class Orders {
 		
 		while(olIterator.hasNext()){
 			OrderLine ol = olIterator.next();
-			if(ol.getProduct().equals(product) && product.getStorageQuantity() > (ol.getQuantity() + quantity)){
+			if(ol.getProduct().equals(product) && product.getStorageQuantity() >= (ol.getQuantity() + quantity)){
 				ol.setQuantity(ol.getQuantity() + quantity);
 				return true;
 			}

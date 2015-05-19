@@ -24,12 +24,17 @@
 
 		<h2>Cart</h2>
 		<h:panelGroup rendered="#{customerController.isLogged()}">
-
-			<ui:repeat var="line" value="#{cartController.getOrderLines()}">
-				<div>#{line.product.name} #{line.product.price}
-					#{line.quantity}</div>
-			</ui:repeat>
+		<h:form>
+			<ui:repeat var="line" value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+					<div>
+						<h:commandLink action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
+							value="Remove" styleClass="btn btn-default">
+						</h:commandLink>
+						#{line.product.name} #{line.product.price} #{line.quantity}
+					</div>
+				</ui:repeat>
 			<div>Total: #{cartController.getTotal()}</div>
+		</h:form>
 
 
 		</h:panelGroup>

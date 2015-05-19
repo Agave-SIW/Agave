@@ -61,13 +61,20 @@ public class CartController {
 		}
 
 	}
-
+	
+	public String removeOrderLine(Orders cart, OrderLine orderLine){
+		System.out.println("Trying to Remove OrderLine");
+		orderFacade.removeOrderLine(cart, orderLine);
+		
+		return "cart?faces-redirect=true";
+	}
+	
 	public Orders getCart() {
 		return cart;
 	}
 	
-	public List<OrderLine> getOrderLines() {
-		return this.cart.getOrderLines();
+	public List<OrderLine> getOrderLines(Orders cart) {
+		return cart.getOrderLines();
 	}
 
 	public void setCart(Orders cart) {

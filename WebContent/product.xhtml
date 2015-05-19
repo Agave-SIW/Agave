@@ -17,7 +17,7 @@
     </ui:define>
 
 	<ui:define name="content">
-	<c:set var="root" value="#{request.contextPath}" />
+		<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<h:panelGroup rendered="#{not empty productController.product}">
@@ -61,12 +61,12 @@
 							<div class="text-right">
 								<a class="btn btn-success" id="addReviewButton">Add a review</a>
 							</div>
-
-							<hr />
 						</h:panelGroup>
-
+						<div class="reviewHr">
+							<hr />
+						</div>
 						<ui:repeat var="review" value="#{productController.getReviews()}">
-							<div class="row">
+							<div class="row review">
 								<div class="col-md-12">
 									<h:outputText
 										value="#{productController.getReviewHtml(review)}"
@@ -79,7 +79,9 @@
 								</div>
 							</div>
 
-							<hr />
+							<div class="reviewHr">
+								<hr />
+							</div>
 						</ui:repeat>
 
 					</div>

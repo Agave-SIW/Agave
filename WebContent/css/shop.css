@@ -30,12 +30,21 @@ a:hover, a:active {
 }
 
 textarea {
-   resize: none;
+	resize: none;
 }
 
 hr {
 	border-top: 1px solid #5e584c;
 	border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.well hr, .darkHr {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	clear: both;
+}
+
+.review, .reviewHr {
+	padding: 0 15px;
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
@@ -343,5 +352,5 @@ input[readonly] {
 }
 
 .form-control {
-  border-radius: 0;
+	border-radius: 0;
 }

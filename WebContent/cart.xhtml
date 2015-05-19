@@ -33,7 +33,13 @@
 					</div>
 				</ui:repeat>
 			<div>Total: #{cartController.getTotal()}</div>
-		</h:form>
+				<div>
+					<h:commandLink
+						action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
+						value="Confirm" styleClass="btn btn-primary">
+					</h:commandLink>
+				</div>
+			</h:form>
 
 
 		</h:panelGroup>

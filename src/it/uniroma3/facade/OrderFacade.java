@@ -34,7 +34,7 @@ public class OrderFacade {
 		return order;
 	}
 	
-	/*Metodo inutilizzato*/
+	/* TODO Metodo inutilizzato*/
 	public Orders createCart(Customer customer) {
 		Orders cart = new Orders();
 		cart.setCustomer(customer);

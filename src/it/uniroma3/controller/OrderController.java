@@ -2,18 +2,15 @@ package it.uniroma3.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import it.uniroma3.facade.OrderFacade;
-import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 /**
- * Class that manage the details of a closed Order
+ * System operations for closed/evaded Order management
  * 
  * @author Andrea
  *

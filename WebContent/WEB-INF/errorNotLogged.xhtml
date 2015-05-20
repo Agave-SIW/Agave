@@ -14,7 +14,7 @@
 	<c:set var="root" value="#{request.contextPath}" />
 
 	<ui:define name="title">
-        Sign In Error | Agave Shop - SIW 2015
+        Error | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
@@ -31,25 +31,10 @@
 				<div class="col-md-12">
 					<h1>Error</h1>
 					<hr />
-					<div class="label label-warning">Wrong email or password</div>
+					<div class="label label-warning">You must be logged to complete this operation</div>
+					<span id="timer"> 
 					<script type="text/javascript">
-						var count = 10;
-						var redirect = "#{root}";
-
-						function countDown() {
-							var timer = document.getElementById("timer");
-							if (count > 0) {
-								count--;
-								timer.innerHTML = "This page will redirect in "
-										+ count + " seconds.";
-								setTimeout("countDown()", 1000);
-							} else {
-								window.location.href = redirect;
-							}
-						}
-					</script>
-					<span id="timer"> <script type="text/javascript">
-						countDown();
+						countDown("#{root}", 10);
 					</script>
 					</span>
 				</div>

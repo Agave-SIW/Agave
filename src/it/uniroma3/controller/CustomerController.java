@@ -17,7 +17,7 @@ import javax.faces.context.FacesContext;
 
 /**
  * System operations for Customer management
- * 
+ *
  * @author Gaetano, Veronica
  *
  */
@@ -69,7 +69,7 @@ public class CustomerController {
 				this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
 				System.out.println("\nCustomer Created\n");
 
-				return "successSignin";
+				return "WEB-INF/successSignin";
 			}
 			else {
 				FacesContext.getCurrentInstance().addMessage("signIn:email", new FacesMessage("There is already a customer with this email address"));
@@ -84,19 +84,19 @@ public class CustomerController {
 
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
-		
-		if(customer==null || !customerFacade.checkPassword(customer, password)){ 
+
+		if(customer==null || !customerFacade.checkPassword(customer, password)){
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
-			return "errorLogin";
+			return "WEB-INF/errorLogin";
 		}
 		else{
 			System.out.print("\n\nLogin OK\n\n");
 		}
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("customer", customer);	
-		
+		this.currentSessionMap.put("customer", customer);
+
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		return page;
 	}
@@ -289,5 +289,3 @@ public class CustomerController {
 
 
 }
-
-

@@ -19,8 +19,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
 /**
- * System operations for Product management
- * 
+ * System operations for Product and Review management
+ *
  * @author Gaetano
  *
  */
@@ -45,7 +45,7 @@ public class ProductController {
 	private String comment;
 	private Integer stars;
 	private Long idProduct;
-	
+
 	private Review review;
 
 	private String page;
@@ -56,10 +56,10 @@ public class ProductController {
 	private CustomerFacade customerFacade;
 
 	private ReviewFacade reviewFacade;
-	
+
 	private Map<String, Object> currentSessionMap;
-	
-	
+
+
 	public ProductController() {
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		this.reviewFacade = new ReviewFacade();
@@ -87,11 +87,11 @@ public class ProductController {
 				this.picturePath = filename.toString();
 
 				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
-				
-				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true"; 
-			} 
+
+				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
+			}
 			catch (Exception e) {
-				return "errorProduct"; 
+				return "WEB-INF/errorProduct";
 			}
 		}
 		else {
@@ -101,7 +101,7 @@ public class ProductController {
 
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
-		return "products?faces-redirect=true"; 
+		return "products?faces-redirect=true";
 	}
 
 	public List<Product> getListProducts() {
@@ -129,7 +129,7 @@ public class ProductController {
 		this.product = getProductFromId(id);
 		return this.product;
 	}
-	
+
 	public Product getProductFromId(Long id) {
 		this.product = productFacade.getProduct(id);
 		return this.product;
@@ -147,13 +147,13 @@ public class ProductController {
 			this.productFacade.addReviewToProduct(r, p);
 		}
 		catch (Exception e){
-			return "error?faces-redirect=true";
+			return "WEB-INF/errorReview";
 		}
 
 		System.out.println("Review Added!");
-        
+
 		this.setReview(r);
-		return "successReview";
+		return "WEB-INF/successReview";
 	}
 
 	public List<Review> getReviews(Product product){
@@ -190,25 +190,25 @@ public class ProductController {
 			return (float) 0;
 	}
 
-	public Float getReviewAverage(){		
+	public Float getReviewAverage(){
 		return getReviewAverage(this.product);
 	}
 
-	public String getReviewAverageHtml(){			
+	public String getReviewAverageHtml(){
 		return getReviewAverageHtml(this.product);
 	}
 
-	public String getReviewAverageHtml(Product product){		
+	public String getReviewAverageHtml(Product product){
 		Integer stars = Math.round(getReviewAverage(product));
 		return starsToHtml(stars);
 	}
 
-	public String getReviewHtml(){		
+	public String getReviewHtml(){
 		Integer stars = review.getStars();
 		return starsToHtml(stars);
 	}
-	
-	public String getReviewHtml(Review review){		
+
+	public String getReviewHtml(Review review){
 		Integer stars = review.getStars();
 		return starsToHtml(stars);
 	}
@@ -377,9 +377,7 @@ public class ProductController {
 	public void setReview(Review review) {
 		this.review = review;
 	}
-	
-	
+
+
 
 }
-
-

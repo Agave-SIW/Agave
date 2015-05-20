@@ -17,43 +17,52 @@
 		<h:form>
 			<ul class="nav nav-tabs nav-justified">
 				<li role="presentation" class="active"><h:commandLink
-						action="orderList" value="Open Order"></h:commandLink></li>
+						action="orderList" value="Open Orders"></h:commandLink></li>
 				<li role="presentation"><h:commandLink action="orderList"
-						value="Closed Order"></h:commandLink></li>
+						value="Closed Orders"></h:commandLink></li>
 			</ul>
 			<br></br>
 			<br></br>
 			<div class="row">
-				<c:forEach var="order" items="#{orderController.getOrders()}">
-					<div class="col-sm-12 col-lg-12 col-md-12">
-						<ul class="list-inline">
-							<li><div>Ordine: ${order.id}</div></li>
-							<li><div>Effettuato il ${order.creationTime}</div></li>
-							<li><div>${order.evasionTime}</div></li>
-							<li><div>
-									<h:commandLink action="#{orderController.findOrder}"
-										value="See the order details">
-										<f:param name="id" value="#{order.id}" />
-									</h:commandLink>
-								</div></li>
-						</ul>
-					</div>
-					<div class="row">
-						<c:forEach var="orderLine" items="#{order.getOrderLines()}">
-							<div class="col-xs-6 col-md-3">
-								<h:commandLink action="#{productController.findProduct}"
-									styleClass="thumbnail">
-									<f:param name="id" value="#{orderLine.product.id}" />
-									<h:graphicImage
-										value="uploads/#{orderLine.product.picturePath}"
-										alt="#{orderLine.product.name}"></h:graphicImage>
-								</h:commandLink>
-							</div>
-						</c:forEach>
-					</div>
-				</c:forEach>
-			</div>
+				<div class="panel panel-default">
+					<c:forEach var="order" items="#{orderController.getOrders()}">
+						<div class="panel panel-default">
 
+								<div class="col-sm-12 col-lg-12 col-md-12">
+									<ul class="list-inline">
+										<li><div>Ordine: ${order.id}</div></li>
+										<li><div>Effettuato il ${order.creationTime}</div></li>
+										<li><div>${order.evasionTime}</div></li>
+										<li><div>
+												<h:commandLink action="#{orderController.findOrder}"
+													value="See the order details">
+													<f:param name="id" value="#{order.id}" />
+												</h:commandLink>
+											</div></li>
+									</ul>
+							</div>
+							<div class="panel-body">
+
+								<div class="row">
+									<c:forEach var="orderLine" items="#{order.getOrderLines()}">
+										<div class="col-xs-6 col-md-3">
+											<h:commandLink action="#{productController.findProduct}"
+												styleClass="thumbnail">
+												<f:param name="id" value="#{orderLine.product.id}" />
+												<h:graphicImage
+													value="uploads/#{orderLine.product.picturePath}"
+													alt="#{orderLine.product.name}"></h:graphicImage>
+												<p align="center">#{orderLine.product.name}</p>
+											</h:commandLink>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+
+					</c:forEach>
+				</div>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -54,7 +54,7 @@ public class CartController {
 	public String addProductToCart(Orders cart, Product product){
 		CustomerController cc = new CustomerController();
 		
-		if(cc.isNotLogged()) return "errorNotLogged";
+		if(cc.isNotLogged()) return "WEB-INF/errorNotLogged";
 		
 		Integer quantity = 1;
 		if(this.quantity != 0) quantity = this.quantity;
@@ -68,7 +68,7 @@ public class CartController {
 		}
 		catch(Exception e){
 			System.out.println("Insufficient Storage Quantity");
-			return "errorQuantity";
+			return "WEB-INF/errorQuantity";
 		}
 
 	}
@@ -76,7 +76,7 @@ public class CartController {
 	public String removeOrderLine(Orders cart, OrderLine orderLine){
 		CustomerController cc = new CustomerController();
 		
-		if(cc.isNotLogged()) return "errorNotLogged";
+		if(cc.isNotLogged()) return "WEB-INF/errorNotLogged";
 		
 		System.out.println("Trying to Remove OrderLine");
 		orderFacade.removeOrderLine(cart, orderLine);
@@ -87,7 +87,7 @@ public class CartController {
 	public String confirmCart(Orders cart){
 		CustomerController cc = new CustomerController();
 		
-		if(cc.isNotLogged()) return "errorNotLogged";
+		if(cc.isNotLogged()) return "WEB-INF/errorNotLogged";
 		
 		System.out.println("Creating new Order from Cart");
 		
@@ -97,7 +97,7 @@ public class CartController {
 		}
 		catch(Exception e){
 			System.out.println("Cart is Empty!");
-			return "errorQuantity";
+			return "WEB-INF/errorQuantity";
 		
 		}
 			

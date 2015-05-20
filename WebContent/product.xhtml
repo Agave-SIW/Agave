@@ -63,6 +63,11 @@
 								<a class="btn btn-success" id="addReviewButton">Add a review</a>
 							</div>
 						</h:panelGroup>
+						<h:panelGroup rendered="#{customerController.isNotLogged()}">
+							<div class="text-right">
+								You must login to send a review.
+							</div>
+						</h:panelGroup>
 						<div class="reviewHr">
 							<hr />
 						</div>

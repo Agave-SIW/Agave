@@ -1,5 +1,6 @@
 package it.uniroma3.facade;
 
+import it.uniroma3.helper.MD5Helper;
 import it.uniroma3.model.*;
 
 import javax.ejb.Stateless;
@@ -17,10 +18,17 @@ public class AdminFacade {
     @PersistenceContext(unitName = "agave")
     private EntityManager em;
     
-	public AdminFacade() {}
+    private MD5Helper md;
+    
+	public AdminFacade() {
+		this.md = new MD5Helper();
+	}
     
 	public Admin createAdmin(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth) {
-		Admin admin = new Admin(firstName, lastName, email, password, phoneNumber, dateofBirth);
+		//making MD5 password to store
+		String securePassword = md.securePassword(password);
+		
+		Admin admin = new Admin(firstName, lastName, email, securePassword, phoneNumber, dateofBirth);
 		em.persist(admin);
 		return admin;
 	}
@@ -44,6 +52,10 @@ public class AdminFacade {
         List<Admin> admins = em.createQuery(cq).getResultList();
 		return admins;
 	}
+	
+	public Boolean checkPassword(Admin admin, String password){
+		return admin.getPassword().equals(md.securePassword(password));
+	}
 
 	public void updateAdmin(Admin admin) {
         em.merge(admin);
@@ -57,4 +69,13 @@ public class AdminFacade {
 		Admin admin = em.find(Admin.class, id);
         deleteAdmin(admin);
 	}
+
+	public MD5Helper getMd() {
+		return md;
+	}
+
+	public void setMd(MD5Helper md) {
+		this.md = md;
+	}
+	
 }

@@ -16,39 +16,30 @@
     </ui:define>
 
 	<ui:define name="content">
+		<c:set var="root" value="#{request.contextPath}" />
 
 		<h:form enctype="multipart/form-data">
-
 			<div class="row">
-
-
 				<div class="col-md-12">
-
 					<div class="row carousel-holder">
 
 						<div class="col-md-12">
 							<div id="carousel-example-generic" class="carousel slide"
 								data-ride="carousel" style="margin-bottom: 40px;">
 								<ol class="carousel-indicators">
-									<li data-target="#carousel-example-generic" data-slide-to="0"
-										class=""></li>
-									<li data-target="#carousel-example-generic" data-slide-to="1"
-										class="active"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="0"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
 									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 								</ol>
 								<div class="carousel-inner">
-									<div class="item">
-										<img class="slide-image" src="http://placehold.it/1150x400"
-											alt="" />
-									</div>
-									<div class="item active">
-										<img class="slide-image" src="http://placehold.it/1150x400"
-											alt="" />
-									</div>
-									<div class="item">
-										<img class="slide-image" src="http://placehold.it/1150x400"
-											alt="" />
-									</div>
+									<c:forEach var="product"
+										items="#{productController.getLastFourProducts()}" end="2" varStatus="theCount">
+										<div class="item #{theCount.index == 1  ? 'active' : ''}">
+											<img class="slide-image"
+												src="#{root}/uploads/#{product.picturePath}"
+												alt="#{product.name}" />
+										</div>
+									</c:forEach>
 								</div>
 								<a class="left carousel-control"
 									href="#carousel-example-generic" data-slide="prev"> <span
@@ -64,10 +55,12 @@
 
 					<div class="row">
 
-						<c:forEach var="product" items="#{productController.getListProducts()}">
+						<c:forEach var="product"
+							items="#{productController.getListProducts()}">
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
-									<img src="http://placehold.it/320x150" alt="" />
+									<img src="#{root}/uploads/#{product.picturePath}"
+										alt="#{product.name}" />
 									<div class="caption">
 										<h4 class="pull-right price">
 											<h:outputText value="#{product.price}">
@@ -82,12 +75,14 @@
 											</h:commandLink>
 
 										</h2>
-										<div class="productsDesc">${product.description}</div>
+										<p class="productsDesc">${product.description}</p>
 									</div>
 									<div class="ratings">
 										<p class="pull-right">${productController.getReviewNumber(product)}</p>
 										<p>
-											<h:outputText value="#{productController.getReviewAverageHtml(product)}" escape="false" />
+											<h:outputText
+												value="#{productController.getReviewAverageHtml(product)}"
+												escape="false" />
 										</p>
 									</div>
 								</div>

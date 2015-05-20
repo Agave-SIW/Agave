@@ -36,7 +36,7 @@ public class AdminController {
 	public String loginAdmin(){
 		this.admin = adminFacade.getAdmin(email);
 
-		if(admin==null || !admin.getPassword().equals(password)){ //TODO MD5
+		if(admin==null || !adminFacade.checkPassword(admin, password)){ 
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));
@@ -63,15 +63,13 @@ public class AdminController {
 		return (Admin) this.currentSessionMap.get("admin");
 	}
 	
-	// currently not used in view, as #{SessionScope} works. Used by other controllers
-	public Boolean loggedIn() {
+	public Boolean isLogged() {
 		Admin a = (Admin) this.currentSessionMap.get("admin");
 		return !(a == null);
 	}
 	
-	// currently not used in view, as #{SessionScope} works
-	public Boolean notLoggedIn() {
-		return !this.loggedIn();
+	public Boolean isNotLogged() {
+		return !this.isLogged();
 	}
 	
 	public Long getId() {

@@ -11,16 +11,16 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-	<f:metadata>
-			<f:event type="preRenderView"
-				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
-	</f:metadata>
-	
 	<ui:define name="title">
         Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
+	</f:metadata>
 
 		<!-- Jumbotron Header -->
 		<header class="jumbotron hero-spacer">
@@ -52,18 +52,21 @@
 
 			<c:forEach var="product"
 				items="#{productController.getLastFourProducts()}" end="3">
-				<h:form id="product-form">
+				<h:form>
 					<div class="col-md-3 col-sm-6 hero-feature">
 						<div class="thumbnail">
-							<img src="http://placehold.it/800x500" alt="" />
+							<img src="#{root}/uploads/#{product.picturePath}" alt="#{product.name}" />
 							<div class="caption">
-								<h3>${product.name}</h3>
-								<p class="indexDesc">${product.description}</p>
+								<h3>#{product.name}</h3>
+								<p class="indexDesc">#{product.description}</p>
 								<p>
-									<h:commandButton
-										action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
-										value="Buy Now!" styleClass="btn btn-primary" />
-									&nbsp;
+									<h:panelGroup rendered="#{customerController.isLogged()}">
+										<h:commandButton
+											action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
+											value="Buy Now!" styleClass="btn btn-primary" />
+											&nbsp;
+									</h:panelGroup>
+
 									<h:commandLink action="#{productController.findProduct}"
 										value="More Info" styleClass="btn btn-default">
 										<f:param name="id" value="#{product.id}" />

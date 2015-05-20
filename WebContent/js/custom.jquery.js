@@ -12,12 +12,14 @@ $(".needType").attr("type", function(){ var arr = this.name.split(":"); return a
 $(".needRequired").prop("required",true);
 $("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
 
-$(".login-link").click(function() {
+$(".login-link").click(function(event) {
+	event.preventDefault();
 	$(".login-link").toggle('slide');
 	$(".login-form").toggle('slide');
 });
 
-$("#addReviewButton").click(function() {
+$("#addReviewButton").click(function(event) {
+	event.preventDefault();
 	$("#addReviewButton").toggle('slide');
 	$("#reviewFrameDiv").toggle('slide');
 });
@@ -45,6 +47,7 @@ $(".price").priceFormat({
 	centsLimit: 2
 });
 
+// file input form made with input and button has to act like a normal file input
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
       numFiles = input.get(0).files ? input.get(0).files.length : 1,
@@ -61,6 +64,10 @@ $(document).ready(function() {
 		ellipsis: 	'... ',
 		watch: 		'window'
 	});
+	
+	// word wrap already in css file
+	$(".indexDesc").removeAttr("style");
+	$(".productsDesc").removeAttr("style");
 	
 	$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
         

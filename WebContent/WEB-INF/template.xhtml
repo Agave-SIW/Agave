@@ -14,17 +14,7 @@
 <h:head>
 	<title><ui:insert name="title">Agave Shop - SIW 2015</ui:insert></title>
 
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Progetto SIW 2015" />
-	<meta name="author"
-		content="Gaetano Bonofiglio, Veronica Iovinella, Andrea Salvoni" />
-	<link rel="icon" href="#{root}/favicon.ico" type="image/x-icon" />
-	<link rel="shortcut icon" href="#{root}/favicon.ico"
-		type="image/x-icon" />
-	<link href="#{root}/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="#{root}/css/shop.css" rel="stylesheet" />
+	<ui:include src="/WEB-INF/meta.xhtml" />
 </h:head>
 
 <body>
@@ -51,13 +41,13 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="#">About</a></li>
-						<li><a href="#{root}/admin.jsf">Admin CP</a></li>
+						<li><a href="#{root}/admin.xhtml">Admin CP</a></li>
 					</ul>
 					<f:subview id="customerController">
-						<h:panelGroup rendered='#{empty sessionScope["customer"]}'>
+						<h:panelGroup rendered="#{customerController.isNotLogged()}">
 							<ul class="nav navbar-nav navbar-right">
 								<li><a class="login-link" href="#">Log In</a></li>
-								<li><a href="#{root}/signin.jsf">Sign In</a></li>
+								<li><a href="#{root}/signin.xhtml">Sign In</a></li>
 							</ul>
 							<h:form id="customerLogin" style="display:none"
 								styleClass="login-form navbar-form navbar-right">
@@ -88,7 +78,7 @@
 
 							</h:form>
 						</h:panelGroup>
-						<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+						<h:panelGroup rendered="#{customerController.isLogged()}">
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
 
 								<div class="form-group">
@@ -98,7 +88,7 @@
 												<h:outputText
 													value='#{sessionScope["customer"].getFirstName()}' />
 											</p></li>
-										<li><a href="#{root}/cart.jsf">Cart</a></li>
+										<li><a href="#{root}/cart.xhtml"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
 												value="Logout" action="#{customerController.logoutCustomer}" /></li>
 
@@ -117,7 +107,7 @@
 		</nav>
 
 		<f:subview id="adminController">
-			<h:panelGroup rendered='#{not empty sessionScope["admin"]}'>
+			<h:panelGroup rendered="#{adminController.isLogged()}">
 				<nav class="navbar navbar-default navbar-lower navbar-relative"
 					role="navigation">
 					<div class="container">
@@ -130,13 +120,13 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#{root}/admin.jsf"> Admin CP </a>
+							<a class="navbar-brand" href="#{root}/admin.xhtml"> Admin CP </a>
 						</div>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse"
 							id="bs-example-navbar-collapse-2">
 							<ul class="nav navbar-nav">
-								<li><a href="#{root}/newProduct.jsf">Inserta new
+								<li><a href="#{root}/newProduct.xhtml">Inserta new
 										product</a></li>
 							</ul>
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
@@ -181,21 +171,7 @@
 			</div>
 		</footer>
 
-		<!-- jQuery -->
-		<script
-			src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="#{root}/js/import.jquery.js"></script>
-		<script src="#{root}/js/modernizr.js"></script>
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-		<script src="#{root}/js/jquery.price_format.2.0.js"></script>
-		<script src="#{root}/js/jquery.dotdotdot.min.js"></script>
-		<script src="#{root}/js/custom.jquery.js"></script>
-		<!-- Bootstrap Core JavaScript -->
-		<script src="#{root}/js/bootstrap.min.js"></script>
+		<ui:include src="/WEB-INF/footer-js.xhtml" />
 	</f:view>
 </body>
 

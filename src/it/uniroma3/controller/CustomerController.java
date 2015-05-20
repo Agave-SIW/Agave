@@ -78,8 +78,8 @@ public class CustomerController {
 
 	public String loginCustomer(){
 		this.customer = customerFacade.getCustomer(email);
-
-		if(customer==null || !customer.getPassword().equals(password)){ //TODO MD5
+		
+		if(customer==null || !customerFacade.checkPassword(customer, password)){ 
 			this.customer = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
@@ -112,13 +112,11 @@ public class CustomerController {
 		return (Customer) this.currentSessionMap.get("customer");
 	}
 
-	// currently not used in view, as #{SessionScope} works
 	public Boolean isLogged() {
 		Customer c = (Customer) this.currentSessionMap.get("customer");
 		return !(c == null);
 	}
 
-	// currently not used in view, as #{SessionScope} works
 	public Boolean isNotLogged() {
 		return !this.isLogged();
 	}

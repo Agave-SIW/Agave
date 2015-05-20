@@ -17,14 +17,15 @@
     </ui:define>
 
 	<ui:define name="content">
+		<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<h:panelGroup rendered="#{not empty productController.product}">
 				<div class="col-md-12">
 
 					<div class="thumbnail">
-						<img class="img-responsive" src="http://placehold.it/1150x400"
-							alt="" />
+						<img class="img-responsive" src="#{root}/uploads/#{productController.product.picturePath}"
+							alt="#{productController.product.name}" />
 
 						<div class="caption-full">
 							<h4 class="pull-right price">
@@ -34,7 +35,8 @@
 							</h4>
 							<h2>#{productController.product.name}</h2>
 							<div>Code: #{productController.product.code}</div>
-							<div>#{productController.product.description}</div>
+							<hr />
+							<p>#{productController.product.description}</p>
 						</div>
 
 						<div class="ratings">
@@ -50,23 +52,22 @@
 							</p>
 						</div>
 					</div>
-
 					<div class="well">
 						<div class="col-md-12" id="reviewFrameDiv" style="display: none">
 							<iframe id="reviewFrame"
 								src="#{root}/newReview.xhtml?id=#{productController.product.id}"
 								width="100%" height="100" seamless="seamless"></iframe>
 						</div>
-						<h:panelGroup rendered='#{not empty sessionScope["customer"]}'>
+						<h:panelGroup rendered="#{customerController.isLogged()}">
 							<div class="text-right">
 								<a class="btn btn-success" id="addReviewButton">Add a review</a>
 							</div>
-
-							<hr />
 						</h:panelGroup>
-
+						<div class="reviewHr">
+							<hr />
+						</div>
 						<ui:repeat var="review" value="#{productController.getReviews()}">
-							<div class="row">
+							<div class="row review">
 								<div class="col-md-12">
 									<h:outputText
 										value="#{productController.getReviewHtml(review)}"
@@ -79,7 +80,9 @@
 								</div>
 							</div>
 
-							<hr />
+							<div class="reviewHr">
+								<hr />
+							</div>
 						</ui:repeat>
 
 					</div>
@@ -95,10 +98,17 @@
 						<hr />
 						<span class="label label-warning">There is no product with
 							the selected id</span> Loading previous page...
-						<script type="text/javascript">window.location = document.referrer + 
+						<script type="text/javascript">
+							if(document.referrer) {
+							window.location = document.referrer + 
 							((document.referrer.indexOf('?')!=-1 &amp;&amp; 
 									document.referrer.indexOf('rel=')!=-1)? 
-											"&amp;rel=1":"");</script>
+											"&amp;rel=1":"");
+							}
+							else {
+								window.history.back();
+							}
+						</script>
 					</div>
 				</div>
 			</h:panelGroup>

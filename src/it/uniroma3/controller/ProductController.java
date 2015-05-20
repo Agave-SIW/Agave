@@ -39,6 +39,8 @@ public class ProductController {
 	private String comment;
 	private Integer stars;
 	private Long idProduct;
+	
+	private Review review;
 
 	private String page;
 
@@ -64,7 +66,7 @@ public class ProductController {
 		//file path functions
 		FileHelper fh = new FileHelper();
 
-		if(ac.loggedIn()){
+		if(ac.isLogged()){
 			String filename = fh.getFileNameFromHeader(picture);
 			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			String path = ctx.getRealPath("/");
@@ -79,7 +81,8 @@ public class ProductController {
 				this.picturePath = filename.toString();
 
 				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
-				return "product"; 
+				
+				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true"; 
 			} 
 			catch (Exception e) {
 				return "errorProduct"; 
@@ -142,7 +145,8 @@ public class ProductController {
 		}
 
 		System.out.println("Review Added!");
-
+        
+		this.setReview(r);
 		return "successReview";
 	}
 
@@ -193,6 +197,11 @@ public class ProductController {
 		return starsToHtml(stars);
 	}
 
+	public String getReviewHtml(){		
+		Integer stars = review.getStars();
+		return starsToHtml(stars);
+	}
+	
 	public String getReviewHtml(Review review){		
 		Integer stars = review.getStars();
 		return starsToHtml(stars);
@@ -353,6 +362,14 @@ public class ProductController {
 
 	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
+	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
 	}
 	
 	

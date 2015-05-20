@@ -48,18 +48,40 @@ public class CartController {
 		Integer quantity = 1;
 		if(this.quantity != 0) quantity = this.quantity;
 		System.out.println("trying to add " + quantity +" Product to Cart");
-		System.out.println(cart.toString());
-		orderFacade.addProductToCart(cart, product, quantity);
-		System.out.println("Product added to Cart");
+		
+		try{
+			orderFacade.addProductToCart(cart, product, quantity);
+			System.out.println("Product added to Cart");
+			
+			return "cart?faces-redirect=true";
+		}
+		catch(Exception e){
+			System.out.println("Insufficient Storage Quantity");
+			return "errorQuantity";
+		}
+
+	}
+	
+	public String removeOrderLine(Orders cart, OrderLine orderLine){
+		System.out.println("Trying to Remove OrderLine");
+		orderFacade.removeOrderLine(cart, orderLine);
+		
 		return "cart?faces-redirect=true";
 	}
-
+	
+	public String confirmCart(Orders cart){
+		System.out.println("Creating new Order from Cart");
+		
+		orderFacade.createOrderFromCart(cart);
+		return "cart?faces-redirect=true";
+	}
+	
 	public Orders getCart() {
 		return cart;
 	}
 	
-	public List<OrderLine> getOrderLines() {
-		return this.cart.getOrderLines();
+	public List<OrderLine> getOrderLines(Orders cart) {
+		return cart.getOrderLines();
 	}
 
 	public void setCart(Orders cart) {
@@ -81,7 +103,5 @@ public class CartController {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 
 }

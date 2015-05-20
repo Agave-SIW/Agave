@@ -45,6 +45,10 @@ public class CartController {
 	}
 	
 	public String addProductToCart(Orders cart, Product product){
+		CustomerController cc = new CustomerController();
+		
+		if(cc.isNotLogged()) return "errorNotLogged";
+		
 		Integer quantity = 1;
 		if(this.quantity != 0) quantity = this.quantity;
 		System.out.println("trying to add " + quantity +" Product to Cart");
@@ -63,6 +67,10 @@ public class CartController {
 	}
 	
 	public String removeOrderLine(Orders cart, OrderLine orderLine){
+		CustomerController cc = new CustomerController();
+		
+		if(cc.isNotLogged()) return "errorNotLogged";
+		
 		System.out.println("Trying to Remove OrderLine");
 		orderFacade.removeOrderLine(cart, orderLine);
 		
@@ -70,10 +78,22 @@ public class CartController {
 	}
 	
 	public String confirmCart(Orders cart){
+		CustomerController cc = new CustomerController();
+		
+		if(cc.isNotLogged()) return "errorNotLogged";
+		
 		System.out.println("Creating new Order from Cart");
 		
+		try{
 		orderFacade.createOrderFromCart(cart);
 		return "cart?faces-redirect=true";
+		}
+		catch(Exception e){
+			System.out.println("Cart is Empty!");
+			return "errorQuantity";
+		
+		}
+			
 	}
 	
 	public Orders getCart() {

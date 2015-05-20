@@ -91,9 +91,7 @@ public class CartController {
 		catch(Exception e){
 			System.out.println("Cart is Empty!");
 			return "errorQuantity";
-		
 		}
-			
 	}
 	
 	public Orders getCart() {

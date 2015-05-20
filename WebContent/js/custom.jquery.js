@@ -1,6 +1,3 @@
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
 $(".needPlaceholder").attr("placeholder", function(){
 		var arr = this.name.split(":"); 
 		var str = arr[arr.length - 1];

@@ -34,7 +34,7 @@ public class OrderFacade {
 		return order;
 	}
 	
-	/*Metodo inutilizzato*/
+	/* TODO Metodo inutilizzato*/
 	public Orders createCart(Customer customer) {
 		Orders cart = new Orders();
 		cart.setCustomer(customer);
@@ -43,7 +43,12 @@ public class OrderFacade {
 		return cart;
 	}
 
-	public Orders createOrderFromCart(Orders cart){
+	public Orders createOrderFromCart(Orders cart) throws Exception {
+		Exception e = new Exception();
+		
+		if (cart.getOrderLines().isEmpty())
+			throw e;
+		else {
 		System.out.println("Retrieving Customer from Cart");
 		Customer customer = em.createQuery("SELECT c FROM Customer c WHERE c.cart.id = " + cart.getId(), Customer.class).getSingleResult();
 
@@ -55,6 +60,7 @@ public class OrderFacade {
 		emptyCart(cart);
 		
 		return order;
+		}
 	}
 
 	public Orders getOrder(Long id) {

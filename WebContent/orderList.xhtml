@@ -23,10 +23,10 @@
 						<div>${order.id}</div>
 						<div>${order.creationTime}</div>
 						<div>${order.evasionTime}</div>
-						<div><h:outputLink action="#{orderController.findOrder}"
+						<div><h:commandLink action="#{orderController.findOrder}"
 								value="See the order details">
 								<f:param name="id" value="#{order.id}" />
-							</h:outputLink>
+							</h:commandLink>
 						</div>
 							
 					</div>

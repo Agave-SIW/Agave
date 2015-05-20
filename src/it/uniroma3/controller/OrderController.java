@@ -49,17 +49,18 @@ public class OrderController {
 		return null;
 	}
 	
-	public List<OrderLine> getOrderLines(){
-		return orderFacade.getOrderLines(order.getId());
-	}
-	
+
 	public List<Orders> getLastOrders(int numOrders){
 		return orderFacade.getLastOrders(numOrders);
 	}
 	
 	public String findOrder(Long id){
 		this.order = orderFacade.getOrder(id);
-		return "order?id="+id+"&faces-redirect=true&includeViewParams=true";
+		return "order";
+	}
+	
+	public String findOrder(){
+		return findOrder(this.id);
 	}
 	
 

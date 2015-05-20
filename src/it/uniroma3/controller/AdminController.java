@@ -11,6 +11,13 @@ import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
+/**
+ * System operations for Admin management
+ * 
+ * @author Gaetano
+ *
+ */
+
 @ManagedBean
 @SessionScoped
 public class AdminController {

@@ -18,6 +18,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
+/**
+ * System operations for Product management
+ * 
+ * @author Gaetano
+ *
+ */
 
 @ManagedBean
 public class ProductController {

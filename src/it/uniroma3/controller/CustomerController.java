@@ -15,6 +15,12 @@ import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
+/**
+ * System operations for Customer management
+ * 
+ * @author Gaetano, Veronica
+ *
+ */
 
 @ManagedBean
 @SessionScoped

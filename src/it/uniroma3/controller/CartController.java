@@ -11,6 +11,13 @@ import it.uniroma3.model.Product;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+/**
+ * System operations for Cart management
+ * 
+ * @author Veronica
+ *
+ */
+
 @ManagedBean
 public class CartController {
 	

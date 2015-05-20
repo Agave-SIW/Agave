@@ -13,7 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 /**
- * Class that manage the details of a closed Order
+ * System operations for closed/evaded Order management
  * 
  * @author Andrea
  *

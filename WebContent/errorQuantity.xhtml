@@ -20,7 +20,7 @@
 	<ui:define name="content">
 	<c:set var="root" value="#{request.contextPath}" />
 	
-	<h:panelGroup rendered="#{customerController.isLogged()}">
+	<h:panelGroup rendered="#{customerController.isNotLogged()}">
 		<script>
 				window.location.href = "#{root}";
 		</script>

@@ -18,6 +18,13 @@
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
+	
+	<h:panelGroup rendered="#{customerController.isLogged()}">
+		<script>
+				window.location.href = "#{root}";
+		</script>
+	</h:panelGroup>
 		<div class="row">
 			<div class="col-lg-12">
 

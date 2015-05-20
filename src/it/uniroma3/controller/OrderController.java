@@ -8,8 +8,8 @@ import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 /**
@@ -20,13 +20,15 @@ import javax.faces.context.FacesContext;
  */
 
 @ManagedBean
-@SessionScoped
 public class OrderController {
 	
 	@EJB
 	private OrderFacade orderFacade;
 	
 	private Map<String, Object> currentSessionMap;
+	
+	@ManagedProperty(value="#{param.id}")
+	private Long id;
 	
 	private Orders order;
 
@@ -39,7 +41,7 @@ public class OrderController {
 		CustomerController customerController = new CustomerController();
 		
 		if(customerController.isLogged()){
-			Long fetchedId = customerController.getCustomer().getId();
+			Long fetchedId = customerController.getCurrentCustomer().getId();
 			if(fetchedId != -1)
 				return orderFacade.getAllOrdersFromCustomer(fetchedId);
 		}
@@ -55,7 +57,8 @@ public class OrderController {
 		return orderFacade.getLastOrders(numOrders);
 	}
 	
-	public String goToOrderDetails(Long id){
+	public String findOrder(Long id){
+		this.order = orderFacade.getOrder(id);
 		return "order?id="+id+"&faces-redirect=true&includeViewParams=true";
 	}
 	
@@ -74,6 +77,24 @@ public class OrderController {
 
 	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
 		this.currentSessionMap = currentSessionMap;
+	}
+	
+	/** GETTER AND SETTERS **/
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Orders getOrder() {
+		return order;
+	}
+
+	public void setOrder(Orders order) {
+		this.order = order;
 	}
 
 }

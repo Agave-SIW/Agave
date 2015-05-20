@@ -4,6 +4,7 @@
     <!ENTITY euro "&#8364;"> 
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -14,26 +15,23 @@
     </ui:define>
 
 	<ui:define name="content">
-	
-		<div class="row">
+		<h:form>
+			<div class="row">
 
-			<c:forEach var="order"
-				items="#{orderController.getOrders()}">
-				<div class="col-sm-4 col-lg-4 col-md-4">
-					<div>${order.id}</div>
-					<div>${order.closingTime}</div>
-					<div>${order.evasionTime}</div>
-					<div>
-						<h:commandLink 
-							 action="#{orderController.goToOrderDetails}"
-						 	 value="See the order details">
-							 <f:param name="id" value="#{order.id}" />
-						</h:commandLink></div>
-				</div>
-			</c:forEach>
-
-		</div>
-	
-	
+				<c:forEach var="order" items="#{orderController.getOrders()}">
+					<div class="col-sm-4 col-lg-4 col-md-4">
+						<div>${order.id}</div>
+						<div>${order.creationTime}</div>
+						<div>${order.evasionTime}</div>
+						<div><h:outputLink action="#{orderController.findOrder}"
+								value="See the order details">
+								<f:param name="id" value="#{order.id}" />
+							</h:outputLink>
+						</div>
+							
+					</div>
+				</c:forEach>
+			</div>
+		</h:form>
 	</ui:define>
 </ui:composition>

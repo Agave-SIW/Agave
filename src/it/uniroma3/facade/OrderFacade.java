@@ -175,6 +175,7 @@ public class OrderFacade {
 							+ "WHERE o.customer.id = :idCustomer", Orders.class)
 							.setParameter("idCustomer", idCustomer)
 							.getResultList();
-	}
 
+	}
+	
 }

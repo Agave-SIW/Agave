@@ -5,6 +5,11 @@ body {
 	color: #e9ffca;
 }
 
+footer {
+	background: #4e483c;
+	box-shadow: 0px 500px 0px 500px #4e483c; /* footer trick */
+}
+
 ::-moz-selection, *::-moz-selection {
 	background: #ccc;
 	background: rgba(128, 128, 128, 0.3);
@@ -362,6 +367,7 @@ input[readonly] {
 .well {
 	min-height: 125px;
 	color: #333;
+	border-radius: 0;
 }
 
 .form-control {
@@ -376,4 +382,11 @@ input[readonly] {
 .carousel-indicators li {
 	box-shadow: 0px 0px 10px 0px #000;
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+}
+
+/*CART CUSTOM Css*/
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }

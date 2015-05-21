@@ -16,35 +16,67 @@
     </ui:define>
 
 	<ui:define name="content">
-	<f:metadata>
+	<c:set var="root" value="#{request.contextPath}" />
+	
+		<f:metadata>
 			<f:event type="preRenderView"
 				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
-	</f:metadata>
+		</f:metadata>
 
 		<h2>Cart</h2>
 		<h:panelGroup rendered="#{customerController.isLogged()}">
-		<h:form>
-			<ui:repeat var="line" value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
-					<div>
-						<h:commandLink action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
-							value="Remove" styleClass="btn btn-default">
-						</h:commandLink>
-						#{line.product.name} #{line.product.price} #{line.quantity}
+			<h:form>
+				<div class="row" style="border-bottom: 1px solid">
+					
+					<div class="col-md-2"><h4>Preview</h4></div>
+					<div class="col-md-4"><h4>Product Name</h4></div>
+					<div class="col-md-2"><h4>Unit Price</h4></div>
+					<div class="col-md-2"><h4>Quantity</h4></div>
+					<div class="col-md-1"><h4>Remove</h4></div>
+				</div>
+				<ui:repeat var="line"
+					value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+					<div class="row" style="border-bottom: 1px solid; padding: 5px">
+						<div class="col-md-2 vcenter">
+							<img src="#{root}/uploads/#{line.product.picturePath}" alt="#{line.product.name}" class="img-thumbnail"/></div>
+						<div class="col-md-4 vcenter">#{line.product.name}</div>
+						<div class="col-md-2 vcenter price">
+						<h:outputText value="#{line.product.price}">
+									<f:convertNumber pattern="#0.00 &#8364;" />
+						</h:outputText>
+						</div>
+						<div class="col-md-2 vcenter">x #{line.quantity}</div>
+						<div class="col-md-1 vcenter">
+							<h:commandLink
+								action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
+								value="Remove" styleClass="btn btn-default">
+							</h:commandLink>
+						</div>
 					</div>
 				</ui:repeat>
-			<div>Total: #{cartController.getTotal()}</div>
-				<div>
-					<h:commandLink
-						action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
-						value="Confirm" styleClass="btn btn-primary">
-					</h:commandLink>
+				<div class="row" style="border-bottom: 1px solid; padding: 10px">
+					<div class="col-md-8" />
+					<div class="col-md-3"><strong>Total:</strong> <span class="price">
+																				<h:outputText value="#{cartController.getTotal()}">
+																					<f:convertNumber pattern="#0.00 &#8364;" />
+																				</h:outputText>
+																  </span>
+					</div>
+				</div>
+
+				<div class="row" style="padding: 5px">
+					<div class="col-md-8" />
+					<div class="col-md-3">
+						<h:commandLink
+							action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
+							value="Confirm" styleClass="btn btn-primary">
+						</h:commandLink>
+					</div>
 				</div>
 			</h:form>
-
-
 		</h:panelGroup>
 		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-		warning
+		Please Log In to access your Cart.
 		</h:panelGroup>
 
 	</ui:define>

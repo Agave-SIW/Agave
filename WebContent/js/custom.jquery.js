@@ -84,7 +84,7 @@ $(document).ready(function() {
 	});
 });
 
-$("#closedOrderNav").click(function(event){
+$("#closedOrderTab").click(function(event){
 	event.preventDefault();
 	$(".nav-justified li:eq(0)").addClass("active");
 	$(".nav-justified li:eq(1)").removeClass("active");
@@ -94,8 +94,8 @@ $("#closedOrderNav").click(function(event){
 	
 $("#evadedOrderTab").click(function(event){
 	event.preventDefault();
-	$(".nav-justified li:eq(1)").addClass("active");
 	$(".nav-justified li:eq(0)").removeClass("active");
+	$(".nav-justified li:eq(1)").addClass("active");
 	$("#closedOrders").hide();
 	$("#evadedOrders").show();
 });

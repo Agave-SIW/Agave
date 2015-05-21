@@ -83,3 +83,19 @@ $(document).ready(function() {
 
 	});
 });
+
+$("#closedOrderNav").click(function(event){
+	event.preventDefault();
+	$(".nav-justified li:eq(0)").addClass("active");
+	$(".nav-justified li:eq(1)").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+});
+	
+$("#evadedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".nav-justified li:eq(1)").addClass("active");
+	$(".nav-justified li:eq(0)").removeClass("active");
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
+});

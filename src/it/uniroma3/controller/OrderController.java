@@ -18,48 +18,72 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class OrderController {
-	
+
 	@EJB
 	private OrderFacade orderFacade;
-	
+
 	private Map<String, Object> currentSessionMap;
-	
+
 	@ManagedProperty(value="#{param.id}")
 	private Long id;
-	
+
 	private Orders order;
 
-	
+
 	public OrderController(){
 		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 	}
-	
+
 	public List<Orders> getOrders(){
 		CustomerController customerController = new CustomerController();
-		
+
 		if(customerController.isLogged()){
 			Long fetchedId = customerController.getCurrentCustomer().getId();
 			if(fetchedId != -1)
 				return orderFacade.getAllOrdersFromCustomer(fetchedId);
 		}
-		System.out.println("you do not have any orders yet!");
+
 		return null;
 	}
-	
+
+	public List<Orders> getClosedOrders(){
+		CustomerController customerController = new CustomerController();
+
+		if(customerController.isLogged()){
+			Long fetchedId = customerController.getCurrentCustomer().getId();
+			if(fetchedId != -1)
+				return orderFacade.getAllClosedOrdersFromCustomer(fetchedId);
+		}
+
+		return null;	
+	}
+
+	public List<Orders> getEvadedOrders(){
+		CustomerController customerController = new CustomerController();
+
+		if(customerController.isLogged()){
+			Long fetchedId = customerController.getCurrentCustomer().getId();
+			if(fetchedId != -1)
+				return orderFacade.getAllEvadedOrdersFromCustomer(fetchedId);
+		}
+
+		return null;
+	}
+
 
 	public List<Orders> getLastOrders(int numOrders){
 		return orderFacade.getLastOrders(numOrders);
 	}
-	
+
 	public String findOrder(Long id){
 		this.order = orderFacade.getOrder(id);
 		return "order";
 	}
-	
+
 	public String findOrder(){
 		return findOrder(this.id);
 	}
-	
+
 
 	public OrderFacade getOrderFacade() {
 		return orderFacade;
@@ -76,9 +100,9 @@ public class OrderController {
 	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
 		this.currentSessionMap = currentSessionMap;
 	}
-	
+
 	/** GETTER AND SETTERS **/
-	
+
 	public Long getId() {
 		return id;
 	}

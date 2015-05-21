@@ -86,16 +86,16 @@ $(document).ready(function() {
 
 $("#closedOrderTab").click(function(event){
 	event.preventDefault();
-	$(".nav-justified li:eq(0)").addClass("active");
-	$(".nav-justified li:eq(1)").removeClass("active");
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
 	$("#closedOrders").show();
 	$("#evadedOrders").hide();
 });
 	
 $("#evadedOrderTab").click(function(event){
 	event.preventDefault();
-	$(".nav-justified li:eq(0)").removeClass("active");
-	$(".nav-justified li:eq(1)").addClass("active");
+	$(".tab-li-1").removeClass("active");
+	$(".tab-li-2").addClass("active");
 	$("#closedOrders").hide();
 	$("#evadedOrders").show();
 });

@@ -211,7 +211,7 @@ public class OrderFacade {
 	}
 	
 	/**
-	 * Return all orders of a selected customer in base the corrispondence of 
+	 * Return all orders of a selected customer in base the correspondence of 
 	 * the customer's id
 	 * @param idCustomer
 	 * @return
@@ -223,6 +223,36 @@ public class OrderFacade {
 							.setParameter("idCustomer", idCustomer)
 							.getResultList();
 
+	}
+
+	/**
+	 * Return all the closed orders of a selected customer in base the correspondence of 
+	 * the customer's id
+	 * @param idCustomer
+	 * @return
+	 */
+	public List<Orders> getAllClosedOrdersFromCustomer(Long idCustomer) {
+		return em.createQuery("SELECT o "
+				            + "FROM Orders o "
+							+ "WHERE o.customer.id = :idCustomer "
+							+ "and o.evasionTime is NULL", Orders.class)
+							.setParameter("idCustomer", idCustomer)
+							.getResultList();
+	}
+
+	/**
+	 * Return all evaded orders of a selected customer in base the correspondence of 
+	 * the customer's id
+	 * @param idCustomer
+	 * @return
+	 */
+	public List<Orders> getAllEvadedOrdersFromCustomer(Long idCustomer) {
+		return em.createQuery("SELECT o "
+				            + "FROM Orders o "
+							+ "WHERE o.customer.id = :idCustomer "
+							+ "and o.evasionTime is not NULL", Orders.class)
+							.setParameter("idCustomer", idCustomer)
+							.getResultList();
 	}
 	
 }

@@ -78,4 +78,31 @@ $(document).ready(function() {
         }*/
         
     });
+	
+$(".nav-justified li:eq(0) a").on("click", function(){
+	event.preventDefault();
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
 });
+
+$(".nav-justified li:eq(1) a").on("click", function(){
+	event.preventDefault();
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
+});
+});
+
+$(".nav-justified li:eq(0) a").on("click", function(){
+	event.preventDefault();
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+});
+
+$(".nav-justified li:eq(1) a").on("click", function(){
+	event.preventDefault();
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
+});
+
+
+

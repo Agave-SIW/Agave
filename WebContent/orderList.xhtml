@@ -17,13 +17,13 @@
 		<h:form>
 			<ul class="nav nav-tabs nav-justified">
 				<li role="presentation" class="active"><h:commandLink
-						action="orderList" value="Open Orders"></h:commandLink></li>
-				<li role="presentation"><h:commandLink action="orderList"
-						value="Closed Orders"></h:commandLink></li>
+						action="orderList" value="Closed Orders"></h:commandLink></li>
+				<li role="presentation"><h:commandLink action="#"
+						value="Evaded Orders"></h:commandLink></li>
 			</ul>
 			<br></br>
 			<br></br>
-			<div class="row">
+			<div class="row" id="closedOrders">
 				<div class="panel panel-default">
 					<c:forEach var="order" items="#{orderController.getOrders()}">
 						<div class="panel panel-default">
@@ -63,6 +63,8 @@
 					</c:forEach>
 				</div>
 			</div>
+			
+			<div id="evadedOrders">pollo</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

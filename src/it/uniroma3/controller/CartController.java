@@ -22,7 +22,7 @@ import javax.faces.bean.ManagedBean;
 public class CartController {
 	
 	private Orders cart;
-	private int quantity;
+	private Integer quantity;
 	
 	@EJB
 	private OrderFacade orderFacade;
@@ -141,11 +141,11 @@ public class CartController {
 		this.orderFacade = orderFacade;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

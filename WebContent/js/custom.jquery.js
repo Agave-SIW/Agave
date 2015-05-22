@@ -44,16 +44,20 @@ $("#evadedOrderTab").click(function(event){
 
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
-	var str = capitalizeFirstLetter(arr[1]).trim();
+	var str = (arr[1]? capitalizeFirstLetter(arr[1]).trim():arr[0]);
 	if (str.indexOf("float") !=-1) {
 		return "Price must be a valid number";
 	}
 	if (str.indexOf("numero intero") !=-1) {
 		return "Quantity must be a valid number";
 	}
+	if (str.indexOf("Quantity") !=-1) {
+		return "Quantity must be a valid number";
+	}
 	if (str.indexOf("DateofBirth") !=-1) {
 		return "Could not be intended as a valid date. Example: 17/05/2015";
 	}
+	
 	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
 });
 

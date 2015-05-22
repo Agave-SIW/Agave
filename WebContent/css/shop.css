@@ -52,6 +52,10 @@ hr {
 	padding: 0 15px;
 }
 
+.inline {
+	display:inline;
+}
+
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 	border-color: #3C4E4B;
 	border-color: rgba(0, 0, 0, 0.1);

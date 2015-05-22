@@ -119,6 +119,11 @@ public class CustomerController {
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		return page;
 	}
+	
+	public Customer getStoredCustomer(Long id){
+		this.customer = customerFacade.getCustomer(id);
+		return this.customer;
+	}
 
 	public Customer getCurrentCustomer(){
 		return (Customer) this.currentSessionMap.get("customer");

@@ -71,10 +71,12 @@
 								</div>
 								<h:inputHidden value="#{view.viewId}" id="page" />
 								<div class="form-group">
-									<h:commandButton id="loginButton" value="Login"
-										action="#{customerController.loginCustomer}"
-										styleClass="btn btn-primary" />
-									<h:message for="loginButton" styleClass="label label-warning" />
+									<fieldset id="loginField">
+										<h:commandButton id="loginButton" value="Login"
+											action="#{customerController.loginCustomer}"
+											styleClass="btn btn-primary" />
+										<h:message for="loginButton" styleClass="label label-warning" />
+									</fieldset>
 								</div>
 
 							</h:form>

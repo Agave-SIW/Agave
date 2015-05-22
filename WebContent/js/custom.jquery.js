@@ -1,3 +1,7 @@
+if(typeof fieldDis != "undefined" && fieldDis){
+	$("#loginField").attr('disabled', 'disabled');
+}
+
 $(".needPlaceholder").attr("placeholder", function(){
 	var arr = this.name.split(":"); 
 	var str = arr[arr.length - 1];

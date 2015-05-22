@@ -10,31 +10,23 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-	
 	<c:set var="root" value="#{request.contextPath}" />
 
 	<ui:define name="title">
-        Cart Error | Agave Shop - SIW 2015
+        Sign In Success | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
-	<c:set var="root" value="#{request.contextPath}" />
-	
-	<h:panelGroup rendered="#{customerController.isNotLogged()}">
-		<script>
-				window.location.href = "#{root}";
-		</script>
-	</h:panelGroup>
 		<div class="row">
 			<div class="col-lg-12">
 
 				<div class="col-md-12">
-					<h1>Error</h1>
+					<h1>Success</h1>
 					<hr />
-					<div class="label label-warning">Insufficient Storage Quantity. Please try again.</div>
+					<div class="label label-success">New Order created successfully</div>
 					<span id="timer"> 
 					<script type="text/javascript">
-						countDown("#{root}/cart.xhtml", 10);
+						countDown("#{root}", 7);
 					</script>
 					</span>
 				</div>

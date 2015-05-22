@@ -167,6 +167,9 @@ public class Orders {
 		}
 		return false;
 	}
-
+	
+	public boolean isEmpty(){
+		return this.orderLines.isEmpty();
+	}
 
 }

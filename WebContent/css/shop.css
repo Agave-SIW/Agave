@@ -390,3 +390,9 @@ input[readonly] {
     vertical-align: middle;
     float: none;
 }
+
+.button-center {
+	display: flex; 
+	justify-content: center; 
+	align-items: center;
+}

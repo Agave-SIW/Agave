@@ -53,7 +53,7 @@ hr {
 }
 
 .inline {
-	display:inline;
+	display: inline;
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
@@ -388,7 +388,6 @@ input[readonly] {
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
-/*CART CUSTOM Css*/
 .vcenter {
 	display: inline-block;
 	vertical-align: middle;
@@ -405,10 +404,23 @@ input[readonly] {
 	margin-top: -15px;
 }
 
-.btn-less-margin-up{
+.btn-less-margin-up {
 	margin-top: -5px;
 }
 
 #buyFrameDiv {
-	  padding: 0;
+	padding: 0;
+}
+
+.margin-center {
+	margin: 0 auto;
+}
+
+.btn-confirm-cart {
+	width: 76px;
+}
+
+.address-pad {
+	padding: 10px;
+	padding-left: 25px;
 }

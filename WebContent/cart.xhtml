@@ -24,75 +24,93 @@
 		</f:metadata>
 		<h:panelGroup rendered="#{customerController.isLogged()}">
 			<h:form>
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<strong>Cart</strong>
-					</div>
-
-
-
-					<h:panelGroup
-						rendered='#{cartController.IsEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
-						<p>Your cart is empty</p>
-					</h:panelGroup>
-
-					<ui:repeat var="line"
-						value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
-						<div class="row" style="padding: 5px">
-							<div class="col-xs-12 col-sm-2 col-md-2 vcenter">
-								<img src="#{root}/uploads/#{line.product.picturePath}"
-									alt="#{line.product.name}" class="img-thumbnail" />
-							</div>
-							<div class="col-xs-12 col-sm-4 col-md-4 vcenter">#{line.product.name}</div>
-							<div class="col-xs-4 col-sm-2 col-md-2 vcenter price">
-								<h:outputText value="#{line.product.price}">
-									<f:convertNumber pattern="#0.00 &#8364;" />
-								</h:outputText>
-							</div>
-							<div class="col-xs-4 col-sm-2 col-md-2 vcenter">x
-								#{line.quantity}</div>
-							<div class="col-xs-2 col-sm-1 col-md-1 vcenter">
-								<h:commandLink
-									action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
-									value="x" styleClass="close" aria-label="Close">
-								</h:commandLink>
-							</div>
-						</div>
-					</ui:repeat>
-				</div>
-
-
+				<h:panelGroup
+					rendered='#{cartController.IsEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+					<span class="label label-info">Your cart is empty</span>
+				</h:panelGroup>
 				<h:panelGroup
 					rendered='#{cartController.NotEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
-					<div class="col-md-6">
-						<div class="panel panel-info"><h:outputText
-													value='#{sessionScope["customer"].getFirstName()}' />
-													<h:outputText
-													value='#{sessionScope["customer"].getLastName()}' />
-													<h:outputText
-													value='#{sessionScope["customer"].getAddress().toString()}' /></div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-info">
-							<div class="row" style="padding: 10px">
-								<div class="col-md-10" />
-								<div class="col-md-2">
-									<p style="text-align: center">
-										<strong>Total:</strong> <span class="price"> <h:outputText
-												value="#{cartController.getTotal()}">
-												<f:convertNumber pattern="#0.00 &#8364;" />
-											</h:outputText>
-										</span>
-									</p>
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<strong>Cart</strong>
+						</div>
+
+						<ui:repeat var="line"
+							value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+							<div class="row" style="padding: 5px">
+								<div class="col-xs-12 col-sm-2 col-md-2 vcenter">
+									<img src="#{root}/uploads/#{line.product.picturePath}"
+										alt="#{line.product.name}" class="img-thumbnail" />
+								</div>
+								<div class="col-xs-12 col-sm-4 col-md-4 vcenter">
+									<h4>#{line.product.name}</h4>
+								</div>
+								<div class="col-xs-4 col-sm-2 col-md-2 vcenter price">
+									<h:outputText value="#{line.product.price}">
+										<f:convertNumber pattern="#0.00 &#8364;" />
+									</h:outputText>
+								</div>
+								<div class="col-xs-4 col-sm-2 col-md-2 vcenter">x
+									#{line.quantity}</div>
+								<div class="col-xs-2 col-sm-1 col-md-1 vcenter">
+									<h:commandLink
+										action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
+										styleClass="close" aria-label="Close">
+										<span class="glyphicon glyphicon-trash"></span>
+									</h:commandLink>
 								</div>
 							</div>
+						</ui:repeat>
+					</div>
 
-							<div class="row" style="padding: 5px">
-								<div class="col-md-10" />
-								<div class="col-md-2 button-center">
+
+
+					<div class="panel panel-info">
+						<h4 class="address-pad">Shipping Info</h4>
+						<div class="row address-pad">
+							<div class="col-xs-12 col-md-10">
+								<p>
+									<h:outputText
+										value='#{sessionScope["customer"].getFirstName()}' />
+									&nbsp;
+									<h:outputText value='#{sessionScope["customer"].getLastName()}' />
+								</p>
+
+
+								<p>
+									<h:outputText
+										value='#{sessionScope["customer"].getAddress().getStreet()}' />
+								</p>
+								<p>
+									<h:outputText
+										value='#{sessionScope["customer"].getAddress().getZipcode()}' />
+									,
+									<h:outputText
+										value='#{sessionScope["customer"].getAddress().getCity()}' />
+
+									(
+									<h:outputText
+										value='#{sessionScope["customer"].getAddress().getState()}' />
+									)
+								</p>
+								<p>
+									<h:outputText
+										value='#{sessionScope["customer"].getAddress().getCountry()}' />
+								</p>
+							</div>
+
+							<div class="col-xs-12 col-md-2">
+								<p style="text-align: center">
+									<strong>Total:</strong> <span class="price"> <h:outputText
+											value="#{cartController.getTotal()}">
+											<f:convertNumber pattern="#0.00 &#8364;" />
+										</h:outputText>
+									</span>
+								</p>
+								<div class="margin-center btn-confirm-cart">
 									<h:commandLink
 										action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
-										value="Confirm" styleClass="btn btn-primary">
+										value="Confirm" styleClass="btn btn-primary btn-confirm-cart">
 									</h:commandLink>
 								</div>
 							</div>
@@ -105,7 +123,7 @@
 
 
 		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-		Please Log In to access your Cart.
+		<span class="label label-warning">Please Log In to access your Cart.</span>
 		</h:panelGroup>
 	</ui:define>
 </ui:composition>

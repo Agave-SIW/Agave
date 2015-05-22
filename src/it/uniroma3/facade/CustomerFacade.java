@@ -1,6 +1,6 @@
 package it.uniroma3.facade;
 
-import it.uniroma3.helper.MD5Helper;
+import it.uniroma3.helper.PasswordHelper;
 import it.uniroma3.model.*;
 
 import javax.ejb.Stateless;
@@ -18,10 +18,10 @@ public class CustomerFacade {
     @PersistenceContext(unitName = "agave")
     private EntityManager em;
     
-    private MD5Helper md;
+    private PasswordHelper md;
     
 	public CustomerFacade() {
-		this.md = new MD5Helper();
+		this.md = new PasswordHelper();
 	}
 	
 	public Customer createCustomer(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth, Address address) {
@@ -115,11 +115,11 @@ public class CustomerFacade {
 		updateCustomer(customer);
 	}
 
-	public MD5Helper getMd() {
+	public PasswordHelper getMd() {
 		return md;
 	}
 
-	public void setMd(MD5Helper md) {
+	public void setMd(PasswordHelper md) {
 		this.md = md;
 	}
 

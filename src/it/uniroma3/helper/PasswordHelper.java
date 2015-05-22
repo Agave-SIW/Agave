@@ -3,13 +3,13 @@ package it.uniroma3.helper;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MD5Helper {
+public class PasswordHelper {
 	
 	private MessageDigest md;
 	
-	public MD5Helper() {
+	public PasswordHelper() {
 		try {
-		 this.md = MessageDigest.getInstance("MD5");
+		 this.md = MessageDigest.getInstance("SHA-256");
 		 
 		}
 		catch (NoSuchAlgorithmException e)
@@ -32,6 +32,8 @@ public class MD5Helper {
         }
         //Get complete hashed password in hex format
         String generatedPassword = sb.toString();
+        
+        //System.out.println(generatedPassword);
         
         return generatedPassword;
 	}

@@ -49,7 +49,7 @@ public class AdminController {
 			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));
 		}
 		else{
-			System.out.print("\n\nLogin OK\n\n");
+			System.out.print("\n\nLogin Admin OK\n\n");
 		}
 		
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;

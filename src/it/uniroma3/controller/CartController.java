@@ -57,7 +57,7 @@ public class CartController {
 		if(cc.isNotLogged()) return "WEB-INF/errorNotLogged";
 		
 		Integer quantity = 1;
-		if(this.quantity != 0) quantity = this.quantity;
+		if(this.quantity != null && this.quantity != 0) quantity = this.quantity;
 		System.out.println("trying to add " + quantity +" Product to Cart");
 		
 		try{

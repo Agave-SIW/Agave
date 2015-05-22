@@ -29,21 +29,26 @@
 			</div>
 			<h:panelGroup rendered="#{customerController.isLogged()}">
 				<h:form>
+
+					<h:panelGroup rendered='#{cartController.IsEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+						<p>Your cart is empty</p>
+					</h:panelGroup>
+
 					<ui:repeat var="line"
 						value='#{cartController.getOrderLines(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
 						<div class="row" style="padding: 5px">
-							<div class="col-xs-12 col-md-2 vcenter">
+							<div class="col-xs-12 col-sm-2 col-md-2 vcenter">
 								<img src="#{root}/uploads/#{line.product.picturePath}"
 									alt="#{line.product.name}" class="img-thumbnail" />
 							</div>
-							<div class="col-xs-12 col-md-4 vcenter">#{line.product.name}</div>
-							<div class="col-xs-4 col-md-2 vcenter price">
+							<div class="col-xs-12 col-sm-4 col-md-4 vcenter">#{line.product.name}</div>
+							<div class="col-xs-4 col-sm-2 col-md-2 vcenter price">
 								<h:outputText value="#{line.product.price}">
 									<f:convertNumber pattern="#0.00 &#8364;" />
 								</h:outputText>
 							</div>
-							<div class="col-xs-4 col-md-2 vcenter">x #{line.quantity}</div>
-							<div class="col-xs-2 col-md-1 vcenter">
+							<div class="col-xs-4 col-sm-2 col-md-2 vcenter">x #{line.quantity}</div>
+							<div class="col-xs-2 col-sm-1 col-md-1 vcenter">
 								<h:commandLink
 									action='#{cartController.removeOrderLine(sessionScope["customer"].getCart(), line)}'
 									value="x" styleClass="close" aria-label="Close">
@@ -51,28 +56,31 @@
 							</div>
 						</div>
 					</ui:repeat>
-					<div class="row" style="padding: 10px">
-						<div class="col-md-10" />
-						<div class="col-md-2">
-							<p style="text-align: center">
-								<strong>Total:</strong> <span class="price"> <h:outputText
-										value="#{cartController.getTotal()}">
-										<f:convertNumber pattern="#0.00 &#8364;" />
-									</h:outputText>
-								</span>
-							</p>
-						</div>
-					</div>
 
-					<div class="row" style="padding: 5px">
-						<div class="col-md-10" />
-						<div class="col-md-2 button-center">
-							<h:commandLink
-								action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
-								value="Confirm" styleClass="btn btn-primary">
-							</h:commandLink>
+					<h:panelGroup rendered='#{cartController.NotEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
+						<div class="row" style="padding: 10px">
+							<div class="col-md-10" />
+							<div class="col-md-2">
+								<p style="text-align: center">
+									<strong>Total:</strong> <span class="price"> <h:outputText
+											value="#{cartController.getTotal()}">
+											<f:convertNumber pattern="#0.00 &#8364;" />
+										</h:outputText>
+									</span>
+								</p>
+							</div>
 						</div>
-					</div>
+
+						<div class="row" style="padding: 5px">
+							<div class="col-md-10" />
+							<div class="col-md-2 button-center">
+								<h:commandLink
+									action='#{cartController.confirmCart(cartController.setCartFromId(sessionScope["customer"].getId()))}'
+									value="Confirm" styleClass="btn btn-primary">
+								</h:commandLink>
+							</div>
+						</div>
+					</h:panelGroup>
 				</h:form>
 			</h:panelGroup>
 		</div>

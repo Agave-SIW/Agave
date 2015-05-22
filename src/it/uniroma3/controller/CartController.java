@@ -93,14 +93,21 @@ public class CartController {
 		
 		try{
 		orderFacade.createOrderFromCart(cart);
-		return "cart?faces-redirect=true";
+		return "WEB-INF/successNewOrder";
 		}
 		catch(Exception e){
 			System.out.println("Cart is Empty!");
 			return "WEB-INF/errorEmptyCart";
 		
-		}
-			
+		}		
+	}
+	
+	public boolean IsEmpty(Orders cart){
+		return cart.isEmpty();
+	}
+	
+	public boolean NotEmpty(Orders cart){
+		return !cart.isEmpty();
 	}
 	
 	public Orders getCart() {

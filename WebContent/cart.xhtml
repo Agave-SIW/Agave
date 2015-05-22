@@ -71,8 +71,7 @@
 							<div class="col-xs-12 col-md-10">
 								<p>
 									<h:outputText
-										value='#{sessionScope["customer"].getFirstName()}' />
-									&nbsp;
+										value='#{sessionScope["customer"].getFirstName()}' /><span>&nbsp;</span>
 									<h:outputText value='#{sessionScope["customer"].getLastName()}' />
 								</p>
 
@@ -83,15 +82,11 @@
 								</p>
 								<p>
 									<h:outputText
-										value='#{sessionScope["customer"].getAddress().getZipcode()}' />
-									,
+										value='#{sessionScope["customer"].getAddress().getZipcode()}' /><span>, </span>
 									<h:outputText
-										value='#{sessionScope["customer"].getAddress().getCity()}' />
-
-									(
+										value='#{sessionScope["customer"].getAddress().getCity()}' /><span> (</span>
 									<h:outputText
-										value='#{sessionScope["customer"].getAddress().getState()}' />
-									)
+										value='#{sessionScope["customer"].getAddress().getState()}' /><span>)</span>
 								</p>
 								<p>
 									<h:outputText
@@ -123,7 +118,8 @@
 
 
 		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-		<span class="label label-warning">Please Log In to access your Cart.</span>
+			<span class="label label-warning">Please Log In to access your
+				Cart.</span>
 		</h:panelGroup>
 	</ui:define>
 </ui:composition>

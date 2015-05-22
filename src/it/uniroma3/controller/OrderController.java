@@ -2,8 +2,11 @@ package it.uniroma3.controller;
 
 import java.util.List;
 import java.util.Map;
+
 import it.uniroma3.facade.OrderFacade;
+import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -83,8 +86,15 @@ public class OrderController {
 	public String findOrder(){
 		return findOrder(this.id);
 	}
-
-
+	
+	public double getOrderTotal(Long orderId){
+		System.out.println(orderId);
+		double sum = 0;
+		for(OrderLine ol : orderFacade.getOrderLines(orderId))
+			sum += ol.getQuantity()*ol.getProduct().getPrice();
+		return sum;
+	}
+	
 	public OrderFacade getOrderFacade() {
 		return orderFacade;
 	}

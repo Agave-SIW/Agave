@@ -184,10 +184,7 @@ public class OrderFacade {
 	 * @return
 	 */
 	public List<OrderLine> getOrderLines(Long id) {
-		return 	em.createQuery("SELECT ol "
-						+ "		FROM OrderLine "
-						+ "		WHERE ol.id_order = :id"
-						, OrderLine.class).setParameter("id", id).getResultList();
+		return getOrder(id).getOrderLines();
 	}
 
 	/**

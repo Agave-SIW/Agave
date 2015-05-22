@@ -419,3 +419,16 @@ input[readonly] {
 #buyFrameDiv {
 	padding: 0;
 }
+
+.margin-center {
+	margin: 0 auto;
+}
+
+.btn-confirm-cart {
+	width: 76px;
+}
+
+.address-pad {
+	padding: 10px;
+	padding-left: 25px;
+}

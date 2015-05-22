@@ -97,7 +97,7 @@ public class CartController {
 		}
 		catch(Exception e){
 			System.out.println("Cart is Empty!");
-			return "WEB-INF/errorQuantity";
+			return "WEB-INF/errorEmptyCart";
 		
 		}
 			

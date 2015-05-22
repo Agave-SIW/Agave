@@ -54,6 +54,8 @@ public class CustomerFacade {
 		return customer;
 	}
 	
+	
+	
 	public boolean existsCustomer(String email) {
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);

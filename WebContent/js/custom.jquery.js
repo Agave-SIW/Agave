@@ -12,6 +12,7 @@ $(".needGlyph").html(function(){
 });
 
 $("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
+$("#buyFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
 
 $(".login-link").click(function(event) {
 	event.preventDefault();
@@ -23,6 +24,22 @@ $("#addReviewButton").click(function(event) {
 	event.preventDefault();
 	$("#addReviewButton").toggle('slide');
 	$("#reviewFrameDiv").toggle('slide');
+});
+
+$("#closedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+});
+	
+$("#evadedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").removeClass("active");
+	$(".tab-li-2").addClass("active");
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
 });
 
 $(".label-warning").text(function(){ 
@@ -57,6 +74,13 @@ $(document).on('change', '.btn-file :file', function() {
 });
 
 $(document).ready(function() {
+	$("#buyFrame").slideDown();
+	
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+	
 	$(".indexDesc").dotdotdot({
 		ellipsis: 	'... ',
 		watch: 		'window'
@@ -77,25 +101,8 @@ $(document).ready(function() {
 
 		if( input.length ) {
 			input.val(log);
-		} /*else {
-            if( log ) alert(log);
-        }*/
+		} /*else {  if( log ) alert(log);   }*/
 
 	});
 });
 
-$("#closedOrderTab").click(function(event){
-	event.preventDefault();
-	$(".tab-li-1").addClass("active");
-	$(".tab-li-2").removeClass("active");
-	$("#closedOrders").show();
-	$("#evadedOrders").hide();
-});
-	
-$("#evadedOrderTab").click(function(event){
-	event.preventDefault();
-	$(".tab-li-1").removeClass("active");
-	$(".tab-li-2").addClass("active");
-	$("#closedOrders").hide();
-	$("#evadedOrders").show();
-});

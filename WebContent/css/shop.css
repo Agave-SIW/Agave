@@ -386,13 +386,25 @@ input[readonly] {
 
 /*CART CUSTOM Css*/
 .vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
 }
 
 .button-center {
-	display: flex; 
-	justify-content: center; 
+	display: flex;
+	justify-content: center;
 	align-items: center;
+}
+
+.btn-margin-up {
+	margin-top: -15px;
+}
+
+.btn-less-margin-up{
+	margin-top: -5px;
+}
+
+#buyFrameDiv {
+	  padding: 0;
 }

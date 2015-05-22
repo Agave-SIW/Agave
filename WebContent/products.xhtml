@@ -28,12 +28,14 @@
 								data-ride="carousel" style="margin-bottom: 40px;">
 								<ol class="carousel-indicators">
 									<li data-target="#carousel-example-generic" data-slide-to="0"></li>
-									<li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+									<li data-target="#carousel-example-generic" data-slide-to="1"
+										class="active"></li>
 									<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 								</ol>
 								<div class="carousel-inner">
 									<c:forEach var="product"
-										items="#{productController.getLastFourProducts()}" end="2" varStatus="theCount">
+										items="#{productController.getLastFourProducts()}" end="2"
+										varStatus="theCount">
 										<div class="item #{theCount.index == 1  ? 'active' : ''}">
 											<img class="slide-image"
 												src="#{root}/uploads/#{product.picturePath}"
@@ -75,10 +77,17 @@
 											</h:commandLink>
 
 										</h2>
-										<p class="productsDesc">${product.description}</p>
+										<p class="productsDesc">#{product.description}</p>
 									</div>
+
 									<div class="ratings">
-										<p class="pull-right">${productController.getReviewNumber(product)}</p>
+										<p class="pull-right">
+											<h:panelGroup rendered="#{customerController.isLogged()}">
+												<h:commandButton
+													action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
+													value="Add To Cart" styleClass="btn btn-primary btn-margin-up" />
+											</h:panelGroup>
+										</p>
 										<p>
 											<h:outputText
 												value="#{productController.getReviewAverageHtml(product)}"

@@ -73,6 +73,17 @@ public class CartController {
 
 	}
 	
+	public String addProductToCartIframe(Orders cart, Product product){
+		//System.out.println(product.getName());
+		
+		String output = addProductToCart(cart, product);
+		
+		if(output.indexOf("error") != -1)
+			return "WEB-INF/errorQuantityIframe";
+		
+		return "WEB-INF/successCartIframe";
+	}
+	
 	public String removeOrderLine(Orders cart, OrderLine orderLine){
 		CustomerController cc = new CustomerController();
 		

@@ -83,28 +83,26 @@ public class CustomerController {
 	}
 
 	public String loginCustomer(){
+		System.out.println("trying to login");
 		this.customer = customerFacade.getCustomer(email);
-
+		
 		if(customer==null || !customerFacade.checkPassword(customer, password)){
 			this.customer = null;
-			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
+			this.email = null;
+			this.password = null;
+			System.out.println("WRONG MAIL OR PASSWORD");
 			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
-			
-			if(page != null) System.out.println(page);
 			
 			if(page != null && page.contains("WEB-INF")) return "index";
 			return "WEB-INF/errorLogin";
 		}
 		else{
-			System.out.print("\n\nLogin OK\n\n");
+			System.out.println("Login OK");
 		}
 		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
 		this.currentSessionMap.put("customer", customer);
 
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
-		
-		if(page != null) System.out.println(page);
-		
 		if(page != null && page.contains("WEB-INF")) return "index";
 		return page;
 	}

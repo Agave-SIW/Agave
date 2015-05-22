@@ -363,6 +363,14 @@ footer {
 	display: block;
 }
 
+fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active,
+	fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active,
+	fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover
+	{
+	background-color: #b06d4a;
+	border-color: #a26b4f;
+}
+
 input[readonly] {
 	background-color: white !important;
 	cursor: text !important;
@@ -410,17 +418,4 @@ input[readonly] {
 
 #buyFrameDiv {
 	padding: 0;
-}
-
-.margin-center {
-	margin: 0 auto;
-}
-
-.btn-confirm-cart {
-	width: 76px;
-}
-
-.address-pad {
-	padding: 10px;
-	padding-left: 25px;
 }

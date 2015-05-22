@@ -98,6 +98,7 @@ public class CustomerController {
 		this.currentSessionMap.put("customer", customer);
 
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
+		if(page.indexOf("WEB-INF")!=-1) return "index";
 		return page;
 	}
 

@@ -16,6 +16,8 @@
     </ui:define>
 
 	<ui:define name="content">
+	<c:set var="root" value="#{request.contextPath}" />
+	
 		<f:metadata>
 			<f:event type="preRenderView"
 				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
@@ -38,7 +40,11 @@
 						<div class="col-md-2 vcenter">
 							<img src="#{root}/uploads/#{line.product.picturePath}" alt="#{line.product.name}" class="img-thumbnail"/></div>
 						<div class="col-md-4 vcenter">#{line.product.name}</div>
-						<div class="col-md-2 vcenter">#{line.product.price}</div>
+						<div class="col-md-2 vcenter price">
+						<h:outputText value="#{line.product.price}">
+									<f:convertNumber pattern="#0.00 &#8364;" />
+						</h:outputText>
+						</div>
 						<div class="col-md-2 vcenter">x #{line.quantity}</div>
 						<div class="col-md-1 vcenter">
 							<h:commandLink
@@ -50,7 +56,12 @@
 				</ui:repeat>
 				<div class="row" style="border-bottom: 1px solid; padding: 10px">
 					<div class="col-md-8" />
-					<div class="col-md-3"><strong>Total:</strong> #{cartController.getTotal()}</div>
+					<div class="col-md-3"><strong>Total:</strong> <span class="price">
+																				<h:outputText value="#{cartController.getTotal()}">
+																					<f:convertNumber pattern="#0.00 &#8364;" />
+																				</h:outputText>
+																  </span>
+					</div>
 				</div>
 
 				<div class="row" style="padding: 5px">

@@ -1,12 +1,16 @@
 $(".needPlaceholder").attr("placeholder", function(){
-		var arr = this.name.split(":"); 
-		var str = arr[arr.length - 1];
-		var arr = str.split(/(?=[A-Z])/);
-		if(arr[0]=="dateof") return "dd/MM/yyyy";
-		return capitalizeFirstLetter(arr[0]) + " " + (arr[1]? arr[1]:"") + " " + (arr[2]? arr[2]:"");
-	});
+	var arr = this.name.split(":"); 
+	var str = arr[arr.length - 1];
+	var arr = str.split(/(?=[A-Z])/);
+	if(arr[0]=="dateof") return "dd/MM/yyyy";
+	return capitalizeFirstLetter(arr[0]) + " " + (arr[1]? arr[1]:"") + " " + (arr[2]? arr[2]:"");
+});
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});
 $(".needRequired").prop("required",true);
+$(".needGlyph").html(function(){ 
+	return '<span class="glyphicon glyphicon-'+this.textContent.toLowerCase().trim().replace(" ", "-")+'"></span> ' + this.textContent; 
+});
+
 $("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
 
 $(".login-link").click(function(event) {
@@ -34,7 +38,7 @@ $(".label-warning").text(function(){
 		return "Could not be intended as a valid date. Example: 17/05/2015";
 	}
 	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
-	});
+});
 
 $(".price").priceFormat({
 	prefix: '',
@@ -44,12 +48,12 @@ $(".price").priceFormat({
 	centsLimit: 2
 });
 
-// file input form made with input and button has to act like a normal file input
+//file input form made with input and button has to act like a normal file input
 $(document).on('change', '.btn-file :file', function() {
-  var input = $(this),
-      numFiles = input.get(0).files ? input.get(0).files.length : 1,
-      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-  input.trigger('fileselect', [numFiles, label]);
+	var input = $(this),
+	numFiles = input.get(0).files ? input.get(0).files.length : 1,
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+	input.trigger('fileselect', [numFiles, label]);
 });
 
 $(document).ready(function() {
@@ -61,21 +65,37 @@ $(document).ready(function() {
 		ellipsis: 	'... ',
 		watch: 		'window'
 	});
-	
+
 	// word wrap already in css file
 	$(".indexDesc").removeAttr("style");
 	$(".productsDesc").removeAttr("style");
-	
+
 	$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-        
-        var input = $(this).parents('.input-group').find(':text'),
-            log = numFiles > 1 ? numFiles + ' files selected' : label;
-        
-        if( input.length ) {
-            input.val(log);
-        } /*else {
+
+		var input = $(this).parents('.input-group').find(':text'),
+		log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+		if( input.length ) {
+			input.val(log);
+		} /*else {
             if( log ) alert(log);
         }*/
-        
-    });
+
+	});
+});
+
+$("#closedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+});
+	
+$("#evadedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").removeClass("active");
+	$(".tab-li-2").addClass("active");
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
 });

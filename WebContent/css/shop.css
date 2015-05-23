@@ -448,3 +448,7 @@ input[readonly] {
 	padding: 20px;
 	margin-bottom: 30px;
 }
+
+.nowrap, .customerInfo p {
+	white-space: nowrap;
+}

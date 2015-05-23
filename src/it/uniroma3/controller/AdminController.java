@@ -44,7 +44,7 @@ public class AdminController {
 		if(admin==null || !adminFacade.checkPassword(admin, password)){ 
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
-			this.ch.addMessage("adminLogin:loginButton", "Invalid Email or Password");
+			this.ch.addMessage("adminLogin", "loginButton", "Invalid Email or Password");
 		}
 		else{
 			System.out.print("\n\nLogin Admin OK\n\n");

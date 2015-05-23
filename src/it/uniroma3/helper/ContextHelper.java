@@ -24,9 +24,20 @@ public class ContextHelper {
 		this.externalContext = currentInstance.getExternalContext();
 		this.sessionMap = externalContext.getSessionMap();
 	}
-
+	
+	//for easier target input
+	public void addMessage(String formId, String fieldName, String message){
+		this.addMessage(formId+":"+fieldName, message);
+	}
+	
+	//target is like "formId:fieldName"
 	public void addMessage(String target, String message){
-		this.currentInstance.addMessage(target, new FacesMessage(message));
+		this.addMessage(target, new FacesMessage(message));
+	}
+	
+	//target is like "formId:fieldName"
+	public void addMessage(String target, FacesMessage message){
+		this.currentInstance.addMessage(target, message);
 	}
 
 	public void addToSession(String key, Object object){

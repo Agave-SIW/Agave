@@ -70,12 +70,12 @@ public class CustomerController {
 				return "WEB-INF/successSignin";
 			}
 			else {
-				this.ch.addMessage("signIn:email", "There is already a customer with this email address");
+				this.ch.addMessage("signIn", "email", "There is already a customer with this email address");
 				return "signin";
 			}
 		}
 		else {
-			this.ch.addMessage("signIn:repeatPassword","Repeated password must be the same as password");
+			this.ch.addMessage("signIn", "repeatPassword","Repeated password must be the same as password");
 			return "signin";
 		}
 	}

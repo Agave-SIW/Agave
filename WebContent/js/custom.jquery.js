@@ -84,6 +84,8 @@ $(document).on('change', '.btn-file :file', function() {
 $(document).ready(function() {
 	$("#buyFrame").slideDown();
 	
+	$('[data-toggle="tooltip"]').tooltip(); 
+	
 	$(".tab-li-1").addClass("active");
 	$(".tab-li-2").removeClass("active");
 	$("#closedOrders").show();

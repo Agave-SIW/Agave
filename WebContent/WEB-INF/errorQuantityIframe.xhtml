@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;">
+    <!ENTITY euro "&#8364;"> 
+]>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<c:set var="root" value="#{request.contextPath}" />
+
+<h:head>
+	<title>Success | Agave Shop - SIW 2015</title>
+
+	<ui:include src="/WEB-INF/meta.xhtml" />
+</h:head>
+
+<body style="background: #494333; color: #fcf9da;">
+	<f:view>
+		<script>
+			//checks if page is inside iframe. If not performs a redirect
+			if (window == window.top) {
+				window.location.href = "#{root}";
+			}
+		</script>
+		<div class="label label-warning pull-right">Cart already contains the storage quantity</div>
+		<br />
+		<span id="timer" class="pull-right" style="font-size:80%"> <script type="text/javascript">
+						countDown("#{root}/addToCart.xhtml", 10, "Reloading button in ");
+					</script>
+		</span>
+
+		<ui:include src="/WEB-INF/footer-js.xhtml" />
+	</f:view>
+</body>
+
+</html>

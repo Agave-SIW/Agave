@@ -22,13 +22,18 @@ import javax.faces.bean.ManagedBean;
 public class CartController {
 	
 	private Orders cart;
-	private int quantity;
+	private Integer quantity;
 	
 	@EJB
 	private OrderFacade orderFacade;
 	@EJB
 	private CustomerFacade customerFacade;
 	
+	
+	public CartController() {
+		
+	}
+
 	public Orders setCartFromId(Long idCustomer) {
 		try{
 			this.cart = customerFacade.getCart(idCustomer);
@@ -57,7 +62,7 @@ public class CartController {
 		if(cc.isNotLogged()) return "WEB-INF/errorNotLogged";
 		
 		Integer quantity = 1;
-		if(this.quantity != 0) quantity = this.quantity;
+		if(this.quantity != null && this.quantity != 0) quantity = this.quantity;
 		System.out.println("trying to add " + quantity +" Product to Cart");
 		
 		try{
@@ -71,6 +76,17 @@ public class CartController {
 			return "WEB-INF/errorQuantity";
 		}
 
+	}
+	
+	public String addProductToCartIframe(Orders cart, Product product){
+		//System.out.println(product.getName());
+		
+		String output = addProductToCart(cart, product);
+		
+		if(output.indexOf("error") != -1)
+			return "WEB-INF/errorQuantityIframe";
+		
+		return "WEB-INF/successCartIframe";
 	}
 	
 	public String removeOrderLine(Orders cart, OrderLine orderLine){
@@ -130,11 +146,11 @@ public class CartController {
 		this.orderFacade = orderFacade;
 	}
 
-	public int getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 

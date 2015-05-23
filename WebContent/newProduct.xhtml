@@ -27,7 +27,7 @@
 					</div>
 					<div class="col-md-6">
 						<div class="panel panel-primary">
-							<div class="panel-heading">Product informations</div>
+							<div class="panel-heading">Product information</div>
 							<div class="panel-body">
 								<div class="form-group">
 									<label for="name" class="control-label col-sm-2">Name:
@@ -106,6 +106,14 @@
 										styleClass="form-control" style="height:236px" />
 
 								</div>
+
+								<h:selectManyCheckbox value="#{productController.providerIds}">
+									<c:forEach var="provider"
+										items="#{productController.getListProviders()}">
+										<f:selectItem itemValue="#{provider.id}"
+											itemLabel="#{provider.name}" /> 
+									</c:forEach>
+								</h:selectManyCheckbox>
 							</div>
 						</div>
 					</div>

@@ -34,7 +34,8 @@
 					<div class="label label-warning">You can't create an order from an empty cart</div>
 					<span id="timer"> 
 					<script type="text/javascript">
-						countDown("#{root}/cart.xhtml", 10);
+						countDown("#{root}/cart.xhtml", 10, "This page will redirect in ");
+						var fieldDis = true;
 					</script>
 					</span>
 				</div>

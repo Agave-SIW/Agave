@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false)
@@ -61,8 +61,11 @@ public class Product {
 		this.providers = new LinkedList<Provider>();
 		this.reviews = new LinkedList<Review>();
 	}
-
-	//          Getters & Setters        
+	
+	
+	public void addProviders(List<Provider> providers){
+		this.providers.addAll(providers);
+	}
 
 	public Long getId() {
 		return id;

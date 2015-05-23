@@ -2,6 +2,13 @@ package it.uniroma3.helper;
 
 import javax.servlet.http.Part;
 
+/**
+ * Helper class for file name manipulation
+ *
+ * @author Gaetano
+ *
+ */
+
 public class FileHelper {
 
 	public FileHelper() {}

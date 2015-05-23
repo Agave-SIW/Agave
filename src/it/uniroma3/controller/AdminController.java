@@ -1,15 +1,12 @@
 package it.uniroma3.controller;
 
-import java.util.Map;
-
 import it.uniroma3.model.Admin;
 import it.uniroma3.facade.AdminFacade;
+import it.uniroma3.helper.ContextHelper;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  * System operations for Admin management
@@ -26,18 +23,19 @@ public class AdminController {
 	private String firstName;
 	private String password;
 	private String email;
+	
 	private Admin admin;
 	
 	private String page;
 	
-	private Map<String, Object> currentSessionMap;
-	
 	@EJB
 	private AdminFacade adminFacade;
+	
+	private ContextHelper ch;
 
 	
 	public AdminController() {
-		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.ch = new ContextHelper();
 	}
 
 	public String loginAdmin(){
@@ -46,32 +44,31 @@ public class AdminController {
 		if(admin==null || !adminFacade.checkPassword(admin, password)){ 
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
-			FacesContext.getCurrentInstance().addMessage("adminLogin:loginButton", new FacesMessage("Invalid Email or Password"));
+			this.ch.addMessage("adminLogin", "loginButton", "Invalid Email or Password");
 		}
 		else{
-			System.out.print("\n\nLogin OK\n\n");
+			System.out.print("\n\nLogin Admin OK\n\n");
 		}
 		
-		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("admin", admin);
+		this.ch.addToSession("admin", admin);
 		
 		return "admin";
 	}
 
 	public String logoutAdmin(){
 		this.admin = null;
-		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("admin", null);
+		
+		this.ch.addToSession("admin", null);
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
 		return "admin";
 	}
 	
 	public Admin getCurrentAdmin(){
-		return (Admin) this.currentSessionMap.get("admin");
+		return (Admin) this.ch.getFromSession("admin");
 	}
 	
 	public Boolean isLogged() {
-		Admin a = (Admin) this.currentSessionMap.get("admin");
+		Admin a = (Admin) this.ch.getFromSession("admin");
 		return !(a == null);
 	}
 	
@@ -133,6 +130,14 @@ public class AdminController {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public ContextHelper getCh() {
+		return ch;
+	}
+
+	public void setCh(ContextHelper ch) {
+		this.ch = ch;
 	}
 	
 	

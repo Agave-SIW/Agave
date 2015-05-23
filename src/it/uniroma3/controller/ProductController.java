@@ -1,14 +1,16 @@
 package it.uniroma3.controller;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.Provider;
 import it.uniroma3.model.Review;
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.ReviewFacade;
+import it.uniroma3.helper.ContextHelper;
 import it.uniroma3.helper.FileHelper;
 
 import javax.ejb.EJB;
@@ -37,6 +39,8 @@ public class ProductController {
 	private Integer quantity;
 	private Part picture;
 	private String picturePath;
+	
+	private Long[] providerIds;
 
 	private Product product;
 	private List<Product> products;
@@ -54,14 +58,14 @@ public class ProductController {
 	private ProductFacade productFacade;
 	@EJB
 	private CustomerFacade customerFacade;
-
+	//not ejb
 	private ReviewFacade reviewFacade;
 
-	private Map<String, Object> currentSessionMap;
+	private ContextHelper ch;
 
 
 	public ProductController() {
-		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.ch = new ContextHelper();
 		this.reviewFacade = new ReviewFacade();
 	}
 
@@ -77,17 +81,22 @@ public class ProductController {
 			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			String path = ctx.getRealPath("/");
 			path = path + fh.makePath(path, "uploads");
-			System.out.print("\n\nFile system context path (in TestServlet): " + path + "\n");
+			System.out.println("\nFile system context path (in TestServlet): " + path);
 
 			try {
-				System.out.print("\nTrying to upload "+ filename +" in "+ path +"\n");
+				System.out.println("Trying to upload "+ filename +" in "+ path);
 				picture.write(path+filename);
-				System.out.print("\nSuccesful! "+ filename + " is uploaded\n\n");
+				System.out.println("Succesful! "+ filename + " is uploaded");
 
 				this.picturePath = filename.toString();
-
-				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
-
+				
+				System.out.println("Trying to create and add product to database");
+				this.product = this.productFacade.createProduct(name, code, price, description, picturePath, quantity);
+				System.out.println("Product added");
+				System.out.println("Trying to add providers");
+				this.productFacade.addProvidersToProduct(product, makeListFromIds(this.providerIds));
+				System.out.println("All done");
+				
 				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
 			}
 			catch (Exception e) {
@@ -98,6 +107,15 @@ public class ProductController {
 			return "admin?faces-redirect=true";
 		}
 	}
+	
+	public List<Provider> makeListFromIds(Long[] providerIds){
+		List<Provider> providers = new LinkedList<Provider>();
+		Integer len = providerIds.length;
+		for(Integer i=0; i<len; i++){
+			providers.add(productFacade.getProvider(providerIds[i]));
+		}
+		return providers;
+	}
 
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
@@ -106,6 +124,10 @@ public class ProductController {
 
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
+	}
+	
+	public List<Provider> getListProviders() {
+		return productFacade.getAllProviders();
 	}
 
 	public List<Product> getLastProducts() {
@@ -136,24 +158,27 @@ public class ProductController {
 	}
 
 	public String addReview(Long idProduct){
-		//must verify that the user is actually logged in
-		Customer c = (Customer) currentSessionMap.get("customer");
-		if(c==null) return "error";
-
-		Product p = this.productFacade.getProduct(idProduct);
-		Review r = this.reviewFacade.createReview(stars, comment, c);
+		//must verify that the user is actually logged in to add a review
+		CustomerController cc = new CustomerController();
+		if(cc.isNotLogged()) return "WEB-INF/errorReview";
 
 		try{
+			Customer c = (Customer) this.ch.getFromSession("customer");
+
+			Product p = this.productFacade.getProduct(idProduct);
+			Review r = this.reviewFacade.createReview(stars, comment, c);
+
+
 			this.productFacade.addReviewToProduct(r, p);
+			System.out.println("Review Added!");
+
+			this.setReview(r);
+			return "WEB-INF/successReview";
 		}
 		catch (Exception e){
 			return "WEB-INF/errorReview";
 		}
 
-		System.out.println("Review Added!");
-
-		this.setReview(r);
-		return "WEB-INF/successReview";
 	}
 
 	public List<Review> getReviews(Product product){
@@ -354,14 +379,6 @@ public class ProductController {
 		this.reviewFacade = reviewFacade;
 	}
 
-	public Map<String, Object> getCurrentSessionMap() {
-		return currentSessionMap;
-	}
-
-	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
-		this.currentSessionMap = currentSessionMap;
-	}
-
 	public Long getIdProduct() {
 		return idProduct;
 	}
@@ -376,6 +393,22 @@ public class ProductController {
 
 	public void setReview(Review review) {
 		this.review = review;
+	}
+
+	public ContextHelper getCh() {
+		return ch;
+	}
+
+	public void setCh(ContextHelper ch) {
+		this.ch = ch;
+	}
+
+	public Long[] getProviderIds() {
+		return providerIds;
+	}
+
+	public void setProviderIds(Long[] providerIds) {
+		this.providerIds = providerIds;
 	}
 
 

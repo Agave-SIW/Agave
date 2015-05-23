@@ -24,7 +24,8 @@
 				<div class="col-md-12">
 
 					<div class="thumbnail">
-						<img class="img-responsive" src="#{root}/uploads/#{productController.product.picturePath}"
+						<img class="img-responsive"
+							src="#{root}/uploads/#{productController.product.picturePath}"
 							alt="#{productController.product.name}" />
 
 						<div class="caption-full">
@@ -34,7 +35,17 @@
 								</h:outputText>
 							</h4>
 							<h2>#{productController.product.name}</h2>
-							<div>Code: #{productController.product.code}</div>
+
+							
+							<div class="col-md-8 pull-right" id="buyFrameDiv">
+								<iframe id="buyFrame"
+									src="#{root}/addToCart.xhtml?id=#{productController.product.id}"
+									width="100%" height="55" seamless="seamless" style="display:none"></iframe>
+							</div>
+							
+
+							<div style="padding-left: 5px;"><span class="glyphicon glyphicon-barcode"></span> Product code: #{productController.product.code}</div>
+							<div style="padding-left: 5px;"><span class="glyphicon glyphicon-th-large"></span> Storage quantity: <span id="productQuantity">#{productController.product.storageQuantity}</span></div>
 							<hr />
 							<p>#{productController.product.description}</p>
 						</div>
@@ -64,9 +75,8 @@
 							</div>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{customerController.isNotLogged()}">
-							<div class="text-right">
-								You must be logged to send a review.
-							</div>
+							<div class="text-right">You must be logged to send a
+								review.</div>
 						</h:panelGroup>
 						<div class="reviewHr">
 							<hr />

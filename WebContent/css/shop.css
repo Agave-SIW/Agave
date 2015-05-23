@@ -27,11 +27,11 @@ footer {
 }
 
 a {
-	color: #d17581;
+	color: #fff;
 }
 
-a:hover, a:active {
-	color: #e6818e;
+a:hover, a:active, a:focus {
+	color: #e9ffca;
 }
 
 textarea {
@@ -50,6 +50,10 @@ hr {
 
 .review, .reviewHr {
 	padding: 0 15px;
+}
+
+.inline {
+	display: inline;
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
@@ -359,6 +363,14 @@ footer {
 	display: block;
 }
 
+fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary.active,
+	fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active,
+	fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover
+	{
+	background-color: #b06d4a;
+	border-color: #a26b4f;
+}
+
 input[readonly] {
 	background-color: white !important;
 	cursor: text !important;
@@ -384,7 +396,6 @@ input[readonly] {
 	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
-/*CART CUSTOM Css*/
 .vcenter {
 	display: inline-block;
 	vertical-align: middle;
@@ -407,4 +418,56 @@ input[readonly] {
 .inner-panel{
 	background-color: lightyellow;
 	padding: 10px;
+}
+.btn-margin-up {
+	margin-top: -15px;
+}
+
+.btn-less-margin-up {
+	margin-top: -5px;
+}
+
+#buyFrameDiv {
+	padding: 0;
+}
+
+.margin-center {
+	margin: 0 auto;
+}
+
+.btn-confirm-cart {
+	width: 76px;
+}
+
+.address-pad {
+	padding: 10px;
+	padding-left: 25px;
+}
+
+.cart-code {
+	margin-top: -11px;
+	position: absolute;
+	font-size: 85%;
+	color: #666;
+}
+
+.customer-avatar {
+	font-size: 156px;
+	background-color: #ddd;
+	color: #666;
+	color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+.nowrap, .customerInfo p {
+	white-space: nowrap;
+}
+
+.cart-product{
+	color: #c2542f;
+}
+
+a:hover, a:active, a:focus .cart-product {
+	color: #c2542f;
 }

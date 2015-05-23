@@ -17,10 +17,6 @@
 
 	<ui:define name="content">
 	<c:set var="root" value="#{request.contextPath}" />
-	<f:metadata>
-		<f:event type="preRenderView"
-			listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
-	</f:metadata>
 
 		<!-- Jumbotron Header -->
 		<header class="jumbotron hero-spacer">
@@ -63,7 +59,7 @@
 									<h:panelGroup rendered="#{customerController.isLogged()}">
 										<h:commandButton
 											action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
-											value="Buy Now!" styleClass="btn btn-primary" />
+											value="Add To Cart" styleClass="btn btn-primary" />
 											&nbsp;
 									</h:panelGroup>
 

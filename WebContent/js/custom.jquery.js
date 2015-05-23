@@ -1,3 +1,7 @@
+if(typeof fieldDis != "undefined" && fieldDis){
+	$("#loginField").attr('disabled', 'disabled');
+}
+
 $(".needPlaceholder").attr("placeholder", function(){
 	var arr = this.name.split(":"); 
 	var str = arr[arr.length - 1];
@@ -12,6 +16,7 @@ $(".needGlyph").html(function(){
 });
 
 $("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
+$("#buyFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
 
 $(".login-link").click(function(event) {
 	event.preventDefault();
@@ -25,18 +30,38 @@ $("#addReviewButton").click(function(event) {
 	$("#reviewFrameDiv").toggle('slide');
 });
 
+$("#closedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+});
+	
+$("#evadedOrderTab").click(function(event){
+	event.preventDefault();
+	$(".tab-li-1").removeClass("active");
+	$(".tab-li-2").addClass("active");
+	$("#closedOrders").hide();
+	$("#evadedOrders").show();
+});
+
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
-	var str = capitalizeFirstLetter(arr[1]).trim();
+	var str = (arr[1]? capitalizeFirstLetter(arr[1]).trim():arr[0]);
 	if (str.indexOf("float") !=-1) {
 		return "Price must be a valid number";
 	}
 	if (str.indexOf("numero intero") !=-1) {
 		return "Quantity must be a valid number";
 	}
+	if (str.indexOf("Quantity") !=-1) {
+		return "Quantity must be a valid number";
+	}
 	if (str.indexOf("DateofBirth") !=-1) {
 		return "Could not be intended as a valid date. Example: 17/05/2015";
 	}
+	
 	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
 });
 
@@ -57,6 +82,13 @@ $(document).on('change', '.btn-file :file', function() {
 });
 
 $(document).ready(function() {
+	$("#buyFrame").slideDown();
+	
+	$(".tab-li-1").addClass("active");
+	$(".tab-li-2").removeClass("active");
+	$("#closedOrders").show();
+	$("#evadedOrders").hide();
+	
 	$(".indexDesc").dotdotdot({
 		ellipsis: 	'... ',
 		watch: 		'window'
@@ -77,25 +109,8 @@ $(document).ready(function() {
 
 		if( input.length ) {
 			input.val(log);
-		} /*else {
-            if( log ) alert(log);
-        }*/
+		} /*else {  if( log ) alert(log);   }*/
 
 	});
 });
 
-$("#closedOrderTab").click(function(event){
-	event.preventDefault();
-	$(".tab-li-1").addClass("active");
-	$(".tab-li-2").removeClass("active");
-	$("#closedOrders").show();
-	$("#evadedOrders").hide();
-});
-	
-$("#evadedOrderTab").click(function(event){
-	event.preventDefault();
-	$(".tab-li-1").removeClass("active");
-	$(".tab-li-2").addClass("active");
-	$("#closedOrders").hide();
-	$("#evadedOrders").show();
-});

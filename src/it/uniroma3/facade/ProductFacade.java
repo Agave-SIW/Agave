@@ -31,11 +31,29 @@ public class ProductFacade {
 		return product;
 	}
 	
+	public Provider getProvider(Long id) {
+	    Provider provider = em.find(Provider.class, id);
+		return provider;
+	}
+	
+	
 	public List<Product> getAllProducts() {
         CriteriaQuery<Product> cq = em.getCriteriaBuilder().createQuery(Product.class);
         cq.select(cq.from(Product.class));
         List<Product> products = em.createQuery(cq).getResultList();
 		return products;
+	}
+	
+	public List<Provider> getAllProviders() {
+        CriteriaQuery<Provider> cq = em.getCriteriaBuilder().createQuery(Provider.class);
+        cq.select(cq.from(Provider.class));
+        List<Provider> providers = em.createQuery(cq).getResultList();
+		return providers;
+	}
+	
+	public void addProvidersToProduct(Product product, List<Provider> providers){
+		product.addProviders(providers);
+		em.merge(product);
 	}
 	
 	public List<Product> getLastProducts() {

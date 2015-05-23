@@ -1,16 +1,15 @@
 package it.uniroma3.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import it.uniroma3.facade.OrderFacade;
+import it.uniroma3.helper.ContextHelper;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
 
 /**
  * System operations for closed/evaded Order management
@@ -22,19 +21,19 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 public class OrderController {
 
-	@EJB
-	private OrderFacade orderFacade;
-
-	private Map<String, Object> currentSessionMap;
-
 	@ManagedProperty(value="#{param.id}")
 	private Long id;
 
 	private Orders order;
+	
+	@EJB
+	private OrderFacade orderFacade;
+	
+	private ContextHelper ch;
 
 
 	public OrderController(){
-		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.ch = new ContextHelper();
 	}
 
 	public List<Orders> getOrders(){
@@ -103,14 +102,6 @@ public class OrderController {
 		this.orderFacade = orderFacade;
 	}
 
-	public Map<String, Object> getCurrentSessionMap() {
-		return currentSessionMap;
-	}
-
-	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
-		this.currentSessionMap = currentSessionMap;
-	}
-
 	/** GETTER AND SETTERS **/
 
 	public Long getId() {
@@ -127,6 +118,14 @@ public class OrderController {
 
 	public void setOrder(Orders order) {
 		this.order = order;
+	}
+
+	public ContextHelper getCh() {
+		return ch;
+	}
+
+	public void setCh(ContextHelper ch) {
+		this.ch = ch;
 	}
 
 }

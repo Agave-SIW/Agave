@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "findAllProviders", query = "SELECT pr FROM Provider pr")
 public class Provider {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

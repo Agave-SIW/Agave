@@ -29,6 +29,11 @@ public class CartController {
 	@EJB
 	private CustomerFacade customerFacade;
 	
+	
+	public CartController() {
+		
+	}
+
 	public Orders setCartFromId(Long idCustomer) {
 		try{
 			this.cart = customerFacade.getCart(idCustomer);

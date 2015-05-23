@@ -3,6 +3,13 @@ package it.uniroma3.helper;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Helper class for password encoding and management
+ *
+ * @author Gaetano
+ *
+ */
+
 public class PasswordHelper {
 	
 	private MessageDigest md;

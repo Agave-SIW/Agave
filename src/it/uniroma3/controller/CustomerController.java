@@ -2,18 +2,16 @@ package it.uniroma3.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import it.uniroma3.model.Address;
 import it.uniroma3.model.Customer;
 import it.uniroma3.facade.AddressFacade;
 import it.uniroma3.facade.CustomerFacade;
+import it.uniroma3.helper.ContextHelper;
 
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 
 /**
  * System operations for Customer management
@@ -35,7 +33,7 @@ public class CustomerController {
 	private String phoneNumber;
 	private Date dateofBirth;
 
-	//address data fetch from form
+	//address data from form
 	private String street;
 	private String city;
 	private String state;
@@ -53,11 +51,11 @@ public class CustomerController {
 	//not ejb
 	private AddressFacade addressFacade;
 
-	private Map<String, Object> currentSessionMap;
+	private ContextHelper ch;
 
 
 	public CustomerController() {
-		this.currentSessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		this.ch = new ContextHelper();
 		this.addressFacade = new AddressFacade();
 	}
 
@@ -72,12 +70,12 @@ public class CustomerController {
 				return "WEB-INF/successSignin";
 			}
 			else {
-				FacesContext.getCurrentInstance().addMessage("signIn:email", new FacesMessage("There is already a customer with this email address"));
+				this.ch.addMessage("signIn:email", "There is already a customer with this email address");
 				return "signin";
 			}
 		}
 		else {
-			FacesContext.getCurrentInstance().addMessage("signIn:repeatPassword", new FacesMessage("Repeated password must be the same as password"));
+			this.ch.addMessage("signIn:repeatPassword","Repeated password must be the same as password");
 			return "signin";
 		}
 	}
@@ -91,7 +89,6 @@ public class CustomerController {
 			this.email = null;
 			this.password = null;
 			System.out.println("WRONG MAIL OR PASSWORD");
-			//FacesContext.getCurrentInstance().addMessage("customerLogin:loginButton", new FacesMessage("Invalid Email or Password"));
 			
 			if(page != null && page.contains("WEB-INF")) return "index";
 			return "WEB-INF/errorLogin";
@@ -99,8 +96,8 @@ public class CustomerController {
 		else{
 			System.out.println("Login OK");
 		}
-		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("customer", customer);
+		
+		this.ch.addToSession("customer", customer);
 
 		if(param!=null) return page + "?id="+param+"&faces-redirect=true&includeViewParams=true";
 		if(page != null && page.contains("WEB-INF")) return "index";
@@ -108,11 +105,9 @@ public class CustomerController {
 	}
 
 	public String logoutCustomer(){
-
 		this.customer = null;
 
-		//workaround, SessionScoped not writing session automatically. Still requires javax.enterprise.context.SessionScoped;
-		this.currentSessionMap.put("customer", customer);
+		this.ch.addToSession("customer", customer);
 
 		System.out.print("\n\nCustomer LOGGED OUT\n\n");
 
@@ -126,11 +121,11 @@ public class CustomerController {
 	}
 
 	public Customer getCurrentCustomer(){
-		return (Customer) this.currentSessionMap.get("customer");
+		return (Customer) this.ch.getFromSession("customer");
 	}
 
 	public Boolean isLogged() {
-		Customer c = (Customer) this.currentSessionMap.get("customer");
+		Customer c = (Customer) this.ch.getFromSession("customer");
 		return !(c == null);
 	}
 
@@ -274,14 +269,6 @@ public class CustomerController {
 		this.country = country;
 	}
 
-	public Map<String, Object> getCurrentSessionMap() {
-		return currentSessionMap;
-	}
-
-	public void setCurrentSessionMap(Map<String, Object> currentSessionMap) {
-		this.currentSessionMap = currentSessionMap;
-	}
-
 	public String getRepeatPassword() {
 		return repeatPassword;
 	}
@@ -296,6 +283,14 @@ public class CustomerController {
 
 	public void setParam(String param) {
 		this.param = param;
+	}
+
+	public ContextHelper getCh() {
+		return ch;
+	}
+
+	public void setCh(ContextHelper ch) {
+		this.ch = ch;
 	}
 
 

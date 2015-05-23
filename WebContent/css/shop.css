@@ -409,16 +409,13 @@ input[readonly] {
 }
 
 /* orderList.xhtml css */
-.panel-backg {
-	background-color: #494333;
-	border: none;
-	padding: 20px;
-}
 
 .inner-panel{
 	background-color: lightyellow;
-	padding: 10px;
+	
 }
+
+/* end */
 .btn-margin-up {
 	margin-top: -15px;
 }

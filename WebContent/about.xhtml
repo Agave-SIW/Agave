@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;"> 
+    <!ENTITY copy "&#169;">
+    <!ENTITY euro "&#8364;"> 
+]>
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<ui:define name="title">
+        About | Agave Shop - SIW 2015
+    </ui:define>
+
+	<ui:define name="content">
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="col-md-12">
+					<h1>About</h1>
+					<hr />
+				</div>
+				<div class="col-md-6">
+					<p>
+						<strong>A-Ga-Ve</strong>, from our initials, is our project for
+						the course of <strong>Sistemi Informativi su Web (SIW)</strong>.
+					</p>
+					<p>It runs on Apache Tomee and it's made using Java with JSF 2.2
+						Framework and Open JPA libraries for PostgreSQL.</p>
+						<p>Among other tools we also used jQuery, Boostrap and Modernizr.</p>
+					<ul>
+						<li><a
+							href="https://dl.dropboxusercontent.com/u/20172572/didattica/siw/siw-progetto-1.pptx"
+							target="_blank">Original project specifications</a></li>
+						<li><a href="https://github.com/Kidel/Agave" target="_blank">GitHub
+								repository</a> and personal extensions to the original project</li>
+					</ul>
+
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

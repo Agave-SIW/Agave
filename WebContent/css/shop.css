@@ -478,6 +478,10 @@ a:hover, a:active, a:focus .cart-product {
   color: #BBB1A0;
 }
 
+a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active {
+	color: #333;
+}
+
 /* orderList.xhtml css */
 
 .inner-panel{

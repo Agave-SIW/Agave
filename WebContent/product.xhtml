@@ -53,13 +53,16 @@
 								<span class="glyphicon glyphicon-th-large"></span> <strong>Storage
 								quantity:  </strong><span id="productQuantity">#{productController.product.storageQuantity}</span>
 							</div>
+							<c:set var="providers" value="#{productController.findProviders(param['id'])}" />
+							<h:panelGroup rendered="#{not empty providers}">
 							<div style="padding-left: 5px;">
 								<span class="glyphicon glyphicon-transfer"></span> <strong>Provided by: </strong>
 								<c:forEach var="provider"
-									items="#{productController.findProviders(param['id'])}" varStatus="loop">
+									items="#{providers}" varStatus="loop">
 							<a href="mailto:#{provider.email}" data-toggle="tooltip" data-placement="bottom" title="Vatin:&#8239;#{provider.vatin} Phone:&#8239;#{provider.phoneNumber}">#{provider.name}</a><c:if test="${!loop.last}">,</c:if> 
 							</c:forEach>
 							</div>
+							</h:panelGroup>
 							<hr />
 							<p>#{productController.product.description}</p>
 						</div>

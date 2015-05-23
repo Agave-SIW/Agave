@@ -1,9 +1,11 @@
 package it.uniroma3.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.Product;
+import it.uniroma3.model.Provider;
 import it.uniroma3.model.Review;
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.ProductFacade;
@@ -37,6 +39,8 @@ public class ProductController {
 	private Integer quantity;
 	private Part picture;
 	private String picturePath;
+	
+	private Long[] providerIds;
 
 	private Product product;
 	private List<Product> products;
@@ -77,17 +81,22 @@ public class ProductController {
 			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			String path = ctx.getRealPath("/");
 			path = path + fh.makePath(path, "uploads");
-			System.out.print("\n\nFile system context path (in TestServlet): " + path + "\n");
+			System.out.println("\nFile system context path (in TestServlet): " + path);
 
 			try {
-				System.out.print("\nTrying to upload "+ filename +" in "+ path +"\n");
+				System.out.println("Trying to upload "+ filename +" in "+ path);
 				picture.write(path+filename);
-				System.out.print("\nSuccesful! "+ filename + " is uploaded\n\n");
+				System.out.println("Succesful! "+ filename + " is uploaded");
 
 				this.picturePath = filename.toString();
-
-				this.product = productFacade.createProduct(name, code, price, description, picturePath, quantity);
-
+				
+				System.out.println("Trying to create and add product to database");
+				this.product = this.productFacade.createProduct(name, code, price, description, picturePath, quantity);
+				System.out.println("Product added");
+				System.out.println("Trying to add providers");
+				this.productFacade.addProvidersToProduct(product, makeListFromIds(this.providerIds));
+				System.out.println("All done");
+				
 				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
 			}
 			catch (Exception e) {
@@ -98,6 +107,15 @@ public class ProductController {
 			return "admin?faces-redirect=true";
 		}
 	}
+	
+	public List<Provider> makeListFromIds(Long[] providerIds){
+		List<Provider> providers = new LinkedList<Provider>();
+		Integer len = providerIds.length;
+		for(Integer i=0; i<len; i++){
+			providers.add(productFacade.getProvider(providerIds[i]));
+		}
+		return providers;
+	}
 
 	public String listProducts() {
 		this.products = productFacade.getAllProducts();
@@ -106,6 +124,10 @@ public class ProductController {
 
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
+	}
+	
+	public List<Provider> getListProviders() {
+		return productFacade.getAllProviders();
 	}
 
 	public List<Product> getLastProducts() {
@@ -379,6 +401,14 @@ public class ProductController {
 
 	public void setCh(ContextHelper ch) {
 		this.ch = ch;
+	}
+
+	public Long[] getProviderIds() {
+		return providerIds;
+	}
+
+	public void setProviderIds(Long[] providerIds) {
+		this.providerIds = providerIds;
 	}
 
 

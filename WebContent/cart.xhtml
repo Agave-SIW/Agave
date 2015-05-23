@@ -22,6 +22,13 @@
 			<f:event type="preRenderView"
 				listener='#{cartController.setCartFromId(sessionScope["customer"].getId())}' />
 		</f:metadata>
+
+		<div class="row">
+			<div class="col-md-12 ">
+				<h1>Cart</h1>
+				<hr />
+			</div>
+		</div>
 		<h:panelGroup rendered="#{customerController.isLogged()}">
 			<h:form>
 				<h:panelGroup
@@ -32,7 +39,7 @@
 					rendered='#{cartController.NotEmpty(cartController.setCartFromId(sessionScope["customer"].getId()))}'>
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<strong>Cart</strong>
+							<strong>Cart Lines</strong>
 						</div>
 
 						<ui:repeat var="line"
@@ -43,7 +50,11 @@
 										alt="#{line.product.name}" class="img-thumbnail" />
 								</div>
 								<div class="col-xs-12 col-sm-4 col-md-4 vcenter">
-									<h4>#{line.product.name}</h4>
+									<h4><h:commandLink action="#{productController.findProduct}"
+												value="#{line.product.name}">
+												<f:param name="id" value="#{line.product.id}" />
+											</h:commandLink></h4>
+									<span class="cart-code">Code: #{line.product.code}</span>
 								</div>
 								<div class="col-xs-4 col-sm-2 col-md-2 vcenter price">
 									<h:outputText value="#{line.product.price}">
@@ -74,8 +85,6 @@
 										value='#{customerController.getStoredCustomer(sessionScope["customer"].id).firstName}' /><span>&nbsp;</span>
 									<h:outputText value='#{customerController.customer.lastName}' />
 								</p>
-
-
 								<p>
 									<h:outputText
 										value='#{customerController.customer.address.street}' />

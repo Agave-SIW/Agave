@@ -432,3 +432,10 @@ input[readonly] {
 	padding: 10px;
 	padding-left: 25px;
 }
+
+.cart-code {
+	margin-top: -11px;
+	position: absolute;
+	font-size: 85%;
+	color: #666;
+}

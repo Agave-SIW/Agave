@@ -31,7 +31,7 @@ public class Provider {
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="providers")
 	private List<Product> products;
 	
 

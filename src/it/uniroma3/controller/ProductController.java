@@ -39,7 +39,7 @@ public class ProductController {
 	private Integer quantity;
 	private Part picture;
 	private String picturePath;
-	
+
 	private Long[] providerIds;
 
 	private Product product;
@@ -89,14 +89,11 @@ public class ProductController {
 				System.out.println("Succesful! "+ filename + " is uploaded");
 
 				this.picturePath = filename.toString();
-				
+
 				System.out.println("Trying to create and add product to database");
-				this.product = this.productFacade.createProduct(name, code, price, description, picturePath, quantity);
-				System.out.println("Product added");
-				System.out.println("Trying to add providers");
-				this.productFacade.addProvidersToProduct(product, makeListFromIds(this.providerIds));
+				this.product = this.productFacade.createProduct(name, code, price, description, picturePath, quantity, makeListFromIds(this.providerIds));
 				System.out.println("All done");
-				
+
 				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
 			}
 			catch (Exception e) {
@@ -107,7 +104,7 @@ public class ProductController {
 			return "admin?faces-redirect=true";
 		}
 	}
-	
+
 	public List<Provider> makeListFromIds(Long[] providerIds){
 		List<Provider> providers = new LinkedList<Provider>();
 		Integer len = providerIds.length;
@@ -125,7 +122,7 @@ public class ProductController {
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
 	}
-	
+
 	public List<Provider> getListProviders() {
 		return productFacade.getAllProviders();
 	}

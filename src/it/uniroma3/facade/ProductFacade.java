@@ -26,6 +26,13 @@ public class ProductFacade {
 		return product;
 	}
 	
+	public Product createProduct(String name, String code, Float price, String description, String picturePath, Integer quantity, List<Provider> providers) {
+		Product product = new Product(name, price, description, code, picturePath, quantity);
+		product.addProviders(providers);
+		em.persist(product);
+		return product;
+	}
+	
 	public Product getProduct(Long id) {
 	    Product product = em.find(Product.class, id);
 		return product;

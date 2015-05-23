@@ -88,6 +88,7 @@
 											<h:message for="picture" styleClass="label label-warning" />
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</div>
@@ -99,21 +100,27 @@
 								mandatory)</div>
 							<div class="panel-body">
 								<div class="form-group">
-									<label for="description">Description: </label>
+									<div class="col-sm-8">
+										<label for="description">Description: </label>
 
-									<h:inputTextarea value="#{productController.description}"
-										required="false" cols="20" rows="12" id="description"
-										styleClass="form-control" style="height:236px" />
+										<h:inputTextarea value="#{productController.description}"
+											required="false" cols="20" rows="12" id="description"
+											styleClass="form-control" style="height:236px" />
+									</div>
+									<div class="col-sm-4">
+										<h:selectManyCheckbox value="#{productController.providerIds}"
+											layout="pageDirection">
+											<c:forEach var="provider"
+												items="#{productController.getListProviders()}">
+
+												<f:selectItem itemValue="#{provider.id}"
+													itemLabel="#{provider.name}" />
+
+											</c:forEach>
+										</h:selectManyCheckbox>
+									</div>
 
 								</div>
-
-								<h:selectManyCheckbox value="#{productController.providerIds}">
-									<c:forEach var="provider"
-										items="#{productController.getListProviders()}">
-										<f:selectItem itemValue="#{provider.id}"
-											itemLabel="#{provider.name}" /> 
-									</c:forEach>
-								</h:selectManyCheckbox>
 							</div>
 						</div>
 					</div>

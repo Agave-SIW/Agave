@@ -38,7 +38,7 @@ public class Product {
 	@Column(nullable = false)
 	private String code;
 
-	@ManyToMany(mappedBy="products")
+	@ManyToMany
 	private List<Provider> providers;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)

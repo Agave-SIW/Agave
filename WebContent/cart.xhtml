@@ -51,7 +51,7 @@
 								</div>
 								<div class="col-xs-12 col-sm-4 col-md-4 vcenter">
 									<h4><h:commandLink action="#{productController.findProduct}"
-												value="#{line.product.name}">
+												value="#{line.product.name}" styleClass="cart-product">
 												<f:param name="id" value="#{line.product.id}" />
 											</h:commandLink></h4>
 									<span class="cart-code">Code: #{line.product.code}</span>

@@ -27,11 +27,11 @@ footer {
 }
 
 a {
-	color: #d17581;
+	color: #fff;
 }
 
-a:hover, a:active {
-	color: #e6818e;
+a:hover, a:active, a:focus {
+	color: #e9ffca;
 }
 
 textarea {

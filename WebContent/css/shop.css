@@ -439,3 +439,12 @@ input[readonly] {
 	font-size: 85%;
 	color: #666;
 }
+
+.customer-avatar {
+	font-size: 130px;
+	background-color: #ddd;
+	color: #666;
+	color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	margin-bottom: 30px;
+}

@@ -477,3 +477,12 @@ a:hover, a:active, a:focus .cart-product {
 .thumbnail a {
   color: #BBB1A0;
 }
+
+/* orderList.xhtml css */
+
+.inner-panel{
+	background-color: lightyellow;
+	
+}
+
+/* end */

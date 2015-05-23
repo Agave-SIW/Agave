@@ -2,6 +2,7 @@
     <!ENTITY nbsp "&#160;"> 
     <!ENTITY copy "&#169;">
     <!ENTITY euro "&#8364;"> 
+    <!ENTITY emsp "&#8195;">
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
@@ -26,115 +27,110 @@
 				<br></br>
 				<br></br>
 				<div class="row" id="closedOrders">
-					<div class="panel panel-default">
-						<c:forEach var="order"
-							items="#{orderController.getClosedOrders()}">
-							<div class="panel panel-default">
+					<c:forEach var="order" items="#{orderController.getClosedOrders()}">
+						<div class="panel panel-primary inner-panel">
 
-								<div class="col-sm-12 col-lg-12 col-md-12">
-									<ul class="list-inline">
-										<li><div>Order: ${order.id}</div></li>
-										<li><div>
-												Carried out on: 
-												<h:outputText value="#{order.creationTime}">
+							<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
+								<ul class="list-inline">
+									<li><div>
+											<strong>Order: ${order.id}&emsp;</strong>
+										</div></li>
+									<li><div>
+											<strong>Carried out on: <h:outputText
+													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
-												</h:outputText>
-											</div></li>
-										<li><div>
-												Total: 
-												<h:outputText
-													value="#{orderController.getOrderTotal(order.id)}" />
-											</div></li>
-										<li><div>Sent to: 
-												#{customerController.getCustomer().address.street}</div></li>
-										<li><div>
-												<h:commandLink action="#{orderController.findOrder}"
+												</h:outputText></strong>&emsp;
+										</div></li>
+									<li><div>
+											<strong>Total: <h:outputText
+													value="#{orderController.getOrderTotal(order.id)}" /> €
+											</strong>&emsp;
+										</div></li>
+									<li><div>
+											<strong> <h:commandLink
+													action="#{orderController.findOrder}"
 													value="See the order details">
 													<f:param name="id" value="#{order.id}" />
-												</h:commandLink>
-											</div></li>
-									</ul>
-								</div>
-								<div class="panel-body">
+												</h:commandLink></strong>
+										</div></li>
+								</ul>
+							</div>
+							<div class="panel-body">
 
-									<div class="row">
-										<c:forEach var="orderLine" items="#{order.getOrderLines()}">
-											<div class="col-xs-6 col-md-3">
-												<h:commandLink action="#{productController.findProduct}"
-													styleClass="thumbnail">
-													<f:param name="id" value="#{orderLine.product.id}" />
-													<h:graphicImage
-														value="uploads/#{orderLine.product.picturePath}"
-														alt="#{orderLine.product.name}"></h:graphicImage>
-													<p align="center">#{orderLine.product.name}</p>
-												</h:commandLink>
-											</div>
-										</c:forEach>
-									</div>
+								<div class="row" style="padding-top: 15px">
+									<c:forEach var="orderLine" items="#{order.getOrderLines()}">
+										<div class="col-xs-3 col-md-3">
+											<h:commandLink action="#{productController.findProduct}">
+												<f:param name="id" value="#{orderLine.product.id}" />
+												<h:graphicImage
+													value="uploads/#{orderLine.product.picturePath}"
+													alt="#{orderLine.product.name}" styleClass="img-thumbnail">
+												</h:graphicImage>
+												<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
+											</h:commandLink>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
+						</div>
 
-						</c:forEach>
-					</div>
+					</c:forEach>
 				</div>
 
 				<div class="row" id="evadedOrders" style="display: none">
-					<div class="panel panel-default">
-						<c:forEach var="order"
-							items="#{orderController.getEvadedOrders()}">
-							<div class="panel panel-default">
-
-								<div class="col-sm-12 col-lg-12 col-md-12">
-									<ul class="list-inline">
-										<li><div>Order: ${order.id}</div></li>
-										<li><div>
-												Carried out on: 
-												<h:outputText value="#{order.creationTime}">
+					<c:forEach var="order" items="#{orderController.getEvadedOrders()}">
+						<div class="panel panel-primary inner-panel">
+							<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
+								<ul class="list-inline">
+									<li><div>
+											<strong>Order: ${order.id}</strong>
+										</div></li>
+									<li><div>
+											<strong>Carried out on: <h:outputText
+													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
-												</h:outputText>
-											</div></li>
-										<li><div>
-												Evaded on: 
-												<h:outputText value="#{order.creationTime}">
+												</h:outputText></strong>&emsp;
+										</div></li>
+									<li><div>
+											<strong>Evaded on: <h:outputText
+													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
-												</h:outputText>
-											</div></li>
-										<li><div>
-												Total:
-												<h:outputText
-													value="#{orderController.getOrderTotal(order.id)}" />
-											</div></li>
-										<li><div>Sent to: 
-												#{customerController.getCustomer().address.street}</div></li>
-										<li><div>
-												<h:commandLink action="#{orderController.findOrder}"
+												</h:outputText></strong>&emsp;
+										</div></li>
+									<li><div>
+											<strong>Total: <h:outputText
+													value="#{orderController.getOrderTotal(order.id)}" /> €
+											</strong>&emsp;
+										</div></li>
+									<li><div>
+											<strong><h:commandLink
+													action="#{orderController.findOrder}"
 													value="See the order details">
 													<f:param name="id" value="#{order.id}" />
-												</h:commandLink>
-											</div></li>
-									</ul>
-								</div>
-								<div class="panel-body">
+												</h:commandLink></strong>
+										</div></li>
+								</ul>
+							</div>
+							<div class="panel-body">
 
-									<div class="row">
-										<c:forEach var="orderLine" items="#{order.getOrderLines()}">
-											<div class="col-xs-6 col-md-3">
-												<h:commandLink action="#{productController.findProduct}"
-													styleClass="thumbnail">
-													<f:param name="id" value="#{orderLine.product.id}" />
-													<h:graphicImage
-														value="uploads/#{orderLine.product.picturePath}"
-														alt="#{orderLine.product.name}"></h:graphicImage>
-													<p align="center">#{orderLine.product.name}</p>
-												</h:commandLink>
-											</div>
-										</c:forEach>
-									</div>
+								<div class="row" style="padding-top: 15px">
+									<c:forEach var="orderLine" items="#{order.getOrderLines()}">
+										<div class="col-xs-3 col-md-3">
+											<h:commandLink action="#{productController.findProduct}">
+												<f:param name="id" value="#{orderLine.product.id}" />
+												<h:graphicImage
+													value="uploads/#{orderLine.product.picturePath}"
+													alt="#{orderLine.product.name}" styleClass="img-thumbnail">
+												</h:graphicImage>
+												<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
+											</h:commandLink>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
+						</div>
 
-						</c:forEach>
-					</div>
+					</c:forEach>
 				</div>
 			</h:form>
 		</h:panelGroup>

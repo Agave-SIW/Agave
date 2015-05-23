@@ -12,7 +12,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<ui:define name="title">
-        Product List | Agave Shop - SIW 2015
+        Product Catalog | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
@@ -20,6 +20,7 @@
 
 		<h:form enctype="multipart/form-data">
 			<div class="row">
+				
 				<div class="col-md-12">
 					<div class="row carousel-holder">
 
@@ -85,7 +86,8 @@
 											<h:panelGroup rendered="#{customerController.isLogged()}">
 												<h:commandButton
 													action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
-													value="Add To Cart" styleClass="btn btn-primary btn-margin-up" />
+													value="Add To Cart"
+													styleClass="btn btn-primary btn-margin-up" />
 											</h:panelGroup>
 										</p>
 										<p>

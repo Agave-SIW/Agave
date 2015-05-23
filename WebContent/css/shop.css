@@ -452,3 +452,11 @@ input[readonly] {
 .nowrap, .customerInfo p {
 	white-space: nowrap;
 }
+
+.cart-product{
+	color: #c2542f;
+}
+
+a:hover, a:active, a:focus .cart-product {
+	color: #c2542f;
+}

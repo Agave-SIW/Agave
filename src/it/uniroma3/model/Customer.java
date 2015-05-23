@@ -56,7 +56,7 @@ public class Customer {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = password; //TODO MD5
+		this.password = password; 
 		this.phoneNumber = phoneNumber;
 		this.dateofBirth = dateofBirth;
 		this.address = address;
@@ -205,7 +205,8 @@ public class Customer {
 				+ ", lastName=" + lastName + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", dateofBirth="
 				+ dateofBirth + ", registrationDate=" + registrationDate
-				+ ", address=" + address.toString() + "]"; // nb: non aggiungere gli ordini per evitare overflow in ricorsione
+				+ ", address=" + address.toString() + "]"; 
+		// nb: non aggiungere gli ordini per evitare overflow in ricorsione
 	}
 
 	@Override

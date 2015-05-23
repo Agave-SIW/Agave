@@ -12,13 +12,6 @@ public class Provider {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Override
-	public String toString() {
-		return "Provider [id=" + id + ", name=" + name + ", phoneNumber="
-				+ phoneNumber + ", email=" + email + ", vatin=" + vatin
-				+ ", address=" + address.toString() + "]";
-	}
-
 	@Column(nullable = false)
 	private String name;
 	
@@ -107,6 +100,13 @@ public class Provider {
 	
 	public void addProduct(Product product) {
 		this.products.add(product);
+	}
+	
+	@Override
+	public String toString() {
+		return "Provider [id=" + id + ", name=" + name + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", vatin=" + vatin
+				+ ", address=" + address.toString() + "]";
 	}
 
 }

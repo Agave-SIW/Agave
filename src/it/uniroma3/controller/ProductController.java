@@ -44,6 +44,7 @@ public class ProductController {
 
 	private Product product;
 	private List<Product> products;
+	private List<Provider> providers;
 
 	// review form data
 	private String comment;
@@ -122,6 +123,11 @@ public class ProductController {
 	public List<Product> getListProducts() {
 		return productFacade.getAllProducts();
 	}
+	
+	public List<Provider> findProviders(Long productId) {
+		this.providers = productFacade.findProviders(productId);
+		return this.providers;
+	}
 
 	public List<Provider> getListProviders() {
 		return productFacade.getAllProviders();
@@ -135,8 +141,7 @@ public class ProductController {
 	}
 
 	public String findProduct() {
-		this.product = productFacade.getProduct(id);
-		return "product?id="+id+"&faces-redirect=true&includeViewParams=true";
+		return this.findProduct(this.id);
 	}
 
 	public String findProduct(Long id) {
@@ -408,6 +413,14 @@ public class ProductController {
 		this.providerIds = providerIds;
 	}
 
+	public List<Provider> getProviders() {
+		return providers;
+	}
+
+	public void setProviders(List<Provider> providers) {
+		this.providers = providers;
+	}
+	
 
 
 }

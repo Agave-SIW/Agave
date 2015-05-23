@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Stateless
@@ -56,6 +57,12 @@ public class ProductFacade {
         cq.select(cq.from(Provider.class));
         List<Provider> providers = em.createQuery(cq).getResultList();
 		return providers;
+	}
+	
+	public List<Provider> findProviders(Long productId) {
+		Product p = em.find(Product.class, productId);
+		if(p==null) return new LinkedList<Provider>();
+		return p.getProviders();
 	}
 	
 	public void addProvidersToProduct(Product product, List<Provider> providers){

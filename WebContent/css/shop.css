@@ -408,14 +408,6 @@ input[readonly] {
 	align-items: center;
 }
 
-/* orderList.xhtml css */
-
-.inner-panel{
-	background-color: lightyellow;
-	
-}
-
-/* end */
 .btn-margin-up {
 	margin-top: -15px;
 }
@@ -468,3 +460,29 @@ input[readonly] {
 a:hover, a:active, a:focus .cart-product {
 	color: #c2542f;
 }
+
+.providers table tr td, .providers table tr {
+  float: right;
+}
+.providers table tr td label, .providers table tr td input {
+  font-weight: 200;
+  float: right;
+  padding: 0 5px;
+  word-wrap: normal;
+}
+
+.thumbnail a:hover,  .thumbnail a:active,  .thumbnail a:focus {
+  color: #9d9588;
+}
+.thumbnail a {
+  color: #BBB1A0;
+}
+
+/* orderList.xhtml css */
+
+.inner-panel{
+	background-color: lightyellow;
+	
+}
+
+/* end */

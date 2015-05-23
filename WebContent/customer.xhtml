@@ -55,7 +55,7 @@
 									<strong>Date of Birth: </strong>
 									<h:outputText
 										value='#{customerController.customer.dateofBirth}'>
-										<f:convertDateTime pattern="d MMM yyyy" locale="en" />
+										<f:convertDateTime pattern="d MMM yyyy" locale="en" timeZone="GMT+1" />
 									</h:outputText>
 								</p>
 								<p>
@@ -67,7 +67,7 @@
 									<strong>Registration Date: </strong>
 									<h:outputText
 										value='#{customerController.customer.registrationDate}'>
-										<f:convertDateTime pattern="d MMM yyyy" locale="en" />
+										<f:convertDateTime pattern="d MMM yyyy" locale="en" timeZone="GMT+1" />
 									</h:outputText>
 								</p>
 							</div>

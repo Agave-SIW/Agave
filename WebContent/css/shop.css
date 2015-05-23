@@ -386,13 +386,25 @@ input[readonly] {
 
 /*CART CUSTOM Css*/
 .vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
 }
 
 .button-center {
-	display: flex; 
-	justify-content: center; 
+	display: flex;
+	justify-content: center;
 	align-items: center;
+}
+
+/* orderList.xhtml css */
+.panel-backg {
+	background-color: #494333;
+	border: none;
+	padding: 20px;
+}
+
+.inner-panel{
+	background-color: lightyellow;
+	padding: 10px;
 }

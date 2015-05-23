@@ -26,27 +26,26 @@
 				<br></br>
 				<br></br>
 				<div class="row" id="closedOrders">
-					<div class="panel panel-default">
+					<div class="panel panel-default panel-backg">
 						<c:forEach var="order"
 							items="#{orderController.getClosedOrders()}">
-							<div class="panel panel-default">
+							<div class="panel panel-default inner-panel">
 
 								<div class="col-sm-12 col-lg-12 col-md-12">
 									<ul class="list-inline">
 										<li><div>Order: ${order.id}</div></li>
 										<li><div>
-												Carried out on: 
+												Carried out on:
 												<h:outputText value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText>
 											</div></li>
 										<li><div>
-												Total: 
+												Total:
 												<h:outputText
 													value="#{orderController.getOrderTotal(order.id)}" />
+												€
 											</div></li>
-										<li><div>Sent to: 
-												#{customerController.getCustomer().address.street}</div></li>
 										<li><div>
 												<h:commandLink action="#{orderController.findOrder}"
 													value="See the order details">
@@ -79,22 +78,22 @@
 				</div>
 
 				<div class="row" id="evadedOrders" style="display: none">
-					<div class="panel panel-default">
+					<div class="panel panel-default panel-backg">
 						<c:forEach var="order"
 							items="#{orderController.getEvadedOrders()}">
-							<div class="panel panel-default">
+							<div class="panel panel-default inner-panel">
 
 								<div class="col-sm-12 col-lg-12 col-md-12">
 									<ul class="list-inline">
 										<li><div>Order: ${order.id}</div></li>
 										<li><div>
-												Carried out on: 
+												Carried out on:
 												<h:outputText value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText>
 											</div></li>
 										<li><div>
-												Evaded on: 
+												Evaded on:
 												<h:outputText value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText>
@@ -103,9 +102,8 @@
 												Total:
 												<h:outputText
 													value="#{orderController.getOrderTotal(order.id)}" />
+												€
 											</div></li>
-										<li><div>Sent to: 
-												#{customerController.getCustomer().address.street}</div></li>
 										<li><div>
 												<h:commandLink action="#{orderController.findOrder}"
 													value="See the order details">

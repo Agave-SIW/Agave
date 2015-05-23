@@ -1,6 +1,5 @@
 package it.uniroma3.helper;
 
-import javax.servlet.http.Part;
 
 /**
  * Helper class for uri encoding and manipulation
@@ -14,7 +13,7 @@ public class UriHelper {
 	public UriHelper() {}
 
 	/** Converts a string into something you can safely insert into a URL. */
-	public static String encodeURIcomponent(String s){
+	public String encodeURIcomponent(String s){
 		StringBuilder o = new StringBuilder();
 		for (char ch : s.toCharArray()) {
 			if (isUnsafe(ch)) {
@@ -27,11 +26,11 @@ public class UriHelper {
 		return o.toString();
 	}
 
-	private static char toHex(int ch){
+	private char toHex(int ch){
 		return (char)(ch < 10 ? '0' + ch : 'A' + ch - 10);
 	}
 
-	private static boolean isUnsafe(char ch){
+	private boolean isUnsafe(char ch){
 		if (ch > 128 || ch < 0)
 			return true;
 		return " %$&+,/:;=?@<>#%".indexOf(ch) >= 0;

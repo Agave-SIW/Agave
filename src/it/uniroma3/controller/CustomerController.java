@@ -8,6 +8,7 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.facade.AddressFacade;
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.helper.ContextHelper;
+import it.uniroma3.helper.UriHelper;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -52,10 +53,12 @@ public class CustomerController {
 	private AddressFacade addressFacade;
 
 	private ContextHelper ch;
+	private UriHelper uh;
 
 
 	public CustomerController() {
 		this.ch = new ContextHelper();
+		this.uh = new UriHelper();
 		this.addressFacade = new AddressFacade();
 	}
 
@@ -132,7 +135,12 @@ public class CustomerController {
 	public Boolean isNotLogged() {
 		return !this.isLogged();
 	}
-
+	
+	public String uriFormattedAddress(Address address){
+		String a = address.getStreet() + " " + address.getCity() + " " + address.getState() + " " + address.getCountry();
+		return this.uh.encodeURIcomponent(a);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -291,6 +299,14 @@ public class CustomerController {
 
 	public void setCh(ContextHelper ch) {
 		this.ch = ch;
+	}
+
+	public UriHelper getUh() {
+		return uh;
+	}
+
+	public void setUh(UriHelper uh) {
+		this.uh = uh;
 	}
 
 

@@ -59,7 +59,7 @@
 								<span class="glyphicon glyphicon-transfer"></span> <strong>Provided by: </strong>
 								<c:forEach var="provider"
 									items="#{providers}" varStatus="loop">
-							<a href="mailto:#{provider.email}" data-toggle="tooltip" data-placement="bottom" title="Vatin:&#8239;#{provider.vatin} Phone:&#8239;#{provider.phoneNumber}">#{provider.name}</a><c:if test="${!loop.last}">,</c:if> 
+							<a href="mailto:#{provider.email}" data-toggle="tooltip" data-placement="bottom" title="Address:&#8239;#{provider.address} Vatin:&#8239;#{provider.vatin} Phone:&#8239;#{provider.phoneNumber}">#{provider.name}</a><c:if test="${!loop.last}">,</c:if> 
 							</c:forEach>
 							</div>
 							</h:panelGroup>

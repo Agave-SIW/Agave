@@ -91,14 +91,18 @@
 
 								<label for="dateOfBirth" class="control-label col-sm-2">Date
 									of birth: </label>
-								<div class="col-sm-10">
+								<div class="col-sm-10 input-append date" id="datetimepicker">
 									<h:inputText value="#{customerController.dateofBirth}"
 										id="dateofBirth" required="true"
 										requiredMessage="Birth date is mandatory"
 										styleClass="form-control needPlaceholder needRequired"
-										placeholder="dd/MM/yyyy">
+										placeholder="dd/MM/yyyy" data-format="dd/MM/yyyy"
+										style="padding-left:  45px;">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</h:inputText>
+									<span class="add-on"> <i data-time-icon="icon-time"
+										data-date-icon="icon-calendar"> </i>
+									</span>
 									<h:message for="dateofBirth" styleClass="label label-warning" />
 								</div>
 							</div>

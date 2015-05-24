@@ -36,19 +36,15 @@ public class Customer {
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, fetch=FetchType.EAGER)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	private Orders cart;
 	
 	@OneToMany(mappedBy="customer")
-	private List<Orders> closedOrders;
-	
-	@OneToMany(mappedBy="customer")
-	private List<Orders> evadedOrders;
+	private List<Orders> orders;
 	
 
 	public Customer() {	
-		this.closedOrders = new LinkedList<Orders>();
-		this.evadedOrders = new LinkedList<Orders>();
+		this.orders = new LinkedList<Orders>();
 	}
 
 	public Customer(String firstName, String lastName, String email, String password,
@@ -76,18 +72,10 @@ public class Customer {
 		this.cart = c.getCart();
 	}
 	
-	public List<Orders> getOrders() {
-		List<Orders> allOrders = new LinkedList<Orders>();
-		allOrders.addAll(this.closedOrders);
-		allOrders.addAll(this.evadedOrders);
-		return allOrders;
-	}
-	
 	public List<Orders> getOrdersAndCart() {
 		List<Orders> allOrdersAndCart = new LinkedList<Orders>();
 		allOrdersAndCart.add(this.cart);
-		allOrdersAndCart.addAll(this.closedOrders);
-		allOrdersAndCart.addAll(this.evadedOrders);
+		allOrdersAndCart.addAll(this.orders);
 		return allOrdersAndCart;
 	}
 
@@ -99,20 +87,12 @@ public class Customer {
 		this.cart = cart;
 	}
 
-	public List<Orders> getClosedOrders() {
-		return closedOrders;
+	public List<Orders> getOrders() {
+		return orders;
 	}
 
-	public void setClosedOrders(List<Orders> closedOrders) {
-		this.closedOrders = closedOrders;
-	}
-
-	public List<Orders> getEvadedOrders() {
-		return evadedOrders;
-	}
-
-	public void setEvadedOrders(List<Orders> evadedOrders) {
-		this.evadedOrders = evadedOrders;
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
 	}
 
 	public Long getId() {

@@ -18,6 +18,10 @@ public class OrderLine {
 	public OrderLine() {
 	}
 	
+	public double getPartialTotal(){
+		return this.quantity*this.product.getPrice();
+	}
+	
 	public OrderLine(Integer quantity, Product product) {
 		this.quantity = quantity;
 		this.product = product;

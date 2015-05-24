@@ -3,6 +3,8 @@
     <!ENTITY nbsp "&#160;"> 
     <!ENTITY copy "&#169;">
     <!ENTITY euro "&#8364;"> 
+    <!ENTITY emsp "&#8195;">
+    
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -16,17 +18,33 @@
 
 	<ui:define name="content">
 
- 		<div class="row">
+		<div class="row">
 
-			<c:forEach var="ordLine"
+			<c:forEach var="orderLine"
 				items="#{orderController.order.getOrderLines()}">
-				<div class="col-sm-4 col-lg-4 col-md-4">
-					#{ordLine.product.name}
-					#{ordLine.quantity}
+				<div class="col-sm-4 col-lg-4 col-md-4 panel panel-primary">
+					<div class="panel panel-heading">Order:
+						#{orderController.order.id}&emsp; Product Name&emsp; Price&emsp;
+						Quantity&emsp; Total&emsp; Provider</div>
+						
+					<div class="col-xs-3 col-md-3 vcenter">
+						<h:commandLink action="#{productController.findProduct}">
+							<f:param name="id" value="#{orderLine.product.id}" />
+							<h:graphicImage value="uploads/#{orderLine.product.picturePath}"
+								alt="#{orderLine.product.name}" styleClass="img-thumbnail">
+							</h:graphicImage>
+							<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
+						</h:commandLink>
+					</div>
+					<div class="col-xs-4 col-sm-2 col-md-2 vcenter"> #{orderLine.product.name} </div>
+					<div class="col-xs-4 col-sm-2 col-md-2 vcenter"> #{orderLine.quantity} </div>
+					<div class="col-xs-4 col-sm-2 col-md-2 vcenter"> #{orderLine.getTotal()} </div>
+					<div class="col-xs-4 col-sm-2 col-md-2 vcenter">#{orderLine.product.getPartialTotal()} </div>
+
 				</div>
 			</c:forEach>
 
-		</div> 
+		</div>
 
 	</ui:define>
 </ui:composition>

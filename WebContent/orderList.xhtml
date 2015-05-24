@@ -20,9 +20,9 @@
 			<h:form>
 				<ul class="nav nav-tabs nav-justified">
 					<li role="presentation" class="tab-li-1 active"><a href="#"
-						id="closedOrderTab">Closed Orders</a></li>
+						id="closedOrderTab"><strong>Closed Orders</strong></a></li>
 					<li role="presentation" class="tab-li-2"><a href="#"
-						id="evadedOrderTab">Evaded Orders</a></li>
+						id="evadedOrderTab"><strong>Evaded Orders</strong></a></li>
 				</ul>
 				<br></br>
 				<br></br>
@@ -36,7 +36,7 @@
 											<strong>Order: ${order.id}&emsp;</strong>
 										</div></li>
 									<li><div>
-											<strong>Carried out on: <h:outputText
+											<strong>Created on: <h:outputText
 													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText></strong>&emsp;
@@ -86,13 +86,13 @@
 											<strong>Order: ${order.id}</strong>
 										</div></li>
 									<li><div>
-											<strong>Carried out on: <h:outputText
+											<strong>Created on: <h:outputText
 													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText></strong>&emsp;
 										</div></li>
 									<li><div>
-											<strong>Evaded on: <h:outputText
+											<strong>Carried out on: <h:outputText
 													value="#{order.creationTime}">
 													<f:convertDateTime pattern="dd.MM.yyyy" />
 												</h:outputText></strong>&emsp;

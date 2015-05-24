@@ -485,7 +485,8 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.2);
 	color: #000;
 	background-color: #4D473B;
-	background-color: rgba(77, 71, 59, 0.85); border : 1px solid #494335;
+	background-color: rgba(77, 71, 59, 0.85);
+	border: 1px solid #494335;
 	border-radius: 0;
 	border: 1px solid #494335;
 }
@@ -515,8 +516,46 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	color: #d96640;
 }
 
+/* calendario */
+.icon-calendar:before {
+	content: "\e109";
+	position: relative;
+	top: 7px;
+	left: 9px;
+	display: inline-block;
+	font-family: 'Glyphicons Halflings';
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-calendar {
+	border: 1px solid;
+	position: relative;
+	margin-top: -34px;
+	width: 34px !important;
+	height: 34px !important;
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.icon-calendar:hover, .icon-calendar:active, .icon-calendar:focus {
+	background-color: #e6e6e6;
+	border-color: #adadad;
+}
+
+.bootstrap-datetimepicker-widget {
+	color: #333;
+}
+
+.bootstrap-datetimepicker-widget>ul{
+	padding:0;
+}
+
 /* orderList.xhtml css */
 .inner-panel {
 	background-color: lightyellow;
 }
-/* end */

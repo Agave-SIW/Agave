@@ -2,6 +2,12 @@ if(typeof fieldDis != "undefined" && fieldDis){
 	$("#loginField").attr('disabled', 'disabled');
 }
 
+$(function() {
+	$('#datetimepicker').datetimepicker({
+		language: 'en',
+	});
+});
+
 $(".needPlaceholder").attr("placeholder", function(){
 	var arr = this.name.split(":"); 
 	var str = arr[arr.length - 1];
@@ -37,7 +43,7 @@ $("#closedOrderTab").click(function(event){
 	$("#closedOrders").show();
 	$("#evadedOrders").hide();
 });
-	
+
 $("#evadedOrderTab").click(function(event){
 	event.preventDefault();
 	$(".tab-li-1").removeClass("active");
@@ -61,7 +67,7 @@ $(".label-warning").text(function(){
 	if (str.indexOf("DateofBirth") !=-1) {
 		return "Could not be intended as a valid date. Example: 17/05/2015";
 	}
-	
+
 	return str + (arr[2]? arr[2]:"") + (arr[3]? arr[3]:"")
 });
 
@@ -83,14 +89,14 @@ $(document).on('change', '.btn-file :file', function() {
 
 $(document).ready(function() {
 	$("#buyFrame").slideDown();
-	
+
 	$('[data-toggle="tooltip"]').tooltip(); 
-	
+
 	$(".tab-li-1").addClass("active");
 	$(".tab-li-2").removeClass("active");
 	$("#closedOrders").show();
 	$("#evadedOrders").hide();
-	
+
 	$(".indexDesc").dotdotdot({
 		ellipsis: 	'... ',
 		watch: 		'window'

@@ -31,10 +31,7 @@ public class Admin {
 	@Temporal(TemporalType.DATE)
 	private Date registrationDate;
 
-	public Admin() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Admin() {}
 
 	public Admin(String firstName, String lastName, String email, String password,
 			String phoneNumber, Date dateofBirth) {

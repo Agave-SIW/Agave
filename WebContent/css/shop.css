@@ -551,8 +551,28 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	color: #333;
 }
 
-.bootstrap-datetimepicker-widget>ul{
-	padding:0;
+.bootstrap-datetimepicker-widget>ul {
+	padding: 0;
+}
+
+.bootstrap-datetimepicker-widget td.active:hover,
+	.bootstrap-datetimepicker-widget td.active:hover:hover,
+	.bootstrap-datetimepicker-widget td.active:active,
+	.bootstrap-datetimepicker-widget td.active:hover:active,
+	.bootstrap-datetimepicker-widget td.active.active,
+	.bootstrap-datetimepicker-widget td.active:hover.active,
+	.bootstrap-datetimepicker-widget td.active.disabled,
+	.bootstrap-datetimepicker-widget td.active:hover.disabled,
+	.bootstrap-datetimepicker-widget td.active[disabled],
+	.bootstrap-datetimepicker-widget td.active:hover[disabled],
+	.bootstrap-datetimepicker-widget td span.active:hover,
+	.bootstrap-datetimepicker-widget td span.active:active,
+	.bootstrap-datetimepicker-widget td span.active.active,
+	.bootstrap-datetimepicker-widget td span.active.disabled,
+	.bootstrap-datetimepicker-widget td span.active[disabled] {
+	background-color: #b74a12;
+	border-color: #b44f25;
+	background-image: none;
 }
 
 /* orderList.xhtml css */

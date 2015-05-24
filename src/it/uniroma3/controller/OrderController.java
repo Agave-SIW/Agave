@@ -47,6 +47,10 @@ public class OrderController {
 
 		return null;
 	}
+	
+	public List<Orders> getAllClosedOrders(){
+		return orderFacade.getAllClosedOrders();
+	}
 
 	public List<Orders> getClosedOrders(){
 		CustomerController customerController = new CustomerController();

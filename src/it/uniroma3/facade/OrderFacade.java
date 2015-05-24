@@ -251,5 +251,16 @@ public class OrderFacade {
 							.setParameter("idCustomer", idCustomer)
 							.getResultList();
 	}
+
+	/**
+	 * Returns all closed order for all customer
+	 * @return
+	 */
+	public List<Orders> getAllClosedOrders() {
+		return em.createQuery("SELECT o "
+				            + "FROM Orders o "
+							+ "WHERE o.evasionTime is NULL", Orders.class)
+							.getResultList();
+	}
 	
 }

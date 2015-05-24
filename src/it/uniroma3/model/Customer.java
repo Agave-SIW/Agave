@@ -186,7 +186,8 @@ public class Customer {
 				+ ", phoneNumber=" + phoneNumber + ", dateofBirth="
 				+ dateofBirth + ", registrationDate=" + registrationDate
 				+ ", address=" + address.toString() + "]"; 
-		// nb: non aggiungere gli ordini per evitare overflow in ricorsione
+		// nb: do not add orders in toString to avoid stack overflow, 
+		//     since orders may outout the customer too
 	}
 
 	@Override

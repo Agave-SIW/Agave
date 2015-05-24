@@ -386,16 +386,6 @@ input[readonly] {
 	border-radius: 0;
 }
 
-.carousel {
-	box-shadow: 0px 5px 10px -2px #000;
-	box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-indicators li {
-	box-shadow: 0px 0px 10px 0px #000;
-	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
-}
-
 .vcenter {
 	display: inline-block;
 	vertical-align: middle;
@@ -453,7 +443,7 @@ input[readonly] {
 	white-space: nowrap;
 }
 
-.cart-product{
+.cart-product {
 	color: #c2542f;
 }
 
@@ -462,28 +452,71 @@ a:hover, a:active, a:focus .cart-product {
 }
 
 .providers table tr td, .providers table tr {
-  float: right;
+	float: right;
 }
+
 .providers table tr td label, .providers table tr td input {
-  font-weight: 200;
-  float: right;
-  padding: 0 5px;
-  word-wrap: normal;
+	font-weight: 200;
+	float: right;
+	padding: 0 5px;
+	word-wrap: normal;
 }
 
-.thumbnail a:hover,  .thumbnail a:active,  .thumbnail a:focus {
-  color: #9d9588;
+.thumbnail a:hover, .thumbnail a:active, .thumbnail a:focus {
+	color: #9d9588;
 }
+
 .thumbnail a {
-  color: #BBB1A0;
+	color: #BBB1A0;
 }
 
-/* orderList.xhtml css */
+a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
+	{
+	color: #333;
+}
 
-.inner-panel{
-	background-color: lightyellow;
+.carousel {
+	box-shadow: 0px 5px 10px -2px #000;
+	box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-indicators li {
+	box-shadow: 0px 0px 10px 0px #000;
+	box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.2);
+	color: #000;
+	background-color: #4D473B;
+	background-color: rgba(77, 71, 59, 0.85); border : 1px solid #494335;
+	border-radius: 0;
+	border: 1px solid #494335;
+}
+
+.carousel-indicators .active {
+	background-color: #494335;
+}
+
+.carousel-caption {
+	text-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+	color: #efe9dd;
+	background: rgba(73, 67, 51, 0.7);
+	padding-top: 10px;
+}
+
+.carousel-control:hover, .carousel-control:active, .carousel-control:focus
+	{
+	color: #fff;
+}
+
+.carousel-control.left, .carousel-control.right {
+	/*background: none;*/
 	
 }
 
+.carousel-caption h2 a {
+	color: #d96640;
+}
 
+/* orderList.xhtml css */
+.inner-panel {
+	background-color: lightyellow;
+}
 /* end */

@@ -33,15 +33,6 @@ public class OrderFacade {
 		em.persist(order);
 		return order;
 	}
-	
-	/* TODO Metodo inutilizzato*/
-	public Orders createCart(Customer customer) {
-		Orders cart = new Orders();
-		cart.setCustomer(customer);
-
-		em.persist(cart);
-		return cart;
-	}
 
 	public Orders createOrderFromCart(Orders cart) throws Exception {
 		Exception e = new Exception();

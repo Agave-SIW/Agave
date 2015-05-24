@@ -4,29 +4,29 @@ import javax.persistence.*;
 
 @Entity
 public class Address {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String street;
-	
+
 	@Column(nullable = false)
 	private String city;
-	
+
 	@Column(nullable = false)
 	private String state;
-	
+
 	@Column(nullable = false)
 	private String zipcode;
-	
+
 	@Column(nullable = false)
 	private String country;
-	
+
 
 	public Address() {}
-	
+
 	public Address(String street, String city, String state,
 			String zipcode, String country) {
 		this.street = street;
@@ -84,14 +84,12 @@ public class Address {
 		this.country = country;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", zipcode=" + zipcode + ", country="
-				+ country + "]";
+		return street + ", " + zipcode + " " + city
+				+ " (" + state + ")" + ", "
+				+ country;
 	}
-	
-	
+
+
 }

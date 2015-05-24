@@ -62,7 +62,6 @@ public class Product {
 		this.reviews = new LinkedList<Review>();
 	}
 	
-	
 	public void addProviders(List<Provider> providers){
 		this.providers.addAll(providers);
 	}

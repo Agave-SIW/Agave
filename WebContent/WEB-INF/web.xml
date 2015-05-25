@@ -11,6 +11,12 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<!-- 50MB max -->
+			<max-file-size>52428800</max-file-size>
+			<max-request-size>54525952</max-request-size>
+			<file-size-threshold>0</file-size-threshold>
+		</multipart-config>
 	</servlet>
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>

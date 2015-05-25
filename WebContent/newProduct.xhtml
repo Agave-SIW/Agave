@@ -20,7 +20,8 @@
 		<div class="row">
 			<h:panelGroup rendered="#{adminController.isLogged()}">
 
-				<h:form styleClass="col-lg-12" enctype="multipart/form-data">
+				<h:form id="newProduct" styleClass="col-lg-12"
+					enctype="multipart/form-data">
 					<div class="col-md-12">
 						<h1>New Product</h1>
 						<hr />
@@ -79,14 +80,16 @@
 									<div class="col-sm-10">
 										<div class="input-group">
 											<span class="input-group-btn"> <span
-												class="btn btn-default btn-file"> Browse... <h:inputFile
-														id="picture" value="#{productController.picture}"
+												class="btn btn-default btn-file" data-toggle="tooltip"
+												data-placement="bottom"
+												title="File&#8239;must&#8239;be&#8239;under&#8239;50&#8239;MB, suggested&#8239;size&#8239;is&#8239;1150x400&#8239;px, accepted&#8239;formats:&#8239;jpg,&#8239;png,&#8239;gif,&#8239;bmp">
+													Browse... <h:inputFile id="picture"
+														value="#{productController.picture}"
 														styleClass="form-control needRequired" required="true" />
 											</span>
 											</span> <input type="text" class="form-control" readonly="readonly" />
-
-											<h:message for="picture" styleClass="label label-warning" />
 										</div>
+										<h:message for="picture" styleClass="label label-warning" />
 									</div>
 
 								</div>
@@ -105,7 +108,8 @@
 
 										<h:inputTextarea value="#{productController.description}"
 											required="false" cols="20" rows="12" id="description"
-											styleClass="form-control" style="height: 236px; margin-bottom: 14px;" />
+											styleClass="form-control"
+											style="height: 236px; margin-bottom: 14px;" />
 									</div>
 									<div class="col-sm-3 providers">
 										<label class="pull-right">Provided by: </label>

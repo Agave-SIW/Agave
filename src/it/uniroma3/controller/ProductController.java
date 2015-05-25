@@ -12,16 +12,15 @@ import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.facade.ReviewFacade;
 import it.uniroma3.helper.ContextHelper;
 import it.uniroma3.helper.FileHelper;
+import it.uniroma3.helper.ImageValidator;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
 /**
- * System operations for Product and Review management
+ * System operations for Product management (including reviews and providers)
  *
  * @author Gaetano
  *
@@ -64,9 +63,9 @@ public class ProductController {
 
 	private ContextHelper ch;
 
-
 	public ProductController() {
 		this.ch = new ContextHelper();
+		
 		this.reviewFacade = new ReviewFacade();
 	}
 
@@ -76,15 +75,21 @@ public class ProductController {
 
 		//file path functions
 		FileHelper fh = new FileHelper();
+		ImageValidator iv = new ImageValidator();
 
 		if(ac.isLogged()){
-			String filename = fh.getFileNameFromHeader(picture);
-			ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-			String path = ctx.getRealPath("/");
-			path = path + fh.makePath(path, "uploads");
-			System.out.println("\nFile system context path (in TestServlet): " + path);
-
 			try {
+				String filename = fh.getFileNameFromHeader(picture);
+				
+				if(!iv.validate(filename)) {
+					this.ch.addMessage("newProduct", "picture", "Wrong file format");
+					return "newProduct";
+				}
+				
+				String path = ch.getServletContext().getRealPath("/");
+				path = path + fh.makePath(path, "uploads");
+				System.out.println("\nFile system context path (in TestServlet): " + path);
+				
 				System.out.println("Trying to upload "+ filename +" in "+ path);
 				picture.write(path+filename);
 				System.out.println("Succesful! "+ filename + " is uploaded");

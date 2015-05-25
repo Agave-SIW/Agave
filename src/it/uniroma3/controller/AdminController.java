@@ -54,7 +54,8 @@ public class AdminController {
 		
 		return "admin";
 	}
-
+	
+	
 	public String logoutAdmin(){
 		this.admin = null;
 		

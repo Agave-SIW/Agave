@@ -24,37 +24,80 @@
 				<c:forEach var="orderLine"
 					items="#{orderController.order.getOrderLines()}">
 					<div class="col-sm-12  col-md-12">
-					<div class="panel panel-primary">
-						<div class="panel panel-heading">Order:
-							#{orderController.order.id}&emsp; #{orderLine.product.name}</div>
+						<div class="panel panel-primary">
+							<div class="panel-heading">Order:
+								#{orderController.order.id}&emsp; #{orderLine.product.name}</div>
 
-						<div class="col-xs-3 col-md-3 vcenter">
-							<h:commandLink action="#{productController.findProduct}">
-								<f:param name="id" value="#{orderLine.product.id}" />
-								<h:graphicImage value="uploads/#{orderLine.product.picturePath}"
-									alt="#{orderLine.product.name}" styleClass="img-thumbnail">
-								</h:graphicImage>
-								<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
-							</h:commandLink>
+							<div class="col-xs-3 col-md-3 vcenter">
+								<h:commandLink action="#{productController.findProduct}">
+									<f:param name="id" value="#{orderLine.product.id}" />
+									<h:graphicImage
+										value="uploads/#{orderLine.product.picturePath}"
+										alt="#{orderLine.product.name}" styleClass="img-thumbnail">
+									</h:graphicImage>
+									<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
+								</h:commandLink>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 vcenter">
+								Price:<br></br> #{orderLine.product.price}&emsp;
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 vcenter">
+								Quantity:<br></br> #{orderLine.quantity}&emsp;
+							</div>
+							<div class="col-xs-2 col-sm-2 col-md-2 vcenter">
+								Total:<br></br> #{orderLine.getPartialTotal()}
+							</div>
+
 						</div>
-						<div class="col-xs-3 col-sm-3 col-md-3 vcenter">Price:<br></br>
-							#{orderLine.product.price}&emsp;</div>
-						<div class="col-xs-3 col-sm-3 col-md-3 vcenter">Quantity:<br></br>
-							#{orderLine.quantity}&emsp;</div>
-						<div class="col-xs-2 col-sm-2 col-md-2 vcenter">Total:<br></br>
-							#{orderLine.getPartialTotal()}</div>
-
-					</div></div>
-				</c:forEach>
-
-				<div class="col-xs-12 col-md-12">
-					<div class="panel panel-info">
-						<div class="panel panel-heading"><h4><strong>My Title</strong></h4></div>
-						<div class="panel-body"><h4><strong>My Content</strong></h4></div>
 					</div>
-				</div>
-
+				</c:forEach>
 			</div>
+
+
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<strong>Summary</strong>
+				</div>
+				<div class="panel-body">
+					<div>
+						<strong>Order: #{orderController.order.id}</strong>
+					</div>
+					<div>
+						<strong>Created on: <h:outputText
+								value="#{orderController.order.creationTime}">
+								<f:convertDateTime pattern="dd MM yyyy" />
+							</h:outputText></strong>
+					</div>
+
+					<div>
+						<strong>Total: <h:outputText
+								value="#{orderController.getOrderTotal(orderController.order.id)}" />
+						</strong>&euro;
+					</div>
+
+					<h:panelGroup
+						rendered="#{orderController.canEvade(orderController.order.id)}">
+						<div><strong>Name: #{orderController.customer.firstName}</strong></div>
+						<div><strong>LastName: #{orderController.customer.lastName}</strong></div>
+						<div><strong>
+							<h:outputText
+								value="Birth Date: #{orderController.customer.dateofBirth}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText></strong>
+						</div>
+						<div><strong>Email: #{orderController.customer.email}</strong></div>
+						<div><strong>Phone Number: #{orderController.customer.phoneNumber}</strong></div>
+						<div><strong>Resident Address: #{orderController.customer.address.street}</strong></div>
+
+						<h:commandButton styleClass="btn btn-danger" value="Evade Order"
+							action="order.xhtml" />
+					</h:panelGroup>
+
+				</div>
+			</div>
+
+
+
 		</h:form>
 	</ui:define>
 </ui:composition>

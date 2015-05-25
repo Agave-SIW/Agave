@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html [
     <!ENTITY nbsp "&#160;"> 
     <!ENTITY copy "&#169;">
@@ -38,12 +39,12 @@
 									<li><div>
 											<strong>Created on: <h:outputText
 													value="#{order.creationTime}">
-													<f:convertDateTime pattern="dd.MM.yyyy" />
+													<f:convertDateTime pattern="dd/MM/yyyy" />
 												</h:outputText></strong>&emsp;
 										</div></li>
 									<li><div>
 											<strong>Total: <h:outputText
-													value="#{orderController.getOrderTotal(order.id)}" /> €
+													value="#{orderController.getOrderTotal(order.id)}" />&euro;
 											</strong>&emsp;
 										</div></li>
 									<li><div>
@@ -99,7 +100,7 @@
 										</div></li>
 									<li><div>
 											<strong>Total: <h:outputText
-													value="#{orderController.getOrderTotal(order.id)}" /> €
+													value="#{orderController.getOrderTotal(order.id)}" />&euro;
 											</strong>&emsp;
 										</div></li>
 									<li><div>

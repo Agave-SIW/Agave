@@ -123,5 +123,11 @@ public class CustomerFacade {
 		this.md = md;
 	}
 
+	public Customer getCustomerByOrderId(Long id) {
+		return em.createQuery("SELECT c "
+							+ "FROM Customer c, Orders o "
+							+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
+	}
+
 	
 }

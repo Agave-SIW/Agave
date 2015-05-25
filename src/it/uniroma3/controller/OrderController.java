@@ -2,8 +2,10 @@ package it.uniroma3.controller;
 
 import java.util.List;
 
+import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.OrderFacade;
 import it.uniroma3.helper.ContextHelper;
+import it.uniroma3.model.Customer;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
 
@@ -25,9 +27,12 @@ public class OrderController {
 	private Long id;
 
 	private Orders order;
+	private Customer customer;
 	
 	@EJB
 	private OrderFacade orderFacade;
+	@EJB
+	private CustomerFacade customerFacade;
 	
 	private ContextHelper ch;
 
@@ -75,6 +80,21 @@ public class OrderController {
 
 		return null;
 	}
+	
+	public boolean canEvade(Long idOrder){
+		
+		if(!new AdminController().isLogged())
+			return false;
+		
+		Orders myOrder = orderFacade.getOrder(idOrder);
+		
+		if(myOrder != null)
+			return myOrder.getEvasionTime() == null;
+		
+		System.out.println("Order is null");
+		
+		return  false;
+	}
 
 
 	public List<Orders> getLastOrders(int numOrders){
@@ -83,6 +103,7 @@ public class OrderController {
 
 	public String findOrder(Long id){
 		this.order = orderFacade.getOrder(id);
+		this.setCustomer(customerFacade.getCustomerByOrderId(id));
 		return "order";
 	}
 
@@ -130,6 +151,14 @@ public class OrderController {
 
 	public void setCh(ContextHelper ch) {
 		this.ch = ch;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }

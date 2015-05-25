@@ -516,6 +516,10 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	color: #d96640;
 }
 
+.tooltip-inner {
+    white-space:pre-wrap;
+}
+
 /* calendario */
 .icon-calendar:before {
 	content: "\e109";

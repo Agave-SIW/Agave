@@ -65,6 +65,11 @@ public class Product {
 	public void addProviders(List<Provider> providers){
 		this.providers.addAll(providers);
 	}
+	
+	public void decreaseStorageQuantity(Integer quantity) {
+		this.storageQuantity -= quantity;
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -186,7 +191,7 @@ public class Product {
 			return false;
 		return true;
 	}
-	
-	
+
+
 
 }

@@ -28,7 +28,7 @@
 				<br></br>
 				<br></br>
 				<div class="row" id="closedOrders">
-					<c:forEach var="order" items="#{orderController.getClosedOrders()}">
+					<ui:repeat var="order" value="#{orderController.getClosedOrders()}">
 						<div class="panel panel-primary inner-panel">
 
 							<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
@@ -52,14 +52,15 @@
 													action="#{orderController.findOrder}"
 													value="See the order details">
 													<f:param name="id" value="#{order.id}" />
-												</h:commandLink></strong>
+												</h:commandLink>
+											</strong>
 										</div></li>
 								</ul>
 							</div>
 							<div class="panel-body">
 
 								<div class="row" style="padding-top: 15px">
-									<c:forEach var="orderLine" items="#{order.getOrderLines()}">
+									<ui:repeat var="orderLine" value="#{order.getOrderLines()}">
 										<div class="col-xs-3 col-md-3">
 											<h:commandLink action="#{productController.findProduct}">
 												<f:param name="id" value="#{orderLine.product.id}" />
@@ -70,12 +71,12 @@
 												<p align="center" class="title-img-thumbnail">#{orderLine.product.name}</p>
 											</h:commandLink>
 										</div>
-									</c:forEach>
+									</ui:repeat>
 								</div>
 							</div>
 						</div>
 
-					</c:forEach>
+					</ui:repeat>
 				</div>
 
 				<div class="row" id="evadedOrders" style="display: none">
@@ -89,13 +90,13 @@
 									<li><div>
 											<strong>Created on: <h:outputText
 													value="#{order.creationTime}">
-													<f:convertDateTime pattern="dd.MM.yyyy" />
+													<f:convertDateTime pattern="dd/MM/yyyy" />
 												</h:outputText></strong>&emsp;
 										</div></li>
 									<li><div>
 											<strong>Carried out on: <h:outputText
 													value="#{order.creationTime}">
-													<f:convertDateTime pattern="dd.MM.yyyy" />
+													<f:convertDateTime pattern="dd/MM/yyyy" />
 												</h:outputText></strong>&emsp;
 										</div></li>
 									<li><div>
@@ -109,6 +110,7 @@
 													value="See the order details">
 													<f:param name="id" value="#{order.id}" />
 												</h:commandLink></strong>
+
 										</div></li>
 								</ul>
 							</div>

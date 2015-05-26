@@ -1,13 +1,16 @@
 package it.uniroma3.controller;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.facade.OrderFacade;
+import it.uniroma3.facade.ProductFacade;
 import it.uniroma3.helper.ContextHelper;
 import it.uniroma3.model.Customer;
 import it.uniroma3.model.OrderLine;
 import it.uniroma3.model.Orders;
+import it.uniroma3.model.Product;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,22 +26,28 @@ import javax.faces.bean.ManagedProperty;
 @ManagedBean
 public class OrderController {
 
-	@ManagedProperty(value="#{param.id}")
-	private Long id;
-
-	private Orders order;
-	private Customer customer;
-	
 	@EJB
 	private OrderFacade orderFacade;
 	@EJB
 	private CustomerFacade customerFacade;
-	
+	@EJB
+	private ProductFacade productFacade;
+
 	private ContextHelper ch;
 
+	@ManagedProperty(value="#{param.id}")
+	private Long id;
+	
+	private Orders order;
+	private Customer orderCustomer;
 
 	public OrderController(){
 		this.ch = new ContextHelper();
+	}
+
+	public void findOrderAndCustomer(Long idOrder){
+		this.order = orderFacade.getOrder(idOrder);
+		this.orderCustomer = customerFacade.getCustomerByOrderId(idOrder);
 	}
 
 	public List<Orders> getOrders(){
@@ -52,7 +61,7 @@ public class OrderController {
 
 		return null;
 	}
-	
+
 	public List<Orders> getAllClosedOrders(){
 		return orderFacade.getAllClosedOrders();
 	}
@@ -80,19 +89,19 @@ public class OrderController {
 
 		return null;
 	}
-	
+
 	public boolean canEvade(Long idOrder){
-		
+
 		if(!new AdminController().isLogged())
 			return false;
-		
+
 		Orders myOrder = orderFacade.getOrder(idOrder);
-		
+
 		if(myOrder != null)
 			return myOrder.getEvasionTime() == null;
-		
+
 		System.out.println("Order is null");
-		
+
 		return  false;
 	}
 
@@ -101,40 +110,60 @@ public class OrderController {
 		return orderFacade.getLastOrders(numOrders);
 	}
 
-	public String findOrder(Long id){
-		this.order = orderFacade.getOrder(id);
-		this.setCustomer(customerFacade.getCustomerByOrderId(id));
-		return "order";
+	public String findOrder(Long orderId){
+		return "order?id=" + orderId + "&faces-redirect=true&includeViewParams=true";
 	}
 
 	public String findOrder(){
 		return findOrder(this.id);
 	}
-	
+
 	public double getOrderTotal(Long orderId){
-		System.out.println(orderId);
 		double sum = 0;
 		for(OrderLine ol : orderFacade.getOrderLines(orderId))
 			sum += ol.getQuantity()*ol.getProduct().getPrice();
 		return sum;
 	}
+
+	public String tryEvadeOrder(Long idOrder){
+		System.out.println(idOrder);
+		try{
+			Orders closedOrder = orderFacade.getOrder(idOrder);
+
+			if(closedOrder.canEvadeAllLines()){
+				evadeOrder(closedOrder);
+				closedOrder.setEvasionTime(new GregorianCalendar().getTime());
+				this.orderFacade.updateOrder(closedOrder);
+				ch.addToSession("evadedResult", new Boolean(true));
+				return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+			}
+			else{
+				ch.addToSession("evadeResult", new Boolean(false));
+				return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+			}
+		}catch(Exception e){
+			ch.addToSession("evadedResult", new Boolean(false));
+			return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+		}
+		
+	}
 	
+	public void evadeOrder(Orders order) {
+		for(OrderLine ol : order.getOrderLines()){
+			Product product = ol.getProduct();
+			product.decreaseStorageQuantity(ol.getQuantity());
+			productFacade.updateProduct(product);
+		}
+	}
+
+	/** GETTER AND SETTERS **/
+
 	public OrderFacade getOrderFacade() {
 		return orderFacade;
 	}
 
 	public void setOrderFacade(OrderFacade orderFacade) {
 		this.orderFacade = orderFacade;
-	}
-
-	/** GETTER AND SETTERS **/
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public Orders getOrder() {
@@ -153,12 +182,36 @@ public class OrderController {
 		this.ch = ch;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Customer getOrderCustomer() {
+		return orderCustomer;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setOrderCustomer(Customer customer) {
+		this.orderCustomer = customer;
+	}
+	
+	public CustomerFacade getCustomerFacade() {
+		return customerFacade;
+	}
+
+	public void setCustomerFacade(CustomerFacade customerFacade) {
+		this.customerFacade = customerFacade;
+	}
+
+	public ProductFacade getProductFacade() {
+		return productFacade;
+	}
+
+	public void setProductFacade(ProductFacade productFacade) {
+		this.productFacade = productFacade;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

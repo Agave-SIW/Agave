@@ -43,6 +43,13 @@ public class Orders {
 	public void emptyOrderLines(){
 		this.orderLines = new LinkedList<OrderLine>();
 	}
+	
+	public boolean canEvadeAllLines() {
+		for(OrderLine ol : this.getOrderLines())
+			if(ol.getQuantity() > ol.getProduct().getStorageQuantity())
+				return false;
+		return true;
+	}
 
 	public Long getId() {
 		return id;

@@ -25,46 +25,44 @@
 						<div class="panel panel-primary inner-panel">
 
 							<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
-								<ul class="list-inline">
-									<li><div>
-											<strong>Order: ${order.id}&emsp;</strong>
-										</div></li>
-									<li><div>
-											<strong>Created by: <h:outputText
-													value="#{order.customer.firstName}">
-													<f:convertDateTime pattern="dd.MM.yyyy" />
-												</h:outputText></strong>&emsp;
-										</div></li>
-									<li><div>
-											<strong>Created on: <h:outputText
-													value="#{order.creationTime}">
-													<f:convertDateTime pattern="dd.MM.yyyy" />
-												</h:outputText></strong>&emsp;
-										</div></li>
-									<li><div>
-											<strong>Total: <h:outputText
-													value="#{orderController.getOrderTotal(order.id)}" />&euro;
-											</strong>&emsp;
-										</div></li>
-									<li><div>
-											<strong> <h:commandLink
-													action="#{orderController.findOrder}"
-													value="See the order details">
-													<f:param name="id" value="#{order.id}" />
-												</h:commandLink></strong>
-										</div></li>
-									<li><div>
-											<strong> <h:commandLink
-													action="#{orderController.findCustomer}"
-													value="See the customer details">
-													<f:param name="id" value="#{order.id}" />
-												</h:commandLink></strong>
-										</div></li>
-								</ul>
+								<div>
+										<strong>Order: ${order.id}&emsp;</strong>
+									</div>
 							</div>
-							<div class="panel-body">
-
-								
+							<div class="panel-body"></div>
+							<div>
+								<div>
+									<strong>Created by: <h:outputText
+											value="#{order.customer.firstName}">
+											<f:convertDateTime pattern="dd.MM.yyyy" />
+										</h:outputText></strong>&emsp;
+								</div>
+								<div>
+									<strong>Created on: <h:outputText
+											value="#{order.creationTime}">
+											<f:convertDateTime pattern="dd.MM.yyyy" />
+										</h:outputText></strong>&emsp;
+								</div>
+								<div>
+									<strong>Total: <h:outputText
+											value="#{orderController.getOrderTotal(order.id)}" />&euro;
+									</strong>&emsp;
+								</div>
+								<div></div>
+								<div>
+									<strong> <h:commandLink
+											action="#{orderController.findOrder}"
+											value="See the order details">
+											<f:param name="id" value="#{order.id}" />
+										</h:commandLink></strong>
+								</div>
+								<div>
+									<strong> <h:commandLink
+											action="#{orderController.findCustomer}"
+											value="See the customer details">
+											<f:param name="id" value="#{order.id}" />
+										</h:commandLink></strong>
+								</div>
 							</div>
 						</div>
 

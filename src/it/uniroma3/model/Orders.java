@@ -50,6 +50,14 @@ public class Orders {
 				return false;
 		return true;
 	}
+	
+	public int getNumberOfItems(){
+		int sum = 0;
+		for(OrderLine ol : getOrderLines())
+			sum += ol.getQuantity();
+		return sum;
+		
+	}
 
 	public Long getId() {
 		return id;

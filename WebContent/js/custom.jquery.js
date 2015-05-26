@@ -38,16 +38,20 @@ $("#addReviewButton").click(function(event) {
 
 $("#closedOrderTab").click(function(event){
 	event.preventDefault();
-	$(".tab-li-1").addClass("active");
-	$(".tab-li-2").removeClass("active");
+	$(".tab-li-1").addClass("btn-primary");
+	$(".tab-li-2").removeClass("btn-primary");
+	$(".tab-li-1").removeClass("btn-default");
+	$(".tab-li-2").addClass("btn-default");
 	$("#closedOrders").show();
 	$("#evadedOrders").hide();
 });
 
 $("#evadedOrderTab").click(function(event){
 	event.preventDefault();
-	$(".tab-li-1").removeClass("active");
-	$(".tab-li-2").addClass("active");
+	$(".tab-li-1").removeClass("btn-primary");
+	$(".tab-li-2").addClass("btn-primary");
+	$(".tab-li-1").addClass("btn-default");
+	$(".tab-li-2").removeClass("btn-default");
 	$("#closedOrders").hide();
 	$("#evadedOrders").show();
 });

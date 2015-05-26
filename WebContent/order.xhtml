@@ -20,8 +20,12 @@
 
 	<ui:define name="content">
 		#{orderController.findOrderAndCustomer(param["id"])}
-			<div class="row">
+		
+			
+		<h1>Order: ##{orderController.order.id}</h1>
 
+
+		<div class="row">
 			<ui:repeat var="orderLine"
 				value="#{orderController.order.orderLines}">
 				<div class="col-sm-12  col-md-12">
@@ -32,8 +36,7 @@
 						<div class="col-xs-3 col-md-3 vcenter">
 							<a href="product.xhtml?id=#{orderLine.product.id}"> <img
 								src="#{root}/uploads/#{orderLine.product.picturePath}"
-								alt="#{orderLine.product.name}" class="img-thumbnail" /> <span
-								class="title-img-thumbnail">#{orderLine.product.name}</span>
+								alt="#{orderLine.product.name}" class="img-thumbnail" />
 							</a>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 vcenter">

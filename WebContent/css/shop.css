@@ -583,3 +583,12 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 .inner-panel {
 	background-color: lightyellow;
 }
+
+.title-tab{
+	position: relative; 
+	margin-top: -75px;
+}
+
+.link-on-red:hover, .link-on-red:focus, .link-on-red:active{
+	color: #fff;
+}

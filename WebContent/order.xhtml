@@ -4,6 +4,7 @@
     <!ENTITY copy "&#169;">
     <!ENTITY euro "&#8364;"> 
     <!ENTITY emsp "&#8195;">
+    <!ENTITY num "&#35;">
     
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
@@ -19,33 +20,33 @@
     </ui:define>
 
 	<ui:define name="content">
-		#{orderController.findOrderAndCustomer(param["id"])}
-		
-			
-		<h1>Order: ##{orderController.order.id}</h1>
-
-
 		<div class="row">
+			<div class="col-md-12">
+				#{orderController.findOrderAndCustomer(param["id"])}
+				<h1>Order: &num;#{orderController.order.id}</h1>
+				<hr />
+			</div>
+
 			<ui:repeat var="orderLine"
 				value="#{orderController.order.orderLines}">
-				<div class="col-sm-12  col-md-12">
+				<div class="col-md-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">Order:
 							#{orderController.order.id}&emsp; #{orderLine.product.name}</div>
 
-						<div class="col-xs-3 col-md-3 vcenter">
+						<div class="col-md-3 vcenter">
 							<a href="product.xhtml?id=#{orderLine.product.id}"> <img
 								src="#{root}/uploads/#{orderLine.product.picturePath}"
 								alt="#{orderLine.product.name}" class="img-thumbnail" />
 							</a>
 						</div>
-						<div class="col-xs-3 col-sm-3 col-md-3 vcenter">
+						<div class="col-md-3 vcenter">
 							Price:<br></br> #{orderLine.product.price}&emsp;
 						</div>
-						<div class="col-xs-3 col-sm-3 col-md-3 vcenter">
+						<div class="col-md-3 vcenter">
 							Quantity:<br></br> #{orderLine.quantity}&emsp;
 						</div>
-						<div class="col-xs-2 col-sm-2 col-md-2 vcenter">
+						<div class="col-md-2 vcenter">
 							Total:<br></br> #{orderLine.getPartialTotal()}
 						</div>
 

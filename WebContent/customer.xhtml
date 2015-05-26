@@ -20,7 +20,7 @@
 
 		<div class="row">
 			<h:panelGroup
-				rendered="#{(not empty customerController.customer) and (adminController.isLogged())}">
+				rendered="#{(not empty customerController.customer) and adminController.isLogged()}">
 
 				<div class="col-md-12">
 					<h1>Customer Profile</h1>
@@ -109,7 +109,7 @@
 			</h:panelGroup>
 
 			<h:panelGroup
-				rendered='#{(empty customerController.customer) or (adminController.isNotLogged())}'>
+				rendered='#{(empty customerController.customer) or adminController.isNotLogged()}'>
 				<div class="col-lg-12">
 
 					<div class="col-md-12">
@@ -131,7 +131,7 @@
 								}
 							</script>
 						</h:panelGroup>
-						<h:panelGroup rendered='#{(not empty customerController.customer) and (adminController.isNotLogged())}'>
+						<h:panelGroup rendered='#{(not empty customerController.customer) and adminController.isNotLogged()}'>
 							<span class="label label-warning">You must be logged as
 								Admin to see Customer information</span>
 

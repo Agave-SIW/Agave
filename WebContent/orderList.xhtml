@@ -22,55 +22,44 @@
 		<h:panelGroup rendered="#{customerController.isLogged()}">
 
 			<div class="row">
-				<div class="col-md-9 col-xs-9 col-sm-9">
+				<div class="col-md-12">
 					<h1>Orders</h1>
+					<hr />
 				</div>
-				<div class="col-md-3-col-xs-3 col-sm-3">
-					<ul class="list-inline">
-						<li class="tab-li-1" style=""><div class="btn-primary">
-								<a href="#" id="closedOrderTab"><strong>Closed
-										Orders</strong></a>
-							</div></li>
-						<li class="tab-li-2" style=""><div class="btn-default">
-								<a href="#" id="evadedOrderTab"><strong>Evaded
-										Orders</strong></a>
-							</div></li>
-					</ul>
+				<div class="title-tab col-md-12 pull-right">
+					<a href="#" id="evadedOrderTab" class="btn btn-default pull-right"
+						style="margin-left: 10px;"><strong>Evaded Orders</strong></a> <a
+						href="#" id="closedOrderTab" class="btn btn-primary pull-right"><strong>Closed
+							Orders</strong></a>
 				</div>
 			</div>
-			<hr />
+
 
 			<div class="row" id="closedOrders">
 				<ui:repeat var="order" value="#{orderController.getClosedOrders()}">
 					<div class="panel panel-primary inner-panel">
 
-						<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
+						<div class="col-md-12 panel-heading">
 							<div class="row">
-								<div class="col-md-2 col-sm-2 col-xs-2">
-									<strong>Order Number:</strong> ${order.id}
-								</div>
-								<div class="col-md-2 col-sm-2 col-xs-2">
-									<strong>Created on:</strong>
+								<div class="col-md-10">
+									<strong>Order Number: </strong> ${order.id} &nbsp;&nbsp; <strong>Created
+										on: </strong>
 									<h:outputText value="#{order.creationTime}">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
 									</h:outputText>
+									&nbsp;&nbsp; <strong>Number of different items: </strong>
+									#{order.getOrderLines().size()} &nbsp;&nbsp; <strong>Total
+										number of items: </strong> #{order.getNumberOfItems()} &nbsp;&nbsp; <strong>Total:
+									</strong>
+									<h:outputText
+										value="#{orderController.getOrderTotal(order.id)}">
+										<f:convertNumber pattern="#0.00 &#8364;" />
+									</h:outputText>
 								</div>
-								<div class="col-md-2 col-sm-2 col-xs-2">
-									<strong>Number of different items:</strong>
-									#{order.getOrderLines().size()}
-								</div>
-
-								<div class="col-md-2 col-sm-2 col-xs-2">
-									<strong>Total number of items:</strong>
-									#{order.getNumberOfItems()}
-								</div>
-								<div>
-									<strong>Total:</strong>
-									#{orderController.getOrderTotal(order.id)} &euro;
-								</div>
-								<div class="col-md-2 col-sm-2 col-xs-2 pull-right">
-									<strong> <a href="#{root}/order.xhtml?id=#{order.id}">
-											See the order details</a>
+								<div class="col-md-2">
+									<strong> <a class="link-on-red"
+										href="#{root}/order.xhtml?id=#{order.id}"> See the order
+											details</a>
 									</strong>
 								</div>
 							</div>
@@ -79,7 +68,7 @@
 
 							<div class="row" style="padding-top: 15px">
 								<ui:repeat var="orderLine" value="#{order.getOrderLines()}">
-									<div class="col-xs-3 col-md-3">
+									<div class="col-md-3">
 										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
 											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
 											alt="#{orderLine.product.name}" class="img-thumbnail" />
@@ -96,54 +85,36 @@
 			<div class="row" id="evadedOrders" style="display: none">
 				<c:forEach var="order" items="#{orderController.getEvadedOrders()}">
 					<div class="panel panel-primary inner-panel">
-						<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
-							<ul class="list-inline">
-								<li><div>
-										<strong>Order Number:</strong> ${order.id}
-									</div></li>
-								<li><div>
-										<strong>Created on:</strong>
-										<h:outputText value="#{order.creationTime}">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</h:outputText>
-									</div></li>
-								<li><div>
-										<strong>Number of different items:</strong>
-										#{order.orderLines.size}
-									</div></li>
-
-								<li><div>
-										<strong>Total number of items:</strong>
-										#{order.getNumberOfItems()}
-									</div></li>
-								<li><div>
-										<strong>Total:</strong>
-										<h:outputText
-											value="#{orderController.getOrderTotal(order.id)}" />
-										&euro;
-									</div></li>
-								<li><div>
-										<strong>Carried out on:</strong>
-										<h:outputText value="#{order.creationTime}">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</h:outputText>
-									</div></li>
-								<li><div>
-										<strong>Total:
-											#{orderController.getOrderTotal(order.id)} &euro; </strong>
-									</div></li>
-								<li><div class="pull-right">
-										<strong> <a href="#{root}/order.xhtml?id=#{order.id}">
-												See the order details</a>
-										</strong>
-									</div></li>
-							</ul>
+						<div class="col-md-12 panel-heading">
+							<div class="row">
+								<div class="col-md-10">
+									<strong>Order Number: </strong> ${order.id} &nbsp;&nbsp; <strong>Created
+										on: </strong>
+									<h:outputText value="#{order.creationTime}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+									&nbsp;&nbsp; <strong>Number of different items: </strong>
+									#{order.getOrderLines().size()} &nbsp;&nbsp; <strong>Total
+										number of items:</strong> #{order.getNumberOfItems()} &nbsp;&nbsp; <strong>Total:
+									</strong>
+									<h:outputText
+										value="#{orderController.getOrderTotal(order.id)}">
+										<f:convertNumber pattern="#0.00 &#8364;" />
+									</h:outputText>
+								</div>
+								<div class="col-md-2">
+									<strong> <a class="link-on-red"
+										href="#{root}/order.xhtml?id=#{order.id}"> See the order
+											details</a>
+									</strong>
+								</div>
+							</div>
 						</div>
 						<div class="panel-body">
 
 							<div class="row" style="padding-top: 15px">
 								<c:forEach var="orderLine" items="#{order.getOrderLines()}">
-									<div class="col-xs-3 col-md-3">
+									<div class="col-md-3">
 										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
 											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
 											alt="#{orderLine.product.name}" class="img-thumbnail" />
@@ -158,16 +129,8 @@
 			</div>
 		</h:panelGroup>
 		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-
-			<div class="col-lg-12">
-
-				<div class="col-md-12">
-					<h1>Error</h1>
-					<hr />
-					<span class="label label-warning">You must log in first to
-						see your orders</span>
-				</div>
-			</div>
+			<span class="label label-warning">You must log in first to see
+				your orders</span>
 		</h:panelGroup>
 
 	</ui:define>

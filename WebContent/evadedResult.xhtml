@@ -14,21 +14,21 @@
 
 	<ui:define name="title">
 		#{orderController.getCh().getFromSession('evadedResult')
-						 ? 'Error' : 'Success'}" | Agave Shop - SIW 2015
+						 ? 'Error' : 'Success'} | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
 
 		<h:panelGroup
 			rendered="#{orderController.getCh().getFromSession('evadedResult')}">
-			<span class="label label-success"><h4>Success - The order was
-				evaded without problems</h4></span>
+			<span class="label label-success">Success - The order was
+				evaded without problems</span>
 		</h:panelGroup>
 
 		<h:panelGroup
 			rendered="#{!orderController.getCh().getFromSession('evadedResult')}">
-			<span class="label label-error"><h4>Failure - The order was not
-				evaded correctly</h4></span>
+			<span class="label label-error">Failure - The order was not
+				evaded correctly</span>
 
 		</h:panelGroup>
 		

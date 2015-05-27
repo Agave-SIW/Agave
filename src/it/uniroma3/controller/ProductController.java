@@ -103,7 +103,9 @@ public class ProductController {
 				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
 			}
 			catch (Exception e) {
-				return "WEB-INF/errorProduct";
+				//return "WEB-INF/errorProduct";
+				this.ch.addErrorMessage("There was an error");
+				return "WEB-INF/error";
 			}
 		}
 		else {
@@ -167,7 +169,7 @@ public class ProductController {
 	public String addReview(Long idProduct){
 		//must verify that the user is actually logged in to add a review
 		CustomerController cc = new CustomerController();
-		if(cc.isNotLogged()) return "WEB-INF/errorReview";
+		if(cc.isNotLogged()) return "WEB-INF/errorReviewIframe";
 
 		try{
 			Customer c = (Customer) this.ch.getFromSession("customer");
@@ -180,10 +182,10 @@ public class ProductController {
 			System.out.println("Review Added!");
 
 			this.setReview(r);
-			return "WEB-INF/successReview";
+			return "WEB-INF/successReviewIframe";
 		}
 		catch (Exception e){
-			return "WEB-INF/errorReview";
+			return "WEB-INF/errorReviewIframe";
 		}
 
 	}

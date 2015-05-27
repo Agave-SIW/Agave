@@ -69,8 +69,10 @@ public class CustomerController {
 				System.out.println("\nAddress created\n");
 				this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
 				System.out.println("\nCustomer Created\n");
-
-				return "WEB-INF/successSignin";
+				
+				//return "WEB-INF/successSignin";
+				this.ch.addSuccessMessage("Registration successful");
+				return "WEB-INF/success";
 			}
 			else {
 				this.ch.addMessage("signIn", "email", "There is already a customer with this email address");

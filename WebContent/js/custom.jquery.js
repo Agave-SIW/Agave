@@ -12,7 +12,7 @@ $(".needPlaceholder").attr("placeholder", function(){
 	var arr = this.name.split(":"); 
 	var str = arr[arr.length - 1];
 	var arr = str.split(/(?=[A-Z])/);
-	if(arr[0]=="dateof") return "dd/MM/yyyy";
+	if(arr[0]=="dateof") return "MM/dd/yyyy";
 	return capitalizeFirstLetter(arr[0]) + " " + (arr[1]? arr[1]:"") + " " + (arr[2]? arr[2]:"");
 });
 $(".needType").attr("type", function(){ var arr = this.name.split(":"); return arr[arr.length - 1];});

@@ -17,7 +17,6 @@
 
 	<ui:define name="content">
 		<c:set var="root" value="#{request.contextPath}" />
-		<c:set var="root" value="#{request.contextPath}" />
 
 		<div class="row">
 			<div class="col-lg-12">
@@ -32,7 +31,7 @@
 						</h:form>
 					</div>
 					&nbsp;<span id="timer"><script type="text/javascript">
-						countDown("#{view.viewId}", 10, "This page will redirect in ");
+						countDown("#{root}", 10, "This page will redirect in ");
 						var fieldDis = true;
 					</script>
 					</span>

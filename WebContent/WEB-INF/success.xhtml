@@ -12,26 +12,25 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<ui:define name="title">
-        Error | Agave Shop - SIW 2015
+        Success | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
-	<c:set var="root" value="#{request.contextPath}" />
-	
-	<h:panelGroup rendered="#{customerController.isLogged()}">
-		<script>
-				window.location.href = "#{root}";
-		</script>
-	</h:panelGroup>
+		<c:set var="root" value="#{request.contextPath}" />
+
 		<div class="row">
 			<div class="col-lg-12">
 
 				<div class="col-md-12">
-					<h1>Error</h1>
+					<h1>Success</h1>
 					<hr />
-					<div class="label label-warning">You must be logged to complete this operation</div>
-					<span id="timer"> 
-					<script type="text/javascript">
+					<div class="label label-success">
+						<h:form id="successForm">
+						    <h:inputHidden id="successMessage" />
+							<h:message for="successMessage" />
+						</h:form>
+					</div>
+					&nbsp;<span id="timer"><script type="text/javascript">
 						countDown("#{root}", 10, "This page will redirect in ");
 						var fieldDis = true;
 					</script>

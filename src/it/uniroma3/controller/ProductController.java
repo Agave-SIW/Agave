@@ -58,7 +58,7 @@ public class ProductController {
 	private ProductFacade productFacade;
 	@EJB
 	private CustomerFacade customerFacade;
-	//not ejb
+	//not ejb, persists handled by cascade type, still repository class for future changes
 	private ReviewFacade reviewFacade;
 
 	private ContextHelper ch;

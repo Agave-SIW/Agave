@@ -14,48 +14,59 @@ import java.util.List;
 
 @Stateless
 public class CustomerFacade {
-	
-    @PersistenceContext(unitName = "agave")
-    private EntityManager em;
-    
-    private PasswordHelper md;
-    
+
+	@PersistenceContext(unitName = "agave")
+	private EntityManager em;
+
+	private PasswordHelper md;
+
 	public CustomerFacade() {
 		this.md = new PasswordHelper();
 	}
-	
+
 	public Customer createCustomer(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth, Address address) {
-		Date currentDate = new Date();
-		Orders cart = new Orders();
-		
-		//making MD5 password to store
-		String securePassword = md.securePassword(password);
-		Customer customer = new Customer(firstName, lastName, email, securePassword,  phoneNumber, dateofBirth, currentDate, address, cart);
-		em.persist(customer);
-		return customer;
-	}
-	
-	public Customer getCustomer(String email) {
-		Customer customer = new Customer();
-		//customer = em.find(Customer.class, email); // Non funziona perche' l'Id e' id, non email. Serve una query per cercare su email
 		try { 
-			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
-			customer = customerQuery.getSingleResult();
+			Date currentDate = new Date();
+			Orders cart = new Orders();
+
+			//making SHA password to store
+			String securePassword = md.securePassword(password);
+			Customer customer = new Customer(firstName, lastName, email, securePassword,  phoneNumber, dateofBirth, currentDate, address, cart);
+			em.persist(customer);
+			return customer;
 		}
 		catch(Exception e){
 			return null;
 		}
-		return customer;
 	}
-	
+
+	public Customer getCustomer(String email) {
+		try { 
+			Customer customer = new Customer();
+			//customer = em.find(Customer.class, email); // Non funziona perche' l'Id e' id, non email. Serve una query per cercare su email
+			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
+			customer = customerQuery.getSingleResult();
+
+			return customer;
+		}
+		catch(Exception e){
+			return null;
+		}
+
+	}
+
 	public Customer getCustomer(Long id) {
-		Customer customer = new Customer();
-		customer = em.find(Customer.class, id); 
-		return customer;
+		try { 
+			Customer customer = new Customer();
+			customer = em.find(Customer.class, id); 
+			return customer;
+		}
+		catch (Exception e){
+			return null;
+		}
 	}
-	
-	
-	
+
+
 	public boolean existsCustomer(String email) {
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
@@ -66,53 +77,56 @@ public class CustomerFacade {
 			return false;
 		}
 	}
-	
+
 	public List<Customer> getAllCustomers() {
-        CriteriaQuery<Customer> cq = em.getCriteriaBuilder().createQuery(Customer.class);
-        cq.select(cq.from(Customer.class));
-        List<Customer> customers = em.createQuery(cq).getResultList();
+		CriteriaQuery<Customer> cq = em.getCriteriaBuilder().createQuery(Customer.class);
+		cq.select(cq.from(Customer.class));
+		List<Customer> customers = em.createQuery(cq).getResultList();
 		return customers;
 	}
-	
+
 	public Boolean checkPassword(Customer customer, String password){
 		return customer.getPassword().equals(md.securePassword(password));
 	}
 
 	public void updateCustomer(Customer customer) {
-        em.merge(customer);
+		em.merge(customer);
 	}
-	
+
 	public void updateCustomer(Long idCustomer) {
 		Customer customer = em.find(Customer.class, idCustomer);
-        updateCustomer(customer);
+		updateCustomer(customer);
 	}
-	
-    private void deleteCustomer(Customer customer) {
-        em.remove(customer);
-    }
+
+	private void deleteCustomer(Customer customer) {
+		em.remove(customer);
+	}
 
 	public void deleteCustomer(Long idCustomer) {
 		Customer customer = em.find(Customer.class, idCustomer);
-        deleteCustomer(customer);
+		deleteCustomer(customer);
 	}
-	
+
 	public Orders getCart(Long idCustomer){
 		Customer customer = em.find(Customer.class, idCustomer);
 		return getCart(customer);
+
 	}
-	
+
 	public Orders getCart(Customer customer){
 		return customer.getCart();
 	}
-	
+
 	public void setCart(Long idCustomer, Orders cart){
 		Customer customer = em.find(Customer.class, idCustomer);
 		setCart(customer, cart);
 	}
-	
+
 	public void setCart(Customer customer, Orders cart){
+
 		customer.setCart(cart);
 		updateCustomer(customer);
+
 	}
 
 	public PasswordHelper getMd() {
@@ -124,10 +138,15 @@ public class CustomerFacade {
 	}
 
 	public Customer getCustomerByOrderId(Long id) {
-		return em.createQuery("SELECT c "
-							+ "FROM Customer c, Orders o "
-							+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
+		try {
+			return em.createQuery("SELECT c "
+					+ "FROM Customer c, Orders o "
+					+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
+		}
+		catch(Exception e){
+			return null;
+		}
 	}
 
-	
+
 }

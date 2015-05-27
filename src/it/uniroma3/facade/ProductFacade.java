@@ -13,63 +13,68 @@ import java.util.List;
 
 @Stateless
 public class ProductFacade {
-	
-    @PersistenceContext(unitName = "agave")
-    private EntityManager em;
-    
-    
+
+	@PersistenceContext(unitName = "agave")
+	private EntityManager em;
+
+
 	public ProductFacade() {
 	}
-    
+
 	public Product createProduct(String name, String code, Float price, String description, String picturePath, Integer quantity) {
 		Product product = new Product(name, price, description, code, picturePath, quantity);
 		em.persist(product);
 		return product;
 	}
-	
+
 	public Product createProduct(String name, String code, Float price, String description, String picturePath, Integer quantity, List<Provider> providers) {
 		Product product = new Product(name, price, description, code, picturePath, quantity);
 		product.addProviders(providers);
 		em.persist(product);
 		return product;
 	}
-	
+
 	public Product getProduct(Long id) {
-	    Product product = em.find(Product.class, id);
+		Product product = em.find(Product.class, id);
 		return product;
 	}
-	
+
 	public Provider getProvider(Long id) {
-	    Provider provider = em.find(Provider.class, id);
+		Provider provider = em.find(Provider.class, id);
 		return provider;
 	}
-	
-	
+
+
 	public List<Product> getAllProducts() {
-        CriteriaQuery<Product> cq = em.getCriteriaBuilder().createQuery(Product.class);
-        cq.select(cq.from(Product.class));
-        List<Product> products = em.createQuery(cq).getResultList();
+		CriteriaQuery<Product> cq = em.getCriteriaBuilder().createQuery(Product.class);
+		cq.select(cq.from(Product.class));
+		List<Product> products = em.createQuery(cq).getResultList();
 		return products;
 	}
-	
+
 	public List<Provider> getAllProviders() {
-        CriteriaQuery<Provider> cq = em.getCriteriaBuilder().createQuery(Provider.class);
-        cq.select(cq.from(Provider.class));
-        List<Provider> providers = em.createQuery(cq).getResultList();
+		CriteriaQuery<Provider> cq = em.getCriteriaBuilder().createQuery(Provider.class);
+		cq.select(cq.from(Provider.class));
+		List<Provider> providers = em.createQuery(cq).getResultList();
 		return providers;
 	}
-	
+
 	public List<Provider> findProviders(Long productId) {
 		Product p = em.find(Product.class, productId);
 		if(p==null) return new LinkedList<Provider>();
 		return p.getProviders();
 	}
-	
+
 	public void addProvidersToProduct(Product product, List<Provider> providers){
-		product.addProviders(providers);
-		em.merge(product);
+		try { 
+			product.addProviders(providers);
+			em.merge(product);
+		}
+		catch(Exception e){
+			System.out.println("Exception: addProvidersToProduct(...)");
+		}
 	}
-	
+
 	public List<Product> getLastProducts() {
 		List<Product> products = new ArrayList<Product>();
 		try { 
@@ -80,7 +85,7 @@ public class ProductFacade {
 		}
 		return products;
 	}
-	
+
 	public List<Product> getLastProducts(Integer n) {
 		List<Product> products = new ArrayList<Product>();
 		try { 
@@ -91,26 +96,26 @@ public class ProductFacade {
 		}
 		return products;
 	}
-	
+
 	public void addReviewToProduct(Review review, Product product){
 		product.addReview(review);
 		em.merge(product);
 	}
 
 	public void updateProduct(Product product) {
-        em.merge(product);
+		em.merge(product);
 	}
-	
-    private void deleteProduct(Product product) {
-        em.remove(product);
-    }
+
+	private void deleteProduct(Product product) {
+		em.remove(product);
+	}
 
 	public void deleteProduct(Long id) {
-        Product product = em.find(Product.class, id);
-        deleteProduct(product);
+		Product product = em.find(Product.class, id);
+		deleteProduct(product);
 	}
 
-	
 
-	
+
+
 }

@@ -49,7 +49,7 @@ public class CustomerController {
 
 	@EJB
 	private CustomerFacade customerFacade;
-	//not ejb
+	//not ejb, persists handled by cascade type, still repository class for future changes
 	private AddressFacade addressFacade;
 
 	private ContextHelper ch;

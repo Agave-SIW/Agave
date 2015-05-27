@@ -25,12 +25,12 @@
 				window.location.href = "#{root}";
 			}
 		</script>
-		<div class="label label-warning pull-right">Cart already
+		<div class="label label-warning pull-right">Too many selected or Cart already
 			contains the storage quantity</div>
 		<br />
 		<span id="timer" class="pull-right" style="font-size: 80%"> <script
 				type="text/javascript">
-						countDown("#{root}/addToCart.xhtml", 10, "Reloading button in ");
+						countDown(document.referrer, 10, "Reloading button in ");
 					</script>
 		</span>
 		<div class="label label-warning invisible facesMessageHandler">

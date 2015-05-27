@@ -32,13 +32,19 @@
 			<hr class="darkHr" />
 			<div class="row">
 				<div class="col-md-12">
-					<div class="label label-warning">There was an error submitting your review</div>
+					<div class="label label-warning">There was an error
+						submitting your review</div>
 				</div>
 			</div>
 
 			<hr class="darkHr" />
 		</h:panelGroup>
-
+		<div class="label label-warning invisible facesMessageHandler">
+			<h:form id="errorForm" style="display: inline;">
+				<h:inputHidden id="errorMessage" />
+				<h:message for="errorMessage" />
+			</h:form>
+		</div>
 		<ui:include src="/WEB-INF/footer-js.xhtml" />
 	</f:view>
 </body>

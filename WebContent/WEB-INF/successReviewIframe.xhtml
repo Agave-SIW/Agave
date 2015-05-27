@@ -45,7 +45,12 @@
 
 			<hr class="darkHr" />
 		</h:panelGroup>
-
+		<div class="label label-success invisible facesMessageHandler">
+			<h:form id="successForm" style="display: inline;">
+				<h:inputHidden id="successMessage" />
+				<h:message for="successMessage" />
+			</h:form>
+		</div>
 		<ui:include src="/WEB-INF/footer-js.xhtml" />
 	</f:view>
 </body>

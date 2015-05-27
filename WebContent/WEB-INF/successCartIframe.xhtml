@@ -25,13 +25,20 @@
 				window.location.href = "#{root}";
 			}
 		</script>
-		<div class="label label-success pull-right">Product added to Cart</div>
+		<div class="label label-success pull-right">Product added to
+			Cart</div>
 		<br />
-		<span id="timer" class="pull-right" style="font-size:80%"> <script type="text/javascript">
-						countDown("#{root}/addToCart.xhtml", 5, "Reloading button in ");
-					</script>
+		<span id="timer" class="pull-right" style="font-size: 80%"> <script
+				type="text/javascript">
+			countDown("#{root}/addToCart.xhtml", 5, "Reloading button in ");
+		</script>
 		</span>
-
+		<div class="label label-success invisible facesMessageHandler">
+			<h:form id="successForm" style="display: inline;">
+				<h:inputHidden id="successMessage" />
+				<h:message for="successMessage" />
+			</h:form>
+		</div>
 		<ui:include src="/WEB-INF/footer-js.xhtml" />
 	</f:view>
 </body>

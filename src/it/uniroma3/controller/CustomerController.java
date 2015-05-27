@@ -94,7 +94,9 @@ public class CustomerController {
 			System.out.println("WRONG MAIL OR PASSWORD");
 			
 			if(page != null && page.contains("WEB-INF")) return "index";
-			return "WEB-INF/errorLogin";
+			//return "WEB-INF/errorLogin";
+			this.ch.addErrorMessage("Invalid Email or Password");
+			return "WEB-INF/error";
 		}
 		else{
 			System.out.println("Login OK");

@@ -42,6 +42,14 @@ public class ContextHelper {
 	public void addMessage(String target, FacesMessage message){
 		this.currentInstance.addMessage(target, message);
 	}
+	
+	public void addErrorMessage(String message) {
+		this.addMessage("errorForm", "errorMessage", message);
+	}
+	
+	public void addSuccessMessage(String message) {
+		this.addMessage("successForm", "successMessage", message);
+	}
 
 	public void addToSession(String key, Object object){
 		this.sessionMap.put(key, object);

@@ -23,7 +23,13 @@ public class AdminFacade {
 	public AdminFacade() {
 		this.md = new PasswordHelper();
 	}
-
+	
+	/**
+	 * Creates an Admin and returns it, admin is persisted
+	 * 
+	 * @param firstName, lastName, email, password,  phoneNumber, dateofBirth
+	 * @return the created admin
+	 */
 	public Admin createAdmin(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth) {
 		//making SHA password to store
 		try { 
@@ -38,6 +44,12 @@ public class AdminFacade {
 		}
 	}
 
+	/**
+	 * Gets the admin from the email address
+	 * 
+	 * @param email
+	 * @return the admin
+	 */
 	public Admin getAdmin(String email) {
 		try { 
 			Admin admin = new Admin();
@@ -50,14 +62,26 @@ public class AdminFacade {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * Gets all the admins in the database
+	 * 
+	 * @param 
+	 * @return admin list
+	 */
 	public List<Admin> getAllAdmins() {
 		CriteriaQuery<Admin> cq = em.getCriteriaBuilder().createQuery(Admin.class);
 		cq.select(cq.from(Admin.class));
 		List<Admin> admins = em.createQuery(cq).getResultList();
 		return admins;
 	}
-
+	
+	/**
+	 * Checks if the password of the given admin is the same as the given password, applying encryption
+	 * 
+	 * @param admin, password
+	 * @return true/false
+	 */
 	public Boolean checkPassword(Admin admin, String password){
 		return admin.getPassword().equals(md.securePassword(password));
 	}

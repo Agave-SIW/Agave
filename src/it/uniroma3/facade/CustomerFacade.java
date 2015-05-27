@@ -24,6 +24,12 @@ public class CustomerFacade {
 		this.md = new PasswordHelper();
 	}
 
+	/**
+	 * Creates a customer with an empty cart and returns it, customer is persisted
+	 * 
+	 * @param firstName, lastName, email, password,  phoneNumber, dateofBirth, address
+	 * @return the created customer
+	 */
 	public Customer createCustomer(String firstName, String lastName, String email, String password, String phoneNumber, Date dateofBirth, Address address) {
 		try { 
 			Date currentDate = new Date();
@@ -40,6 +46,12 @@ public class CustomerFacade {
 		}
 	}
 
+	/**
+	 * Finds a customer from its email
+	 * 
+	 * @param email
+	 * @return the customer
+	 */
 	public Customer getCustomer(String email) {
 		try { 
 			Customer customer = new Customer();
@@ -55,6 +67,12 @@ public class CustomerFacade {
 
 	}
 
+	/**
+	 * Finds a customer from its id
+	 * 
+	 * @param id
+	 * @return the customer
+	 */
 	public Customer getCustomer(Long id) {
 		try { 
 			Customer customer = new Customer();
@@ -66,7 +84,12 @@ public class CustomerFacade {
 		}
 	}
 
-
+	/**
+	 * Checks if a customer with the given email exists
+	 * 
+	 * @param email
+	 * @return true/false
+	 */
 	public boolean existsCustomer(String email) {
 		try { 
 			TypedQuery<Customer> customerQuery = em.createQuery("SELECT c FROM Customer c WHERE c.email = :email", Customer.class).setParameter("email", email);
@@ -78,6 +101,12 @@ public class CustomerFacade {
 		}
 	}
 
+	/**
+	 * Returns the list of all customers in the database
+	 * 
+	 * @param 
+	 * @return customer list
+	 */
 	public List<Customer> getAllCustomers() {
 		CriteriaQuery<Customer> cq = em.getCriteriaBuilder().createQuery(Customer.class);
 		cq.select(cq.from(Customer.class));
@@ -85,9 +114,33 @@ public class CustomerFacade {
 		return customers;
 	}
 
+	/**
+	 * Checks if the password of the given customer is the same as the given password, applying encryption
+	 * 
+	 * @param customer, password
+	 * @return true/false
+	 */
 	public Boolean checkPassword(Customer customer, String password){
 		return customer.getPassword().equals(md.securePassword(password));
 	}
+
+	/**
+	 * Gets the customer by a given order id
+	 * 
+	 * @param order id
+	 * @return the customer
+	 */
+	public Customer getCustomerByOrderId(Long id) {
+		try {
+			return em.createQuery("SELECT c "
+					+ "FROM Customer c, Orders o "
+					+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
+		}
+		catch(Exception e){
+			return null;
+		}
+	}
+
 
 	public void updateCustomer(Customer customer) {
 		em.merge(customer);
@@ -135,17 +188,6 @@ public class CustomerFacade {
 
 	public void setMd(PasswordHelper md) {
 		this.md = md;
-	}
-
-	public Customer getCustomerByOrderId(Long id) {
-		try {
-			return em.createQuery("SELECT c "
-					+ "FROM Customer c, Orders o "
-					+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
-		}
-		catch(Exception e){
-			return null;
-		}
 	}
 
 

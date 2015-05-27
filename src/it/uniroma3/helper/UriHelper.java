@@ -1,18 +1,10 @@
 package it.uniroma3.helper;
 
-
-/**
- * Helper class for uri encoding and manipulation
- *
- * @author Gaetano
- *
- */
-
 public class UriHelper {
 
 	public UriHelper() {}
 
-	/** Converts a string into something you can safely insert into a URL. */
+	// Converts a string into something you can safely insert into a URL. 
 	public String encodeURIcomponent(String s){
 		StringBuilder o = new StringBuilder();
 		for (char ch : s.toCharArray()) {

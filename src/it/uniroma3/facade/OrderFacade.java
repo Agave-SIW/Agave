@@ -19,9 +19,14 @@ public class OrderFacade {
 	@PersistenceContext(unitName = "agave")
 	private EntityManager em;
 
-	public OrderFacade() {
-	}
+	public OrderFacade() {}
 
+	/**
+	 * Creates an order for a customer and with the given orderlines, the order is persisted
+	 * 
+	 * @param customer, order lines
+	 * @return the created order
+	 */
 	public Orders createOrder(Customer customer, List<OrderLine> orderlines) {
 		Orders order = new Orders();
 		order.setCustomer(customer);
@@ -34,6 +39,12 @@ public class OrderFacade {
 		return order;
 	}
 
+	/**
+	 * Creates an order from a cart, updating the relation with the customer. The original cart is made empty
+	 * 
+	 * @param the cart
+	 * @return the order
+	 */
 	public Orders createOrderFromCart(Orders cart) throws Exception {
 		Exception e = new Exception();
 		
@@ -54,16 +65,34 @@ public class OrderFacade {
 		}
 	}
 
+	/**
+	 * Gets an order from its id
+	 * 
+	 * @param the id
+	 * @return the order
+	 */
 	public Orders getOrder(Long id) {
 		Orders order = em.find(Orders.class, id);
 		return order;
 	}
-
+	
+	/**
+	 * Gets an order line from its id
+	 * 
+	 * @param the id
+	 * @return the order line
+	 */
 	public OrderLine getOrderLine(Long id){
 		OrderLine orderLine = em.find(OrderLine.class, id);
 		return orderLine;
 	}
 
+	/**
+	 * Gets all the orders in the database
+	 * 
+	 * @param 
+	 * @return the order list
+	 */
 	public List<Orders> getAllOrders() {
 		CriteriaQuery<Orders> cq = em.getCriteriaBuilder().createQuery(Orders.class);
 		cq.select(cq.from(Orders.class));
@@ -71,23 +100,12 @@ public class OrderFacade {
 		return ordersList;
 	}
 
-	public void updateOrder(Orders order) {
-		em.merge(order);
-	}	
-
-	private void deleteOrder(Orders order) {
-		em.remove(order);
-	}
-
-	public void deleteOrder(Long id) {
-		Orders order = em.find(Orders.class, id);
-		deleteOrder(order);
-	}
-
-	public void deleteOrderLine(OrderLine orderLine){
-		em.remove(orderLine);
-	}
-
+	/**
+	 * Adds a product to the cart, making an order line from the product and the quantity. The cart is then updated
+	 * 
+	 * @param cart, product, quantity
+	 * @return 
+	 */
 	public void addProductToCart(Orders cart, Product product, Integer quantity) throws Exception{
 		Orders c = getOrder(cart.getId());
 		Exception e = new Exception();
@@ -110,7 +128,13 @@ public class OrderFacade {
 		System.out.println("Cart Updated");
 	}
 
-	public OrderLine makeOrderLineFromProduct(Product product, int quantity){
+	/**
+	 * Makes an order line from a product and its quantity
+	 * 
+	 * @param product, quantity
+	 * @return the order line
+	 */
+	public OrderLine makeOrderLineFromProduct(Product product, Integer quantity){
 		OrderLine ol = new OrderLine(quantity, product);
 		return ol;
 	}
@@ -127,6 +151,12 @@ public class OrderFacade {
 		System.out.println("OrderLine Removed");
 	}
 
+	/**
+	 * Makes a copy of a list of order lines
+	 * 
+	 * @param original order lines
+	 * @return the copy
+	 */
 	public List<OrderLine> createOrderLines(List<OrderLine> orderLines){
 		Iterator<OrderLine> olIterator = orderLines.iterator();
 		List<OrderLine> newOrderLines = new LinkedList<OrderLine>();
@@ -139,6 +169,12 @@ public class OrderFacade {
 		return newOrderLines;
 	}
 	
+	/**
+	 * All order lines are removed from the given order
+	 * 
+	 * @param cart
+	 * @return 
+	 */
 	public void emptyCart(Orders cart){
 		System.out.println("Emptying Cart");
 		Orders c = getOrder(cart.getId());
@@ -154,6 +190,7 @@ public class OrderFacade {
 		updateOrder(c);
 		System.out.println("Cart Empty");
 	}
+	
 	
 	/**
 	 * Return the closed but not evaded order
@@ -252,6 +289,24 @@ public class OrderFacade {
 				            + "FROM Orders o "
 							+ "WHERE o.evasionTime is NULL", Orders.class)
 							.getResultList();
+	}
+	
+
+	public void updateOrder(Orders order) {
+		em.merge(order);
+	}	
+
+	private void deleteOrder(Orders order) {
+		em.remove(order);
+	}
+
+	public void deleteOrder(Long id) {
+		Orders order = em.find(Orders.class, id);
+		deleteOrder(order);
+	}
+
+	public void deleteOrderLine(OrderLine orderLine){
+		em.remove(orderLine);
 	}
 	
 }

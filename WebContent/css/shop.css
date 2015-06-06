@@ -617,6 +617,10 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	border-radius: 0;
 }
 
+.modal-body {
+  padding-bottom: 0;
+}
+
 .input-group-addon:last-child {
 	border-left: 0;
 	top: 0px;

@@ -517,7 +517,7 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 }
 
 .tooltip-inner {
-    white-space:pre-wrap;
+	white-space: pre-wrap;
 }
 
 /* calendario */
@@ -580,7 +580,50 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 }
 
 .invisible {
-	display: none !important; opacity: 0 !important; visibility: hidden !important;
+	display: none !important;
+	opacity: 0 !important;
+	visibility: hidden !important;
+}
+
+.modal-dialog {
+	width: 300px;
+}
+
+.modal-footer {
+	height: 70px;
+	margin: 0;
+}
+
+.modal-footer .btn {
+	font-weight: bold;
+}
+
+.modal-footer .progress {
+	display: none;
+	height: 32px;
+	margin: 0;
+}
+
+.input-group-addon {
+	color: #fff;
+	background: #3276B1;
+}
+
+.modal-title {
+	color: #333;
+}
+
+.modal-content {
+	border-radius: 0;
+}
+
+.input-group-addon:last-child {
+	border-left: 0;
+	top: 0px;
+	padding: 8px 10px;
+	border-radius: 0px;
+	background-color: #fff;
+	color: #333;
 }
 
 /* orderList.xhtml css */
@@ -588,11 +631,11 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	background-color: lightyellow;
 }
 
-.title-tab{
-	position: relative; 
+.title-tab {
+	position: relative;
 	margin-top: -75px;
 }
 
-.link-on-red:hover, .link-on-red:focus, .link-on-red:active{
+.link-on-red:hover, .link-on-red:focus, .link-on-red:active {
 	color: #fff;
 }

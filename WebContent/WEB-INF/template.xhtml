@@ -46,40 +46,11 @@
 					<f:subview id="customerController">
 						<h:panelGroup rendered="#{customerController.isNotLogged()}">
 							<ul class="nav navbar-nav navbar-right">
-								<li><a class="login-link" href="#">Log In</a></li>
+								<li><a class="login-link" href="#" data-toggle="modal"
+									data-target="#loginModal">Log In</a></li>
 								<li><a href="#{root}/signin.xhtml"><span
 										class="glyphicon glyphicon-pencil"></span> Sign In</a></li>
 							</ul>
-							<h:form id="customerLogin" style="display:none"
-								styleClass="login-form navbar-form navbar-right">
-
-								<div class="form-group">
-									<label for="email" class="sr-only">Email: </label>
-									<h:inputText value="#{customerController.email}"
-										required="true" requiredMessage="Email is mandatory"
-										id="email"
-										styleClass="form-control needPlaceholder needRequired needType" />
-									<h:message for="email" styleClass="label label-warning" />
-								</div>
-								<div class="form-group">
-									<label for="password" class="sr-only">Password: </label>
-									<h:inputSecret value="#{customerController.password}"
-										required="true" requiredMessage="Password is mandatory"
-										id="password"
-										styleClass="form-control needPlaceholder needRequired" />
-									<h:message for="password" styleClass="label label-warning" />
-								</div>
-								<h:inputHidden value="#{view.viewId}" id="page" />
-								<div class="form-group">
-									<fieldset id="loginField">
-										<h:commandButton id="loginButton" value="Login"
-											action="#{customerController.loginCustomer}"
-											styleClass="btn btn-primary" />
-										<h:message for="loginButton" styleClass="label label-warning" />
-									</fieldset>
-								</div>
-
-							</h:form>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{customerController.isLogged()}">
 							<h:form styleClass="navbar-form navbar-right" style="margin: 0;">
@@ -160,6 +131,77 @@
 				</nav>
 			</h:panelGroup>
 		</f:subview>
+
+		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+			aria-labelledby="loginModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<h:form id="customerLogin">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">×</button>
+							<h4 class="modal-title" id="myModalLabel">Customer Log in</h4>
+						</div>
+						<!-- /.modal-header -->
+
+						<div class="modal-body">
+
+							<div class="form-group">
+								<div class="input-group">
+									<h:inputText value="#{customerController.email}"
+										required="true" requiredMessage="Email is mandatory"
+										id="email"
+										styleClass="form-control needPlaceholder needRequired needType" />
+
+									<label for="email"
+										class="input-group-addon glyphicon glyphicon-envelope"></label>
+									<h:message for="email" styleClass="label label-warning" />
+								</div>
+							</div>
+							<!-- /.form-group -->
+
+							<div class="form-group">
+								<div class="input-group">
+									<h:inputSecret value="#{customerController.password}"
+										required="true" requiredMessage="Password is mandatory"
+										id="password"
+										styleClass="form-control needPlaceholder needRequired" />
+
+									<label for="password"
+										class="input-group-addon glyphicon glyphicon-lock"></label>
+									<h:message for="password" styleClass="label label-warning" />
+								</div>
+								<!-- /.input-group -->
+							</div>
+							<!-- /.form-group -->
+						</div>
+						<!-- /.modal-body -->
+						<h:inputHidden value="#{view.viewId}" id="page" />
+						<div class="modal-footer">
+							<fieldset id="loginField">
+								<h:commandButton id="loginButton" value="Login"
+									action="#{customerController.loginCustomer}"
+									styleClass="form-control btn btn-primary" />
+
+
+								<div class="progress">
+									<div class="progress-bar progress-bar-primary"
+										role="progressbar" aria-valuenow="1" aria-valuemin="1"
+										aria-valuemax="100" style="width: 0%;">
+										<span class="sr-only">progress</span>
+									</div>
+								</div>
+								<h:message for="loginButton" styleClass="label label-warning" />
+							</fieldset>
+						</div>
+						<!-- /.modal-footer -->
+					</h:form>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
 
 		<!-- Page Content -->
 		<div class="container">

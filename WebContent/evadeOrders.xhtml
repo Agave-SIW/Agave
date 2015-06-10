@@ -20,53 +20,45 @@
 			<h:form>
 
 				<div class="row">
-					<c:forEach var="order"
-						items="#{orderController.getAllClosedOrders()}">
-						<div class="panel panel-primary inner-panel">
+					<div class="panel panel-primary inner-panel">
 
-							<div class="col-sm-12 col-lg-12 col-md-12 panel-heading">
-								<div>
+						<div class="panel-heading">Evadi Ordini</div>
+						<div class="panel-body">
+
+							<c:forEach var="order"
+								items="#{orderController.getAllClosedOrders()}">
+
+
+								<div class="row" style="margin-bottom: 10px">
+									<div class="col-md-2 vcenter">
 										<strong>Order: ${order.id}&emsp;</strong>
 									</div>
-							</div>
-							<div class="panel-body"></div>
-							<div>
-								<div>
-									<strong>Created by: <h:outputText
-											value="#{order.customer.firstName}">
-											<f:convertDateTime pattern="dd.MM.yyyy" />
-										</h:outputText></strong>&emsp;
+									<div class="col-md-2 vcenter">
+										<strong>Created by: <h:outputText
+												value="#{order.customer.firstName} #{order.customer.lastName}">
+												<f:convertDateTime pattern="dd.MM.yyyy" />
+											</h:outputText></strong>&emsp;
+									</div>
+									<div class="col-md-2 vcenter">
+										<strong>Created on: <h:outputText
+												value="#{order.creationTime}">
+												<f:convertDateTime pattern="dd.MM.yyyy" />
+											</h:outputText></strong>&emsp;
+									</div>
+									<div class="col-md-2 vcenter">
+										<strong>Total: <h:outputText
+												value="#{orderController.getOrderTotal(order.id)}" />&euro;
+										</strong>&emsp;
+									</div>
+									<div class="col-md-3 vcenter">
+										<a class="btn btn-warning pull-right"
+											href="order.xhtml?id=#{order.id}">See the order details</a>
+									</div>
 								</div>
-								<div>
-									<strong>Created on: <h:outputText
-											value="#{order.creationTime}">
-											<f:convertDateTime pattern="dd.MM.yyyy" />
-										</h:outputText></strong>&emsp;
-								</div>
-								<div>
-									<strong>Total: <h:outputText
-											value="#{orderController.getOrderTotal(order.id)}" />&euro;
-									</strong>&emsp;
-								</div>
-								<div></div>
-								<div>
-									<strong> <h:commandLink
-											action="#{orderController.findOrder}"
-											value="See the order details">
-											<f:param name="id" value="#{order.id}" />
-										</h:commandLink></strong>
-								</div>
-								<div>
-									<strong> <h:commandLink
-											action="#{orderController.findCustomer}"
-											value="See the customer details">
-											<f:param name="id" value="#{order.id}" />
-										</h:commandLink></strong>
-								</div>
-							</div>
-						</div>
 
-					</c:forEach>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 
 

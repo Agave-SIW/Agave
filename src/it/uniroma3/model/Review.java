@@ -130,7 +130,8 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return stars + "<>" + comment + "<>" + customer.getFullName() + "<>" + date;
+		return "Review [id=" + id + ", stars=" + stars + ", comment=" + comment
+				+ ", date=" + date + ", customer name=" + customer.getFullName() + "]";
 	}
 
 }

@@ -4,134 +4,118 @@
     <!ENTITY copy "&#169;">
     <!ENTITY euro "&#8364;"> 
     <!ENTITY emsp "&#8195;">
+    <!ENTITY num "&#35;">
+    
 ]>
 <ui:composition template="/WEB-INF/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
 	<ui:param name="root" value="#{request.contextPath}" />
 
 	<ui:define name="title">
-        Orders | Agave Shop - SIW 2015
+        Order Details | Agave Shop - SIW 2015
     </ui:define>
 
-
 	<ui:define name="content">
-		<h:panelGroup rendered="#{customerController.isLogged()}">
+		<div class="row">
+			<div class="col-md-12">
+				#{orderController.findOrderAndCustomer(param["id"])}
+				<h1>
+					Order:
+					&num;
+					#{orderController.order.id}
+				</h1>
+				<hr />
+			</div>
 
-			<div class="row">
-				<div class="col-md-12">
-					<h1>Orders</h1>
-					<hr />
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Order details</div>
+					<ui:repeat var="orderLine"
+						value="#{orderController.order.orderLines}">
+
+						<div class="row">
+							<div class="col-xs-3 col-md-2 vcenter">
+								<a href="product.xhtml?id=#{orderLine.product.id}"> <img
+									src="#{root}/uploads/#{orderLine.product.picturePath}"
+									alt="#{orderLine.product.name}" class="img-thumbnail" />
+								</a>
+							</div>
+							<div class="col-md-3 vcenter">
+								<h3 style="color: #b74a12">#{orderLine.product.name}</h3>
+							</div>
+
+							<div class="col-md-2 vcenter" align="center">#{orderLine.product.price}
+								&nbsp;&#8364;</div>
+							<div class="col-md-2 vcenter" align="center">x#{orderLine.quantity}</div>
+							<div class="col-md-2 vcenter" align="center">
+								<strong>Total</strong>&nbsp;
+								#{orderLine.getPartialTotal()}&nbsp;&#8364;
+							</div>
+						</div>
+
+					</ui:repeat>
 				</div>
-				<div class="title-tab col-md-12 pull-right">
-					<a href="#" id="evadedOrderTab" class="btn btn-default pull-right"
-						style="margin-left: 10px;"><strong>Evaded Orders</strong></a> <a
-						href="#" id="closedOrderTab" class="btn btn-primary pull-right"><strong>Closed
-							Orders</strong></a>
+			</div>
+		</div>
+
+
+		<div class="panel panel-info">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-9">
+						<div>
+							<h3>Shipping Info</h3>
+							<br />
+
+						</div>
+						<div>#{orderController.orderCustomer.firstName}
+							#{orderController.orderCustomer.lastName}</div>
+						<div>#{orderController.orderCustomer.address.street}</div>
+						<div>#{orderController.orderCustomer.address.zipcode},
+							#{orderController.orderCustomer.address.city}</div>
+						<div>#{orderController.orderCustomer.address.state}</div>
+					</div>
+					<div class="col-md-3" align="right">
+						<br />
+						<div>
+							<strong>Number of different items: </strong>#{orderController.order.getOrderLines().size()}
+						</div>
+						<div>
+							<strong>Total number of items: </strong>#{orderController.order.getNumberOfItems()}
+						</div>
+						<div>
+							<strong>Total: </strong>
+							<h:outputText
+								value="#{orderController.getOrderTotal(orderController.order.id)}" />
+							&euro;
+						</div>
+
+						<h:panelGroup
+							rendered="#{orderController.canEvade(orderController.order.id)}">
+
+							<div>
+								<a href="customer.xhtml?id={orderController.orderCustomer.id}"><strong>See
+										client details</strong> </a>
+							</div>
+
+						
+							<h:form>
+								<h:commandButton
+									action="#{orderController.tryEvadeOrder(param['id'])}"
+									value="Evadi Ordine" styleClass="btn btn-danger pull-right" />
+							</h:form>
+
+						</h:panelGroup>
+					</div>
 				</div>
 			</div>
+		</div>
 
 
-			<div class="row" id="closedOrders">
-				<ui:repeat var="order" value="#{orderController.getClosedOrders()}">
-					<div class="panel panel-primary inner-panel">
-
-						<div class="col-md-12 panel-heading">
-							<div class="row">
-								<div class="col-md-10">
-									<strong>Order Number: </strong> ${order.id} &nbsp;&nbsp; <strong>Created
-										on: </strong>
-									<h:outputText value="#{order.creationTime}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-									&nbsp;&nbsp; <strong>Number of different items: </strong>
-									#{order.getOrderLines().size()} &nbsp;&nbsp; <strong>Total
-										number of items: </strong> #{order.getNumberOfItems()} &nbsp;&nbsp; <strong>Total:
-									</strong>
-									<h:outputText
-										value="#{orderController.getOrderTotal(order.id)}">
-										<f:convertNumber pattern="#0.00 &#8364;" />
-									</h:outputText>
-								</div>
-								<div class="col-md-2">
-									<strong> <a class="link-on-red"
-										href="#{root}/order.xhtml?id=#{order.id}"> See the order
-											details</a>
-									</strong>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-
-							<div class="row" style="padding-top: 15px">
-								<ui:repeat var="orderLine" value="#{order.getOrderLines()}">
-									<div class="col-xs-3 col-md-3">
-										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
-											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
-											alt="#{orderLine.product.name}" class="img-thumbnail" />
-										</a>
-									</div>
-								</ui:repeat>
-							</div>
-						</div>
-					</div>
-
-				</ui:repeat>
-			</div>
-
-			<div class="row" id="evadedOrders" style="display: none">
-				<c:forEach var="order" items="#{orderController.getEvadedOrders()}">
-					<div class="panel panel-primary inner-panel">
-						<div class="col-md-12 panel-heading">
-							<div class="row">
-								<div class="col-md-10">
-									<strong>Order Number: </strong> ${order.id} &nbsp;&nbsp; <strong>Created
-										on: </strong>
-									<h:outputText value="#{order.creationTime}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-									&nbsp;&nbsp; <strong>Number of different items: </strong>
-									#{order.getOrderLines().size()} &nbsp;&nbsp; <strong>Total
-										number of items:</strong> #{order.getNumberOfItems()} &nbsp;&nbsp; <strong>Total:
-									</strong>
-									<h:outputText
-										value="#{orderController.getOrderTotal(order.id)}">
-										<f:convertNumber pattern="#0.00 &#8364;" />
-									</h:outputText>
-								</div>
-								<div class="col-md-2">
-									<strong> <a class="link-on-red"
-										href="#{root}/order.xhtml?id=#{order.id}"> See the order
-											details</a>
-									</strong>
-								</div>
-							</div>
-						</div>
-						<div class="panel-body">
-
-							<div class="row" style="padding-top: 15px">
-								<c:forEach var="orderLine" items="#{order.getOrderLines()}">
-									<div class="col-xs-3 col-md-3">
-										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
-											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
-											alt="#{orderLine.product.name}" class="img-thumbnail" />
-										</a>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-					</div>
-
-				</c:forEach>
-			</div>
-		</h:panelGroup>
-		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-			<span class="label label-warning">You must log in first to see
-				your orders</span>
-		</h:panelGroup>
 
 	</ui:define>
 </ui:composition>

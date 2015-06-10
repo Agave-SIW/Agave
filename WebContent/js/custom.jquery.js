@@ -22,7 +22,10 @@ $(".needGlyph").html(function(){
 });
 
 $("#reviewFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
+if(isIE()) $("#reviewFrame").removeAttr("seamless");
+
 $("#buyFrame").attr('allowTransparency', 'true').attr('frameBorder', '0').attr('scrolling', 'no');
+if(isIE()) $("#buyFrame").removeAttr("seamless");
 
 /*$(".login-link").click(function(event) {
 	event.preventDefault();
@@ -84,6 +87,45 @@ $("#evadeOrder").click(function(event){
 	    	 $("#evadeMessage").addClass("label label-warning");
 	    	 $("#evadeMessage").html("There was an error - " + message);
 	    	 $("#evadeMessage").slideDown();
+	     }
+	  });
+});
+
+$("#addReview").click(function(event){
+	event.preventDefault();
+	var productId  = parseInt($("#addReview").attr('href').replace("#", ""));
+	var app = $("#stars option:selected").text().split(" ");
+	var stars = parseInt(app[0]);
+	var comment = $('#comment').val();
+	$.get( "reviewAdder.xhtml", { id: productId, stars: stars, comment: comment } )
+	  .done(function( data ) {
+		 var arr = data.split("<!-- TRY -->"); 
+		 if(arr.length > 0) {
+			 var arr = arr[1].split("<!-- CATCH -->");
+			 var arr = arr[0].split("<!-- RESULT -->");
+			 if(arr.length > 0) {
+				 var arr = arr[1].split("<!-- END -->");
+				 var message = arr[0];
+			 }
+			 else message="Error";
+		 }
+		 else message="Error";
+		 
+		 message = $('<div/>').html(message).text();
+		 //console.log(message);
+		 var arr = message.trim().split(" <::> ");
+		 if(arr.length < 3) message = "Error";
+		 //console.log(message);
+	     if(message != "Error") {
+	    	 $("#revForm").slideUp();
+	    	 $("#revNewStars").html(starsToHtml(arr['0']));
+	    	 $("#revNewName").text(arr['1']);
+	    	 $("#revNewComment").text(arr['2']);
+	    	 $("#revNewDate").html(currentDate());
+	    	 $("#revNew").slideDown();
+	     }
+	     else {
+	    	 $("#reviewError").html("There was an error");
 	     }
 	  });
 });

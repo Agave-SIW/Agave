@@ -30,3 +30,33 @@ function loadPreviousPage() {
 			window.history.back();
 		}
 }
+
+function isIE() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      
+    	return true;
+
+    return false;
+}
+
+function currentDate() {
+	var fullDate = new Date();
+	var twoDigitMonth = fullDate.getMonth()+""; 
+	if(twoDigitMonth.length==1)  twoDigitMonth="0" + twoDigitMonth;
+	var twoDigitDate = fullDate.getDate()+"";
+	if(twoDigitDate.length==1) twoDigitDate="0" + twoDigitDate;
+	return twoDigitMonth + "/" + twoDigitDate + "/" + fullDate.getFullYear();
+}
+
+function starsToHtml(stars){
+	var html = "";
+	for (var i = 0; i < stars; i++) {
+		html += "<span class=\"glyphicon glyphicon-star\"></span> ";
+	}
+	for (var i = stars; i < 5; i++) {
+		html += "<span class=\"glyphicon glyphicon-star-empty\"></span> ";
+	}
+	return html;
+}

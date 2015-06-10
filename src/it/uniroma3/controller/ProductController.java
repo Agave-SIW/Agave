@@ -165,27 +165,32 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 		return this.product;
 	}
+	
+	public String addReview(){
+		return addReview(idProduct);
+	}
 
-	public String addReview(Long idProduct){
+	public String  addReview(Long idProduct){
 		//must verify that the user is actually logged in to add a review
 		CustomerController cc = new CustomerController();
-		if(cc.isNotLogged()) return "WEB-INF/errorReviewIframe";
+		if(cc.isNotLogged()) return "Error";
+		
+		if(comment.isEmpty()) return "Error";
 
 		try{
 			Customer c = (Customer) this.ch.getFromSession("customer");
 
 			Product p = this.productFacade.getProduct(idProduct);
 			Review r = this.reviewFacade.createReview(stars, comment, c);
-
-
+			
 			this.productFacade.addReviewToProduct(r, p);
 			System.out.println("Review Added!");
 
 			this.setReview(r);
-			return "WEB-INF/successReviewIframe";
+			return stars.toString() + " <::> " + c.getFullName() + " <::> " + comment;
 		}
 		catch (Exception e){
-			return "WEB-INF/errorReviewIframe";
+			return "Error";
 		}
 
 	}

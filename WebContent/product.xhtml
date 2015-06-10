@@ -46,22 +46,26 @@
 
 
 							<div style="padding-left: 5px;">
-								<span class="glyphicon glyphicon-barcode"></span> <strong>Product code:  </strong>
-								#{productController.product.code}
+								<span class="glyphicon glyphicon-barcode"></span> <strong>Product
+									code: </strong> #{productController.product.code}
 							</div>
 							<div style="padding-left: 5px;">
 								<span class="glyphicon glyphicon-th-large"></span> <strong>Storage
-								quantity:  </strong><span id="productQuantity">#{productController.product.storageQuantity}</span>
+									quantity: </strong><span id="productQuantity">#{productController.product.storageQuantity}</span>
 							</div>
-							<c:set var="providers" value="#{productController.findProviders(param['id'])}" />
+							<c:set var="providers"
+								value="#{productController.findProviders(param['id'])}" />
 							<h:panelGroup rendered="#{not empty providers}">
-							<div style="padding-left: 5px;">
-								<span class="glyphicon glyphicon-transfer"></span> <strong>Provided by: </strong>
-								<c:forEach var="provider"
-									items="#{providers}" varStatus="loop">
-							<a href="mailto:#{provider.email}" data-toggle="tooltip" data-placement="bottom" title="Address:&#8239;#{provider.address} Vatin:&#8239;#{provider.vatin} Phone:&#8239;#{provider.phoneNumber}">#{provider.name}</a><c:if test="${!loop.last}">,</c:if> 
-							</c:forEach>
-							</div>
+								<div style="padding-left: 5px;">
+									<span class="glyphicon glyphicon-transfer"></span> <strong>Provided
+										by: </strong>
+									<c:forEach var="provider" items="#{providers}" varStatus="loop">
+										<a href="mailto:#{provider.email}" data-toggle="tooltip"
+											data-placement="bottom"
+											title="Address:&#8239;#{provider.address} Vatin:&#8239;#{provider.vatin} Phone:&#8239;#{provider.phoneNumber}">#{provider.name}</a>
+										<c:if test="${!loop.last}">,</c:if>
+									</c:forEach>
+								</div>
 							</h:panelGroup>
 							<hr />
 							<p>#{productController.product.description}</p>
@@ -81,39 +85,75 @@
 						</div>
 					</div>
 					<div class="well">
-						<div class="col-md-12" id="reviewFrameDiv" style="display: none">
-							<iframe id="reviewFrame"
-								src="#{root}/newReview.xhtml?id=#{productController.product.id}"
-								width="100%" height="100" seamless="seamless"></iframe>
-						</div>
 						<h:panelGroup rendered="#{customerController.isLogged()}">
-							<div class="text-right">
-								<a class="btn btn-success" id="addReviewButton">Add a review</a>
+							<div id="revForm">
+								<div class="col-md-8" style="margin-bottom: 10px;">
+									<input type="text" required="required" placeholder="Comment"
+										id="comment" class="form-control" />
+									<div id="messageComment" class="label label-warning"></div>
+								</div>
+								<div class="col-md-2"
+									style="max-width: 160px; display: inline-table;">
+									<select id="stars" class="form-control" style="height: 34px;">
+										<option value="1">1 star</option>
+										<option value="2">2 stars</option>
+										<option value="3">3 stars</option>
+										<option value="4">4 stars</option>
+										<option value="5">5 stars</option>
+									</select>
+									<div id="messageStars" class="label label-warning"></div>
+								</div>
+								<div class="col-md-2 pull-right" style="display: inline;">
+									<a id="addReview" href="##{productController.product.id}"
+										class="btn btn-success pull-right">Add Review</a>
+								</div>
+
+								<div class="col-md-12" style="margin-bottom: 10px;">
+									<div id="reviewError" class="label label-warning pull-right"></div>
+								</div>
 							</div>
 						</h:panelGroup>
 						<h:panelGroup rendered="#{customerController.isNotLogged()}">
-							<div class="text-right">You must be logged to send a
-								review.</div>
+							<div class="label label-info pull-right">You must be logged
+								to send a review.</div>
 						</h:panelGroup>
 						<div class="reviewHr">
 							<hr />
 						</div>
-						<ui:repeat var="review" value="#{productController.getReviews()}">
+
+						<div id="revNew" style="display: none">
 							<div class="row review">
 								<div class="col-md-12">
-									<h:outputText
-										value="#{productController.getReviewHtml(review)}"
-										escape="false" />
-									#{review.getCustomerName()} <span class="pull-right"><h:outputText
-											value="#{review.getDate()}">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
-										</h:outputText></span>
-									<p>#{review.getComment()}</p>
+									<span id="revNewStars"></span><span id="revNewName"></span> <span
+										id="revNewDate" class="pull-right"></span>
+									<p id="revNewComment"></p>
 								</div>
 							</div>
 
 							<div class="reviewHr">
 								<hr />
+							</div>
+						</div>
+
+						<ui:repeat var="review" value="#{productController.getReviews()}"
+							varStatus="theCount">
+							<div id="rev#{theCount.step}">
+								<div class="row review">
+									<div class="col-md-12">
+										<h:outputText
+											value="#{productController.getReviewHtml(review)}"
+											escape="false" />
+										#{review.getCustomerName()} <span class="pull-right"><h:outputText
+												value="#{review.getDate()}">
+												<f:convertDateTime pattern="MM/dd/yyyy" />
+											</h:outputText></span>
+										<p>#{review.getComment()}</p>
+									</div>
+								</div>
+
+								<div class="reviewHr">
+									<hr />
+								</div>
 							</div>
 						</ui:repeat>
 
@@ -122,15 +162,15 @@
 				</div>
 			</h:panelGroup>
 			<h:panelGroup rendered='#{empty productController.product}'>
-					<div class="col-md-12">
-						<h1>Ops</h1>
-						<hr />
-						<span class="label label-warning">There is no product with
-							the selected id</span> Loading previous page...
-						<script type="text/javascript">
-							loadPreviousPage();
-						</script>
-					</div>
+				<div class="col-md-12">
+					<h1>Ops</h1>
+					<hr />
+					<span class="label label-warning">There is no product with
+						the selected id</span> Loading previous page...
+					<script type="text/javascript">
+						loadPreviousPage();
+					</script>
+				</div>
 			</h:panelGroup>
 
 		</div>

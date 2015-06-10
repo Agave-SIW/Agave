@@ -45,9 +45,10 @@ public class OrderController {
 		this.ch = new ContextHelper();
 	}
 
-	public void findOrderAndCustomer(Long idOrder){
+	public Orders findOrderAndCustomer(Long idOrder){
 		this.order = orderFacade.getOrder(idOrder);
 		this.orderCustomer = customerFacade.getCustomerByOrderId(idOrder);
+		return this.order;
 	}
 
 	public List<Orders> getOrders(){
@@ -100,7 +101,7 @@ public class OrderController {
 		if(myOrder != null)
 			return myOrder.getEvasionTime() == null;
 
-		System.out.println("Order is null");
+		System.out.println("canEvade(): Order is null");
 
 		return  false;
 	}
@@ -124,26 +125,32 @@ public class OrderController {
 			sum += ol.getQuantity()*ol.getProduct().getPrice();
 		return sum;
 	}
-
+	
+	public String tryEvadeOrder() {
+		return tryEvadeOrder(id);
+	}
+	
 	public String tryEvadeOrder(Long idOrder){
+		System.out.println("Trying to evade order number... ");
 		System.out.println(idOrder);
-		try{
+		
+		try {
 			Orders closedOrder = orderFacade.getOrder(idOrder);
 
-			if(closedOrder.canEvadeAllLines()){
+			if(closedOrder.canEvadeAllLines() && canEvade(idOrder)){
 				evadeOrder(closedOrder);
 				closedOrder.setEvasionTime(new GregorianCalendar().getTime());
 				this.orderFacade.updateOrder(closedOrder);
-				ch.addToSession("evadedResult", new Boolean(true));
-				return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+				System.out.println("Success!");
+				return "Success";
 			}
-			else{
-				ch.addToSession("evadeResult", new Boolean(false));
-				return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+			else {
+				System.out.println("Error! Not logged or insufficient storage.");
+				return "Error: couldn't evade the order (insufficient products)";
 			}
-		}catch(Exception e){
-			ch.addToSession("evadedResult", new Boolean(false));
-			return "evadedResult.xhtml?faces-redirect=true&includeViewParams=true";
+		} catch(Exception e){
+			System.out.println("Unknown Error!");
+			return "Error: couldn't evade the order";
 		}
 		
 	}

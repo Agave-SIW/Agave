@@ -18,3 +18,15 @@ function countDown(redirect, count, text) {
 		window.location.href = redirect;
 	}
 }
+
+function loadPreviousPage() {
+	if(document.referrer) {
+		window.location = document.referrer + 
+		((document.referrer.indexOf('?')!=-1 && 
+				document.referrer.indexOf('rel=')!=-1)? 
+						"&amp;rel=1":"");
+		}
+		else {
+			window.history.back();
+		}
+}

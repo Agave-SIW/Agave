@@ -16,106 +16,143 @@
 	<ui:param name="root" value="#{request.contextPath}" />
 
 	<ui:define name="title">
-        Order Details | Agave Shop - SIW 2015
+        Order &num;
+		<h:outputText
+			value="#{orderController.findOrderAndCustomer(param['id']).id}" /> Details | Agave Shop - SIW 2015
     </ui:define>
 
 	<ui:define name="content">
 		<div class="row">
-			<div class="col-md-12">
-				#{orderController.findOrderAndCustomer(param["id"])}
-				<h1>
-					Order:
-					&num;
-					#{orderController.order.id}
-				</h1>
-				<hr />
-			</div>
 
-			<div class="col-md-12">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Order details</div>
-					<ui:repeat var="orderLine"
-						value="#{orderController.order.orderLines}">
+			<h:panelGroup rendered="#{not empty orderController.order}">
 
-						<div class="row">
-							<div class="col-xs-3 col-md-2 vcenter">
-								<a href="product.xhtml?id=#{orderLine.product.id}"> <img
-									src="#{root}/uploads/#{orderLine.product.picturePath}"
-									alt="#{orderLine.product.name}" class="img-thumbnail" />
-								</a>
-							</div>
-							<div class="col-md-3 vcenter">
-								<h3 style="color: #b74a12">#{orderLine.product.name}</h3>
-							</div>
-
-							<div class="col-md-2 vcenter" align="center">#{orderLine.product.price}
-								&nbsp;&#8364;</div>
-							<div class="col-md-2 vcenter" align="center">x#{orderLine.quantity}</div>
-							<div class="col-md-2 vcenter" align="center">
-								<strong>Total</strong>&nbsp;
-								#{orderLine.getPartialTotal()}&nbsp;&#8364;
-							</div>
-						</div>
-
-					</ui:repeat>
+				<div class="col-md-12">
+					<h1>
+						Order:
+						&num;
+						#{orderController.order.id}
+					</h1>
+					<hr />
 				</div>
-			</div>
-		</div>
 
 
-		<div class="panel panel-info">
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-9">
-						<div>
-							<h3>Shipping Info</h3>
-							<br />
+				<h:panelGroup
+					rendered="#{adminController.isLogged() or orderController.orderCustomer.id.equals(customerController.getCurrentCustomer().id)}">
 
+
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Order details</div>
+							<ui:repeat var="orderLine"
+								value="#{orderController.order.orderLines}">
+
+								<div class="row">
+									<div class="col-xs-3 col-md-2 vcenter">
+										<a href="product.xhtml?id=#{orderLine.product.id}"> <img
+											src="#{root}/uploads/#{orderLine.product.picturePath}"
+											alt="#{orderLine.product.name}" class="img-thumbnail" />
+										</a>
+									</div>
+									<div class="col-md-3 vcenter">
+										<h3 style="color: #b74a12">#{orderLine.product.name}</h3>
+									</div>
+
+									<div class="col-md-2 vcenter" align="center">#{orderLine.product.price}
+										&nbsp;&#8364;</div>
+									<div class="col-md-2 vcenter" align="center">x#{orderLine.quantity}</div>
+									<div class="col-md-2 vcenter" align="center">
+										<strong>Total</strong>&nbsp;
+										#{orderLine.getPartialTotal()}&nbsp;&#8364;
+									</div>
+								</div>
+
+							</ui:repeat>
 						</div>
-						<div>#{orderController.orderCustomer.firstName}
-							#{orderController.orderCustomer.lastName}</div>
-						<div>#{orderController.orderCustomer.address.street}</div>
-						<div>#{orderController.orderCustomer.address.zipcode},
-							#{orderController.orderCustomer.address.city}</div>
-						<div>#{orderController.orderCustomer.address.state}</div>
-					</div>
-					<div class="col-md-3" align="right">
-						<br />
-						<div>
-							<strong>Number of different items: </strong>#{orderController.order.getOrderLines().size()}
-						</div>
-						<div>
-							<strong>Total number of items: </strong>#{orderController.order.getNumberOfItems()}
-						</div>
-						<div>
-							<strong>Total: </strong>
-							<h:outputText
-								value="#{orderController.getOrderTotal(orderController.order.id)}" />
-							&euro;
-						</div>
 
-						<h:panelGroup
-							rendered="#{orderController.canEvade(orderController.order.id)}">
 
-							<div>
-								<a href="customer.xhtml?id={orderController.orderCustomer.id}"><strong>See
-										client details</strong> </a>
+
+
+						<div class="panel panel-info">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-9">
+										<div>
+											<h3>Shipping Info</h3>
+											<br />
+
+
+										</div>
+										<div>#{orderController.orderCustomer.firstName}
+											#{orderController.orderCustomer.lastName}</div>
+										<div>#{orderController.orderCustomer.address.street}</div>
+										<div>#{orderController.orderCustomer.address.zipcode},
+											#{orderController.orderCustomer.address.city}</div>
+										<div>#{orderController.orderCustomer.address.state}</div>
+
+										<br />
+
+										<div>
+											<a
+												href="customer.xhtml?id=#{orderController.orderCustomer.id}"
+												style="color: #c2542f"><strong>See full
+													customer details</strong> </a>
+										</div>
+										<br />
+									</div>
+									<div class="col-md-3" align="right">
+										<br />
+										<div>
+											<strong>Number of different items: </strong>#{orderController.order.getOrderLines().size()}
+										</div>
+										<div>
+											<strong>Total number of items: </strong>#{orderController.order.getNumberOfItems()}
+										</div>
+										<div>
+											<strong>Total: </strong>
+											<h:outputText
+												value="#{orderController.getOrderTotal(orderController.order.id)}" />
+											&euro;
+										</div>
+
+										<h:panelGroup
+											rendered="#{orderController.canEvade(orderController.order.id)}">
+
+											<a id="evadeOrder" href="##{param['id']}"
+												class="btn btn-primary pull-right">Evade Order</a>
+											<div id="evadeMessage"></div>
+										</h:panelGroup>
+
+									</div>
+								</div>
 							</div>
+						</div>
 
-						
-							<h:form>
-								<h:commandButton
-									action="#{orderController.tryEvadeOrder(param['id'])}"
-									value="Evadi Ordine" styleClass="btn btn-danger pull-right" />
-							</h:form>
-
-						</h:panelGroup>
 					</div>
+
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{adminController.isNotLogged() and (not orderController.orderCustomer.id.equals(customerController.getCurrentCustomer().id))}">
+					<div class="col-md-12">
+						<span class="label label-warning">Please log in to access
+							this order.</span>
+					</div>
+				</h:panelGroup>
+
+			</h:panelGroup>
+
+			<h:panelGroup rendered='#{empty orderController.order}'>
+				<div class="col-md-12">
+					<h1>Ops</h1>
+					<hr />
+					<span class="label label-warning">There is no order with the
+						selected id</span> Loading previous page...
+					<script type="text/javascript">
+						loadPreviousPage();
+					</script>
 				</div>
-			</div>
+			</h:panelGroup>
+
 		</div>
-
-
-
 	</ui:define>
 </ui:composition>

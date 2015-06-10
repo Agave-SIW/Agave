@@ -169,15 +169,14 @@ hr {
 	color: #efe9dd;
 }
 
+.btn {
+	border-radius: 0 !important;
+}
+
 .btn-primary {
 	color: #fff;
 	background-color: #b74a12;
 	border-color: #b44f25;
-	border-radius: 0;
-}
-
-.btn-success {
-	border-radius: 0;
 }
 
 .label {

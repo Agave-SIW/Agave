@@ -56,6 +56,38 @@ $("#evadedOrderTab").click(function(event){
 	$("#evadedOrders").show();
 });
 
+$("#evadeOrder").click(function(event){
+	event.preventDefault();
+	var orderId = parseInt($("#evadeOrder").attr('href').replace("#", ""));
+	$.get( "orderEvader.xhtml", { id: orderId } )
+	  .done(function( data ) {
+		 var arr = data.split("<!-- TRY -->"); 
+		 if(arr.length > 0) {
+			 var arr = arr[1].split("<!-- CATCH -->");
+			 var arr = arr[0].split("<!-- RESULT -->");
+			 if(arr.length > 0) {
+				 var arr = arr[1].split("<!-- END -->");
+				 var message = arr[0];
+			 }
+			 else message="Error: admin not logged";
+		 }
+		 else message="Error";
+		 
+		 message.trim();
+	     if(message == "Success") {
+	    	 $("#evadeOrder").slideUp();
+	    	 $("#evadeMessage").addClass("label label-success");
+	    	 $("#evadeMessage").html("Order successfully evaded!");
+	    	 $("#evadeMessage").slideDown();
+	     }
+	     else {
+	    	 $("#evadeMessage").addClass("label label-warning");
+	    	 $("#evadeMessage").html("There was an error - " + message);
+	    	 $("#evadeMessage").slideDown();
+	     }
+	  });
+});
+
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
 	var str = (arr[1]? capitalizeFirstLetter(arr[1]).trim():arr[0]);

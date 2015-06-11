@@ -83,7 +83,7 @@ public class CartController {
 			System.out.println("Insufficient Storage Quantity");
 			//return "WEB-INF/errorQuantity";
 			this.ch.addErrorMessage("Cart already contains the storage quantity");
-			return "WEB-INF/error?quantity";
+			return "WEB-INF/error?quantity=-1";
 		}
 
 	}

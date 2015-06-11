@@ -130,6 +130,39 @@ $("#addReview").click(function(event){
 	  });
 });
 
+$("#addToCart").click(function(event){
+	event.preventDefault();
+	var productId = parseInt($("#addToCart").attr('href').replace("#", ""));
+	var quantity = parseInt($('#quantity').val());
+	$.get( "cartAdder.xhtml", { id: productId, quantity: quantity } )
+	  .done(function( data ) {
+		 var arr = data.split("<!-- TRY -->"); 
+		 if(arr.length > 0) {
+			 var arr = arr[1].split("<!-- CATCH -->");
+			 var arr = arr[0].split("<!-- RESULT -->");
+			 if(arr.length > 0) {
+				 var arr = arr[1].split("<!-- END -->");
+				 var message = arr[0];
+			 }
+			 else message="Error: customer not logged";
+		 }
+		 else message="Error";
+
+		 message.trim();
+	     if(message == "Success") {
+	    	 $("#addToCartForm").slideUp();
+	    	 $("#addToCartMessage").addClass("label label-success");
+	    	 $("#addToCartMessage").html("Product added to Cart!");
+	    	 $("#addToCartMessage").slideDown();
+	     }
+	     else {
+	    	 $("#addToCartMessage").addClass("label label-warning");
+	    	 $("#addToCartMessage").html("There was an error - " + message);
+	    	 $("#addToCartMessage").slideDown();
+	     }
+	  });
+});
+
 $(".label-warning").text(function(){ 
 	var arr = this.textContent.split(":"); 
 	var str = (arr[1]? capitalizeFirstLetter(arr[1]).trim():arr[0]);

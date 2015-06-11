@@ -25,6 +25,7 @@ public class CartController {
 	private Orders cart;
 	private Integer quantity;
 
+
 	@EJB
 	private OrderFacade orderFacade;
 	@EJB
@@ -82,20 +83,23 @@ public class CartController {
 			System.out.println("Insufficient Storage Quantity");
 			//return "WEB-INF/errorQuantity";
 			this.ch.addErrorMessage("Cart already contains the storage quantity");
-			return "WEB-INF/error";
+			return "WEB-INF/error?quantity";
 		}
 
 	}
 
-	public String addProductToCartIframe(Orders cart, Product product){
+	public String addProductToCartReactive(Orders cart, Product product){
 		//System.out.println(product.getName());
 
 		String output = addProductToCart(cart, product);
+		
+		if(output.indexOf("quantity") != -1)
+			return "Insufficient quantity";
 
 		if(output.indexOf("error") != -1)
-			return "WEB-INF/errorQuantityIframe";
+			return "Error";
 
-		return "WEB-INF/successCartIframe";
+		return "Success";
 	}
 
 	public String removeOrderLine(Orders cart, OrderLine orderLine){
@@ -172,6 +176,6 @@ public class CartController {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
-	}
+	}	
 
 }

@@ -151,12 +151,12 @@ $("#addToCart").click(function(event){
 		 message.trim();
 	     if(message == "Success") {
 	    	 $("#addToCartForm").slideUp();
-	    	 $("#addToCartMessage").addClass("label label-success");
+	    	 $("#addToCartMessage").addClass("label label-success pull-right");
 	    	 $("#addToCartMessage").html("Product added to Cart!");
 	    	 $("#addToCartMessage").slideDown();
 	     }
 	     else {
-	    	 $("#addToCartMessage").addClass("label label-warning");
+	    	 $("#addToCartMessage").addClass("label label-warning pull-right");
 	    	 $("#addToCartMessage").html("There was an error - " + message);
 	    	 $("#addToCartMessage").slideDown();
 	     }

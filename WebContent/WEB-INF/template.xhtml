@@ -31,17 +31,18 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#{root}/"> <img alt="Agave"
-						src="#{root}/images/logo_small.png"
-						style="width: auto; height: 20px;" />
+					<a class="navbar-brand" href="#{root}/" style="margin-top: -5px;">
+						<img alt="Agave" src="#{root}/images/logo_small.png"
+						style="width: auto; height: 30px;" />
 					</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="#{root}/about.xhtml">About</a></li>
-						<li><a href="#{root}/admin.xhtml">Admin CP</a></li>
+						<li><a href="#{root}/about.xhtml">About us</a></li>
+						<li><a href="#{root}/products.xhtml">Products</a></li>
+						<li><a href="#{root}/admin.xhtml">((Admin CP))</a></li>
 					</ul>
 					<f:subview id="customerController">
 						<h:panelGroup rendered="#{customerController.isNotLogged()}">
@@ -58,7 +59,10 @@
 								<div class="form-group">
 									<ul class="nav navbar-nav navbar-right">
 										<li><p class="navbar-text">
-												Welcome
+												<img
+													src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(sessionScope['customer'].getEmail())}?s=50"
+													width="25" class="img-rounded" style="margin-right: 10px;" alt="Gravatar" />
+													Welcome
 												<h:outputText
 													value='#{sessionScope["customer"].getFirstName()}' />
 											</p></li>
@@ -86,7 +90,8 @@
 
 		<f:subview id="adminController">
 			<h:panelGroup rendered="#{adminController.isLogged()}">
-				<nav class="navbar navbar-default navbar-lower navbar-relative"
+				<nav
+					class="navbar navbar-default navbar-lower navbar-relative navbar-admin"
 					role="navigation">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
@@ -98,8 +103,8 @@
 									class="icon-bar"></span> <span class="icon-bar"></span> <span
 									class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#{root}/admin.xhtml"> Admin CP
-							</a>
+							<span class="navbar-brand" style="color: #BDD79A;"> Admin
+								CP </span>
 						</div>
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse"
@@ -114,7 +119,9 @@
 								<div class="form-group">
 									<ul class="nav navbar-nav navbar-right">
 										<li><p class="navbar-text">
-												Welcome
+												<img
+													src="http://www.gravatar.com/avatar/#{adminController.getGravatarId(sessionScope['admin'].getEmail())}?s=50"
+													width="25" class="img-rounded" style="margin-right: 10px;" alt="Gravatar" /> Logged as
 												<h:outputText
 													value='#{sessionScope["admin"].getFirstName()}' />
 											</p></li>

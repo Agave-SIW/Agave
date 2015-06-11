@@ -8,6 +8,7 @@ import it.uniroma3.model.Customer;
 import it.uniroma3.facade.AddressFacade;
 import it.uniroma3.facade.CustomerFacade;
 import it.uniroma3.helper.ContextHelper;
+import it.uniroma3.helper.MD5Helper;
 import it.uniroma3.helper.UriHelper;
 
 import javax.ejb.EJB;
@@ -143,6 +144,15 @@ public class CustomerController {
 	public String uriFormattedAddress(Address address){
 		String a = address.getStreet() + " " + address.getCity() + " " + address.getState() + " " + address.getCountry();
 		return this.uh.encodeURIcomponent(a);
+	}
+	
+	public String getGravatarId(){
+		return getGravatarId(this.email);
+	}
+	
+	public String getGravatarId(String email){
+		MD5Helper mh = new MD5Helper();
+		return mh.md5(email);
 	}
 	
 	public Long getId() {

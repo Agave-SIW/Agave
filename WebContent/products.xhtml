@@ -41,7 +41,7 @@
 											<img class="slide-image"
 												src="#{root}/uploads/#{product.picturePath}"
 												alt="#{product.name}" />
-											
+
 										</div>
 									</c:forEach>
 								</div>
@@ -63,8 +63,11 @@
 							items="#{productController.getListProducts()}">
 							<div class="col-sm-4 col-lg-4 col-md-4">
 								<div class="thumbnail">
-									<img src="#{root}/uploads/#{product.picturePath}"
-										alt="#{product.name}" />
+									<h:commandLink action="#{productController.findProduct}">
+										<f:param name="id" value="#{product.id}" />
+										<img src="#{root}/uploads/#{product.picturePath}"
+											alt="#{product.name}" />
+									</h:commandLink>
 									<div class="caption">
 										<h4 class="pull-right price">
 											<h:outputText value="#{product.price}">

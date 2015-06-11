@@ -39,11 +39,12 @@
 							<h:panelGroup rendered="#{customerController.isLogged()}">
 								<div id="addToCartForm" class="form-inline pull-right">
 									<input type="text" required="required" placeholder="Quantity"
-										id="quantity" class="form-control " style="width: 80px;"/> <a id="addToCart"
-										href="##{productController.product.id}"
+										id="quantity" class="form-control " style="width: 80px;" /> <a
+										id="addToCart" href="##{productController.product.id}"
 										class="btn btn-primary " style="width: 110px;">Add To Cart</a>
 								</div>
-								<div id="addToCartMessage" style="color: #fcf9da; clear: both; margin-top: 5px;"></div>
+								<div id="addToCartMessage"
+									style="color: #fcf9da; clear: both; margin-top: 5px;"></div>
 							</h:panelGroup>
 
 							<div style="padding-left: 5px;">
@@ -125,9 +126,14 @@
 						<div id="revNew" style="display: none">
 							<div class="row review">
 								<div class="col-md-12">
-									<span id="revNewStars"></span><span id="revNewName"></span> <span
-										id="revNewDate" class="pull-right"></span>
-									<p id="revNewComment"></p>
+									<img
+										src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(sessionScope['customer'].getEmail())}?s=50"
+										width="25" class="img-rounded" style="margin-right: 10px;"
+										alt="Gravatar" /> <span id="revNewName"></span> <span
+										id="revNewStars" class="pull-right"></span><br />
+									<span id="revNewDate" class="pull-right"></span>
+									<div style="margin-top: 5px; margin-left: 39px;"
+										id="revNewComment"></div>
 								</div>
 							</div>
 
@@ -141,14 +147,18 @@
 							<div id="rev#{theCount.step}">
 								<div class="row review">
 									<div class="col-md-12">
-										<h:outputText
-											value="#{productController.getReviewHtml(review)}"
-											escape="false" />
-										#{review.getCustomerName()} <span class="pull-right"><h:outputText
+										<img
+											src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(review.customer.email)}?s=50"
+											width="25" class="img-rounded" style="margin-right: 10px;"
+											alt="Gravatar" /> #{review.getCustomerName()} <span
+											class="pull-right"> <h:outputText
+												value="#{productController.getReviewHtml(review)}"
+												escape="false" /></span> <br /> <span
+											class="pull-right"><h:outputText
 												value="#{review.getDate()}">
 												<f:convertDateTime pattern="MM/dd/yyyy" />
 											</h:outputText></span>
-										<p>#{review.getComment()}</p>
+										<div style="margin-top: 5px; margin-left: 39px;">#{review.getComment()}</div>
 									</div>
 								</div>
 

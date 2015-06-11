@@ -16,7 +16,7 @@
     </ui:define>
 
 	<ui:define name="content">
-	<c:set var="root" value="#{request.contextPath}" />
+		<c:set var="root" value="#{request.contextPath}" />
 
 		<!-- Jumbotron Header -->
 		<header class="jumbotron hero-spacer">
@@ -38,7 +38,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h3>Latest Features</h3>
+				<h3>Latest Products</h3>
 			</div>
 		</div>
 		<!-- /.row -->
@@ -51,7 +51,11 @@
 				<h:form>
 					<div class="col-md-3 col-sm-6 hero-feature">
 						<div class="thumbnail">
-							<img src="#{root}/uploads/#{product.picturePath}" alt="#{product.name}" />
+							<h:commandLink action="#{productController.findProduct}">
+								<f:param name="id" value="#{product.id}" />
+								<img src="#{root}/uploads/#{product.picturePath}"
+									alt="#{product.name}" />
+							</h:commandLink>
 							<div class="caption">
 								<h3>#{product.name}</h3>
 								<p class="indexDesc">#{product.description}</p>

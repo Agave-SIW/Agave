@@ -47,14 +47,14 @@
 			</h:panelGroup>
 			<h:panelGroup rendered="#{adminController.isLogged()}">
 				<h:form styleClass="form-signin">
-					<p>
+					<h2 class="form-signin-heading">
 						Welcome 
 						<h:outputText
 							value='#{sessionScope["admin"].getFirstName()}' />
 						-
 						<h:commandLink value="Logout"
 							action="#{adminController.logoutAdmin}" />
-					</p>
+					</h2>
 				</h:form>
 			</h:panelGroup>
 

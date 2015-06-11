@@ -3,6 +3,7 @@ package it.uniroma3.controller;
 import it.uniroma3.model.Admin;
 import it.uniroma3.facade.AdminFacade;
 import it.uniroma3.helper.ContextHelper;
+import it.uniroma3.helper.MD5Helper;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -45,6 +46,8 @@ public class AdminController {
 			this.admin = null;
 			System.out.print("\n\nWRONG MAIL OR PASSWORD\n\n");
 			this.ch.addMessage("adminLogin", "loginButton", "Invalid Email or Password");
+			
+			return "admin";
 		}
 		else{
 			System.out.print("\n\nLogin Admin OK\n\n");
@@ -52,7 +55,7 @@ public class AdminController {
 		
 		this.ch.addToSession("admin", admin);
 		
-		return "admin";
+		return "index?faces-redirect=true";
 	}
 	
 	
@@ -61,7 +64,8 @@ public class AdminController {
 		
 		this.ch.addToSession("admin", null);
 		System.out.print("\n\nAdmin LOGGED OUT\n\n");
-		return "admin";
+		
+		return "index?faces-redirect=true";
 	}
 	
 	public Admin getCurrentAdmin(){
@@ -75,6 +79,15 @@ public class AdminController {
 	
 	public Boolean isNotLogged() {
 		return !this.isLogged();
+	}
+	
+	public String getGravatarId(){
+		return getGravatarId(this.email);
+	}
+	
+	public String getGravatarId(String email){
+		MD5Helper mh = new MD5Helper();
+		return mh.md5(email);
 	}
 	
 	public Long getId() {

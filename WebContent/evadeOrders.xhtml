@@ -36,18 +36,21 @@
 									<div class="col-md-2 vcenter">
 										<strong>Created by: <h:outputText
 												value="#{order.customer.firstName} #{order.customer.lastName}">
-												<f:convertDateTime pattern="dd.MM.yyyy" />
+												<f:convertDateTime pattern="MM/dd/yyyy" />
 											</h:outputText></strong>&emsp;
 									</div>
 									<div class="col-md-2 vcenter">
 										<strong>Created on: <h:outputText
 												value="#{order.creationTime}">
-												<f:convertDateTime pattern="dd.MM.yyyy" />
+												<f:convertDateTime pattern="MM/dd/yyyy" />
 											</h:outputText></strong>&emsp;
 									</div>
 									<div class="col-md-2 vcenter">
 										<strong>Total: <h:outputText
-												value="#{orderController.getOrderTotal(order.id)}" />&euro;
+												value="#{orderController.getOrderTotal(order.id)}">
+												<f:convertNumber pattern="#0.00 &#8364;" />
+											</h:outputText>
+
 										</strong>&emsp;
 									</div>
 									<div class="col-md-3 vcenter">
@@ -55,7 +58,7 @@
 											href="order.xhtml?id=#{order.id}">See the order details</a>
 									</div>
 								</div>
-
+								<hr />
 							</c:forEach>
 						</div>
 					</div>

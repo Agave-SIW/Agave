@@ -57,19 +57,23 @@
 										<h3 style="color: #b74a12">#{orderLine.product.name}</h3>
 									</div>
 
-									<div class="col-md-2 vcenter" align="center">#{orderLine.product.price}
-										&nbsp;&#8364;</div>
+									<div class="col-md-2 vcenter" align="center">
+										<h:outputText value="#{orderLine.product.price}">
+											<f:convertNumber pattern="#0.00 &#8364;" />
+										</h:outputText>
+									</div>
 									<div class="col-md-2 vcenter" align="center">x#{orderLine.quantity}</div>
 									<div class="col-md-2 vcenter" align="center">
 										<strong>Total</strong>&nbsp;
-										#{orderLine.getPartialTotal()}&nbsp;&#8364;
+										<h:outputText value="#{orderLine.getPartialTotal()}">
+											<f:convertNumber pattern="#0.00 &#8364;" />
+										</h:outputText>
+
 									</div>
 								</div>
 
 							</ui:repeat>
 						</div>
-
-
 
 
 						<div class="panel panel-info">
@@ -109,9 +113,11 @@
 										</div>
 										<div>
 											<strong>Total: </strong>
+
 											<h:outputText
-												value="#{orderController.getOrderTotal(orderController.order.id)}" />
-											&euro;
+												value="#{orderController.getOrderTotal(orderController.order.id)}">
+												<f:convertNumber pattern="#0.00 &#8364;" />
+											</h:outputText>
 										</div>
 
 										<h:panelGroup

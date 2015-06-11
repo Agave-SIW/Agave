@@ -20,18 +20,20 @@
 			<h:form>
 
 				<div class="row">
-					<div class="panel panel-primary inner-panel">
+					<div class="panel panel-primary">
 
 						<div class="panel-heading">Evade Orders</div>
 						<div class="panel-body">
-
-							<c:forEach var="order"
-								items="#{orderController.getAllClosedOrders()}">
-
-
+							<hr class="darkHr" />
+							<c:set var="allClosedOrders" value="#{orderController.getAllClosedOrders()}" />
+							<h:panelGroup rendered="#{allClosedOrders.size() == 0}">
+								<span class="label label-info">There are no orders to evade.</span>
+								<hr class="darkHr" />
+							</h:panelGroup>
+							<c:forEach var="order" items="#{allClosedOrders}">
 								<div class="row" style="margin-bottom: 10px">
 									<div class="col-md-2 vcenter">
-										<strong>Order:</strong> ${order.id}&emsp;
+										<strong style="margin-left: 40px;">Order:</strong> ${order.id}&emsp;
 									</div>
 									<div class="col-md-2 vcenter">
 										<strong>Created by:</strong>&nbsp;<a

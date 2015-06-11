@@ -67,12 +67,24 @@
 						<div class="panel-body">
 
 							<div class="row" style="padding-top: 15px">
-								<ui:repeat var="orderLine" value="#{order.getOrderLines()}">
+								<c:set var="orderLines" value="#{order.getOrderLines()}" />
+								<c:set var="orderLinesSize"
+									value="#{orderController.size(orderLines)}" />
+								<ui:repeat var="orderLine" value="${orderLines}"
+									varStatus="lineStatus">
 									<div class="col-xs-3 col-md-3">
-										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
-											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
-											alt="#{orderLine.product.name}" class="img-thumbnail" />
-										</a>
+										<h:panelGroup
+											rendered="#{not (lineStatus.index > 2 and orderLinesSize > 4) }">
+											<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
+												<img src="#{root}/uploads/#{orderLine.product.picturePath}"
+												alt="#{orderLine.product.name}" class="img-thumbnail" />
+											</a>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{lineStatus.index == 3 and orderLinesSize > 4 }">
+											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">See
+												the order details for the full list of ordered products.</a>
+										</h:panelGroup>
 									</div>
 								</ui:repeat>
 							</div>
@@ -113,14 +125,25 @@
 						<div class="panel-body">
 
 							<div class="row" style="padding-top: 15px">
-								<c:forEach var="orderLine" items="#{order.getOrderLines()}">
+								<c:set var="orderLines" value="#{order.getOrderLines()}" />
+								<c:set var="orderLinesSize" value="#{orderLines.size()}" />
+								<ui:repeat var="orderLine" value="${orderLines}"
+									varStatus="lineStatus">
 									<div class="col-xs-3 col-md-3">
-										<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
-											<img src="#{root}/uploads/#{orderLine.product.picturePath}"
-											alt="#{orderLine.product.name}" class="img-thumbnail" />
-										</a>
+										<h:panelGroup
+											rendered="#{not (lineStatus.index > 2 and orderLinesSize > 4) }">
+											<a href="#{root}/product.xhtml?id=#{orderLine.product.id}">
+												<img src="#{root}/uploads/#{orderLine.product.picturePath}"
+												alt="#{orderLine.product.name}" class="img-thumbnail" />
+											</a>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{lineStatus.index == 3 and orderLinesSize > 4 }">
+											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">See
+												the order details for the full list of ordered products.</a>
+										</h:panelGroup>
 									</div>
-								</c:forEach>
+								</ui:repeat>
 							</div>
 						</div>
 					</div>
@@ -129,8 +152,15 @@
 			</div>
 		</h:panelGroup>
 		<h:panelGroup rendered="#{customerController.isNotLogged()}">
-			<span class="label label-warning">You must log in first to see
-				your orders</span>
+			<div class="row">
+				<div class="col-md-12">
+					<h1>Error</h1>
+					<hr />
+
+					<span class="label label-warning">You must log in first to
+						see your orders</span>
+				</div>
+			</div>
 		</h:panelGroup>
 
 	</ui:define>

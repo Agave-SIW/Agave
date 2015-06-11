@@ -31,34 +31,34 @@
 
 								<div class="row" style="margin-bottom: 10px">
 									<div class="col-md-2 vcenter">
-										<strong>Order: ${order.id}&emsp;</strong>
+										<strong>Order:</strong> ${order.id}&emsp;
 									</div>
 									<div class="col-md-2 vcenter">
-										<strong>Created by: <h:outputText
+										<strong>Created by:</strong>&nbsp;<a
+												href="customer.xhtml?id=#{order.customer.id}"
+												style="color: #c2542f"><h:outputText
 												value="#{order.customer.firstName} #{order.customer.lastName}">
 												<f:convertDateTime pattern="MM/dd/yyyy" />
-											</h:outputText></strong>&emsp;
-									</div>
-									<div class="col-md-2 vcenter">
-										<strong>Created on: <h:outputText
-												value="#{order.creationTime}">
-												<f:convertDateTime pattern="MM/dd/yyyy" />
-											</h:outputText></strong>&emsp;
-									</div>
-									<div class="col-md-2 vcenter">
-										<strong>Total: <h:outputText
-												value="#{orderController.getOrderTotal(order.id)}">
-												<f:convertNumber pattern="#0.00 &#8364;" />
-											</h:outputText>
-
-										</strong>&emsp;
+											</h:outputText></a>&emsp;
 									</div>
 									<div class="col-md-3 vcenter">
-										<a class="btn btn-warning pull-right"
+										<strong>Created on:</strong>&nbsp;<h:outputText
+												value="#{order.creationTime}">
+												<f:convertDateTime pattern="MM/dd/yyyy" />
+											</h:outputText>&emsp;
+									</div>
+									<div class="col-md-2 vcenter">
+										<strong>Total:</strong>&nbsp;<h:outputText
+												value="#{orderController.getOrderTotal(order.id)}">
+												<f:convertNumber pattern="#0.00 &#8364;" />
+											</h:outputText>	&emsp;
+									</div>
+									<div class="col-md-2 vcenter">
+										<a class="btn btn-info pull-right" style="color: #fff"
 											href="order.xhtml?id=#{order.id}">See the order details</a>
 									</div>
 								</div>
-								<hr />
+								<hr class="darkHr" />
 							</c:forEach>
 						</div>
 					</div>

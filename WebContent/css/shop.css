@@ -617,7 +617,7 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 }
 
 .modal-body {
-  padding-bottom: 0;
+	padding-bottom: 0;
 }
 
 .input-group-addon:last-child {
@@ -629,7 +629,6 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	color: #333;
 }
 
-/* orderList.xhtml css */
 .inner-panel {
 	background-color: lightyellow;
 }
@@ -641,4 +640,11 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 
 .link-on-red:hover, .link-on-red:focus, .link-on-red:active {
 	color: #fff;
+}
+
+.seeMore {
+	color: #666;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 110%;
+	font-weight: bold;
 }

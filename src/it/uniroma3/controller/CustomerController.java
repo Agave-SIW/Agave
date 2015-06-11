@@ -13,7 +13,6 @@ import it.uniroma3.helper.UriHelper;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 
 /**
  * System operations for Customer management
@@ -23,7 +22,6 @@ import javax.enterprise.context.SessionScoped;
  */
 
 @ManagedBean
-@SessionScoped
 public class CustomerController {
 
 	private Long id;

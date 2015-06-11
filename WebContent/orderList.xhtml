@@ -69,7 +69,7 @@
 							<div class="row" style="padding-top: 15px">
 								<c:set var="orderLines" value="#{order.getOrderLines()}" />
 								<c:set var="orderLinesSize"
-									value="#{orderController.size(orderLines)}" />
+									value="#{orderLines.size()}" />
 								<ui:repeat var="orderLine" value="${orderLines}"
 									varStatus="lineStatus">
 									<div class="col-xs-3 col-md-3">
@@ -82,7 +82,7 @@
 										</h:panelGroup>
 										<h:panelGroup
 											rendered="#{lineStatus.index == 3 and orderLinesSize > 4 }">
-											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">See
+											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">More then 4 different products. See
 												the order details for the full list of ordered products.</a>
 										</h:panelGroup>
 									</div>
@@ -139,7 +139,7 @@
 										</h:panelGroup>
 										<h:panelGroup
 											rendered="#{lineStatus.index == 3 and orderLinesSize > 4 }">
-											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">See
+											<a href="#{root}/order.xhtml?id=#{order.id}" class="seeMore">More then 4 different products. See
 												the order details for the full list of ordered products.</a>
 										</h:panelGroup>
 									</div>

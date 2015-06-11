@@ -61,14 +61,14 @@
 								<p class="indexDesc">#{product.description}</p>
 								<p>
 									<h:panelGroup rendered="#{customerController.isLogged()}">
-										<h:commandButton
-											action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
-											value="Add To Cart" styleClass="btn btn-primary" />
+										<input type="button" id='##{product.id}' class="btn btn-primary addToCart"
+											style="width: 103px; transition: background 0.5s; color: #fff; opacity:1; margin-bottom: 5px;" 
+											value="Add To Cart" />
 											&nbsp;
 									</h:panelGroup>
 
 									<h:commandLink action="#{productController.findProduct}"
-										value="More Info" styleClass="btn btn-default">
+										value="More Info" styleClass="btn btn-default" style="margin-bottom: 5px;">
 										<f:param name="id" value="#{product.id}" />
 									</h:commandLink>
 								</p>

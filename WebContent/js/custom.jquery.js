@@ -153,12 +153,51 @@ $("#addToCart").click(function(event){
 	    	 $("#addToCartForm").slideUp();
 	    	 $("#addToCartMessage").addClass("label label-success pull-right");
 	    	 $("#addToCartMessage").html("Product added to Cart!");
+	    	 $("#cartIcon").effect( "shake" );
 	    	 $("#addToCartMessage").slideDown();
 	     }
 	     else {
 	    	 $("#addToCartMessage").addClass("label label-warning pull-right");
 	    	 $("#addToCartMessage").html("There was an error - " + message);
 	    	 $("#addToCartMessage").slideDown();
+	     }
+	  });
+});
+
+$(".addToCart").click(function(event){
+	event.preventDefault();
+	var target = $( event.target );
+	var productId = parseInt(target.attr('id').replace("#", ""));
+	var quantity = 1;
+	$.get( "cartAdder.xhtml", { id: productId, quantity: quantity } )
+	  .done(function( data ) {
+		 var arr = data.split("<!-- TRY -->"); 
+		 if(arr.length > 0) {
+			 var arr = arr[1].split("<!-- CATCH -->");
+			 var arr = arr[0].split("<!-- RESULT -->");
+			 if(arr.length > 0) {
+				 var arr = arr[1].split("<!-- END -->");
+				 var message = arr[0];
+			 }
+			 else message="Error: customer not logged";
+		 }
+		 else message="Error";
+
+		 message.trim();
+	     if(message == "Success") {
+	    	 target.removeClass("btn-primary");
+	    	 target.removeClass("addToCart");
+	    	 target.addClass("btn-success");
+	    	 $("#cartIcon").effect( "shake" );
+	    	 target.prop('value', "Added!");
+	    	 target.prop('disabled', true);
+	     }
+	     else {
+	    	 target.removeClass("btn-primary");
+	    	 target.removeClass("addToCart");
+	    	 target.addClass("btn-warning");
+	    	 target.prop('value', "Error!");
+	    	 target.prop('disabled', true);
 	     }
 	  });
 });

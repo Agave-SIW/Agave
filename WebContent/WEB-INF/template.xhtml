@@ -59,17 +59,17 @@
 								<div class="form-group">
 									<ul class="nav navbar-nav navbar-right">
 										<li><p class="navbar-text">
-												<img
+												<a href="#{root}/customer.xhtml?id=#{customerController.getCurrentCustomer().getId()}"><img
 													src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(sessionScope['customer'].getEmail())}?s=50"
-													width="25" class="img-rounded" style="margin-right: 10px;" alt="Gravatar" />
+													width="27" class="img-rounded" style="  margin-right: 15px; float: left;  margin-top: -3px;" alt="Gravatar" /></a>
 													Welcome
 												<h:outputText
-													value='#{sessionScope["customer"].getFirstName()}' />
+													value='#{customerController.getCurrentCustomer().getFirstName()}' />
 											</p></li>
 										<li><a href="#{root}/orderList.xhtml"><span
 												class="glyphicon glyphicon-th-list"></span> My orders</a></li>
-										<li><a href="#{root}/cart.xhtml"><span
-												class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+										<li><a id="cartLink" href="#{root}/cart.xhtml"><span
+												id="cartIcon" class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 										<li><h:inputHidden value="#{view.viewId}" id="page" /> <h:commandLink
 												value="Log Out"
 												action="#{customerController.logoutCustomer}" /></li>
@@ -121,7 +121,7 @@
 										<li><p class="navbar-text">
 												<img
 													src="http://www.gravatar.com/avatar/#{adminController.getGravatarId(sessionScope['admin'].getEmail())}?s=50"
-													width="25" class="img-rounded" style="margin-right: 10px;" alt="Gravatar" /> Logged as
+													width="27" class="img-rounded" style="  margin-right: 15px; float: left;  margin-top: -3px;" alt="Gravatar" /> Logged as
 												<h:outputText
 													value='#{sessionScope["admin"].getFirstName()}' />
 											</p></li>

@@ -147,6 +147,12 @@ hr {
 	border: none;
 }
 
+#cartIcon {
+	float: left;
+	top: 2px;
+	left: -4px;
+}
+
 .thumbnail img {
 	width: 100%;
 	padding: 10px;
@@ -194,9 +200,12 @@ hr {
 }
 
 .btn-primary {
-	color: #fff;
 	background-color: #b74a12;
 	border-color: #b44f25;
+}
+
+.btn-primary, .btn-warning, .btn-success, .btn-info {
+	color: #fff !important;
 }
 
 .label {

@@ -88,10 +88,10 @@
 									<div class="ratings">
 										<p class="pull-right">
 											<h:panelGroup rendered="#{customerController.isLogged()}">
-												<h:commandButton
-													action='#{cartController.addProductToCart(sessionScope["customer"].getCart(), product)}'
-													value="Add To Cart"
-													styleClass="btn btn-primary btn-margin-up" />
+												<input type="button" id='##{product.id}'
+													class="btn btn-primary btn-margin-up addToCart"
+													style="width: 103px; transition: background 0.5s; color: #fff; opacity:1"
+													value="Add To Cart" />
 											</h:panelGroup>
 										</p>
 										<p>

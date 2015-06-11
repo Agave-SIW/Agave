@@ -7,7 +7,6 @@ import it.uniroma3.helper.MD5Helper;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.enterprise.context.SessionScoped;
 
 /**
  * System operations for Admin management
@@ -17,7 +16,6 @@ import javax.enterprise.context.SessionScoped;
  */
 
 @ManagedBean
-@SessionScoped
 public class AdminController {
 
 	private Long id;

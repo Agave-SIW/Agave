@@ -3,6 +3,7 @@ package it.uniroma3.model;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @NamedQuery(name = "findAllAdmins", query = "SELECT a FROM Admin a")
@@ -19,6 +20,7 @@ public class Admin {
 	private String lastName;
 	
 	@Column(unique=true)
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
 	
 	private String password;

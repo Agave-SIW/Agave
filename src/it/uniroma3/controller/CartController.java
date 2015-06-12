@@ -43,7 +43,7 @@ public class CartController {
 			this.cart = customerFacade.getCart(idCustomer);
 		}
 		catch(Exception e){
-			//
+			System.out.println("Error while trying to set controller cart from customer id");
 		}
 		return this.cart;
 	}
@@ -64,7 +64,7 @@ public class CartController {
 		CustomerController cc = new CustomerController();
 
 		if(cc.isNotLogged()) {
-			//return "WEB-INF/errorNotLogged";
+
 			this.ch.addErrorMessage("You must be logged to complete this operation");
 			return "WEB-INF/error";
 		}
@@ -81,7 +81,7 @@ public class CartController {
 		}
 		catch(Exception e){
 			System.out.println("Insufficient Storage Quantity");
-			//return "WEB-INF/errorQuantity";
+			
 			this.ch.addErrorMessage("Cart already contains the storage quantity");
 			return "WEB-INF/error?quantity=-1";
 		}
@@ -89,8 +89,6 @@ public class CartController {
 	}
 
 	public String addProductToCartReactive(Orders cart, Product product){
-		//System.out.println(product.getName());
-
 		String output = addProductToCart(cart, product);
 		
 		if(output.indexOf("quantity") != -1)
@@ -106,7 +104,7 @@ public class CartController {
 		CustomerController cc = new CustomerController();
 
 		if(cc.isNotLogged()) {
-			//return "WEB-INF/errorNotLogged";
+
 			this.ch.addErrorMessage("You must be logged to complete this operation");
 			return "WEB-INF/error";
 		}

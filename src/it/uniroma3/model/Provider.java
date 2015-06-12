@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @NamedQuery(name = "findAllProviders", query = "SELECT pr FROM Provider pr")
@@ -17,8 +18,10 @@ public class Provider {
 	
 	private String phoneNumber;
 	
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
 	
+	@Pattern(regexp = "^[0-9]{11}$", message = "Please insert a valid vatin (11 numbers)")
 	private String vatin;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})

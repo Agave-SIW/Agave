@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @NamedQuery(name = "findAllCustomers", query = "SELECT c FROM Customer c")
@@ -21,6 +22,7 @@ public class Customer {
 	private String lastName;
 	
 	@Column(unique = true)
+	@Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 	private String email;
 	
 	private String password;

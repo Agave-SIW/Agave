@@ -103,7 +103,7 @@ public class ProductController {
 				return "product?id="+this.product.getId()+"&faces-redirect=true&includeViewParams=true";
 			}
 			catch (Exception e) {
-				//return "WEB-INF/errorProduct";
+
 				this.ch.addErrorMessage("There was an error");
 				return "WEB-INF/error";
 			}

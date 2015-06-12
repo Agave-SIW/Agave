@@ -62,14 +62,22 @@ public class CustomerController {
 	}
 
 	public String signIn() {
+		System.out.println("\nAttempting customer signin\n");
+		
 		if(this.repeatPassword.equals(this.password)){
 			if(!customerFacade.existsCustomer(this.email)){
 				Address address = addressFacade.createAddress(street, city, state, zipcode, country);
-				System.out.println("\nAddress created\n");
 				this.customer = customerFacade.createCustomer(firstName, lastName, email, password, phoneNumber, dateofBirth, address);
-				System.out.println("\nCustomer Created\n");
 				
-				//return "WEB-INF/successSignin";
+				//if the form is altered and submitted, the validation pattern on the model will prevent 
+				//the customer from being saved on the database. Checking if the customer has been really saved
+				this.customer = customerFacade.getCustomer(email);
+				if(this.customer==null) {
+					this.ch.addMessage("signIn", "email", "There was an error, please try again");
+					return "signin";
+				}
+				
+				System.out.println("\nCustomer persisted\n");
 				this.ch.addSuccessMessage("Registration successful");
 				return "WEB-INF/success";
 			}
@@ -95,7 +103,7 @@ public class CustomerController {
 			System.out.println("WRONG MAIL OR PASSWORD");
 			
 			if(page != null && page.contains("WEB-INF")) return "index";
-			//return "WEB-INF/errorLogin";
+
 			this.ch.addErrorMessage("Invalid Email or Password");
 			return "WEB-INF/error";
 		}

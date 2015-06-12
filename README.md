@@ -16,7 +16,7 @@
  * Una recensione è composta da un **commento**, una **valutazione** da 1 a 5 e un *autore* (un cliente). 
  * Nella pagina del singolo prodotto è mostrato l'elenco delle recensioni. 
  * Nella pagina con l'elenco dei prodotti è mostrata la media delle valutazioni per ogni prodotto.
- * I prodotti elencati sono divisi in pagine di 6 prodotti per pagina, sfogliabili tramite un menu.
+ * I prodotti elencati sono divisi in **pagine** di 6 prodotti per pagina, sfogliabili tramite un menu.
 * Quando l'**amministratore** effettua il login, l'applicazione lo ricorda fino al logout.
  * Se l'amministratore non è loggato non può accedere al **pannello admin**.
 * Quando un amministratore invia un nuovo prodotto deve **caricare un'immagine** che poi verrà mostrata nel riepilogo del prodotto.

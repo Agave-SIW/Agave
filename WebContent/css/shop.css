@@ -677,3 +677,50 @@ a.btn-default, a.btn-default:hover, a.btn-default:focus, a.btn-default:active
 	font-size: 110%;
 	font-weight: bold;
 }
+
+.green {
+  background-color: #4e483c;
+}
+
+.pager div.short input {
+  color: #333;
+  font-size: 80%;
+  padding: 1px;
+}
+
+.pager .disabled {
+  text-shadow: none;
+}
+
+.pager ul li a {
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.pager span {
+  color: #fcf9da;
+}
+
+.green.normal, .pager.green .btn {
+  background-color: #4A4139;
+  color: #fcf9da;
+  border: 1px solid #494333;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.green.active {
+  color: #F8EB00;
+  background-color: #595048;
+  color: #fcf9da;
+  border: 1px solid #5C5646;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+a.green:hover, .pager.green .btn:hover {
+	background-color: #3F3A31 !important;
+}
+
+#paginator div.btn {
+	display: none;
+	visibility: hidden;
+}

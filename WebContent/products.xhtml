@@ -58,52 +58,56 @@
 					</div>
 
 					<div class="row">
+						<div id="mt" style="min-height: 630px">
+						<c:set var="products" value="#{productController.getListProducts()}" />
+							<c:forEach var="product"
+								items="#{products}">
+								<nav class="col-sm-4 col-lg-4 col-md-4">
+									<div class="thumbnail">
+										<h:commandLink action="#{productController.findProduct}">
+											<f:param name="id" value="#{product.id}" />
+											<img src="#{root}/uploads/#{product.picturePath}"
+												alt="#{product.name}" />
+										</h:commandLink>
+										<div class="caption">
+											<h4 class="pull-right price">
+												<h:outputText value="#{product.price}">
+													<f:convertNumber pattern="#0.00 &#8364;" />
+												</h:outputText>
 
-						<c:forEach var="product"
-							items="#{productController.getListProducts()}">
-							<div class="col-sm-4 col-lg-4 col-md-4">
-								<div class="thumbnail">
-									<h:commandLink action="#{productController.findProduct}">
-										<f:param name="id" value="#{product.id}" />
-										<img src="#{root}/uploads/#{product.picturePath}"
-											alt="#{product.name}" />
-									</h:commandLink>
-									<div class="caption">
-										<h4 class="pull-right price">
-											<h:outputText value="#{product.price}">
-												<f:convertNumber pattern="#0.00 &#8364;" />
-											</h:outputText>
+											</h4>
+											<h2>
+												<h:commandLink action="#{productController.findProduct}"
+													value="#{product.name}">
+													<f:param name="id" value="#{product.id}" />
+												</h:commandLink>
 
-										</h4>
-										<h2>
-											<h:commandLink action="#{productController.findProduct}"
-												value="#{product.name}">
-												<f:param name="id" value="#{product.id}" />
-											</h:commandLink>
+											</h2>
+											<p class="productsDesc">#{product.description}</p>
+										</div>
 
-										</h2>
-										<p class="productsDesc">#{product.description}</p>
+										<div class="ratings">
+											<p class="pull-right">
+												<h:panelGroup rendered="#{customerController.isLogged()}">
+													<input type="button" id='##{product.id}'
+														class="btn btn-primary btn-margin-up addToCart"
+														style="width: 103px; transition: background 0.5s; color: #fff; opacity: 1"
+														value="Add To Cart" />
+												</h:panelGroup>
+											</p>
+											<p>
+												<h:outputText
+													value="#{productController.getReviewAverageHtml(product)}"
+													escape="false" />
+											</p>
+										</div>
 									</div>
-
-									<div class="ratings">
-										<p class="pull-right">
-											<h:panelGroup rendered="#{customerController.isLogged()}">
-												<input type="button" id='##{product.id}'
-													class="btn btn-primary btn-margin-up addToCart"
-													style="width: 103px; transition: background 0.5s; color: #fff; opacity:1"
-													value="Add To Cart" />
-											</h:panelGroup>
-										</p>
-										<p>
-											<h:outputText
-												value="#{productController.getReviewAverageHtml(product)}"
-												escape="false" />
-										</p>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-
+								</nav>
+							</c:forEach>
+						</div>
+						<div id="paginator" style="margin: auto; clear:both"></div>
+						<script>var totalrecords = #{products.size()}</script>
+						
 					</div>
 
 				</div>

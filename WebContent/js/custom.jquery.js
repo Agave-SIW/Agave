@@ -63,32 +63,32 @@ $("#evadeOrder").click(function(event){
 	event.preventDefault();
 	var orderId = parseInt($("#evadeOrder").attr('href').replace("#", ""));
 	$.get( "orderEvader.xhtml", { id: orderId } )
-	  .done(function( data ) {
-		 var arr = data.split("<!-- TRY -->"); 
-		 if(arr.length > 0) {
-			 var arr = arr[1].split("<!-- CATCH -->");
-			 var arr = arr[0].split("<!-- RESULT -->");
-			 if(arr.length > 0) {
-				 var arr = arr[1].split("<!-- END -->");
-				 var message = arr[0];
-			 }
-			 else message="Error: admin not logged";
-		 }
-		 else message="Error";
-		 
-		 message.trim();
-	     if(message == "Success") {
-	    	 $("#evadeOrder").slideUp();
-	    	 $("#evadeMessage").addClass("label label-success");
-	    	 $("#evadeMessage").html("Order successfully evaded!");
-	    	 $("#evadeMessage").slideDown();
-	     }
-	     else {
-	    	 $("#evadeMessage").addClass("label label-warning");
-	    	 $("#evadeMessage").html("There was an error - " + message);
-	    	 $("#evadeMessage").slideDown();
-	     }
-	  });
+	.done(function( data ) {
+		var arr = data.split("<!-- TRY -->"); 
+		if(arr.length > 0) {
+			var arr = arr[1].split("<!-- CATCH -->");
+			var arr = arr[0].split("<!-- RESULT -->");
+			if(arr.length > 0) {
+				var arr = arr[1].split("<!-- END -->");
+				var message = arr[0];
+			}
+			else message="Error: admin not logged";
+		}
+		else message="Error";
+
+		message.trim();
+		if(message == "Success") {
+			$("#evadeOrder").slideUp();
+			$("#evadeMessage").addClass("label label-success");
+			$("#evadeMessage").html("Order successfully evaded!");
+			$("#evadeMessage").slideDown();
+		}
+		else {
+			$("#evadeMessage").addClass("label label-warning");
+			$("#evadeMessage").html("There was an error - " + message);
+			$("#evadeMessage").slideDown();
+		}
+	});
 });
 
 $("#addReview").click(function(event){
@@ -98,36 +98,36 @@ $("#addReview").click(function(event){
 	var stars = parseInt(app[0]);
 	var comment = $('#comment').val();
 	$.get( "reviewAdder.xhtml", { id: productId, stars: stars, comment: comment } )
-	  .done(function( data ) {
-		 var arr = data.split("<!-- TRY -->"); 
-		 if(arr.length > 0) {
-			 var arr = arr[1].split("<!-- CATCH -->");
-			 var arr = arr[0].split("<!-- RESULT -->");
-			 if(arr.length > 0) {
-				 var arr = arr[1].split("<!-- END -->");
-				 var message = arr[0];
-			 }
-			 else message="Error";
-		 }
-		 else message="Error";
-		 
-		 message = $('<div/>').html(message).text();
-		 //console.log(message);
-		 var arr = message.trim().split(" <::> ");
-		 if(arr.length < 3) message = "Error";
-		 //console.log(message);
-	     if(message != "Error") {
-	    	 $("#revForm").slideUp();
-	    	 $("#revNewStars").html(starsToHtml(arr['0']));
-	    	 $("#revNewName").text(arr['1']);
-	    	 $("#revNewComment").text(arr['2']);
-	    	 $("#revNewDate").html(currentDate());
-	    	 $("#revNew").slideDown();
-	     }
-	     else {
-	    	 $("#reviewError").html("There was an error");
-	     }
-	  });
+	.done(function( data ) {
+		var arr = data.split("<!-- TRY -->"); 
+		if(arr.length > 0) {
+			var arr = arr[1].split("<!-- CATCH -->");
+			var arr = arr[0].split("<!-- RESULT -->");
+			if(arr.length > 0) {
+				var arr = arr[1].split("<!-- END -->");
+				var message = arr[0];
+			}
+			else message="Error";
+		}
+		else message="Error";
+
+		message = $('<div/>').html(message).text();
+		//console.log(message);
+		var arr = message.trim().split(" <::> ");
+		if(arr.length < 3) message = "Error";
+		//console.log(message);
+		if(message != "Error") {
+			$("#revForm").slideUp();
+			$("#revNewStars").html(starsToHtml(arr['0']));
+			$("#revNewName").text(arr['1']);
+			$("#revNewComment").text(arr['2']);
+			$("#revNewDate").html(currentDate());
+			$("#revNew").slideDown();
+		}
+		else {
+			$("#reviewError").html("There was an error");
+		}
+	});
 });
 
 $("#addToCart").click(function(event){
@@ -135,33 +135,33 @@ $("#addToCart").click(function(event){
 	var productId = parseInt($("#addToCart").attr('href').replace("#", ""));
 	var quantity = parseInt($('#quantity').val());
 	$.get( "cartAdder.xhtml", { id: productId, quantity: quantity } )
-	  .done(function( data ) {
-		 var arr = data.split("<!-- TRY -->"); 
-		 if(arr.length > 0) {
-			 var arr = arr[1].split("<!-- CATCH -->");
-			 var arr = arr[0].split("<!-- RESULT -->");
-			 if(arr.length > 0) {
-				 var arr = arr[1].split("<!-- END -->");
-				 var message = arr[0];
-			 }
-			 else message="Error: customer not logged";
-		 }
-		 else message="Error";
+	.done(function( data ) {
+		var arr = data.split("<!-- TRY -->"); 
+		if(arr.length > 0) {
+			var arr = arr[1].split("<!-- CATCH -->");
+			var arr = arr[0].split("<!-- RESULT -->");
+			if(arr.length > 0) {
+				var arr = arr[1].split("<!-- END -->");
+				var message = arr[0];
+			}
+			else message="Error: customer not logged";
+		}
+		else message="Error";
 
-		 message.trim();
-	     if(message == "Success") {
-	    	 $("#addToCartForm").slideUp();
-	    	 $("#addToCartMessage").addClass("label label-success pull-right");
-	    	 $("#addToCartMessage").html("Product added to Cart!");
-	    	 $("#cartIcon").effect( "shake" );
-	    	 $("#addToCartMessage").slideDown();
-	     }
-	     else {
-	    	 $("#addToCartMessage").addClass("label label-warning pull-right");
-	    	 $("#addToCartMessage").html("There was an error - " + message);
-	    	 $("#addToCartMessage").slideDown();
-	     }
-	  });
+		message.trim();
+		if(message == "Success") {
+			$("#addToCartForm").slideUp();
+			$("#addToCartMessage").addClass("label label-success pull-right");
+			$("#addToCartMessage").html("Product added to Cart!");
+			$("#cartIcon").effect( "shake" );
+			$("#addToCartMessage").slideDown();
+		}
+		else {
+			$("#addToCartMessage").addClass("label label-warning pull-right");
+			$("#addToCartMessage").html("There was an error - " + message);
+			$("#addToCartMessage").slideDown();
+		}
+	});
 });
 
 $(".addToCart").click(function(event){
@@ -170,36 +170,36 @@ $(".addToCart").click(function(event){
 	var productId = parseInt(target.attr('id').replace("#", ""));
 	var quantity = 1;
 	$.get( "cartAdder.xhtml", { id: productId, quantity: quantity } )
-	  .done(function( data ) {
-		 var arr = data.split("<!-- TRY -->"); 
-		 if(arr.length > 0) {
-			 var arr = arr[1].split("<!-- CATCH -->");
-			 var arr = arr[0].split("<!-- RESULT -->");
-			 if(arr.length > 0) {
-				 var arr = arr[1].split("<!-- END -->");
-				 var message = arr[0];
-			 }
-			 else message="Error: customer not logged";
-		 }
-		 else message="Error";
+	.done(function( data ) {
+		var arr = data.split("<!-- TRY -->"); 
+		if(arr.length > 0) {
+			var arr = arr[1].split("<!-- CATCH -->");
+			var arr = arr[0].split("<!-- RESULT -->");
+			if(arr.length > 0) {
+				var arr = arr[1].split("<!-- END -->");
+				var message = arr[0];
+			}
+			else message="Error: customer not logged";
+		}
+		else message="Error";
 
-		 message.trim();
-	     if(message == "Success") {
-	    	 target.removeClass("btn-primary");
-	    	 target.removeClass("addToCart");
-	    	 target.addClass("btn-success");
-	    	 $("#cartIcon").effect( "shake" );
-	    	 target.prop('value', "Added!");
-	    	 target.prop('disabled', true);
-	     }
-	     else {
-	    	 target.removeClass("btn-primary");
-	    	 target.removeClass("addToCart");
-	    	 target.addClass("btn-warning");
-	    	 target.prop('value', "Error!");
-	    	 target.prop('disabled', true);
-	     }
-	  });
+		message.trim();
+		if(message == "Success") {
+			target.removeClass("btn-primary");
+			target.removeClass("addToCart");
+			target.addClass("btn-success");
+			$("#cartIcon").effect( "shake" );
+			target.prop('value', "Added!");
+			target.prop('disabled', true);
+		}
+		else {
+			target.removeClass("btn-primary");
+			target.removeClass("addToCart");
+			target.addClass("btn-warning");
+			target.prop('value', "Error!");
+			target.prop('disabled', true);
+		}
+	});
 });
 
 $(".label-warning").text(function(){ 
@@ -270,7 +270,7 @@ $(document).ready(function() {
 		} /*else {  if( log ) alert(log);   }*/
 
 	});
-	
+
 	$('.modal-footer button').click(function(){
 		var button = $(this);
 
@@ -289,17 +289,17 @@ $(document).ready(function() {
 			progressBar.animate({width : "100%"}, 100);
 
 			progress.delay(1000)
-					.fadeOut(600);
+			.fadeOut(600);
 
 			button.text("Close")
-					.removeClass("btn-primary")
-					.addClass("btn-success")
-    				.blur()
-					.delay(1600)
-					.fadeIn(function(){
-						title.text("Log in is successful");
-						button.attr("data-dismiss", "modal");
-					});
+			.removeClass("btn-primary")
+			.addClass("btn-success")
+			.blur()
+			.delay(1600)
+			.fadeIn(function(){
+				title.text("Log in is successful");
+				button.attr("data-dismiss", "modal");
+			});
 		}
 	});
 
@@ -316,10 +316,17 @@ $(document).ready(function() {
 		progressBar.css({ "width" : "0%" });
 
 		button.removeClass("btn-success")
-				.addClass("btn-primary")
-				.text("Ok")
-				.removeAttr("data-dismiss");
-                
+		.addClass("btn-primary")
+		.text("Ok")
+		.removeAttr("data-dismiss");
+
 	});
+
+	$('#paginator').smartpaginator({ totalrecords: totalrecords || 100,
+		recordsperpage: 6, 
+		controlsalways: true,
+		datacontainer: 'mt', 
+		dataelement: 'nav',
+		theme: 'green' });
 });
 

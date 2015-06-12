@@ -60,3 +60,5 @@ function starsToHtml(stars){
 	}
 	return html;
 }
+
+var totalrecords = 100;

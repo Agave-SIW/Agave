@@ -322,7 +322,7 @@ $(document).ready(function() {
 
 	});
 
-	$('#paginator').smartpaginator({ totalrecords: totalrecords || 100,
+	$('#paginator').smartpaginator({ totalrecords: totalrecords,
 		recordsperpage: 6, 
 		controlsalways: true,
 		datacontainer: 'mt', 

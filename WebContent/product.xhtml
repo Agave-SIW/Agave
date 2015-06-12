@@ -127,11 +127,13 @@
 							<div class="row review">
 								<div class="col-md-12">
 									<img
-										src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(sessionScope['customer'].getEmail())}?s=50"
-										width="25" class="img-rounded" style="margin-right: 10px;"
-										alt="Gravatar" /> <span id="revNewName"></span> <span
-										id="revNewStars" class="pull-right"></span><br />
-									<span id="revNewDate" class="pull-right"></span>
+										src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(sessionScope['customer'].getEmail())}?s=60"
+										width="60" class="img-rounded"
+										style="margin-right: 10px; float: left"
+										alt="Gravatar for #{sessionScope['customer'].getFullName()}" />
+									<span id="revNewName"></span> <span id="revNewStars"
+										class="pull-right"></span><br /> <span id="revNewDate"
+										class="pull-right"></span>
 									<div style="margin-top: 5px; margin-left: 39px;"
 										id="revNewComment"></div>
 								</div>
@@ -148,13 +150,13 @@
 								<div class="row review">
 									<div class="col-md-12">
 										<img
-											src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(review.customer.email)}?s=50"
-											width="25" class="img-rounded" style="margin-right: 10px;"
-											alt="Gravatar" /> #{review.getCustomerName()} <span
-											class="pull-right"> <h:outputText
+											src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(review.customer.email)}?s=60"
+											width="60" class="img-rounded"
+											style="margin-right: 10px; float: left"
+											alt="Gravatar for #{review.customer.getFullName()}" />
+										#{review.getCustomerName()} <span class="pull-right"> <h:outputText
 												value="#{productController.getReviewHtml(review)}"
-												escape="false" /></span> <br /> <span
-											class="pull-right"><h:outputText
+												escape="false" /></span> <br /> <span class="pull-right"><h:outputText
 												value="#{review.getDate()}">
 												<f:convertDateTime pattern="MM/dd/yyyy" />
 											</h:outputText></span>

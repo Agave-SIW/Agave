@@ -20,11 +20,14 @@
 
 		<!-- Jumbotron Header -->
 		<header class="jumbotron hero-spacer">
-			<h1>A Warm Welcome!</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero
-				aliquid similique quaerat nam nobis illo aspernatur vitae fugiat
-				numquam repellat.</p>
+			<h1>Welcome to Agave Shop!</h1>
+			<p>
+				<strong>A-Ga-Ve</strong>, from our initials, is our project for the
+				course of <strong>Sistemi Informativi su Web (SIW)</strong>.
+			</p>
+			<p>It runs on Apache Tomee and it's made using Java with JSF 2.2
+				Framework and Open JPA libraries for PostgreSQL.
+			</p>
 			<p>
 				<h:form>
 					<h:commandLink action="#{productController.listProducts()}"
@@ -61,14 +64,16 @@
 								<p class="indexDesc">#{product.description}</p>
 								<p>
 									<h:panelGroup rendered="#{customerController.isLogged()}">
-										<input type="button" id='##{product.id}' class="btn btn-primary addToCart"
-											style="width: 103px; transition: background 0.5s; color: #fff; opacity:1; margin-bottom: 5px;" 
+										<input type="button" id='##{product.id}'
+											class="btn btn-primary addToCart"
+											style="width: 103px; transition: background 0.5s; color: #fff; opacity: 1; margin-bottom: 5px;"
 											value="Add To Cart" />
 											&nbsp;
 									</h:panelGroup>
 
 									<h:commandLink action="#{productController.findProduct}"
-										value="More Info" styleClass="btn btn-default" style="margin-bottom: 5px;">
+										value="More Info" styleClass="btn btn-default"
+										style="margin-bottom: 5px;">
 										<f:param name="id" value="#{product.id}" />
 									</h:commandLink>
 								</p>

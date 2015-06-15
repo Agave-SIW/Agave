@@ -47,7 +47,7 @@ public class OrderController {
 
 	public Orders findOrderAndCustomer(Long idOrder){
 		this.order = orderFacade.getOrder(idOrder);
-		this.orderCustomer = customerFacade.getCustomerByOrderId(idOrder);
+		this.orderCustomer = order.getCustomer();
 		return this.order;
 	}
 

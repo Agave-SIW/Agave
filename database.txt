@@ -1,0 +1,862 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.6
+-- Dumped by pg_dump version 9.4.1
+-- Started on 2015-06-15 15:46:52
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 187 (class 3079 OID 11756)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2045 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 171 (class 1259 OID 16483)
+-- Name: address; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE address (
+    id bigint NOT NULL,
+    city character varying(255) NOT NULL,
+    country character varying(255) NOT NULL,
+    state character varying(255) NOT NULL,
+    street character varying(255) NOT NULL,
+    zipcode character varying(255) NOT NULL
+);
+
+
+ALTER TABLE address OWNER TO agave;
+
+--
+-- TOC entry 170 (class 1259 OID 16481)
+-- Name: address_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE address_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE address_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2046 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: address_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE address_id_seq OWNED BY address.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16494)
+-- Name: admin; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE admin (
+    id bigint NOT NULL,
+    dateofbirth date,
+    email character varying(255),
+    firstname character varying(255) NOT NULL,
+    lastname character varying(255) NOT NULL,
+    password character varying(255),
+    phonenumber character varying(255),
+    registrationdate date
+);
+
+
+ALTER TABLE admin OWNER TO agave;
+
+--
+-- TOC entry 172 (class 1259 OID 16492)
+-- Name: admin_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE admin_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE admin_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2047 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: admin_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE admin_id_seq OWNED BY admin.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16507)
+-- Name: customer; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE customer (
+    id bigint NOT NULL,
+    dateofbirth date,
+    email character varying(255),
+    firstname character varying(255) NOT NULL,
+    lastname character varying(255) NOT NULL,
+    password character varying(255),
+    phonenumber character varying(255),
+    registrationdate date,
+    address_id bigint,
+    cart_id bigint
+);
+
+
+ALTER TABLE customer OWNER TO agave;
+
+--
+-- TOC entry 174 (class 1259 OID 16505)
+-- Name: customer_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE customer_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE customer_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2048 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: customer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE customer_id_seq OWNED BY customer.id;
+
+
+--
+-- TOC entry 177 (class 1259 OID 16520)
+-- Name: orderline; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE orderline (
+    id bigint NOT NULL,
+    quantity integer,
+    product_id bigint,
+    orders_id bigint
+);
+
+
+ALTER TABLE orderline OWNER TO agave;
+
+--
+-- TOC entry 176 (class 1259 OID 16518)
+-- Name: orderline_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE orderline_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orderline_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2049 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: orderline_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE orderline_id_seq OWNED BY orderline.id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 16528)
+-- Name: orders; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id bigint NOT NULL,
+    creationtime date,
+    evasiontime date,
+    customer_id bigint
+);
+
+
+ALTER TABLE orders OWNER TO agave;
+
+--
+-- TOC entry 178 (class 1259 OID 16526)
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE orders_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2050 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 16536)
+-- Name: product; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE product (
+    id bigint NOT NULL,
+    code character varying(255) NOT NULL,
+    description character varying(2000),
+    name character varying(255) NOT NULL,
+    picturepath character varying(255),
+    price real,
+    storagequantity integer
+);
+
+
+ALTER TABLE product OWNER TO agave;
+
+--
+-- TOC entry 180 (class 1259 OID 16534)
+-- Name: product_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE product_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE product_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2051 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE product_id_seq OWNED BY product.id;
+
+
+--
+-- TOC entry 182 (class 1259 OID 16545)
+-- Name: product_provider; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE product_provider (
+    products_id bigint,
+    providers_id bigint
+);
+
+
+ALTER TABLE product_provider OWNER TO agave;
+
+--
+-- TOC entry 184 (class 1259 OID 16550)
+-- Name: provider; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE provider (
+    id bigint NOT NULL,
+    email character varying(255),
+    name character varying(255) NOT NULL,
+    phonenumber character varying(255),
+    vatin character varying(255),
+    address_id bigint
+);
+
+
+ALTER TABLE provider OWNER TO agave;
+
+--
+-- TOC entry 183 (class 1259 OID 16548)
+-- Name: provider_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE provider_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE provider_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2052 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: provider_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE provider_id_seq OWNED BY provider.id;
+
+
+--
+-- TOC entry 186 (class 1259 OID 16561)
+-- Name: review; Type: TABLE; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE TABLE review (
+    id bigint NOT NULL,
+    comment character varying(255),
+    date date,
+    stars integer NOT NULL,
+    product_id bigint,
+    customer_id bigint
+);
+
+
+ALTER TABLE review OWNER TO agave;
+
+--
+-- TOC entry 185 (class 1259 OID 16559)
+-- Name: review_id_seq; Type: SEQUENCE; Schema: public; Owner: agave
+--
+
+CREATE SEQUENCE review_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE review_id_seq OWNER TO agave;
+
+--
+-- TOC entry 2053 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: agave
+--
+
+ALTER SEQUENCE review_id_seq OWNED BY review.id;
+
+
+--
+-- TOC entry 1878 (class 2604 OID 16486)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::regclass);
+
+
+--
+-- TOC entry 1879 (class 2604 OID 16497)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY admin ALTER COLUMN id SET DEFAULT nextval('admin_id_seq'::regclass);
+
+
+--
+-- TOC entry 1880 (class 2604 OID 16510)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY customer ALTER COLUMN id SET DEFAULT nextval('customer_id_seq'::regclass);
+
+
+--
+-- TOC entry 1881 (class 2604 OID 16523)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY orderline ALTER COLUMN id SET DEFAULT nextval('orderline_id_seq'::regclass);
+
+
+--
+-- TOC entry 1882 (class 2604 OID 16531)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- TOC entry 1883 (class 2604 OID 16539)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY product ALTER COLUMN id SET DEFAULT nextval('product_id_seq'::regclass);
+
+
+--
+-- TOC entry 1884 (class 2604 OID 16553)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY provider ALTER COLUMN id SET DEFAULT nextval('provider_id_seq'::regclass);
+
+
+--
+-- TOC entry 1885 (class 2604 OID 16564)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: agave
+--
+
+ALTER TABLE ONLY review ALTER COLUMN id SET DEFAULT nextval('review_id_seq'::regclass);
+
+
+--
+-- TOC entry 2022 (class 0 OID 16483)
+-- Dependencies: 171
+-- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY address (id, city, country, state, street, zipcode) FROM stdin;
+1	Fiumicino	Italy	RM	Via Andrea Mantegna 28 C	00054
+2	Roma	Italy	RM	Via di tutti i provider	00128
+3	Roma	Italy	RM	Via Aldo Banzi 87	00128
+4	Rome	Italy	RM	via bombay 32	00144
+\.
+
+
+--
+-- TOC entry 2054 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: address_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('address_id_seq', 4, true);
+
+
+--
+-- TOC entry 2024 (class 0 OID 16494)
+-- Dependencies: 173
+-- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY admin (id, dateofbirth, email, firstname, lastname, password, phonenumber, registrationdate) FROM stdin;
+1	2015-06-15	admin@agave.tk	Agave	Siw	11492c59a8f11680703d13c72aea27d55b996f0d0118097bd31000357adfba69	12345678	2015-06-15
+\.
+
+
+--
+-- TOC entry 2055 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: admin_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('admin_id_seq', 1, true);
+
+
+--
+-- TOC entry 2026 (class 0 OID 16507)
+-- Dependencies: 175
+-- Data for Name: customer; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY customer (id, dateofbirth, email, firstname, lastname, password, phonenumber, registrationdate, address_id, cart_id) FROM stdin;
+1	1987-09-06	gaetano.bonofiglio@gmail.com	Gaetano	Bonofiglio	11492c59a8f11680703d13c72aea27d55b996f0d0118097bd31000357adfba69	123456	2015-06-15	1	1
+2	1990-11-07	vero.neeja@gmail.com	Veronica	Iovinella	11492c59a8f11680703d13c72aea27d55b996f0d0118097bd31000357adfba69	987654	2015-06-15	3	2
+3	2015-01-07	andrea.salvoni93@gmail.com	Andrea	Salvoni	74a1c9db7551cce7e6ee7b7f4edf9dfb059b4a545836bc03c4b8c467e80c8c8f	3406867549	2015-06-15	4	9
+\.
+
+
+--
+-- TOC entry 2056 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('customer_id_seq', 3, true);
+
+
+--
+-- TOC entry 2028 (class 0 OID 16520)
+-- Dependencies: 177
+-- Data for Name: orderline; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY orderline (id, quantity, product_id, orders_id) FROM stdin;
+45	1	4	10
+46	1	6	10
+47	1	5	10
+7	1	6	3
+8	2	5	3
+9	1	7	3
+11	3	6	4
+12	1	2	4
+13	1	7	4
+14	1	5	4
+24	1	2	5
+25	1	6	5
+26	1	4	5
+27	3	1	5
+28	1	5	5
+30	1	6	6
+31	1	2	6
+32	2	4	6
+33	2	5	6
+34	1	7	6
+37	1	3	7
+39	1	6	8
+40	1	5	8
+\.
+
+
+--
+-- TOC entry 2057 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: orderline_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('orderline_id_seq', 47, true);
+
+
+--
+-- TOC entry 2030 (class 0 OID 16528)
+-- Dependencies: 179
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY orders (id, creationtime, evasiontime, customer_id) FROM stdin;
+1	\N	\N	\N
+2	\N	\N	\N
+3	2015-06-15	\N	2
+4	2015-06-15	\N	1
+5	2015-06-15	\N	2
+6	2015-06-15	\N	1
+7	2015-06-15	2015-06-15	2
+8	2015-06-15	2015-06-15	1
+9	\N	\N	\N
+10	2015-06-15	\N	1
+\.
+
+
+--
+-- TOC entry 2058 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('orders_id_seq', 10, true);
+
+
+--
+-- TOC entry 2032 (class 0 OID 16536)
+-- Dependencies: 181
+-- Data for Name: product; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY product (id, code, description, name, picturepath, price, storagequantity) FROM stdin;
+1	MND	Amazing set of plates made in terracotta.	MYNDIG	11.png	5	30
+2	KDM	Basic pot for your plants.	KARDEMUMMA	10.png	10	20
+4	KTC	Complete agenda for the current year that can be customized to hold your favourite pictures.	KANNETECKEN	5.jpg	4	40
+7	TDE	Customizable teddy bear, with a picture of your choice printed on the t-shirt.	TEDDY	7.jpg	12	20
+3	SLK	Elegant, set of 4 colored vases in terracotta.	SLUKA	3.png	16	17
+6	FRG	Colorful set of 3 mugs.	FARGIK	6.jpg	7	26
+5	HLS	Useful and handy termos for your hot or cold drinks.	HALSA	4.jpg	14	34
+\.
+
+
+--
+-- TOC entry 2059 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('product_id_seq', 7, true);
+
+
+--
+-- TOC entry 2033 (class 0 OID 16545)
+-- Dependencies: 182
+-- Data for Name: product_provider; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY product_provider (products_id, providers_id) FROM stdin;
+1	1
+1	2
+2	3
+2	5
+3	4
+4	2
+5	1
+5	2
+5	3
+6	3
+6	5
+7	2
+7	4
+7	5
+\.
+
+
+--
+-- TOC entry 2035 (class 0 OID 16550)
+-- Dependencies: 184
+-- Data for Name: provider; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY provider (id, email, name, phonenumber, vatin, address_id) FROM stdin;
+1	provider1@weareproviders.com	Provider1	1234567	12345678901	2
+2	provider2@weareproviders.com	Provider2	1234567	12345678901	2
+3	provider3@weareproviders.com	Provider3	1234567	12345678901	2
+4	provider4@weareproviders.com	Provider4	1234567	12345678901	2
+5	provider5@weareproviders.com	Provider5	1234567	12345678901	2
+\.
+
+
+--
+-- TOC entry 2060 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: provider_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('provider_id_seq', 5, true);
+
+
+--
+-- TOC entry 2037 (class 0 OID 16561)
+-- Dependencies: 186
+-- Data for Name: review; Type: TABLE DATA; Schema: public; Owner: agave
+--
+
+COPY review (id, comment, date, stars, product_id, customer_id) FROM stdin;
+2	Carino e coccoloso	2015-06-15	5	7	2
+1	Molto carino, ma puzza!	2015-06-15	2	7	1
+4	Belle ma troppo profonde	2015-06-15	3	6	2
+3	Tazze di buona fattura, e il prezzo e' vantaggioso.	2015-06-15	5	6	1
+9	Molto resistenti, devo ammetterlo. Hanno resistito alla cena di Capodanno.	2015-06-15	5	1	1
+8	Perfetti per la macedonia	2015-06-15	3	1	2
+7	Prezzo vantaggioso.	2015-06-15	4	4	1
+5	Pratico e compatto. Ottimo acquisto!	2015-06-15	4	4	2
+12	Sono molto eleganti, ma il prezzo sembra alto per dei vasi.	2015-06-15	3	2	1
+10	Perdono acqua dai buchi	2015-06-15	1	2	2
+14	La mia collezione di anfore finalmente e' completa	2015-06-15	5	3	1
+13	Molto carini, 4 regali in un solo acquisto.	2015-06-15	4	3	2
+11	Il cinese sotto casa lo fa a meno	2015-06-15	1	4	3
+15	Il tappo non si avvita	2015-06-15	1	5	2
+6	Prezzo alto per una borraccia misera.	2015-06-15	2	5	1
+\.
+
+
+--
+-- TOC entry 2061 (class 0 OID 0)
+-- Dependencies: 185
+-- Name: review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: agave
+--
+
+SELECT pg_catalog.setval('review_id_seq', 15, true);
+
+
+--
+-- TOC entry 1887 (class 2606 OID 16491)
+-- Name: address_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY address
+    ADD CONSTRAINT address_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1889 (class 2606 OID 16502)
+-- Name: admin_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY admin
+    ADD CONSTRAINT admin_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 16515)
+-- Name: customer_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT customer_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 16525)
+-- Name: orderline_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY orderline
+    ADD CONSTRAINT orderline_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1903 (class 2606 OID 16533)
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1905 (class 2606 OID 16544)
+-- Name: product_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY product
+    ADD CONSTRAINT product_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1910 (class 2606 OID 16558)
+-- Name: provider_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY provider
+    ADD CONSTRAINT provider_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1913 (class 2606 OID 16566)
+-- Name: review_pkey; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY review
+    ADD CONSTRAINT review_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1891 (class 2606 OID 16504)
+-- Name: u_admin_email; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY admin
+    ADD CONSTRAINT u_admin_email UNIQUE (email);
+
+
+--
+-- TOC entry 1897 (class 2606 OID 16517)
+-- Name: u_customr_email; Type: CONSTRAINT; Schema: public; Owner: agave; Tablespace: 
+--
+
+ALTER TABLE ONLY customer
+    ADD CONSTRAINT u_customr_email UNIQUE (email);
+
+
+--
+-- TOC entry 1894 (class 1259 OID 16567)
+-- Name: i_customr_address; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_customr_address ON customer USING btree (address_id);
+
+
+--
+-- TOC entry 1895 (class 1259 OID 16568)
+-- Name: i_customr_cart; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_customr_cart ON customer USING btree (cart_id);
+
+
+--
+-- TOC entry 1901 (class 1259 OID 16570)
+-- Name: i_orders_customer; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_orders_customer ON orders USING btree (customer_id);
+
+
+--
+-- TOC entry 1898 (class 1259 OID 16569)
+-- Name: i_ordrlin_product; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_ordrlin_product ON orderline USING btree (product_id);
+
+
+--
+-- TOC entry 1906 (class 1259 OID 16571)
+-- Name: i_prdcvdr_element; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_prdcvdr_element ON product_provider USING btree (providers_id);
+
+
+--
+-- TOC entry 1907 (class 1259 OID 16572)
+-- Name: i_prdcvdr_products_id; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_prdcvdr_products_id ON product_provider USING btree (products_id);
+
+
+--
+-- TOC entry 1908 (class 1259 OID 16573)
+-- Name: i_providr_address; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_providr_address ON provider USING btree (address_id);
+
+
+--
+-- TOC entry 1911 (class 1259 OID 16574)
+-- Name: i_review_customer; Type: INDEX; Schema: public; Owner: agave; Tablespace: 
+--
+
+CREATE INDEX i_review_customer ON review USING btree (customer_id);
+
+
+--
+-- TOC entry 2044 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-06-15 15:47:21
+
+--
+-- PostgreSQL database dump complete
+--
+

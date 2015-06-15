@@ -131,7 +131,7 @@
 										width="60" class="img-rounded"
 										style="margin-right: 10px; float: left"
 										alt="Gravatar for #{sessionScope['customer'].getFullName()}" />
-									<span id="revNewName"></span> <span id="revNewStars"
+									<strong><span id="revNewName"></span></strong> <span id="revNewStars"
 										class="pull-right"></span><br /> <span id="revNewDate"
 										class="pull-right"></span>
 									<div style="margin-top: 5px; margin-left: 39px;"
@@ -153,8 +153,8 @@
 											src="http://www.gravatar.com/avatar/#{customerController.getGravatarId(review.customer.email)}?s=60"
 											width="60" class="img-rounded"
 											style="margin-right: 10px; float: left"
-											alt="Gravatar for #{review.customer.getFullName()}" />
-										#{review.getCustomerName()} <span class="pull-right"> <h:outputText
+											alt="Gravatar for #{review.customer.getFullName()}" /><strong>
+										#{review.getCustomerName()}</strong> <span class="pull-right"> <h:outputText
 												value="#{productController.getReviewHtml(review)}"
 												escape="false" /></span> <br /> <span class="pull-right"><h:outputText
 												value="#{review.getDate()}">

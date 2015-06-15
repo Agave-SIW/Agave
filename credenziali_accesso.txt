@@ -1,0 +1,18 @@
+Credenziali accesso:
+
+Admin:
+
+admin@agave.tk
+password: siw
+
+
+Example Customers:
+
+gaetano.bonofiglio@gmail.com
+password: siw
+
+vero.neeja@gmail.com
+password: siw
+
+andrea.salvoni93@gmail.com
+password: pepette

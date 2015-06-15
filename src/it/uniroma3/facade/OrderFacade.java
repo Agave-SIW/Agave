@@ -260,7 +260,8 @@ public class OrderFacade {
 		return em.createQuery("SELECT o "
 				            + "FROM Orders o "
 							+ "WHERE o.customer.id = :idCustomer "
-							+ "and o.evasionTime is NULL", Orders.class)
+							+ "and o.evasionTime is NULL "
+							+ "and o.creationTime is NOT NULL", Orders.class)
 							.setParameter("idCustomer", idCustomer)
 							.getResultList();
 	}
@@ -287,7 +288,8 @@ public class OrderFacade {
 	public List<Orders> getAllClosedOrders() {
 		return em.createQuery("SELECT o "
 				            + "FROM Orders o "
-							+ "WHERE o.evasionTime is NULL", Orders.class)
+							+ "WHERE o.evasionTime is NULL "
+							+ "and o.creationTime is NOT NULL", Orders.class)
 							.getResultList();
 	}
 	

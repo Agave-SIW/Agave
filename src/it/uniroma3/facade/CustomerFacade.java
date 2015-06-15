@@ -124,24 +124,6 @@ public class CustomerFacade {
 		return customer.getPassword().equals(md.securePassword(password));
 	}
 
-	/**
-	 * Gets the customer by a given order id
-	 * 
-	 * @param order id
-	 * @return the customer
-	 */
-	public Customer getCustomerByOrderId(Long id) {
-		try {
-			return em.createQuery("SELECT c "
-					+ "FROM Customer c, Orders o "
-					+ "WHERE o.customer.id = c.id", Customer.class).getResultList().get(0);
-		}
-		catch(Exception e){
-			return null;
-		}
-	}
-
-
 	public void updateCustomer(Customer customer) {
 		em.merge(customer);
 	}
